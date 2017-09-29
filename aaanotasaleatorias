@@ -1,0 +1,13 @@
+#include <stdio.h>
+
+main(){
+
+    int r = 10;
+    int c = 50;
+
+    printf("%c[2J", 27);
+    printf("%c[%d;%dH", 27, r, c);
+    printf("Hello World");
+    fflush(stdout);
+    while(1);
+}
