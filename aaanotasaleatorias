@@ -11,3 +11,17 @@ main(){
     fflush(stdout);
     while(1);
 }
+
+
+image to ascii para interfaz
+
+en resource.c nos falta la función display resource
+
+
+
+IDEAS LOCAS
+
+modo batalla, idiomas, mochila expandible, todo con probabilidades, niveles ( poder subir resource ) /*muy flipada*/
+
+Versión demo, controladisima
+para que funcione en la presentación

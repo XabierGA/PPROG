@@ -6,6 +6,7 @@
 #define MEDIUM 1001
 #define HARD 1002
 #define LEGENDARY 1003
+#define BATTLE_MODE 1004
 
 /*Languages*/
 #define ENGLISH 1010
@@ -20,15 +21,12 @@
 #define DRINK 1024
 #define MEDICINES 1025
 
-/*Resources types*/
-#define HP 1030
-#define HYDRATION 1031
-#define GUNPOWDER 1032
-#define HUNGER 1033
-
 /*Status*/
 typedef enum{
     ERROR=2000, OK=2001
 }Status;
+
+/*Others*/
+BUFFER_SIZE 64
 
 #endif /* DEFINES_H */
