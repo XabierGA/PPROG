@@ -1,0 +1,53 @@
+Menú:
+New Game -> Select Difficulty
+Load Game
+Language
+Exit Game
+
+Casting:
+Balodis
+Santini
+Protagonista
+Past Santini
+Santini a medio camino
+
+
+
+
+
+
+--Bienvenida al Juego
+'Buenas, jugador estas en un mundo postapocaliptico tras una infección zombi iniciada en el paciente 0 llamado Pedro Balodís. 
+Para sobrevivir debes de buscar recursos y personalizar tu base con la finalidad de sobrevivir a las hordas zombies que
+vienen tras caer la noche. Recuerda que solo puedes hacer dos misiones por día. De momento veo una horda de autobalodis 
+aproximandose por el horizonte. Mucha suerte Recluta!'
+
+--Día 1
+'Bueno, bueno, parece que eres mejor de lo que pensaba. Estos autobalodis eran fáciles de matar, pera cada vez serán más
+agresivos y por ende peligrosos. Eva Tourís no pudo sobrevivir ni a esta primera noche, cayó en las garras de los hiperplanos,
+ahora tendrás 3 misiones en las cuales podrás recojer recursos para mejorar tanto tus estadísticas como las de tu ciudad.
+Recuerda que durante el día los esbirros de balodís no son peligrosos ya que cual fiestero resacoso le tienen miedo a la luz.
+Mucha Suerte Recluta!'
+
+--Día 2
+'Vives para contarlo... no voy a fingir que me alegro por que en el fondo me da igual, pero bueno, has sobrevivido a otra horda.
+Ya sabes que cada día serán más y más complicadas y numerosas. Mucha Suerte Recluta!'
+
+
+
+
+--Día X
+'Has conseguido sobrevivir a esta horda, pero el veneno de balodis corre por tus venas ya que has sido atacado multitud de veces
+durante esta aventura. Pides ayuda a un gran sabio llamado Santini que dice que con tres cables y un par de condensadores ha conseguido
+fabricar una máquina del tiempo cojonuda. Decides viajar al pasado para matar a Balodís a tiempo antes de que empize a contagiar a la
+gente. Mucha Suerte Recluta!'
+
+'Has vencido a Baldís pero de repente desapareces, mientras lo haces piensas en el continuo espacio tiempo y en las reglas que Santini
+ha violado vilmente. Te das cuenta de que Solo hay una respuesta y es que Balodis sea directamente resposable de que tu estés ahí,
+efectivamente Balodís es tu padre. Ya sospechabas que esa forma de andar que tienes no es nada normal y solo podía ser fruto de la
+genética. Ahora todo tiene sentido. Santini aún posee su máquina del tiempo y le ha parecido gracioso crear una infinidad de realidades
+paralelas para así crear un ejercito de Santinis. El problema es que no hay ningún tipo de organización ni de jerarquía y el ejercito es
+en realidad una horda de seres que quieren cerveza, todo estaba bien  hasta que se acabaron las existencias de este preciado bien. Entonces
+se desarrolla una guerra civil entre ellos todos contra todos. Al menos has salvado el mundo una vez. Ahora tendrá que venir otro heroe
+para solucionar esta situación.
+Ya sabes, "Nunca digas de este agua no beberé, ni este Balodís no es mi Padre". CONTINUARA?

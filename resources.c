@@ -1,6 +1,6 @@
 #include <stdio.h>
-
 #include "resources.h"
+
 
 typedef struct _resources{
     int object_type;
@@ -24,7 +24,7 @@ Resources** load_resources(char *filename){
     if(filename == NULL){
         printf("Error. Resources f1-1.")
     }
-    }/*-----------------------------------*/
+    /*-----------------------------------*/
     
     in = (FILE *) fopen(filename, "r");
     if(in == NULL){
@@ -71,7 +71,6 @@ Resources** load_resources(char *filename){
 
 
 /*Function that receives all the resources fields and returns a created resource*/
-
 Resource* create_resource(int type, char *name, int max, int actual, int row, int col){
     Resources *r;
     /*Checking*/
@@ -107,10 +106,12 @@ Resource* create_resource(int type, char *name, int max, int actual, int row, in
 }
 
 void delete_resource(Resources *r){
-    if(r == NULL)
-        return;
+    if(r == NULL) return;
         
-    free(r->name);
+    if (r->name != NULL){
+        free(r->name);
+    }
+    
     free(r);
 }
 

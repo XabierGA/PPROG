@@ -1,6 +1,10 @@
 #ifndef DEFINES_H
 #define DEFINES_H
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
 /*Game Mode*/
 #define EASY 1000
 #define MEDIUM 1001
@@ -14,12 +18,15 @@
 #define GALICIAN 1012
 
 /*Object types*/
-#define WEAPON 1020
 #define AMMO 1021
 #define FOOD 1022
-#define MONSTER 1023
-#define DRINK 1024
-#define MEDICINES 1025
+#define DRINK 1023
+#define MEDICINE 1024
+
+/*Enemies types*/
+#define ZOMBIE 1030
+#define WALL 1031
+
 
 /*Status*/
 typedef enum{
@@ -27,6 +34,6 @@ typedef enum{
 }Status;
 
 /*Others*/
-BUFFER_SIZE 64
+BUFFER_SIZE 128
 
 #endif /* DEFINES_H */
