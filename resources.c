@@ -22,7 +22,7 @@ Resources** load_resources(char *filename){
     
     /*Checking*/
     if(filename == NULL){
-        printf("Error. Resources f1-1.")
+        printf("Error. Resources F1-1.");
     }
     /*-----------------------------------*/
     

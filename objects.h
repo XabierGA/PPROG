@@ -14,20 +14,28 @@
 */
 
 typedef struct _object Object;
-  /*Function that loads objects from a file*/
-  Object** load_objects ()
-  
-  /*Function that receives the name, the serial number, the type and creates an object*/
-  Object* create_object (char *name, int type, int value, int amount);
-  
-  /*Function that receives an object and destroys it*/
-  void destroy_object (Object *ob);
-  
-  /*Function that uses an object*/
-  status use_object (Object *ob);
+
+
+/*Function that loads a*/
+Object** load_objects ()
   
   
-  /*Function that */
+/*Function that receives the name, the serial number, the type and creates an object (used mainly in "load_objects" function)*/
+Object* create_object (char *name, int type, int value, int amount);
+  
+  
+/*Function that receives an object and destroys it*/
+void destroy_object (Object *ob);
+  
+  
+/*Function that uses an object*/
+Status use_object (Object *ob);
+  
+
+/*Function that returns the amount of an object*/
+int object_getAmount(Object *ob);
+
+/*Function that */
   
   
   
