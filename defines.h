@@ -30,10 +30,11 @@
 
 /*Status*/
 typedef enum{
-    ERROR=2000, OK=2001
+    FAILED=2000, OK=2001
 }Status;
 
 /*Others*/
 BUFFER_SIZE 128
+ERROR -11111
 
 #endif /* DEFINES_H */

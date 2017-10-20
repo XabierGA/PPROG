@@ -6,6 +6,6 @@
 #include <string.h>
 #include "defines.h"
 
-typedef struct _armory armory;
+typedef struct _armory Armory;
 
 #endif /* ARMORY.H */

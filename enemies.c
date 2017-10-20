@@ -17,7 +17,7 @@ typedef struct _enemies{
 /*Function that loads all the enemies from a file*/
 Enemy** load_enemies(char *filename){
     Enemy **e=NULL;
-    FILE *in;
+    FILE *in=NULL;
     char buff[BUFFER_SIZE], *name;
     char display;
     int i, n_ene, type, HP, speed, damage;
@@ -25,14 +25,13 @@ Enemy** load_enemies(char *filename){
     
     /*Checking*/
     if(filename == NULL){
-        printf("Error. Enemies-f1-1.\n")
+        printf("Error. Enemies-F1-1.\n");
     }
     /*-----------------------------------*/
     
     in = (FILE *) fopen(filename, "r");
     if(in == NULL){
         printf("Error. Enemies-F1-2.\n");
-        free(e);
         return NULL;
     }
     
@@ -74,27 +73,27 @@ Enemy** load_enemies(char *filename){
 
 /*Function that creates an enemy*/
 Enemy* create_enemy(char* name, char display, int type, int HP, int speed, int damage){
-    Enemy *enemy;
+    Enemy *ene;
      
     if(damage<0||hp<0||speed<0||type!=WALL||type!=ZOMBIE||name==NULL){
         printf("Error. Enemies-F2-1.\n");
         return NULL;
     }
      
-    enemy = (Enemy *) malloc(sizeof(Enemy));
-    if(enemy==NULL){
+    ene = (Enemy *) malloc(sizeof(Enemy));
+    if(ene==NULL){
         printf("Error. Enemies-F2-2.\n");
         return NULL;
     } 
      
-    strcpy(enemy->name, name);
-    enemy->display = display;
-    enemy->type = type;
-    enemy->HP = HP;
-    enemy->speed = speed;
-    enemy->damage = damage;
+    ene->name = strdup(name);
+    ene->display = display;
+    ene->type = type;
+    ene->HP = HP;
+    ene->speed = speed;
+    ene->damage = damage;
      
-    return enemy;
+    return ene;
 }
  
  
@@ -117,7 +116,7 @@ Enemy* modify_enemyhp(Enemy *e, int increase){
         return e;
     }
     if (e->hp <= 0){
-        EnemyDestroy (e);
+        EnemyDestroy(e);
         return NULL;
     }
 }
@@ -141,7 +140,7 @@ Enemy* generate_enemy(Enemy **pe, char *name){
                 printf("Error. Enemies-F5-2.\n");
                 return NULL;
             }
-            strcpy(e->name, (*i)->name);
+            e->name = strdup((*i)->name);
             e->display = (*i)->display;
             e->type = (*i)->type;
             e->HP = (*i)->HP;

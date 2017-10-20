@@ -64,13 +64,14 @@ Object** load_objects(char *filename){
 }
 
 
+
 /*Function that creates an object*/
 Object* create_object (char *name, int type, int value, int amount){
       Object *obj=NULL;
       
       if(name==NULL||value<0||amount<0){
             printf("Error. Object-F2-1.\n");
-            return NULL;
+            return NULL;/*Exit the game*/
       }
       
       if(type != AMMO || type != MEDICINE || type != DRINK || type != FOOD){
@@ -84,7 +85,7 @@ Object* create_object (char *name, int type, int value, int amount){
             return NULL;
       } 
      
-      strcpy(object->name, name);
+      object->name = strdup(name);
       object->object_type = type;
       object->value = value;
       object->amount = amount;
@@ -106,3 +107,59 @@ void destroy_object(Object* ob){
 
 
 
+Object* generate_object(Object **po, char *name){
+    Object *o=NULL,
+    Object **i=NULL;
+    
+    if(name == NULL||po==NULL){
+        printf("Error. Objects-F4-1.\n");
+        return NULL;
+    }
+    
+    i=po;
+    
+    while(*i != NULL){
+        if(strcmp((*i)->name, name)==0){
+            o = (Object *) malloc(sizeof(Object));
+            if(o == NULL){
+                printf("Error. Objects-F4-2.\n");
+                return NULL;
+            }
+            o->name = strdup((*i)->name);
+            o->object_type = (*i)->object_type;
+            o->value = (*i)->value;
+            o->amount = (*i)->amount;
+            
+            return o;
+        }
+        i++;
+    }
+    
+    printf("Error. Objects-F4-3.\n");
+    return NULL;
+}
+
+
+
+Status use_object(Resources **r, Object *o){
+    int i;
+    Resources **aux=NULL;
+    
+    if(r==NULL || o==NULL){
+        printf("Error. Objects-F5-1.\n");
+        return FAILED;
+    }
+    
+    for(i=0, aux = r; *aux != NULL; aux++, i++){
+        if(o->object_type == resources_get_ObjectType(r[i])){
+            if(modify_resource(r[i], o->value) == ERROR){
+                printf("Error. Objects-F5-2.\n");
+                return FAILED;
+            }
+            return OK;
+        }
+    }
+    
+    printf("No comments Objects-F5.\n");
+    return FAILED;
+}

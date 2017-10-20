@@ -96,7 +96,7 @@ Resource* create_resource(int type, char *name, int max, int actual, int row, in
     }
     
     r->resource_type = type;
-    strcpy(r->name, name);
+    r->name = strdup(name);
     r->max = max;
     r->actual = actual;
     r->row = row;
@@ -118,24 +118,42 @@ void delete_resource(Resources *r){
 
 
 
-Status modify_resource(Resources **r, int value, int object_type){
-    Resources **aux=NULL;
-    int i = 0;
-    
+int modify_resource(Resources *r, int value){
     if(r==NULL){
         printf("Error. Resources-F3-1.\n");
         return ERROR;
     }
     
+    r->actual += value;
     
+    return r->actual;
+    
+    /*DO IT IN use_object OBJECTS.C
     for(i=0, aux = r; *aux != NULL; aux++, i++){
         if(r[i]->object_type == object_type){
             r[i]->actual += value;
             return OK;
         }
     }
-    
-    printf("No comments. Resources-f3-2\n");
-    return ERROR;
+    ----------------------------*/
 }
 
+
+int resources_get_ObjectType(Resources *r){
+    if(r==NULL){
+        printf("Error. Resources-F4-1.\n");
+        return ERROR;
+    }
+    
+    return r->object_type;
+}
+
+
+int resources_get_ActualValue(Resources *r){
+    if(r==NULL){
+        printf("Error. Resources-F5-1.\n");
+        return ERROR;
+    }
+    
+    return r->actual;
+}
