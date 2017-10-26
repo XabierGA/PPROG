@@ -34,7 +34,7 @@ typedef enum{
 }Status;
 
 /*Others*/
-BUFFER_SIZE 128
-ERROR -11111
+#define BUFFER_SIZE 128
+#define ERROR -11111
 
 #endif /* DEFINES_H */

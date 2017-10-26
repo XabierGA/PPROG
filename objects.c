@@ -25,7 +25,6 @@ Object** load_objects(char *filename){
     in = (FILE *) fopen(filename, "r");
     if(in == NULL){
         printf("Error. Objects-F1-2.\n");
-        free(o);
         return NULL;
     }
     
@@ -96,13 +95,13 @@ Object* create_object (char *name, int type, int value, int amount){
 
 /*Function of liberating memory*/
 void destroy_object(Object* ob){
-      if(ob == NULL) return;
+    if(ob == NULL) return;
         
-      if (ob->name != NULL){
-            free(ob->name);
-      }
+    if (ob->name != NULL){
+        free(ob->name);
+    }
     
-      free(ob);
+    free(ob);
 }
 
 
@@ -162,4 +161,12 @@ Status use_object(Resources **r, Object *o){
     
     printf("No comments Objects-F5.\n");
     return FAILED;
+}
+
+int object_getAmount(Object *ob){
+    if(ob == NULL){
+        printf("Error. Object-F6")
+        return ERROR;
+    }
+    return ob->amount;
 }
