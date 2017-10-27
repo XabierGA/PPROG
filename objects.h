@@ -4,14 +4,7 @@
 #include "defines.h"
 #include "resources.h"
 
-#define MAXNAME 64
-/* In the following structure:
-        object_type: depending on the number received it is one type or another; resource(ammo as well), enemy, weapons, usables.
-        name: name as the objects is know in the game.
-        
-        
 
-*/
 
 typedef struct _object Object;
 
@@ -37,8 +30,9 @@ Status use_object(Object *ob, Resource **r);
 /*Function that returns the amount of an object*/
 int object_getAmount(Object *ob);
 
-/*Function that */
 
+/*Function that returns the value that one resource can be modified by this object*/
+int object_getValue(Object *ob);
 
 
 #endif /* OBJECTS_H */  

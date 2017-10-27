@@ -6,6 +6,7 @@ typedef struct _inventory{
     int last;
 };
 
+
 Inventory* create_inventory(char* filename){
     Inventory *inv=NULL;
     FILE *in=NULL;
@@ -32,7 +33,7 @@ Inventory* create_inventory(char* filename){
         printf("Error. Inventory-F1-3.\n");
         fclose(in);
     }
-    
+
     inv->n_objects = n_ob;
     inv->last = 0;
     
@@ -48,6 +49,8 @@ void delete_inventory(Inventory *inv){
     
     free(inv);
 }
+
+
 
 Status add_inventory_object(Inventory *i, Object *obj){
     if (i == NULL||obj ==NULL){

@@ -127,19 +127,10 @@ int modify_resource(Resources *r, int value){
     r->actual += value;
     
     return r->actual;
-    
-    /*DO IT IN use_object OBJECTS.C
-    for(i=0, aux = r; *aux != NULL; aux++, i++){
-        if(r[i]->object_type == object_type){
-            r[i]->actual += value;
-            return OK;
-        }
-    }
-    ----------------------------*/
 }
 
 
-int resources_get_ObjectType(Resources *r){
+int resources_getObjectType(Resources *r){
     if(r==NULL){
         printf("Error. Resources-F4-1.\n");
         return ERROR;
@@ -149,11 +140,34 @@ int resources_get_ObjectType(Resources *r){
 }
 
 
-int resources_get_ActualValue(Resources *r){
+
+int resources_getActualValue(Resources *r){
     if(r==NULL){
         printf("Error. Resources-F5-1.\n");
         return ERROR;
     }
     
     return r->actual;
+}
+
+
+
+int resources_getRow(Resources *r){
+    if(r==NULL){
+        printf("Error. Resources-F6-1.\n");
+        return ERROR;
+    }
+    
+    return r->row;
+}
+
+
+
+int resources_getCol(Resources *r){
+    if(r==NULL){
+        printf("Error. Resources-F7-1.\n");
+        return ERROR;
+    }
+    
+    return r->col;
 }

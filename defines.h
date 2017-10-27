@@ -27,11 +27,27 @@
 #define ZOMBIE 1030
 #define WALL 1031
 
+/*Weapon owned*/
+#define OWNED 1040
+#define NOT_OWNED 1041
+
+/*Orientation of character*/
+#define NORTH 1050
+#define SOUTH 1051
+#define EAST 1052
+#define WEST 1053
+
 
 /*Status*/
 typedef enum{
     FAILED=2000, OK=2001
 }Status;
+
+
+/*Boolean*/
+typedef enum{
+    T=3000, F=3001
+}Boolean;
 
 /*Others*/
 #define BUFFER_SIZE 128

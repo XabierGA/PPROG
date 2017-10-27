@@ -9,13 +9,14 @@ typedef struct _weapon{
     int powder_waste;
     int speed;
     int damage;
+    int owned;/*This value is equal to OWNED (1040) or NOTOWNED (1041)*/
 };
 
 Weapon** load_weapons(char *filename){
     Weapon **w=NULL;º
     FILE *in=NULL;
     char buff[BUFFER_SIZE], *name;
-    int i, n_weapons, powder_waste, speed, damage;
+    int i, n_weapons, powder_waste, speed, damage, owned;
     
     /* Checking*/
     if(filename == NULL){
@@ -43,9 +44,9 @@ Weapon** load_weapons(char *filename){
     
     for(i=0; i<n_weapons; i++){
         fgets(buff, BUFFER_SIZE, in);
-		sscanf(buff, "%s %d %d %d", name, &powder_waste, &speed, &damage);
+		sscanf(buff, "%s %d %d %d %d", name, &powder_waste, &speed, &damage, &owned);
 		
-		w[i] = create_weapon(name, powder_waste, speed, damage);
+		w[i] = create_weapon(name, powder_waste, speed, damage, owned);
 		if(w[i]==NULL){
 		    printf("Error. EWeapons-F1-4.\n");
 		    for(j=i-1; j>=0; j--){
@@ -65,13 +66,15 @@ Weapon** load_weapons(char *filename){
 
 
 
-Weapon* create_weapon(char *name, int powder_waste, int speed, int damage){
+Weapon* create_weapon(char *name, int powder_waste, int speed, int damage, int owned){
     Weapon *weap;
      
     if(damage<0 || name==NULL || powder_waste<0 || speed<0){
         printf("Error. Weapons-F2-1.\n");
         return NULL;
     }
+    
+    if(owned != OWNED || owned != NOT_OWNED)
      
     weap = (Weapon *) malloc(sizeof(Weapon));
     if(weap==NULL){
@@ -83,15 +86,9 @@ Weapon* create_weapon(char *name, int powder_waste, int speed, int damage){
     weap->powder_waste = powder_waste;
     weap->speed = speed;
     weap->damage = damage;
+    weap->owned = owned;
      
     return weap;
-}
-
-
-
-
-Weapon* shot_weapon(Weapon *wp, /*Gunpowder*/){
-    
 }
 
 
@@ -102,3 +99,41 @@ void destroy_weapon(Weapon *wp){
     }
     free (wp);
 }
+
+
+
+Boolean own_weapon(Weapon *wp){
+    if (wp == NULL) return F;
+    if (wp->owned==OWNED)return T;
+    return F;
+}
+
+
+
+int weapon_getPowderWaste(Weapon *wp){
+    if(wp == NULL){
+        return ERROR;
+    }
+    
+    return wp->powder_waste;
+}
+
+
+int weapom_getSpeed(Weapon *wp){
+    if(wp == NULL){
+        return ERROR;
+    }
+    
+    return wp->speed;
+}
+
+
+int weapon_getDamage(Weapon *wp){
+    if(wp == NULL){
+        return ERROR;
+    }
+    
+    return wp->damage;
+}
+
+

@@ -8,4 +8,10 @@
 
 typedef struct _armory Armory;
 
+Armory* create_armory(char* filename);
+
+void destroy_armory(Armory *armory);
+
+
+ 
 #endif /* ARMORY.H */

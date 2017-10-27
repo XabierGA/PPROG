@@ -26,6 +26,7 @@ Enemy** load_enemies(char *filename){
     /*Checking*/
     if(filename == NULL){
         printf("Error. Enemies-F1-1.\n");
+        return NULL;
     }
     /*-----------------------------------*/
     
@@ -153,4 +154,54 @@ Enemy* generate_enemy(Enemy **pe, char *name){
     }
     printf("Error. Enemies-F5-3.\n");
     return NULL;
+}
+
+
+char enemy_getDisplay(Enemy *ene){
+    if(ene == NULL){
+        printf("Error. Enemies-F6-1.\n");
+        return 0;
+    }
+    
+    return ene->display;
+}
+
+
+int enemy_getType(Enemy *ene){
+    if(ene == NULL){
+        printf("Error. Enemies-F7-1.\n");
+        return ERROR;
+    }
+    
+    return ene->type;
+}
+
+
+int enemy_getHP(Enemy *ene){
+    if(ene == NULL){
+        printf("Error. Enemies-F8-1.\n");
+        return ERROR;
+    }
+    
+    return ene->HP;
+}
+
+
+int enemy_getSpeed(Enemy *ene){
+    if(ene == NULL){
+        printf("Error. Enemies-F9-1.\n");
+        return ERROR;
+    }
+    
+    return ene->Speed;
+}
+
+
+int enemy_getDamage(Enemy *ene){
+    if(ene == NULL){
+        printf("Error. Enemies-F8-1.\n");
+        return ERROR;
+    }
+    
+    return ene->Damage;
 }

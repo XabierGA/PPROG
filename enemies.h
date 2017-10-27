@@ -33,5 +33,18 @@ Enemy* attack_player(Enemy*e, Resource*r);
 the enemy with the same name as "name", the second input parameter */
 Enemy* generate_enemy(Enemy** pe, char* name);
 
+/*Function that gets the display character of a given enemy*/
+char enemy_getDisplay(Enemy *ene);
 
+/*Function that returns the type of a given enemy*/
+int enemy_getType(Enemy *ene);
+
+/*Function that returns the HP of a given enemy*/
+int enemy_getHP(Enemy *ene);
+
+/*Function that returns the moving speed of a given enemy*/
+int enemy_getSpeed(Enemy *ene);
+
+/*Function that gets the damage of a given enemy*/
+int enemy_getDamage(Enemy *ene);
 #endif /* ENEMIES_H */

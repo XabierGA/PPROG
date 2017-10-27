@@ -21,16 +21,19 @@ void delete_resource(Resources *r);
 int modify_resource(Resources *r, int value);
 
 
-/* Function that display a resource and its ammount. In the interface, the resources should be updated
-every time they are changed */
-Status display_resource(?????, char *resource_name);
-
 /* Function that gets the object type of a given resource*/
-int resources_get_ObjectType(Resources *r);
+int resources_getObjectType(Resources *r);
+
 
 /* Function that gets the actual value of a given resource*/
-int resources_get_ActualValue(Resources *r);
+int resources_getActualValue(Resources *r);
+
+
+/*Function that returns the row where the resource must be printed in the interface*/
+int resources_getRow(Resources *r);
+
+
+/*Function that returns the col where the resource must be printed in the interface*/
+int resources_getCol(Resources *r);
+
 #endif /* RESOURCES_H */
-
-
-

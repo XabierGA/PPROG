@@ -163,10 +163,33 @@ Status use_object(Resources **r, Object *o){
     return FAILED;
 }
 
-int object_getAmount(Object *ob){
+
+
+int object_getType(Object *ob){
     if(ob == NULL){
-        printf("Error. Object-F6")
+        printf("Error. Objects-F6-1.\n");
         return ERROR;
     }
+    
+    return ob->object_type;
+}
+
+
+int object_getAmount(Object *ob){
+    if(ob == NULL){
+        printf("Error. Objects-F7-1.\n");
+        return ERROR;
+    }
+    
     return ob->amount;
+}
+
+
+int object_getValue(Object *ob){
+    if(ob == NULL){
+        printf("Error. Objects-F8-1.\n");
+        return ERROR;
+    }
+    
+    return ob->value;
 }
