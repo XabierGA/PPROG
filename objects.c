@@ -12,7 +12,7 @@ struct _objects{
 Object** load_objects(char *filename){
     Enemy **o=NULL;
     FILE *in;
-    char buff[BUFFER_SIZE], *name;
+    char buff[BUFFER_SIZE], name[NAME_SIZE];
     int i, n_ob, type, value, amount;
     
     

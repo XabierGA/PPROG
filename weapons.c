@@ -15,7 +15,7 @@ struct _weapon{
 Weapon** load_weapons(char *filename){
     Weapon **w=NULL;º
     FILE *in=NULL;
-    char buff[BUFFER_SIZE], *name;
+    char buff[BUFFER_SIZE], name[NAME_SIZE];
     int i, n_weapons, powder_waste, speed, damage, owned;
     
     /* Checking*/

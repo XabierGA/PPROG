@@ -18,7 +18,7 @@ struct _enemies{
 Enemy** load_enemies(char *filename){
     Enemy **e=NULL;
     FILE *in=NULL;
-    char buff[BUFFER_SIZE], *name;
+    char buff[BUFFER_SIZE], name[NAME_SIZE];
     char display;
     int i, n_ene, type, HP, speed, damage;
     
