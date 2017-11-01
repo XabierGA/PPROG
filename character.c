@@ -1,7 +1,7 @@
 #include "character.h"
 
 
-typedef struct _character{
+struct _character{
     char display;
     int orientation;
     int row;

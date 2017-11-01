@@ -4,7 +4,7 @@
 
 #include "weapons.h"
 
-typedef struct _weapon{
+struct _weapon{
     char *name;
     int powder_waste;
     int speed;
@@ -30,7 +30,7 @@ Weapon** load_weapons(char *filename){
         return NULL;
     }
     
-    fgets(buff, MAX, in);
+    fgets(buff, BUFFER_SIZE, in);
     sscanf(buff, "%d", &n_weapons);
     
     

@@ -1,6 +1,6 @@
 #include "objects.h"
 
-typedef struct _objects{
+struct _objects{
       char *name;
       int object_type;
       int value;
@@ -28,11 +28,11 @@ Object** load_objects(char *filename){
         return NULL;
     }
     
-    fgets(buff, MAX, in);
+    fgets(buff, BUFFER_SIZE, in);
     sscanf(buff, "%d", &n_ob);
     
     
-    o = (Object **) malloc((n_ob+1) * sizeof(Object*);
+    o = (Object **) malloc((n_ob+1) * sizeof(Object*));
     if(o==NULL){
         printf("Error. Objects-F1-3.\n");
         fclose(in);

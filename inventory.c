@@ -1,6 +1,6 @@
 #define "inventory.h"
 
-typedef struct _inventory{
+struct _inventory{
     Object *objects;
     int n_objects;
     int last;
@@ -25,7 +25,7 @@ Inventory* create_inventory(char* filename){
         return NULL;
     }
     
-    fgets(buff, MAX, in);
+    fgets(buff, BUFFER_SIZE, in);
     sscanf(buff, "%d", &n_ob);
     
     inv = (Inventory *) malloc(n_ob * sizeof(Inventory));

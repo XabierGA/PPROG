@@ -10,7 +10,11 @@ Resources** load_resources(char *filename);
 
 
 /*Function that receives all the resources fields and returns a created resource*/
-Resource* create_resource(int type, char *name, int max, int actual, int row, int col);
+Resources* create_resource(int type, char *name, int max, int actual, int row, int col);
+
+
+/*Function that destroys the double array of resources, helped by "delete_resource" function*/
+void destroy_resources(Resources **r);
 
 
 /*Function that receives a pointer to a resource and liberates all the memory allocated*/
@@ -35,5 +39,13 @@ int resources_getRow(Resources *r);
 
 /*Function that returns the col where the resource must be printed in the interface*/
 int resources_getCol(Resources *r);
+
+
+/*Function that returns the name of a resource*/
+char* resources_getName(Resources *r);
+
+
+/*Function that returns the maximun value that a resource can have*/
+int resources_getMax(Resources *r);
 
 #endif /* RESOURCES_H */

@@ -1,7 +1,7 @@
 #include "armory.h"
 
 
-typedef struct _armory{
+struct _armory{
     Weapon *weapons;
     int n_weapons;
     int last;
@@ -26,7 +26,7 @@ Armory* create_armory(char* filename){
         return NULL;
     }
     
-    fgets(buff, MAX, in);
+    fgets(buff, BUFFER_SIZE, in);
     sscanf(buff, "%d", &n_wp);
     
     arm = (Armory *) malloc(n_wp * sizeof(Armory));

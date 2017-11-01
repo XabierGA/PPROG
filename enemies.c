@@ -4,7 +4,7 @@
 
 #include "enemies.h"
 
-typedef struct _enemies{
+struct _enemies{
     char *name;
     char display;
     int type;
@@ -36,11 +36,11 @@ Enemy** load_enemies(char *filename){
         return NULL;
     }
     
-    fgets(buff, MAX, in);
+    fgets(buff, BUFFER_SIZE, in);
     sscanf(buff, "%d", &n_ene);
     
     
-    e = (Enemy **) malloc((n_ene+1) * sizeof(Enemy*);
+    e = (Enemy **) malloc((n_ene+1) * sizeof(Enemy*));
     if(e==NULL){
         printf("Error. Enemies-F1-3.\n");
         fclose(in);

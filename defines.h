@@ -18,10 +18,10 @@
 #define GALICIAN 1012
 
 /*Object types*/
-#define AMMO 1021
-#define FOOD 1022
-#define DRINK 1023
-#define MEDICINE 1024
+#define MEDICINE 1020
+#define FOOD 1021
+#define DRINK 1022
+#define AMMO 1023
 
 /*Enemies types*/
 #define ZOMBIE 1030
@@ -51,6 +51,7 @@ typedef enum{
 
 /*Others*/
 #define BUFFER_SIZE 128
+#define NAME_SIZE 20
 #define ERROR -11111
 
 #endif /* DEFINES_H */
