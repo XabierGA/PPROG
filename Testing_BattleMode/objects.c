@@ -5,6 +5,8 @@ struct _object{
       int object_type;
       int value;
       int amount;
+      int row;
+      int col;
 };
 
 
@@ -13,7 +15,7 @@ Object** load_objects(char *filename){
     Object **o=NULL;
     FILE *in;
     char buff[BUFFER_SIZE], name[NAME_SIZE];
-    int i, j, n_ob, type, value, amount;
+    int i, j, n_ob, type, value, amount, r, c;
     
     
     /*Checking*/
@@ -42,9 +44,9 @@ Object** load_objects(char *filename){
     
     for(i=0; i<n_ob; i++){
         fgets(buff, BUFFER_SIZE, in);
-		sscanf(buff, "%s %d %d %d", name, &type, &value, &amount);
+		sscanf(buff, "%s %d %d %d", name, &type, &value, &amount, &r, &c);
 		
-		o[i] = create_object(name, type, value, amount);
+		o[i] = create_object(name, type, value, amount, r, c);
 		if(o[i]==NULL){
 		    printf("Error. Objects-F1-4.\n");
 		    for(j=i-1; j>=0; j--){
@@ -65,10 +67,10 @@ Object** load_objects(char *filename){
 
 
 /*Function that creates an object*/
-Object* create_object (char *name, int type, int value, int amount){
+Object* create_object(char *name, int type, int value, int amount, int r, int c){
       Object *obj=NULL;
       
-      if(name==NULL||value<0||amount<0){
+      if(name==NULL||value<0||amount<0||r<0||c<0){
             printf("Error. Object-F2-1.\n");
             return NULL;/*Exit the game*/
       }
@@ -82,15 +84,18 @@ Object* create_object (char *name, int type, int value, int amount){
       if(obj==NULL){
             printf("Error. Object-F2-3.\n");
             return NULL;
-      } 
+      }
      
       obj->name = strdup(name);
       obj->object_type = type;
       obj->value = value;
       obj->amount = amount;
+      obj->r = r;
+      obj->c = c;
      
       return obj;
 }
+
 
 void destroy_objects(Object **ob){
     Object **aux=NULL;
@@ -153,6 +158,24 @@ char* object_getName(Object *ob){
     }
     
     return ob->name;
+}
+
+
+int object_getRow(Object *ob){
+    if(ob == NULL){
+        printf("Error. Objects-F9.25-1.\n");
+        return NULL;
+    }
+    
+    return ob->row;
+}
+
+int object_getColumn(Object *ob){
+    if(ob == NULL){
+        printf("Error. Objects-F9.5-1\n");
+    }
+    
+    return ob->col;
 }
 
 Status object_changeAmount(Object *ob, int inc){

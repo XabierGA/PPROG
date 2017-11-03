@@ -44,7 +44,7 @@ Resources** load_resources(char *filename){
 
 
     for(i=0; i<n_res; i++){
-      fgets(buff, BUFFER_SIZE, in);
+        fgets(buff, BUFFER_SIZE, in);
 	    sscanf(buff, "%d %s %d %d %d %d", &type, name, &max, &actual, &row, &col);
 
 	    r[i] = create_resource(type, name, max, actual, row, col);
@@ -56,7 +56,7 @@ Resources** load_resources(char *filename){
 	      free(r);
 	      fclose(in);
 	      return NULL;
-	   }
+	    }
     }
 	  r[n_res] = NULL;
 

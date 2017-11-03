@@ -9,14 +9,14 @@ struct _weapon{
     int powder_waste;
     int speed;
     int damage;
-    int owned;/*This value is equal to OWNED (1040) or NOTOWNED (1041)*/
+    int owned; /*This value is equal to OWNED (1040) or NOT_OWNED (1041)*/
 };
 
 Weapon** load_weapons(char *filename){
-    Weapon **w=NULL;º
+    Weapon **w=NULL;
     FILE *in=NULL;
     char buff[BUFFER_SIZE], name[NAME_SIZE];
-    int i, n_weapons, powder_waste, speed, damage, owned;
+    int i, j, n_weapons, powder_waste, speed, damage, owned;
     
     /* Checking*/
     if(filename == NULL){
@@ -34,7 +34,7 @@ Weapon** load_weapons(char *filename){
     sscanf(buff, "%d", &n_weapons);
     
     
-    w = (Weapon **) malloc((n_weapons+1) * sizeof(Weapon*);
+    w = (Weapon **) malloc((n_weapons+1) * sizeof(Weapon*));
     if(w==NULL){
         printf("Error. Weapons-F1-3.\n");
         fclose(in);
@@ -48,9 +48,9 @@ Weapon** load_weapons(char *filename){
 		
 		w[i] = create_weapon(name, powder_waste, speed, damage, owned);
 		if(w[i]==NULL){
-		    printf("Error. EWeapons-F1-4.\n");
+		    printf("Error. Weapons-F1-4.\n");
 		    for(j=i-1; j>=0; j--){
-		        delete_enemy(w[j]);
+		        delete_weapon(w[j]);
 		    }
 		    free(w);
 		    fclose(in);
@@ -92,7 +92,7 @@ Weapon* create_weapon(char *name, int powder_waste, int speed, int damage, int o
 }
 
 
-void destroy_weapon(Weapon *wp){
+void delete_weapon(Weapon *wp){
     if (wp==NULL) return;
     if (wp->name != NULL){
         free(wp->name);
@@ -100,12 +100,28 @@ void destroy_weapon(Weapon *wp){
     free (wp);
 }
 
+void destroy_weapons(Weapon **wp){
+    Weapon **aux=NULL;
+    
+    if(wp == NULL) return;
+    
+    for(aux = wp; *aux!=NULL; aux++){
+        delete_weapon(*aux);
+    }
+    free(wp);
+}
 
+char *weapon_getName(Weapon* wp){
+    if(wp==NULL){
+        return NULL;
+    }
+    return wp->name;
+}
 
-Boolean own_weapon(Weapon *wp){
-    if (wp == NULL) return F;
-    if (wp->owned==OWNED)return T;
-    return F;
+int own_weapon(Weapon *wp){
+    if (wp == NULL) return NOT_OWNED;
+    if (wp->owned==OWNED)return OWNED;
+    return NOT_OWNED;
 }
 
 
@@ -119,7 +135,7 @@ int weapon_getPowderWaste(Weapon *wp){
 }
 
 
-int weapom_getSpeed(Weapon *wp){
+int weapon_getSpeed(Weapon *wp){
     if(wp == NULL){
         return ERROR;
     }
@@ -136,4 +152,37 @@ int weapon_getDamage(Weapon *wp){
     return wp->damage;
 }
 
+Status change_own(Weapon *wp){
+    if(wp == NULL){
+        return FAILED;
+    }
+    wp->owned = OWNED;
+    
+    return OK;
+}
 
+Status shot_weapon(Weapon *wp, Resources **r){
+    Resources **aux=NULL;
+    Resources *r2=NULL;
+    
+    if(wp==NULL||r==NULL||wp->owned==NOT_OWNED) return FAILED;
+    
+    for(aux = r; aux!=NULL; aux++){
+        if(resources_getType(*aux)==GUNPOWDER){
+            r2 = *aux;
+        }
+    }
+    if(r2==NULL){
+        printf("Error. Weapons-F10-1.\n");
+        return FAILED;
+    } 
+    
+    if(wp->powder_waste > resources_getActualValue(r2)) return FAILED;
+    
+    if(modify_resource(r2, -(wp->powder_waste)) == ERROR){
+        printf("Ni puta idea de lo que ha pasado.\n");
+        return FAILED;
+    }
+    
+    return OK;
+}
