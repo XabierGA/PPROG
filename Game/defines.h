@@ -26,8 +26,6 @@
 /*Enemies types*/
 #define ZOMBIE 1030
 #define WALL 1031
-#define ALIVE 1032
-#define DEAD 1033
 
 /*Weapon owned*/
 #define OWNED 1040

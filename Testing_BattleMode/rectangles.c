@@ -267,7 +267,8 @@ int win_write_line_at(rectangle *rec, int row, int col, char *str){
         ret = strlen(str);
         
     if (nl_p) *nl_p = '\n';
-    rec->last_line = row;
+    rec->
+    last_line = row;
     
     return ret;
 }

@@ -32,11 +32,10 @@
 #define NOT_OWNED 1041
 
 /*Orientation of character*/
-#define NORTH 1050
-#define SOUTH 1051
-#define EAST 1052
-#define WEST 1053
-#define HERE 1054
+#define UP 1050
+#define DOWN 1051
+#define RIGHT 1052
+#define LEFT 1053
 
 /*Colors*/
 #define BLACK 40

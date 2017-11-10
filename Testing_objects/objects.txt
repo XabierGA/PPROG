@@ -1,5 +1,5 @@
 4
-Bandage 1020 30 0
-Hamburger 1021 40 0
-Fanta 1022 70 0
-Bullets 1023 30 0
+Bandage 1020 30 0 1 1
+Hamburger 1021 40 0 2 2
+Fanta 1022 70 0 3 3
+Bullets 1023 30 0 4 4

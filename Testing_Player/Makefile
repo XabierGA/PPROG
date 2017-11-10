@@ -1,6 +1,6 @@
 CC = gcc -pedantic
-CFLAGS = -Wall -g
-EXE = test_weapons
+CFLAGS = -Wall
+EXE = test_player
 
 all : $(EXE)
 
@@ -8,12 +8,12 @@ all : $(EXE)
 clean :
 	rm -f *.o core $(EXE)
 
-$(EXE) : % : %.o resources.o weapons.o
+$(EXE) : % : %.o resources.o player.o
 	@echo "#---------------------------"
 	@echo "# Generando $@ "
 	@echo "# Depende de $^"
 	@echo "# Ha cambiado $<"
-	$(CC) $(CFLAGS) -o $@ $@.o resources.o weapons.o
+	$(CC) $(CFLAGS) -o $@ $@.o resources.o player.o
 
 resources.o : resources.c resources.h defines.h
 	@echo "#---------------------------"
@@ -22,7 +22,7 @@ resources.o : resources.c resources.h defines.h
 	@echo "# Ha cambiado $<"
 	$(CC) $(CFLAGS) -c $<
 
-weapons.o : weapons.c weapons.h
+player.o : player.c player.h
 	@echo "#---------------------------"
 	@echo "# Generando $@"
 	@echo "# Depende de $^"

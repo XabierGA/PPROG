@@ -1,3 +1,6 @@
+#ifndef INTERFACE_H
+#define INTERFACE_H
+
 #include "rectangles.h"
 
 typedef struct{
@@ -10,3 +13,5 @@ typedef struct{
 
 
 Interface* intrf_create(char* filename);
+
+#endif /*INTERFACE_H*/
