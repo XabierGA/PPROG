@@ -298,3 +298,14 @@ Status win_write_char_at(rectangle *rec, int row, int col, char ch){
     fflush(stdout);
     return OK;
 }
+
+
+
+int rectangle_getNCols(rectangle *rec){
+  if(rec == NULL){
+    printf("Error. Rectangles F10-1.\n");
+    return ERROR;
+  }
+  
+  return rec->n_cols;
+}

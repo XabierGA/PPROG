@@ -45,10 +45,11 @@
 
 /*Types of rectangles*/
 #define RECT_RES 1070
-#define RECT_OBJ 1071
+#define RECT_INVENT 1071
 #define RECT_WEAP 1072
-#define RECT_BATTLEFIELD 1073
-#define RECT_NOTIF 1074
+#define RECT_BATTLE 1073
+#define RECT_INFO 1074
+#define RECT_STORY 1075
 
 /*Things about the interface*/
 #define VISIBLE 1060

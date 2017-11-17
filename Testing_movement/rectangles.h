@@ -248,4 +248,13 @@ Status win_write_char_at(rectangle *rec, int row, int col, char ch);
 /* Returns the type of the rectangle. It allows you to differenciate each rectangle*/
 int rectangle_getType(rectangle *rec);
 
+
+/* Returns the number of columns of a given rectangle */
+int rectangle_getNCols(rectangle *rec);
+
+
+/* Draws in the screen a given rectangle */
+Status rectangle_draw(rectangle *rec);
+
+
 #endif /* RECTANGLES_H */

@@ -312,3 +312,52 @@ int rectangle_getType(rectangle *rec){
   
   return rec->type;
 }
+
+
+
+int rectangle_getNCols(rectangle *rec){
+  if(rec == NULL){
+    printf("Error. Rectangles F10-1.\n");
+    return ERROR;
+  }
+  
+  return rec->n_cols;
+}
+
+
+Status rectangle_draw(rectangle *rec){
+  int i, r;
+  
+  if(rec == NULL{
+    printf("Error. Rectangles rectangle_draw-1.\n");
+    return FAILED;
+  }
+  
+  /* Draw the top row */
+  fprintf(stdout, "%c[%d;%dH", 27, rec->ini_row, rec->ini_col); /* Move to the top/left corner of the rectangle */
+  fprintf(stdout, "+");
+  
+  for(i=0; i < rec->n_cols; i++){
+    fprintf(stdout, "-");
+  }
+  fprintf(stdout, "+");
+  
+  /* Draw the bottom row */
+  fprintf(stdout, "%c[%d;%dH", 27, rec->ini_row + rec->n_rows - 1, rec->ini_col); /* Move to the bottom/left corner of the rectangle */
+  fprintf(stdout, "+");
+  
+  for(i=0; i < rec->n_cols; i++){
+    fprintf(stdout, "-");
+  }
+  fprintf(stdout, "+");
+  
+  /* Draw the vertical lines */
+  for(r = rec->ini_row+1; r < rec->n_rows; r++){
+    fprintf(stdout, "%c[%d;%dH", 27, r, rec->ini_col); /* Move just 1 unit under the top/left corner */
+    fprintf(stdout, "|");
+    fprintf(stdout, "%c[%d;%dH", 27, r, rec->ini_col + rec->n_cols -1);
+    fprintf(stdout, "|");
+  }
+  
+  return OK;
+}
