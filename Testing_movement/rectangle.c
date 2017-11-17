@@ -1,4 +1,4 @@
-#include "rectangles.h"
+#include "rectangle.h"
 
 
 /*
@@ -88,7 +88,7 @@ rectangle* win_new(int ini_row, int ini_col, int n_rows, int n_cols, int bg, int
     rec->bg_color = bg;
     rec->fg_color = fg;
     
-    rec->type = type;
+    rec->rect_type = type;
      
     return rec;
 }
@@ -243,9 +243,9 @@ int win_write_line_at(rectangle *rec, int row, int col, char *str){
     char *nl_p;
     char save, av_space, ret;
 
-    if (!is_visible(rec)) return 0;
+    if (!is_visible(rec)) return ERROR;
     
-    if (row >= rec->n_rows || col >= rec->n_cols) return 0;
+    if (row >= rec->n_rows || col >= rec->n_cols) return ERROR;
     
     nl_p = strchr(str, '\n');
     if (nl_p) *nl_p = 0;
@@ -310,7 +310,7 @@ int rectangle_getType(rectangle *rec){
     return ERROR;
   }
   
-  return rec->type;
+  return rec->rect_type;
 }
 
 
@@ -328,7 +328,7 @@ int rectangle_getNCols(rectangle *rec){
 Status rectangle_draw(rectangle *rec){
   int i, r;
   
-  if(rec == NULL{
+  if(rec == NULL){
     printf("Error. Rectangles rectangle_draw-1.\n");
     return FAILED;
   }
@@ -337,7 +337,7 @@ Status rectangle_draw(rectangle *rec){
   fprintf(stdout, "%c[%d;%dH", 27, rec->ini_row, rec->ini_col); /* Move to the top/left corner of the rectangle */
   fprintf(stdout, "+");
   
-  for(i=0; i < rec->n_cols; i++){
+  for(i=0; i < rec->n_cols-2; i++){
     fprintf(stdout, "-");
   }
   fprintf(stdout, "+");
@@ -346,13 +346,13 @@ Status rectangle_draw(rectangle *rec){
   fprintf(stdout, "%c[%d;%dH", 27, rec->ini_row + rec->n_rows - 1, rec->ini_col); /* Move to the bottom/left corner of the rectangle */
   fprintf(stdout, "+");
   
-  for(i=0; i < rec->n_cols; i++){
+  for(i=0; i < rec->n_cols-2; i++){
     fprintf(stdout, "-");
   }
   fprintf(stdout, "+");
   
   /* Draw the vertical lines */
-  for(r = rec->ini_row+1; r < rec->n_rows; r++){
+  for(r = rec->ini_row+1; r < rec->ini_row + rec->n_rows -1; r++){
     fprintf(stdout, "%c[%d;%dH", 27, r, rec->ini_col); /* Move just 1 unit under the top/left corner */
     fprintf(stdout, "|");
     fprintf(stdout, "%c[%d;%dH", 27, r, rec->ini_col + rec->n_cols -1);

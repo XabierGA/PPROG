@@ -1,0 +1,5 @@
+4
+Shitty_gun 1 10 10 1040
+Light_machine_gun 1 50 20 1041
+Revolver 5 10 70 1041
+Bazooka 20 2 200 1041

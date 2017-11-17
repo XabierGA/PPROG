@@ -3,7 +3,7 @@
 
 struct _player{
     char display;       /*Char with which the player is going to be printed*/
-    int orientation;    /*Indicates where the player is looking to (NORTH, SOUTH, WEST, EAST)*/
+    int orientation;    /*Indicates where the player is looking to (UP, DOWN, LEFT, RIGHT)*/
     int row;            /*Position of the player in X axis*/
     int col;            /*Position of the player in Y axis*/
 };
@@ -84,7 +84,7 @@ Status player_setOrientation(Player *pl, int orient){
         printf("Error. Player-F4-1.\n");
         return FAILED;
     }
-    if(orient!=NORTH && orient!=SOUTH && orient!=WEST && orient!=EAST){
+    if(orient!=UP && orient!=DOWN && orient!=LEFT && orient!=RIGHT){
         printf("Error. Player-F4-2.\n");
         return FAILED;
     }

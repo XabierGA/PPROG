@@ -1,7 +1,8 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
-#include "resoures.h"
+#include "defines.h"
+#include "resources.h"
 
 typedef struct _player Player;
 

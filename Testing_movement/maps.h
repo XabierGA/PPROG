@@ -1,6 +1,8 @@
 #ifndef MAPS_H
 #define MAPS_H
 
+#include "defines.h"
+
 struct _maps{
     char **field;
     int n_rows;

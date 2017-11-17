@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "weapons.h"
+#include "weapon.h"
 
 struct _weapon{
     char *name;
@@ -47,7 +47,7 @@ Weapon** load_weapons(char *filename){
     
     for(i=0; i<n_weapons; i++){
         fgets(buff, BUFFER_SIZE, in);
-		sscanf(buff, "%s %d %d %d %d", name, &powder_waste, &speed, &damage, &owned, &row, &col);
+		sscanf(buff, "%s %d %d %d %d %d %d", name, &powder_waste, &speed, &damage, &owned, &row, &col);
 		
 		w[i] = create_weapon(name, powder_waste, speed, damage, owned, row, col);
 		if(w[i]==NULL){
@@ -174,7 +174,7 @@ Status shot_weapon(Weapon *wp, Resources **r){
     if(wp==NULL||r==NULL||wp->owned==NOT_OWNED) return FAILED;
     
     for(aux = r; aux!=NULL; aux++){
-        if(resources_getType(*aux)==GUNPOWDER){
+        if(resources_getObjectType(*aux)==AMMO){
             r2 = *aux;
         }
     }
@@ -206,7 +206,7 @@ int weapon_getRow(Weapon *wp){
 
 int weapon_getCol(Weapon *wp){
     if(wp == NULL){
-        printf("Error. Weapons-F12-1.\n";
+        printf("Error. Weapons-F12-1.\n");
         return ERROR;
     }
     

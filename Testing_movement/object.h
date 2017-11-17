@@ -1,5 +1,5 @@
-#ifndef OBJECTS_H
-#define OBJECTS_H
+#ifndef OBJECT_H
+#define OBJECT_H
 
 #include "defines.h"
 #include "resources.h"
@@ -49,4 +49,4 @@ Status object_changeAmount(Object *ob, int inc);
 Status use_object(Resources **r, Object *o);
 
 
-#endif /* OBJECTS_H */  
+#endif /* OBJECT_H */  

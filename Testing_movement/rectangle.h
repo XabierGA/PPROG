@@ -78,8 +78,8 @@
   -------------------------------------------------------------------
 */
 
-#ifndef RECTANGLES_H
-#define RECTANGLES_H
+#ifndef RECTANGLE_H
+#define RECTANGLE_H
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -257,4 +257,4 @@ int rectangle_getNCols(rectangle *rec);
 Status rectangle_draw(rectangle *rec);
 
 
-#endif /* RECTANGLES_H */
+#endif /* RECTANGLE_H */

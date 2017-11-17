@@ -1,8 +1,8 @@
 #include "interface.h"
 
 
-Interface* create_intrf(char* rect_fname, char maps_fname){
-    int n_rect, i, ini_row, ini_col, n_rows, n_cols, bg, fg, rect_type;
+Interface* create_intrf(char* rect_fname, char* maps_fname){
+    int n_rect, i, j, ini_row, ini_col, n_rows, n_cols, bg, fg, rect_type;
     FILE *in=NULL;
     char buff[BUFFER_SIZE];
     Interface *intrf=NULL;
@@ -38,7 +38,7 @@ Interface* create_intrf(char* rect_fname, char maps_fname){
     intrf->rect_array = (rectangle **) malloc(n_rect * sizeof(rectangle *));
     for(i=0; i<n_rect; i++){
         fgets(buff, BUFFER_SIZE, in);
-	    sscanf(buff, "%d %d %d %d %d %d", &ini_row, &ini_col, &n_rows, &n_cols, &bg, &fg, &rect_type);
+	    sscanf(buff, "%d %d %d %d %d %d %d", &ini_row, &ini_col, &n_rows, &n_cols, &bg, &fg, &rect_type);
 
 	    intrf->rect_array[i] = win_new(ini_row, ini_col, n_rows, n_cols, bg, fg, rect_type);
 	    if(intrf->rect_array[i]==NULL){
@@ -82,10 +82,10 @@ void destroy_intrf(Interface *intrf){
     
     if(intrf == NULL) return;
     
-    for(i=0; i<intrf->n_rect; i++){
+    for(i=0; i<intrf->n_rectangles; i++){
         win_delete(intrf->rect_array[i]);
     }
-    free(rect_array);
+    free(intrf->rect_array);
     
     if(intrf->maps_array != NULL){
         destroy_maps(intrf->maps_array);
@@ -107,7 +107,7 @@ Status print_resources(Interface *intrf, Resources **r){
     
     for(i=0; i<intrf->n_rectangles; i++){ /*Searching for the rectangle which is going to print the resources*/
         if(rectangle_getType(intrf->rect_array[i]) == RECT_RES){ /*Found it*/
-            num = rectangle_getNCols(rect_array[i]);
+            num = rectangle_getNCols(intrf->rect_array[i]);
             for(aux = r; *aux != NULL; aux++){  /*Printing all the resources information*/
                 buff = (char *) malloc(num * sizeof(char));
                 if(buff == NULL){
@@ -123,7 +123,7 @@ Status print_resources(Interface *intrf, Resources **r){
                 strcpy(buff, resources_getName(*aux));
                 sprintf(str, ": %d / %d", resources_getActualValue(*aux), resources_getMax(*aux));
                 strcat(buff, str);
-                if(win_write_line_at(rect_array[i], resources_getRow(*aux), resources_getCol(*aux), buff) == FAILED){
+                if(win_write_line_at(intrf->rect_array[i], resources_getRow(*aux), resources_getCol(*aux), buff) == FAILED){
                     printf("Error. Interface-F3-3.\n");
                     return FAILED;
                 }
@@ -150,9 +150,9 @@ Status print_weapons(Interface *intrf, Weapon **wp){
         return FAILED;
     }
     
-    for(i=0; i<intrf->n_rectangles; i++){ /*Searching for the rectangle which is going to print the weapons*/
+    for(i=0; i<intrf->n_rectangles; i++){ /*Searching for the rectangle which is going to print the 0*/
         if(rectangle_getType(intrf->rect_array[i]) == RECT_WEAP){ /*Found it*/
-            num = rectangle_getNCols(rect_array[i]);
+            num = rectangle_getNCols(intrf->rect_array[i]);
             for(aux = wp; *aux != NULL; aux++){  /*Printing all the weapons information*/
                 if(own_weapon(*aux) == OWNED){ /*BUT we only print those who are OWNED*/
                     buff = (char *) malloc(num * sizeof(char));
@@ -169,7 +169,7 @@ Status print_weapons(Interface *intrf, Weapon **wp){
                     strcpy(buff, weapon_getName(*aux));
                     sprintf(str, ": %d", weapon_getPowderWaste(*aux));
                     strcat(buff, str);
-                    if(win_write_line_at(rect_array[i], weapon_getRow(*aux), weapon_getCol(*aux), buff) == FAILED){
+                    if(win_write_line_at(intrf->rect_array[i], weapon_getRow(*aux), weapon_getCol(*aux), buff) == FAILED){
                         printf("Error. Interface-F4-3.\n");
                         return FAILED;
                     }
@@ -193,14 +193,14 @@ Status print_objects(Interface *intrf, Object **obj){
     Object **aux=NULL;
     char *buff, *str;
     
-    if(intrf == NULL || r == NULL){
+    if(intrf == NULL || obj == NULL){
         printf("Error. Interface-F5-1.\n");
         return FAILED;
     }
     
     for(i=0; i<intrf->n_rectangles; i++){ /*Searching for the rectangle which is going to print the resources*/
-        if(rectangle_getType(intrf->rect_array[i]) == RECT_OBJ){ /*Found it*/
-            num = rectangle_getNCols(rect_array[i]);
+        if(rectangle_getType(intrf->rect_array[i]) == RECT_INVENT){ /*Found it*/
+            num = rectangle_getNCols(intrf->rect_array[i]);
             for(aux = obj; *aux != NULL; aux++){  /*Printing all the resources information*/
                 buff = (char *) malloc(num * sizeof(char));
                 if(buff == NULL){
@@ -216,7 +216,7 @@ Status print_objects(Interface *intrf, Object **obj){
                 strcpy(buff, object_getName(*aux));
                 sprintf(str, ": %d  %d", object_getAmount(*aux), object_getValue(*aux));
                 strcat(buff, str);
-                if(win_write_line_at(rect_array[i], object_getRow(*aux), object_getColumn(*aux), buff) == FAILED){
+                if(win_write_line_at(intrf->rect_array[i], object_getRow(*aux), object_getColumn(*aux), buff) == FAILED){
                     printf("Error. Interface-F5-3.\n");
                     return FAILED;
                 }
@@ -244,15 +244,15 @@ Status print_map(Interface *intrf, int map_id){
     
     r = intrf->maps_array[map_id]->n_rows;
     
-    for(j=0; j < intrf->n_rectangles, j++){
+    for(j=0; j < intrf->n_rectangles; j++){
         if(rectangle_getType(intrf->rect_array[j]) == RECT_BATTLE){
-            aux = intrf->rec_array[j];
+            aux = intrf->rect_array[j];
             break;
         }
     }
     
     for(i=0; i<r; i++){
-        if(win_write_line_at(aux, i, 0, intrf->maps_array[maps_id]->field[i]) == FAILED){
+        if(win_write_line_at(aux, i, 0, intrf->maps_array[map_id]->field[i]) == FAILED){
             printf("Error. Interface-F6-2.\n");
             return FAILED;
         }
@@ -262,7 +262,7 @@ Status print_map(Interface *intrf, int map_id){
 }
 
 
-Status initialize_intrf(Interface *intrf, int initial_map, Resources **r, Weapons **wp, Objects **obj, Player *pl){
+Status initialize_intrf(Interface *intrf, int initial_map, Resources **r, Weapon **wp, Object **obj, Player *pl){
     int i, j;
     rectangle *aux=NULL;
     
@@ -272,7 +272,7 @@ Status initialize_intrf(Interface *intrf, int initial_map, Resources **r, Weapon
         return FAILED;
     }
     
-    /* Drawing all the rectangles of the interface */
+    /* Drawing all the rectangle of the interface */
     for(i=0; i < intrf->n_rectangles; i++){
         if(rectangle_draw(intrf->rect_array[i]) == FAILED){
             printf("Error. Interface-F7-2.\n");
@@ -287,7 +287,7 @@ Status initialize_intrf(Interface *intrf, int initial_map, Resources **r, Weapon
     }
     
     /* Printing the armory */
-    if(print_weapons(intrf, wp) == FAILED{
+    if(print_weapons(intrf, wp) == FAILED){
         printf("Error. Interface-F7-4.\n");
         return FAILED;
     }
@@ -305,9 +305,9 @@ Status initialize_intrf(Interface *intrf, int initial_map, Resources **r, Weapon
     }
     
     /* Looking for the Battlefield rectangle in order to print the player sign there later */
-    for(j=0; j < intrf->n_rectangles, j++){
+    for(j=0; j < intrf->n_rectangles; j++){
         if(rectangle_getType(intrf->rect_array[j]) == RECT_BATTLE){
-            aux = intrf->rec_array[j];
+            aux = intrf->rect_array[j];
             break;
         }
     }

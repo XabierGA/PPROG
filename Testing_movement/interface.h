@@ -2,9 +2,9 @@
 #define INTERFACE_H
 
 #include "resources.h"
-#include "objects.h"
-#include "weapons.h"
-#include "rectangles.h"
+#include "object.h"
+#include "weapon.h"
+#include "rectangle.h"
 #include "maps.h"
 #include "player.h"
 
@@ -13,8 +13,8 @@
 #include <stdlib.h>
 
 struct _interface{
-    rectangles **rect_array;  /* Array of rectangles */
-    int n_rectangles;       /* Total number of rectangles */
+    rectangle **rect_array;  /* Array of rectangle */
+    int n_rectangles;       /* Total number of rectangle */
     
     Maps **maps_array;  /* Array of maps */
     int n_maps;         /* Total number of maps */
@@ -22,7 +22,7 @@ struct _interface{
 
 typedef struct _interface Interface;
 
-Interface* create_intrf(char* filename);
+Interface* create_intrf(char* rect_fname, char* maps_fname);
 
 void destroy_intrf(Interface *intrf);
 
@@ -34,6 +34,6 @@ Status print_objects(Interface *intrf, Object **obj);
 
 Status print_map(Interface *intrf, int map_id);
 
-Status initialize_intrf(Interface *intrf, int initial_map, Resources **r, Weapons **wp, Objects **obj, Player *pl);
+Status initialize_intrf(Interface *intrf, int initial_map, Resources **r, Weapon **wp, Object **obj, Player *pl);
 
 #endif /*INTERFACE_H*/

@@ -1,4 +1,4 @@
-#include "objects.h"
+#include "object.h"
 
 struct _object{
       char *name;

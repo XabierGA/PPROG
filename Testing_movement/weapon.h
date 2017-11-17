@@ -1,5 +1,5 @@
-#ifndef WEAPONS_H
-#define WEAPONS_H
+#ifndef WEAPON_H
+#define WEAPON_H
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -56,4 +56,4 @@ int weapon_getRow(Weapon *wp);
 /*Returns the column where the weapon is going to be shown at the interface*/
 int weapon_getCol(Weapon *wp);
 
-#endif /* WEAPONS_H */ 
+#endif /* WEAPON_H */ 
