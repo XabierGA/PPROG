@@ -2,7 +2,7 @@
 
 
 Interface* create_intrf(char* rect_fname, char* maps_fname){
-    int n_rect, i, j, ini_row, ini_col, n_rows, n_cols, bg, fg, rect_type;
+    int n_rect, i, j, ini_row, ini_col, last_row, last_col, bg, fg, rect_type;
     FILE *in=NULL;
     char buff[BUFFER_SIZE];
     Interface *intrf=NULL;
@@ -38,9 +38,9 @@ Interface* create_intrf(char* rect_fname, char* maps_fname){
     intrf->rect_array = (rectangle **) malloc(n_rect * sizeof(rectangle *));
     for(i=0; i<n_rect; i++){
         fgets(buff, BUFFER_SIZE, in);
-	    sscanf(buff, "%d %d %d %d %d %d %d", &ini_row, &ini_col, &n_rows, &n_cols, &bg, &fg, &rect_type);
+	    sscanf(buff, "%d %d %d %d %d %d %d", &ini_row, &ini_col, &last_row, &last_col, &bg, &fg, &rect_type);
 
-	    intrf->rect_array[i] = win_new(ini_row, ini_col, n_rows, n_cols, bg, fg, rect_type);
+	    intrf->rect_array[i] = win_new(ini_row, ini_col, last_row, last_col, bg, fg, rect_type);
 	    if(intrf->rect_array[i]==NULL){
 		    printf("Error. Interface-F1-5.\n");
 	        for(j=i-1; j>=0; j--){
@@ -234,7 +234,7 @@ Status print_objects(Interface *intrf, Object **obj){
 
 
 Status print_map(Interface *intrf, int map_id){
-    int i, j, r;
+    int i, j, r, flag=0;
     rectangle *aux=NULL;
     
     if(intrf == NULL || map_id < 0){
@@ -247,13 +247,19 @@ Status print_map(Interface *intrf, int map_id){
     for(j=0; j < intrf->n_rectangles; j++){
         if(rectangle_getType(intrf->rect_array[j]) == RECT_BATTLE){
             aux = intrf->rect_array[j];
+            flag = 1;
             break;
         }
     }
     
+    if(flag != 1){
+        printf("Error. Interface-F6-2.\n");
+        return FAILED;
+    }
+    
     for(i=0; i<r; i++){
         if(win_write_line_at(aux, i, 0, intrf->maps_array[map_id]->field[i]) == FAILED){
-            printf("Error. Interface-F6-2.\n");
+            printf("Error. Interface-F6-3.\n");
             return FAILED;
         }
     }
