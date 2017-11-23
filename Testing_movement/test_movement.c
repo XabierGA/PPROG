@@ -30,5 +30,15 @@ int main(){
     
     if(initialize_intrf(intrf, 0, r, wp, obj, pl) == FAILED) exit(12345);
     
+    destroy_resources(r);
+    
+    destroy_weapons(wp);
+    
+    destroy_objects(obj);
+    
+    player_delete(pl);
+    
+    destroy_intrf(intrf);
+    
     return 0;
 }

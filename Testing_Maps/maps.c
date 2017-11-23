@@ -44,7 +44,6 @@ Maps** load_maps(char *filename){
             for(m=0; m < n_cols; m++){
                 maps[i]->field[k][m] = buff[m];
             }
-            maps[i]->field[k][m] = 0;
         }
     }
     
@@ -82,7 +81,7 @@ Maps* create_map(int rows, int cols){
     }
     
     for(i=0; i<rows; i++){
-        map->field[i] = (char *) malloc((cols+1) * sizeof(char));
+        map->field[i] = (char *) malloc(cols * sizeof(char));
         if(map->field[i]==NULL){
             printf("Error. Maps-F2-4.\n");
             for(j=0; j<i; j++){
