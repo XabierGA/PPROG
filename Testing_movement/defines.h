@@ -38,6 +38,7 @@
 #define DOWN 1051
 #define RIGHT 1052
 #define LEFT 1053
+#define HERE 1054
 
 /*Colors*/
 #define BLACK 40

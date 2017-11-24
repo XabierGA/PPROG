@@ -1,5 +1,5 @@
 CC = gcc -pedantic
-CFLAGS = -Wall
+CFLAGS = -Wall -g
 EXE = test_movement
 
 all : $(EXE)

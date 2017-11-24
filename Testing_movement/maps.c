@@ -5,7 +5,7 @@ Maps** load_maps(char *filename){
     Maps **maps;
     FILE *in=NULL;
     char buff[BUFFER_SIZE];
-    int n_maps, n_cols, n_rows, i, j, k, m;
+    int n_maps, n_cols, n_rows, map_id, i, j, k, m;
     
     if(filename == NULL){
         printf("Error. Maps-F1-1.\n");
@@ -29,9 +29,9 @@ Maps** load_maps(char *filename){
     
     for(i=0; i<n_maps; i++){
         fgets(buff, BUFFER_SIZE, in);
-        sscanf(buff, "%d %d", &n_rows, &n_cols);
+        sscanf(buff, "%d %d %d", &n_rows, &n_cols, &map_id);
         
-        maps[i] = create_map(n_rows, n_cols);
+        maps[i] = create_map(n_rows, n_cols, map_id);
         if(maps[i]==NULL){
             printf("Error. Maps-F1-4.\n");
             for(j=0; j<i; j++){
@@ -57,7 +57,7 @@ Maps** load_maps(char *filename){
 
 
 
-Maps* create_map(int rows, int cols){
+Maps* create_map(int rows, int cols, int map_id){
     Maps *map=NULL;
     int i, j;
     
@@ -74,6 +74,7 @@ Maps* create_map(int rows, int cols){
     
     map->n_rows = rows;
     map->n_cols = cols;
+    map->map_id = map_id;
     
     map->field = (char **) malloc(rows * sizeof(char *));
     if(map->field == NULL){
@@ -124,3 +125,13 @@ void destroy_maps(Maps **maps){
     
     free(maps);
 } 
+
+
+int map_getId(Maps *map){
+    if(map == NULL){
+        printf("Error. Maps-F5-1.\n");
+        return ERROR;
+    }
+    
+    return map->map_id;
+}

@@ -67,7 +67,7 @@ Interface* create_intrf(char* rect_fname, char* maps_fname){
     }
     for(aux = intrf->maps_array, i=1; *aux != NULL; aux++, i++);
     
-    intrf->n_maps = i;
+    intrf->n_maps = i-1;
     
     
     fclose(in);
@@ -234,15 +234,26 @@ Status print_objects(Interface *intrf, Object **obj){
 
 
 Status print_map(Interface *intrf, int map_id){
-    int i, j, r, ini_row, ini_col, last_row, n_rows, flag=0;
+    int i, j, r, ini_row, ini_col, last_row, n_rows;
     rectangle *aux=NULL;
+    Maps *map=NULL;
     
     if(intrf == NULL || map_id < 0){
         printf("Error. Interface-F6-1.\n");
         return FAILED;
     }
     
-    r = intrf->maps_array[map_id]->n_rows;
+    for(j=0; j<intrf->n_maps; j++){ /* Searching for the correct map */
+        if(map_getId(intrf->maps_array[j]) == map_id){
+            map = intrf->maps_array[j];
+        }
+    }
+    if(map == NULL){
+        printf("Error. Interface-F6-4.\n");
+        return FAILED;
+    }
+    
+    r = map->n_rows;
     
     for(j=0; j < intrf->n_rectangles; j++){
         if(rectangle_getType(intrf->rect_array[j]) == RECT_BATTLE){
@@ -251,7 +262,6 @@ Status print_map(Interface *intrf, int map_id){
             ini_col = intrf->rect_array[j]->ini_row;
             last_row = intrf->rect_array[j]->last_row;
             n_rows = intrf->rect_array[j]->n_rows;
-            flag = 1;
             break;
         }
     }
@@ -261,14 +271,14 @@ Status print_map(Interface *intrf, int map_id){
         return FAILED;
     }
     
-    if(flag != 1){
+    if(aux == NULL){
         printf("Error. Interface-F6-3.\n");
         return FAILED;
     }
     
-    for(j = 0, i=ini_row + 1; i < last_row; j++, i++){
-        if(win_write_line_at(aux, i, ini_col + 1, intrf->maps_array[map_id]->field[j]) == FAILED){
-            printf("Error. Interface-F6-4.\n");
+    for(j = 0, i=ini_row + 1; i < last_row; j++, i++){ /* Printing the map */
+        if(win_write_line_at(aux, i, ini_col + 1, map->field[j]) == FAILED){
+            printf("Error. Interface-F6-5.\n");
             return FAILED;
         }
     }
@@ -334,3 +344,668 @@ Status initialize_intrf(Interface *intrf, int initial_map, Resources **r, Weapon
     
     return OK;
 }
+
+
+
+static int Dr[5] = {-1, 1, 0, 0, 0}; 
+static int Dc[5] = {0, 0, 1, -1, 0};
+void move(Interface *intrf, int map_id, Player *pl, int dir){
+    int fin_row, fin_col, j, act_row, act_col, go; 
+    Maps *map=NULL;
+    rectangle *aux=NULL;
+    
+    if(dir != UP && dir != DOWN && dir != LEFT && dir != RIGHT && dir != HERE){
+        printf("Error. Not valid direction. Interface-F8-1\n");
+        return;
+    }
+    if(intrf==NULL ||pl==NULL){
+        printf("Error. Parameters NULL (interf or player). Interface-F8-2.\n");
+        return;
+    }
+    act_row = player_getRow(pl);
+    act_col = player_getCol(pl);
+    go = dir - UP;
+    fin_row =  act_row + Dr[go]; 
+    fin_col =  act_col + Dc[go];
+    
+    for(j=0; j<intrf->n_maps; j++){ /* Searching the map */
+        if(map_getId(intrf->maps_array[j]) == map_id){
+            map = intrf->maps_array[j];
+            break;
+        }
+    }
+    if(map == NULL){
+        printf("Error. Map is NULL. Interface-F8-3.\n");
+        return;
+    }
+    
+    for(j=0; j < intrf->n_rectangles; j++){ /*Searching the rectangle */
+        if(rectangle_getType(intrf->rect_array[j]) == RECT_BATTLE){
+            aux = intrf->rect_array[j];
+            break;
+        }
+    }
+    if(aux==NULL){
+        printf("Error. NULL rectagle. Interface-F8-5.\n");
+        return;
+    }
+    
+    if(fin_row<=1 || fin_col<=1 || fin_row >= aux->last_row || fin_col >= aux-> last_col) return;
+    
+    
+    if(map->field[fin_row-2][fin_col-2] != ' ') return;
+    
+    
+    if(win_write_char_at(aux, act_row, act_col, ' ') == FAILED){
+            printf("Error. Invalid write. Interface-F8-6.\n");
+            return;
+    }
+    if(win_write_char_at(aux, fin_row, fin_col, player_getDisplay(pl)) == FAILED){
+            printf("Error. Invalid write. Interface-F8-6.\n");
+            return;
+    }
+    
+    if(player_setLocation(pl, fin_row, fin_col) == FAILED){
+        printf("Error. Wrong Location. Interface-F8-4.\n");
+        return;
+    }
+    
+    return;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -36,4 +36,6 @@ Status print_map(Interface *intrf, int map_id);
 
 Status initialize_intrf(Interface *intrf, int initial_map, Resources **r, Weapon **wp, Object **obj, Player *pl);
 
+void move(Interface *intrf, int map_id, Player *pl, int dir);
+
 #endif /*INTERFACE_H*/
