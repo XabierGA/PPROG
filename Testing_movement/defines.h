@@ -29,9 +29,14 @@
 #define ALIVE 1032
 #define DEAD 1033
 
-/*Weapon owned*/
+/*Weapon owned & equipped & dir_change*/
 #define OWNED 1040
 #define NOT_OWNED 1041
+#define EQUIPPED 1042
+#define NOT_EQUIPPED 1043
+#define UPW 1044
+#define DOWNW 1045
+
 
 /*Orientation of character*/
 #define UP 1050

@@ -14,7 +14,7 @@ Weapon** load_weapons(char* filename);
 
 
 /*This function creates a weapon, reserves memory and fill it with the data specified*/
-Weapon* create_weapon(char *name, int powder_waste, int speed, int damage, int owned, int row, int col);
+Weapon* create_weapon(char *name, int powder_waste, int speed, int damage, int owned, int equipped, int row, int col);
 
 
 /*This function receives a weapon and it frees all the memory allocated for it*/
@@ -46,7 +46,7 @@ Status change_own(Weapon *wp);
 
 /*This function uses a weapon, it wastes the amount of gunpowder needed to shoot and deals damage in the line it is shot, a Weapon
 only uses the resource gunpowder to shoot, the object ammo gives you gunpowder, but we supose we have infinite bullets*/
-Status shot_weapon(Weapon* wp, Resources** r);
+Status shot_weapon(Weapon** wp, Resources** r);
 
 
 /*Returns the row where the weapon is going to be shown at the interface*/
@@ -55,5 +55,7 @@ int weapon_getRow(Weapon *wp);
 
 /*Returns the column where the weapon is going to be shown at the interface*/
 int weapon_getCol(Weapon *wp);
+
+Status change_equipped(Weapon **wp, int dir);
 
 #endif /* WEAPON_H */ 

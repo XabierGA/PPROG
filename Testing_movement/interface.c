@@ -414,6 +414,25 @@ void move(Interface *intrf, int map_id, Player *pl, int dir){
 }
 
 
+void shot(Interface *intrf, Weapon **wp, Player *pl, Resources **r){
+    
+    if(intrf == NULL || wp == NULL || r == NULL || pl == NULL){
+        printf("Error. Interface-F9-1.\n");
+        return;
+    }
+    
+    if(shot_weapon(wp, r) == FAILED){
+        printf("Error. Interface-F9-2.\n");
+        return;
+    }
+    
+    if(print_resources(intrf, r) == FAILED){
+        printf("Error. Interface-F9-3.\n");
+        return;
+    }
+}
+
+
 
 
 

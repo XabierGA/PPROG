@@ -185,10 +185,7 @@ Status shot_weapon(Weapon **wp, Resources **r){
     Weapon **auxw=NULL;
     Weapon *w2=NULL;
     
-    if(wp==NULL||r==NULL){
-        printf("Error. Weapons-F10-0.\n");
-        return FAILED;
-    } 
+    if(wp==NULL||r==NULL) return FAILED;
     
     for(auxr = r; (*auxr) != NULL; auxr++){ /*Searching for the resource of ammo*/
         if(resources_getObjectType(*auxr)==AMMO){
@@ -210,7 +207,7 @@ Status shot_weapon(Weapon **wp, Resources **r){
         return FAILED;
     }
     
-    if(w2->powder_waste > resources_getActualValue(r2)) return OK;
+    if(w2->powder_waste > resources_getActualValue(r2)) return FAILED;
     
     if(modify_resource(r2, -(w2->powder_waste)) == ERROR){
         printf("Ni puta idea de lo que ha pasado. Weapons-F10-3.\n");
@@ -254,7 +251,6 @@ Status change_equipped(Weapon **wp, int dir){
         return FAILED;
     }
     /*--------------------------------------*/
-    
     
     for(aux = wp; *aux != NULL; aux++){
         if((*aux)->equipped == EQUIPPED){

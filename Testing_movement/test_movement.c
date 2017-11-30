@@ -102,7 +102,7 @@ int main(){
     
     while(1){
         c = read_key();
-        if(c == 'q'){
+        if(c == 27){
             tcsetattr(fileno(stdin), TCSANOW, &initial);	/*We now restore the settings we back-up'd 
 							  so that the termial behaves normally when 
 							  the program ends */
@@ -111,6 +111,9 @@ int main(){
         
         else if(c < 0){
             move(intrf, 1, pl, -c);
+        }
+        else if(c == 's'){
+            shot(intrf, wp, pl, r);
         }
     }
     

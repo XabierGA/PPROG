@@ -38,4 +38,6 @@ Status initialize_intrf(Interface *intrf, int initial_map, Resources **r, Weapon
 
 void move(Interface *intrf, int map_id, Player *pl, int dir);
 
+void shot(Interface *intrf, Weapon **wp, Player *pl, Resources **r);
+
 #endif /*INTERFACE_H*/
