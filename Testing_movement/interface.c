@@ -421,7 +421,7 @@ void move(Interface *intrf, int map_id, Player *pl, int dir){
 
 
 void shoot(Interface *intrf, Weapon **wp, Player *pl, Resources **r, int map_id, int dir){
-    int row, col, go, next_row, next_col, j, flag=0;
+    int row, col, go, next_row, next_col, r_aux, c_aux, j, flag=0;
     Weapon *w=NULL;
     Maps *map=NULL;
     rectangle *aux=NULL;
@@ -482,6 +482,12 @@ void shoot(Interface *intrf, Weapon **wp, Player *pl, Resources **r, int map_id,
         next_col = col + Dc[go];
         
         if(next_row<=1 || next_col<=1 || next_row >= aux->last_row || next_col >= aux->last_col){
+            r_aux = player_getRow(pl);
+            c_aux = player_getCol(pl);
+            if(r_aux == row && c_aux == col){
+                return;
+            }
+    
             if(win_write_char_at(aux, row, col, ' ') == FAILED){
                 printf("Error. Invalid write. Interface-F9-6.\n");
             }
@@ -489,6 +495,12 @@ void shoot(Interface *intrf, Weapon **wp, Player *pl, Resources **r, int map_id,
         } 
         
         if(map->field[next_row-2][next_col-2] != ' '){
+            r_aux = player_getRow(pl);
+            c_aux = player_getCol(pl);
+            if(r_aux == row && c_aux == col){
+                return;
+            }
+            
             if(win_write_char_at(aux, row, col, ' ') == FAILED){
                 printf("Error. Invalid write. Interface-F9-7.\n");
             }
