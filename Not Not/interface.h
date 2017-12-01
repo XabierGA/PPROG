@@ -11,7 +11,6 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include <unistd.h>
 
 struct _interface{
     rectangle **rect_array;  /* Array of rectangle */
@@ -39,6 +38,6 @@ Status initialize_intrf(Interface *intrf, int initial_map, Resources **r, Weapon
 
 void move(Interface *intrf, int map_id, Player *pl, int dir);
 
-void shoot(Interface *intrf, Weapon **wp, Player *pl, Resources **r, int map_id, int dir);
+void shot(Interface *intrf, Weapon **wp, Player *pl, Resources **r);
 
 #endif /*INTERFACE_H*/

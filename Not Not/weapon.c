@@ -307,27 +307,3 @@ int weapon_equipped(Weapon *wp){
         return NOT_EQUIPPED;
     }
 }
-
-
-
-Weapon* weapon_getWeaponEquipped(Weapon **wp){
-    Weapon *w2=NULL;
-    Weapon **auxw=NULL;
-    
-    if(wp == NULL){
-        printf("Error. Weapons-F15-1.\n");
-        return NULL;   
-    }
-    
-    for(auxw = wp; (*auxw) != NULL; auxw++){
-        if((*auxw)->equipped == EQUIPPED){
-            w2 = *auxw;
-        }
-    }
-    if(w2==NULL){
-        printf("Error. Weapons-F10-2.\n");
-        return NULL;
-    }
-    
-    return w2;
-}

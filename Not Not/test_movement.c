@@ -1,14 +1,24 @@
 #include "interface.h"
-#include "resources.h"
-#include "object.h"
-#include "player.h"
-#include "weapon.h"
 #include "maps.h"
 #include "rectangle.h"
+#include <limits.h>
+#include <stdlib.h>
 
 #include <termios.h>
 
 struct termios initial;
+
+int aleat_num(int inf, int sup) {
+  
+  int dif;
+  
+  if (inf > sup) return inf - 1;
+  
+  dif = sup - inf;
+  
+  return inf + (int)((dif + 1) * (rand() / (RAND_MAX + 1.0)));
+
+}
 
 /*
   Structure to send the clock parameters to the function that manages
@@ -19,8 +29,6 @@ typedef struct {
   time_t initial; /* Initial time at which the function is first called */
   Interface  *intrf;    /* pointer to the interface where the clock is to be displayed */
 } clock_data;
-
-
 
 void _term_init() {
 	struct termios new;	          /*a termios structure contains a set of attributes about 
@@ -75,62 +83,45 @@ int read_key(){
 
 
 int main(){
-    Resources **r=NULL;
-    Weapon **wp=NULL;
-    Object **obj=NULL;
-    Player *pl=NULL;
     Interface *intrf=NULL;
-    int c;
-    
-    r = load_resources("resources.txt");
-    if(r == NULL) exit(12345);
-    
-    wp = load_weapons("weapons.txt");
-    if(wp == NULL) exit(12345);
-    
-    obj = load_objects("objects.txt");
-    if(obj == NULL) exit(12345);
-    
-    pl = load_player("player.txt");
-    if(pl == NULL) exit(12345);
+    int c, puntos = 0;
+    int aleat = 0;
     
     intrf = create_intrf("rectangles.txt", "map.txt");
     if(intrf == NULL) exit(12345);
     
-    if(initialize_intrf(intrf, 1, r, wp, obj, pl) == FAILED) exit(12345);
+    print_map (intrf, 16);
     
   
     _term_init();
-    
+    sleep (6);
     while(1){
-        c = read_key();
-        if(c == 'q'){
-            tcsetattr(fileno(stdin), TCSANOW, &initial);	/*We now restore the settings we back-up'd 
-							  so that the termial behaves normally when 
-							  the program ends */
-            exit(0);
+        
+        aleat = aleat_num(1, 2);
+        printf("%d", aleat);
+        break;
+        print_map (intrf, aleat);
+        if (aleat == 1){
+            c = read_key();
+            if (c==RIGHT){
+                puntos++;
+            }else{
+                printf("pringao, tienes %d puntos.", puntos);
+                break;
+            } 
+        }else if (aleat == 2){
+            c = read_key();
+            if (c==LEFT){
+                puntos++;
+            }else{
+                printf("pringao, tienes %d puntos.", puntos);
+                break;
+            } 
         }
         
-        /*
-        else if(c < 0){
-            move(intrf, 1, pl, -c);
-        }*/
-        
-        
-        else if(c < 0){
-            shoot(intrf, wp, pl, r, 1, -c);
-        }
         
     }
     
-    
-    destroy_resources(r);
-    
-    destroy_weapons(wp);
-    
-    destroy_objects(obj);
-    
-    player_delete(pl);
     
     destroy_intrf(intrf);
     
