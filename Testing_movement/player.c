@@ -18,13 +18,13 @@ Player* load_player(char *filename){
     
     if(filename == NULL){
         printf("Error. Player-F1-1.\n");
-        return NULL;
+        exit(ERROR);
     }
     
     in = (FILE *) fopen(filename, "r");
     if(in==NULL){
         printf("Error. Player-F1-2.\n");
-        return NULL;
+        exit(ERROR);
     }
     
     fgets(buff, BUFFER_SIZE, in);
@@ -34,7 +34,7 @@ Player* load_player(char *filename){
     if(player==NULL){
         printf("Error. Player-F1-3.\n");
         fclose(in);
-        return NULL;
+        exit(ERROR);
     }
     
     player->display = display;
@@ -59,8 +59,8 @@ void player_delete(Player *pl){
 
 char player_getDisplay(Player *pl){
     if(pl==NULL){
-        printf("Error. Player-F2-1.\n");
-        return 0;
+        printf("Error. Player-F3-1.\n");
+        exit(ERROR);
     }
     
     return pl->display;
@@ -70,8 +70,8 @@ char player_getDisplay(Player *pl){
 
 int player_getOrientation(Player *pl){
     if(pl==NULL){
-        printf("Error. Player-F3-2.\n");
-        return ERROR;
+        printf("Error. Player-F4-2.\n");
+        exit(ERROR);
     }
     
     return pl->orientation;
@@ -81,12 +81,12 @@ int player_getOrientation(Player *pl){
 
 Status player_setOrientation(Player *pl, int orient){
     if(pl==NULL){
-        printf("Error. Player-F4-1.\n");
-        return FAILED;
+        printf("Error. Player-F5-1.\n");
+        exit(ERROR);
     }
     if(orient!=UP && orient!=DOWN && orient!=LEFT && orient!=RIGHT){
-        printf("Error. Player-F4-2.\n");
-        return FAILED;
+        printf("Error. Player-F5-2.\n");
+        exit(ERROR);
     }
     
     pl->orientation = orient;
@@ -98,8 +98,8 @@ Status player_setOrientation(Player *pl, int orient){
 
 int player_getRow(Player *pl){
     if(pl==NULL){
-        printf("Error. Player-F5-2.\n");
-        return ERROR;
+        printf("Error. Player-F6-1.\n");
+        exit(ERROR);
     }
     
     return pl->row;
@@ -109,8 +109,8 @@ int player_getRow(Player *pl){
 
 int player_getCol(Player *pl){
     if(pl==NULL){
-        printf("Error. Player-F6-2.\n");
-        return ERROR;
+        printf("Error. Player-F7-1.\n");
+        exit(ERROR);
     }
     
     return pl->col;
@@ -120,8 +120,8 @@ int player_getCol(Player *pl){
 
 Status player_setLocation(Player *pl, int r, int c){
     if(pl==NULL||r<=0||c<=0){
-        printf("Error. Player-F7-2.\n");
-        return FAILED;
+        printf("Error. Player-F8-2.\n");
+        exit(ERROR);
     }
     
     pl->row = r;

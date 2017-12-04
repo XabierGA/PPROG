@@ -11,25 +11,25 @@ Interface* create_intrf(char* rect_fname, char* maps_fname){
     /*-----------Checkings-------------------------*/
     if(rect_fname==NULL){
         printf("Error. Interface-F1-1.\n");
-        return NULL;
+        exit(ERROR);
     }
     
     if(maps_fname==NULL){
         printf("Error. Interface-F1-2.\n");
-        return NULL;
+        exit(ERROR);
     }
     /*-----------------------------------------------*/
     
     in = (FILE *) fopen(rect_fname, "r");
     if(in == NULL){
         printf("Error. Interface-F1-3.\n");
-        return NULL;
+        exit(ERROR);
     }
     
     intrf = (Interface *) malloc(sizeof(Interface));
     if(intrf == NULL){
         printf("Error. Interface-F1-4.\n");
-        return NULL;
+        exit(ERROR);
     }
     
     fgets(buff, BUFFER_SIZE, in);
@@ -49,7 +49,7 @@ Interface* create_intrf(char* rect_fname, char* maps_fname){
 	        free(intrf->rect_array);
 	        free(intrf);
 	        fclose(in);
-	        return NULL;
+	        exit(ERROR);
 	    }
     }
     
@@ -64,11 +64,11 @@ Interface* create_intrf(char* rect_fname, char* maps_fname){
         free(intrf->rect_array);
         free(intrf);
         fclose(in);
+        exit(ERROR);
     }
     for(aux = intrf->maps_array, i=1; *aux != NULL; aux++, i++);
     
     intrf->n_maps = i-1;
-    
     
     fclose(in);
     
@@ -80,7 +80,10 @@ Interface* create_intrf(char* rect_fname, char* maps_fname){
 void destroy_intrf(Interface *intrf){
     int i;
     
-    if(intrf == NULL) return;
+    if(intrf == NULL){
+        printf("Error. Interface-F2-1.\n");
+        exit(ERROR);
+    }
     
     for(i=0; i<intrf->n_rectangles; i++){
         win_delete(intrf->rect_array[i]);
@@ -102,31 +105,31 @@ Status print_resources(Interface *intrf, Resources **r){
     
     if(intrf == NULL || r == NULL){
         printf("Error. Interface-F3-1.\n");
-        return FAILED;
+        exit(ERROR);
     }
     
     for(i=0; i<intrf->n_rectangles; i++){ /*Searching for the rectangle which is going to print the resources*/
         if(rectangle_getType(intrf->rect_array[i]) == RECT_RES){ /*Found it*/
+        
             num = rectangle_getNCols(intrf->rect_array[i]) - 1;
+            
             for(aux = r; *aux != NULL; aux++){  /*Printing all the resources information*/
                 buff = (char *) malloc(num * sizeof(char));
                 if(buff == NULL){
                     printf("Error. Interface-F3-2.\n");
-                    return FAILED;
+                    exit(ERROR);
                 }
                 str = (char *) malloc(num * sizeof(char));
                 if(str == NULL){
                     printf("Error. Interface-F3-3.\n");
-                    return FAILED;
+                    exit(ERROR);
                 }
                 
                 strcpy(buff, resources_getName(*aux));
                 sprintf(str, ": %05d / %d", resources_getActualValue(*aux), resources_getMax(*aux));
                 strcat(buff, str);
-                if(win_write_line_at(intrf->rect_array[i], resources_getRow(*aux), resources_getCol(*aux), buff) == FAILED){
-                    printf("Error. Interface-F3-4.\n");
-                    return FAILED;
-                }
+                
+                win_write_line_at(intrf->rect_array[i], resources_getRow(*aux), resources_getCol(*aux), buff);
                 
                 free(buff);
                 free(str);
@@ -134,8 +137,8 @@ Status print_resources(Interface *intrf, Resources **r){
             return OK;
         }
     }
-    printf("Error. Interface-F3-5.\n");
-    return FAILED;
+    printf("Error. Interface-F3-4.\n");
+    exit(ERROR);
 }
 
 
@@ -147,23 +150,25 @@ Status print_weapons(Interface *intrf, Weapon **wp){
     
     if(intrf == NULL || wp == NULL){
         printf("Error. Interface-F4-1.\n");
-        return FAILED;
+        exit(ERROR);
     }
     
     for(i=0; i<intrf->n_rectangles; i++){ /*Searching for the rectangle which is going to print the 0*/
         if(rectangle_getType(intrf->rect_array[i]) == RECT_WEAP){ /*Found it*/
+        
             num = rectangle_getNCols(intrf->rect_array[i]) - 1;
+            
             for(aux = wp; *aux != NULL; aux++){  /*Printing all the weapons information*/
                 if(own_weapon(*aux) == OWNED){ /*BUT we only print those who are OWNED*/
                     buff = (char *) malloc(num * sizeof(char));
                     if(buff == NULL){
                         printf("Error. Interface-F4-2.\n");
-                        return FAILED;
+                        exit(ERROR);
                     }
                     str = (char *) malloc(num * sizeof(char));
                     if(buff == NULL){
                         printf("Error. Interface-F4-2.\n");
-                        return FAILED;
+                        exit(ERROR);
                     }
                 
                     strcpy(buff, weapon_getName(*aux));
@@ -175,10 +180,8 @@ Status print_weapons(Interface *intrf, Weapon **wp){
                     else if(weapon_equipped(*aux) == NOT_EQUIPPED){
                         strcat(buff, " N");
                     }
-                    if(win_write_line_at(intrf->rect_array[i], weapon_getRow(*aux), weapon_getCol(*aux), buff) == FAILED){
-                        printf("Error. Interface-F4-3.\n");
-                        return FAILED;
-                    }
+                    
+                    win_write_line_at(intrf->rect_array[i], weapon_getRow(*aux), weapon_getCol(*aux), buff);
                 
                     free(buff);
                     free(str);
@@ -188,8 +191,8 @@ Status print_weapons(Interface *intrf, Weapon **wp){
         }
     }
     
-    printf("Error. Interface-F4-4.\n");
-    return FAILED;
+    printf("Error. Interface-F4-3.\n");
+    exit(ERROR);
 }
 
 
@@ -201,31 +204,31 @@ Status print_objects(Interface *intrf, Object **obj){
     
     if(intrf == NULL || obj == NULL){
         printf("Error. Interface-F5-1.\n");
-        return FAILED;
+        exit(ERROR);
     }
     
     for(i=0; i<intrf->n_rectangles; i++){ /*Searching for the rectangle which is going to print the resources*/
         if(rectangle_getType(intrf->rect_array[i]) == RECT_INVENT){ /*Found it*/
+        
             num = rectangle_getNCols(intrf->rect_array[i]) - 1;
+            
             for(aux = obj; *aux != NULL; aux++){  /*Printing all the resources information*/
                 buff = (char *) malloc(num * sizeof(char));
                 if(buff == NULL){
                     printf("Error. Interface-F5-2.\n");
-                    return FAILED;
+                    exit(ERROR);
                 }
                 str = (char *) malloc(num * sizeof(char));
                 if(buff == NULL){
                     printf("Error. Interface-F5-2.\n");
-                    return FAILED;
+                    exit(ERROR);
                 }
                 
                 strcpy(buff, object_getName(*aux));
                 sprintf(str, ": %d  %d", object_getAmount(*aux), object_getValue(*aux));
                 strcat(buff, str);
-                if(win_write_line_at(intrf->rect_array[i], object_getRow(*aux), object_getColumn(*aux), buff) == FAILED){
-                    printf("Error. Interface-F5-3.\n");
-                    return FAILED;
-                }
+                
+                win_write_line_at(intrf->rect_array[i], object_getRow(*aux), object_getColumn(*aux), buff);
                 
                 free(buff);
                 free(str);
@@ -233,8 +236,8 @@ Status print_objects(Interface *intrf, Object **obj){
             return OK;
         }
     }
-    printf("Error. Interface-F5-4.\n");
-    return FAILED;
+    printf("Error. Interface-F5-3.\n");
+    exit(ERROR);
 }
 
 
@@ -246,7 +249,7 @@ Status print_map(Interface *intrf, int map_id){
     
     if(intrf == NULL || map_id < 0){
         printf("Error. Interface-F6-1.\n");
-        return FAILED;
+        exit(ERROR);
     }
     
     for(j=0; j<intrf->n_maps; j++){ /* Searching for the correct map */
@@ -255,7 +258,7 @@ Status print_map(Interface *intrf, int map_id){
         }
     }
     if(map == NULL){
-        printf("Error. Interface-F6-4.\n");
+        printf("Error. Interface-F6-2.\n");
         return FAILED;
     }
     
@@ -274,19 +277,16 @@ Status print_map(Interface *intrf, int map_id){
     
     if(r != n_rows-2){
         printf("Error. Interface-F6-2.\n");
-        return FAILED;
+        exit(ERROR);
     }
     
     if(aux == NULL){
         printf("Error. Interface-F6-3.\n");
-        return FAILED;
+        exit(ERROR);
     }
     
     for(j = 0, i=ini_row + 1; i < last_row; j++, i++){ /* Printing the map */
-        if(win_write_line_at(aux, i, ini_col + 1, map->field[j]) == FAILED){
-            printf("Error. Interface-F6-5.\n");
-            return FAILED;
-        }
+        win_write_line_at(aux, i, ini_col + 1, map->field[j]);
     }
     
     return OK;
@@ -300,40 +300,25 @@ Status initialize_intrf(Interface *intrf, int initial_map, Resources **r, Weapon
     /* Error checking */
     if(intrf == NULL || initial_map < 0){
         printf("Error. Interface-F7-1.\n");
-        return FAILED;
+        exit(ERROR);
     }
     
     /* Drawing all the rectangle of the interface */
     for(i=0; i < intrf->n_rectangles; i++){
-        if(rectangle_draw(intrf->rect_array[i]) == FAILED){
-            printf("Error. Interface-F7-2.\n");
-            return FAILED;
-        }
+        rectangle_draw(intrf->rect_array[i]);
     }
     
     /* Printing the resources */
-    if(print_resources(intrf, r) == FAILED){
-        printf("Error. Interface-F7-3.\n");
-        return FAILED;
-    }
+    print_resources(intrf, r);
     
     /* Printing the armory */
-    if(print_weapons(intrf, wp) == FAILED){
-        printf("Error. Interface-F7-4.\n");
-        return FAILED;
-    }
+    print_weapons(intrf, wp);
     
     /* Printing the inventory */
-    if(print_objects(intrf, obj) == FAILED){
-        printf("Error. Interface-F7-5.\n");
-        return FAILED;
-    }
+    print_objects(intrf, obj);
     
     /* Printing the initial map */
-    if(print_map(intrf, initial_map) == FAILED){
-        printf("Error. Interface-F7-6.\n");
-        return FAILED;
-    }
+    print_map(intrf, initial_map);
     
     /* Looking for the Battlefield rectangle in order to print the player sign there later */
     for(j=0; j < intrf->n_rectangles; j++){
@@ -342,11 +327,13 @@ Status initialize_intrf(Interface *intrf, int initial_map, Resources **r, Weapon
             break;
         }
     }
-    /* Printing the player at the initial position */
-    if(win_write_char_at(aux, player_getRow(pl), player_getCol(pl), player_getDisplay(pl)) == FAILED){
-        printf("Error. Interface-F7-7.\n");
-        return FAILED;
+    if(aux == NULL){
+        printf("Error. Interface-F7-2.\n");
+        exit(ERROR);
     }
+    
+    /* Printing the player at the initial position */
+    win_write_char_at(aux, player_getRow(pl), player_getCol(pl), player_getDisplay(pl));
     
     return OK;
 }
@@ -361,11 +348,11 @@ void move(Interface *intrf, int map_id, Player *pl, int dir){
     rectangle *aux=NULL;
     
     if(dir != UP && dir != DOWN && dir != LEFT && dir != RIGHT && dir != HERE){
-        printf("Error. Not valid direction. Interface-F8-1\n");
+        printf("Error. Interface-F8-1\n");
         return;
     }
     if(intrf==NULL ||pl==NULL){
-        printf("Error. Parameters NULL (interf or player). Interface-F8-2.\n");
+        printf("Error. Interface-F8-2.\n");
         return;
     }
     act_row = player_getRow(pl);
@@ -381,7 +368,7 @@ void move(Interface *intrf, int map_id, Player *pl, int dir){
         }
     }
     if(map == NULL){
-        printf("Error. Map is NULL. Interface-F8-3.\n");
+        printf("Error. Interface-F8-3.\n");
         return;
     }
     
@@ -392,7 +379,7 @@ void move(Interface *intrf, int map_id, Player *pl, int dir){
         }
     }
     if(aux==NULL){
-        printf("Error. NULL rectagle. Interface-F8-5.\n");
+        printf("Error. Interface-F8-4.\n");
         return;
     }
     
@@ -402,19 +389,11 @@ void move(Interface *intrf, int map_id, Player *pl, int dir){
     if(map->field[fin_row-2][fin_col-2] != ' ') return;
     
     
-    if(win_write_char_at(aux, act_row, act_col, ' ') == FAILED){
-            printf("Error. Invalid write. Interface-F8-6.\n");
-            return;
-    }
-    if(win_write_char_at(aux, fin_row, fin_col, player_getDisplay(pl)) == FAILED){
-            printf("Error. Invalid write. Interface-F8-6.\n");
-            return;
-    }
+    win_write_char_at(aux, act_row, act_col, ' ');
     
-    if(player_setLocation(pl, fin_row, fin_col) == FAILED){
-        printf("Error. Wrong Location. Interface-F8-4.\n");
-        return;
-    }
+    win_write_char_at(aux, fin_row, fin_col, player_getDisplay(pl));
+    
+    player_setLocation(pl, fin_row, fin_col);
     
     return;
 }
@@ -437,16 +416,13 @@ void shoot(Interface *intrf, Weapon **wp, Player *pl, Resources **r, int map_id,
         return;
     }
     
-    if(print_resources(intrf, r) == FAILED){
-        printf("Error. Interface-F9-2.\n");
-        return;
-    }
+    print_resources(intrf, r);
     
     /*Now, if it had enough gunpowder to shoot, we print the bullet */
     
-    w = weapon_getWeaponEquipped(wp); /*We get the weapon equipped at this moment*/
+    w = weapon_getEquippedWeapon(wp); /*We get the weapon equipped at this moment*/
     if(w == NULL){
-       printf("Error. Interface-F9-3.\n");
+        printf("Error. Interface-F9-2.\n");
         return; 
     }
     
@@ -457,7 +433,7 @@ void shoot(Interface *intrf, Weapon **wp, Player *pl, Resources **r, int map_id,
         }
     }
     if(map == NULL){
-        printf("Error. Map is NULL. Interface-F9-4.\n");
+        printf("Error. Interface-F9-3.\n");
         return;
     }
     
@@ -468,7 +444,7 @@ void shoot(Interface *intrf, Weapon **wp, Player *pl, Resources **r, int map_id,
         }
     }
     if(aux==NULL){
-        printf("Error. NULL rectagle. Interface-F9-5.\n");
+        printf("Error. Interface-F9-4.\n");
         return;
     }
     
@@ -488,9 +464,7 @@ void shoot(Interface *intrf, Weapon **wp, Player *pl, Resources **r, int map_id,
                 return;
             }
     
-            if(win_write_char_at(aux, row, col, ' ') == FAILED){
-                printf("Error. Invalid write. Interface-F9-6.\n");
-            }
+            win_write_char_at(aux, row, col, ' ');
             return;
         } 
         
@@ -501,23 +475,17 @@ void shoot(Interface *intrf, Weapon **wp, Player *pl, Resources **r, int map_id,
                 return;
             }
             
-            if(win_write_char_at(aux, row, col, ' ') == FAILED){
-                printf("Error. Invalid write. Interface-F9-7.\n");
-            }
+            win_write_char_at(aux, row, col, ' ');
+            
             return;
         }
         
         if(flag != 0){
-            if(win_write_char_at(aux, row, col, ' ') == FAILED){
-            printf("Error. Invalid write. Interface-F8-6.\n");
-            return;
-            }
+            win_write_char_at(aux, row, col, ' ');
         }
+        
         flag = 1;
-        if(win_write_char_at(aux, next_row, next_col, 'o') == FAILED){
-            printf("Error. Invalid write. Interface-F8-6.\n");
-            return;
-        }
+        win_write_char_at(aux, next_row, next_col, 'o');
         
         row = next_row;
         col = next_col;

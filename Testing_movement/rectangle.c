@@ -84,7 +84,7 @@ rectangle* win_new(int ini_row, int ini_col, int last_row, int last_col, int bg,
     rectangle *rec = (rectangle *) malloc(sizeof(rectangle));
     if(rec==NULL){
       printf("Error. Rectangles-F4-1.\n");
-      return NULL;
+      exit(ERROR);
     }
     
     rec->ini_row = ini_row;
@@ -122,13 +122,13 @@ void win_clear(rectangle *rec){
     
     if (!is_visible(rec)){
       printf("Error. Rectangles-F5-1.\n");
-      return;
+      exit(ERROR);
     } 
     
     buf = (char *) malloc((rec->n_cols -1) * sizeof(char));
     if(buf==NULL){
       printf("Error. Rectangles-F5-2.\n");
-      return;
+      exit(ERROR);
     } 
     
     memset(buf, ' ', rec->n_cols - 2);
@@ -180,7 +180,7 @@ void win_delete(rectangle *rec){
 Status win_bgcolor(rectangle *rec, int color){
     if (!is_visible(rec)){
       printf("Error. Rectangles-F7-1.\n");
-      return FAILED;
+      exit(ERROR);
     } 
     
     if (color >= 30 && color <= 39){
@@ -189,7 +189,7 @@ Status win_bgcolor(rectangle *rec, int color){
     } 
     
     printf("Error. Rectangles-F7-2.\n");
-    return FAILED;
+    exit(ERROR);
 }
 
 
@@ -208,7 +208,7 @@ Status win_bgcolor(rectangle *rec, int color){
 Status win_fgcolor(rectangle *rec, int color){
     if (!is_visible(rec)){
       printf("Error. Rectangles-F8-1.\n");
-      return FAILED;
+      exit(ERROR);
     } 
     
     if (color >= 30 && color <= 39){
@@ -217,7 +217,7 @@ Status win_fgcolor(rectangle *rec, int color){
     } 
     
     printf("Error. Rectangles-F8-2.\n");
-    return FAILED;
+    exit(ERROR);
 }
 
 
@@ -268,12 +268,12 @@ int win_write_line_at(rectangle *rec, int row, int col, char *str){
 
     if (!is_visible(rec)){
       printf("Error. Rectangles-F9-1.\n");
-      return ERROR;
+      exit(ERROR);
     } 
     
     if (row >= rec->n_rows || col >= rec->n_cols){
       printf("Error. Rectangles-F9-2.\n");
-      return ERROR;
+      exit(ERROR);
     } 
     
     nl_p = strchr(str, '\n');
@@ -326,15 +326,15 @@ Status win_write_char_at(rectangle *rec, int row, int col, char ch){
   
     if (!is_visible(rec)){
       printf("Error. Rectangles-F10-1.\n");
-      return FAILED;
+      exit(ERROR);
     } 
     if (row > rec->n_rows || col > rec->n_cols){
       printf("Error. Rectangles-F10-2.\n");
-      return FAILED;
+      exit(ERROR);
     } 
     if(row < 0 || col <0){
       printf("Error. Rectangles-F10-3.\n");
-      return FAILED;
+      exit(ERROR);
     } 
   
     move_to(rec, row, col);
@@ -352,7 +352,7 @@ Status win_write_char_at(rectangle *rec, int row, int col, char ch){
 int rectangle_getIniRow(rectangle *rec){
   if(rec == NULL){
     printf("Error. Rectangles-F11-1.\n");
-    return ERROR;
+    exit(ERROR);
   }
   
   return rec->ini_row;
@@ -363,7 +363,7 @@ int rectangle_getIniRow(rectangle *rec){
 int rectangle_getIniCol(rectangle *rec){
   if(rec == NULL){
     printf("Error. Rectangles-F12-1.\n");
-    return ERROR;
+    exit(ERROR);
   }
   
   return rec->ini_col;
@@ -373,8 +373,8 @@ int rectangle_getIniCol(rectangle *rec){
 
 int rectangle_getLastRow(rectangle *rec){
   if(rec == NULL){
-    printf("Error. Rectangles-F12-1.\n");
-    return ERROR;
+    printf("Error. Rectangles-F13-1.\n");
+    exit(ERROR);
   }
   
   return rec->last_row;
@@ -384,8 +384,8 @@ int rectangle_getLastRow(rectangle *rec){
 
 int rectangle_getLastCol(rectangle *rec){
   if(rec == NULL){
-    printf("Error. Rectangles-F13-1.\n");
-    return ERROR;
+    printf("Error. Rectangles-F14-1.\n");
+    exit(ERROR);
   }
   
   return rec->last_col;
@@ -395,8 +395,8 @@ int rectangle_getLastCol(rectangle *rec){
 
 int rectangle_getType(rectangle *rec){
   if(rec == NULL){
-    printf("Error. Rectangles-F14-1.\n");
-    return ERROR;
+    printf("Error. Rectangles-F15-1.\n");
+    exit(ERROR);
   }
   
   return rec->rect_type;
@@ -406,8 +406,8 @@ int rectangle_getType(rectangle *rec){
 
 int rectangle_getNRows(rectangle *rec){
   if(rec == NULL){
-    printf("Error. Rectangles-F15-1.\n");
-    return ERROR;
+    printf("Error. Rectangles-F16-1.\n");
+    exit(ERROR);
   }
   
   return rec->n_rows;
@@ -417,8 +417,8 @@ int rectangle_getNRows(rectangle *rec){
 
 int rectangle_getNCols(rectangle *rec){
   if(rec == NULL){
-    printf("Error. Rectangles F16-1.\n");
-    return ERROR;
+    printf("Error. Rectangles F17-1.\n");
+    exit(ERROR);
   }
   
   return rec->n_cols;
@@ -430,8 +430,8 @@ Status rectangle_draw(rectangle *rec){
   int i, r;
   
   if(rec == NULL){
-    printf("Error. Rectangles rectangle_draw-1.\n");
-    return FAILED;
+    printf("Error. Rectangles F18-2.\n");
+    exit(ERROR);
   }
   
   /* Draw the top row */

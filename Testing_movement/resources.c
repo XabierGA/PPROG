@@ -22,13 +22,14 @@ Resources** load_resources(char *filename){
     /*Checking*/
     if(filename == NULL){
         printf("Error. Resources F1-1.");
+        exit(ERROR);
     }
     /*-----------------------------------*/
 
     in = (FILE *) fopen(filename, "r");
     if(in == NULL){
         printf("Error. Resources-F1-2.\n");
-        return NULL;
+        exit(ERROR);
     }
 
     fgets(buff, BUFFER_SIZE, in);
@@ -39,7 +40,7 @@ Resources** load_resources(char *filename){
     if(r==NULL){
         printf("Error. Resources-F1-3.\n");
         fclose(in);
-        return NULL;
+        exit(ERROR);
     }
 
 
@@ -55,7 +56,7 @@ Resources** load_resources(char *filename){
 	      }
 	      free(r);
 	      fclose(in);
-	      return NULL;
+	      exit(ERROR);
 	    }
     }
 	  r[n_res] = NULL;
@@ -66,29 +67,28 @@ Resources** load_resources(char *filename){
 }
 
 
-/*Function that receives all the resources fields and returns a created resource*/
+
 Resources* create_resource(int type, char *name, int max, int actual, int row, int col){
     Resources *r;
     /*Checking*/
     if(type != MEDICINE && type != FOOD && type != DRINK && type != AMMO){
         printf("Error. Resources-F2-1.\n");
-        return NULL;
+        exit(ERROR);
     }
     if(max <= 0 || actual>max || actual<0){
         printf("Error. Resources-F2-2.\n");
-        return NULL;
+        exit(ERROR);
     }
-
     if(name == NULL){
         printf("Error. Resources-F2-3.\n");
-        return NULL;
+        exit(ERROR);
     }
     /*-----------------------------------------------*/
 
     r = (Resources *) malloc(sizeof(Resources));
     if(r == NULL){
         printf("Error. Resources-F2-4.\n");
-        return NULL;
+        exit(ERROR);
     }
 
     r->object_type = type;
@@ -102,10 +102,14 @@ Resources* create_resource(int type, char *name, int max, int actual, int row, i
 }
 
 
+
 void destroy_resources(Resources **r){
     Resources **aux=NULL;
     
-    if(r == NULL) return;
+    if(r == NULL){
+        printf("Error. Resources-F3-1.\n");
+        exit(ERROR);
+    } 
     
     for(aux = r; *aux!=NULL; aux++){
         delete_resource(*aux);
@@ -114,8 +118,12 @@ void destroy_resources(Resources **r){
 }
 
 
+
 void delete_resource(Resources *r){
-    if(r == NULL) return;
+    if(r == NULL){
+        printf("Error. Resources-F4-1.\n");
+        exit(ERROR);
+    } 
 
     if (r->name != NULL){
         free(r->name);
@@ -128,7 +136,7 @@ void delete_resource(Resources *r){
 
 int modify_resource(Resources *r, int value){
     if(r==NULL){
-        printf("Error. Resources-F3-1.\n");
+        printf("Error. Resources-F5-1.\n");
         return ERROR;
     }
     
@@ -151,8 +159,8 @@ int modify_resource(Resources *r, int value){
 
 int resources_getObjectType(Resources *r){
     if(r==NULL){
-        printf("Error. Resources-F4-1.\n");
-        return ERROR;
+        printf("Error. Resources-F6-1.\n");
+        exit(ERROR);
     }
 
     return r->object_type;
@@ -162,8 +170,8 @@ int resources_getObjectType(Resources *r){
 
 int resources_getActualValue(Resources *r){
     if(r==NULL){
-        printf("Error. Resources-F5-1.\n");
-        return ERROR;
+        printf("Error. Resources-F7-1.\n");
+        exit(ERROR);
     }
 
     return r->actual;
@@ -173,8 +181,8 @@ int resources_getActualValue(Resources *r){
 
 int resources_getRow(Resources *r){
     if(r==NULL){
-        printf("Error. Resources-F6-1.\n");
-        return ERROR;
+        printf("Error. Resources-F8-1.\n");
+        exit(ERROR);
     }
 
     return r->row;
@@ -184,8 +192,8 @@ int resources_getRow(Resources *r){
 
 int resources_getCol(Resources *r){
     if(r==NULL){
-        printf("Error. Resources-F7-1.\n");
-        return ERROR;
+        printf("Error. Resources-F9-1.\n");
+        exit(ERROR);
     }
 
     return r->col;
@@ -195,8 +203,8 @@ int resources_getCol(Resources *r){
 
 char* resources_getName(Resources *r){
     if(r==NULL){
-        printf("Error. Resources-F8-1.\n");
-        return NULL;
+        printf("Error. Resources-F10-1.\n");
+        exit(ERROR);
     }
     
     return r->name;
@@ -206,9 +214,32 @@ char* resources_getName(Resources *r){
 
 int resources_getMax(Resources *r){
     if(r==NULL){
-        printf("Error. Resources-F9.1.\n");
-        return ERROR;
+        printf("Error. Resources-F11-1.\n");
+        exit(ERROR);
     }
     
     return r->max;
+}
+
+
+
+Resources* resources_getResource(Resources **r, int type){
+    Resources **aux=NULL;
+    
+    if(r == NULL){
+        printf("Error. Resources-F12-1.\n");
+        exit(ERROR);
+    }
+    if(type != MEDICINE && type != AMMO && type != FOOD && type != DRINK){
+        printf("Error. Resources-F12-2.\n");
+        exit(ERROR);
+    }
+    
+    for(aux = r; (*aux)!=NULL; aux++){
+        if(resources_getObjectType(*aux) == type){
+            return (*aux);
+        }
+    }
+    printf("Error. Resources-F12-3.\n");
+    exit(ERROR);
 }

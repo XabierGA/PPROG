@@ -60,6 +60,6 @@ Status change_equipped(Weapon **wp, int dir);
 
 int weapon_equipped(Weapon *wp);
 
-Weapon* weapon_getWeaponEquipped(Weapon **wp);
+Weapon* weapon_getEquippedWeapon(Weapon **wp);
 
 #endif /* WEAPON_H */ 

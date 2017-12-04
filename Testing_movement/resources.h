@@ -48,4 +48,8 @@ char* resources_getName(Resources *r);
 /*Function that returns the maximun value that a resource can have*/
 int resources_getMax(Resources *r);
 
+
+/* Function that returns the pointer to the resource (which is inside the array of pointers) of the type passed by argument*/
+Resources* resources_getResource(Resources **r, int type);
+
 #endif /* RESOURCES_H */

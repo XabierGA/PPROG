@@ -21,13 +21,14 @@ Object** load_objects(char *filename){
     /*Checking*/
     if(filename == NULL){
         printf("Error. Objects-F1-1.\n");
+        exit(ERROR);
     }
     /*-----------------------------------*/
     
     in = (FILE *) fopen(filename, "r");
     if(in == NULL){
         printf("Error. Objects-F1-2.\n");
-        return NULL;
+        exit(ERROR);
     }
     
     fgets(buff, BUFFER_SIZE, in);
@@ -38,7 +39,7 @@ Object** load_objects(char *filename){
     if(o==NULL){
         printf("Error. Objects-F1-3.\n");
         fclose(in);
-        return NULL;
+        exit(ERROR);
     }
     
     
@@ -54,7 +55,7 @@ Object** load_objects(char *filename){
 		    }
 		    free(o);
 		    fclose(in);
-		    return NULL;
+		    exit(ERROR);
 		}
 	}
 	o[n_ob] = NULL;
@@ -72,18 +73,18 @@ Object* create_object(char *name, int type, int value, int amount, int r, int c)
       
       if(name==NULL||value<0||amount<0||r<0||c<0){
             printf("Error. Object-F2-1.\n");
-            return NULL;/*Exit the game*/
+            exit(ERROR);/*Exit the game*/
       }
       
       if(type != AMMO && type != MEDICINE && type != DRINK && type != FOOD){
             printf("Error. Object-F2-2.\n");
-            return NULL;
+            exit(ERROR);
       }
       
       obj = (Object *) malloc(sizeof(Object));
       if(obj==NULL){
             printf("Error. Object-F2-3.\n");
-            return NULL;
+            exit(ERROR);
       }
      
       obj->name = strdup(name);
@@ -124,8 +125,8 @@ void delete_object(Object* ob){
 
 int object_getType(Object *ob){
     if(ob == NULL){
-        printf("Error. Objects-F6-1.\n");
-        return ERROR;
+        printf("Error. Objects-F5-1.\n");
+        exit(ERROR);
     }
     
     return ob->object_type;
@@ -134,8 +135,8 @@ int object_getType(Object *ob){
 
 int object_getAmount(Object *ob){
     if(ob == NULL){
-        printf("Error. Objects-F7-1.\n");
-        return ERROR;
+        printf("Error. Objects-F6-1.\n");
+        exit(ERROR);
     }
     
     return ob->amount;
@@ -144,8 +145,8 @@ int object_getAmount(Object *ob){
 
 int object_getValue(Object *ob){
     if(ob == NULL){
-        printf("Error. Objects-F8-1.\n");
-        return ERROR;
+        printf("Error. Objects-F7-1.\n");
+        exit(ERROR);
     }
     
     return ob->value;
@@ -153,8 +154,8 @@ int object_getValue(Object *ob){
 
 char* object_getName(Object *ob){
     if(ob == NULL){
-        printf("Error. Objects-F9-1.\n");
-        return NULL;
+        printf("Error. Objects-F8-1.\n");
+        exit(ERROR);
     }
     
     return ob->name;
@@ -163,8 +164,8 @@ char* object_getName(Object *ob){
 
 int object_getRow(Object *ob){
     if(ob == NULL){
-        printf("Error. Objects-F9.25-1.\n");
-        return ERROR;
+        printf("Error. Objects-F9-1.\n");
+        exit(ERROR);
     }
     
     return ob->row;
@@ -172,7 +173,8 @@ int object_getRow(Object *ob){
 
 int object_getColumn(Object *ob){
     if(ob == NULL){
-        printf("Error. Objects-F9.5-1\n");
+        printf("Error. Objects-F10-1\n");
+        exit(ERROR);
     }
     
     return ob->col;
@@ -180,8 +182,8 @@ int object_getColumn(Object *ob){
 
 Status object_changeAmount(Object *ob, int inc){
     if (ob == NULL){
-        printf("Error. Objects-F10-1.\n");
-        return FAILED;
+        printf("Error. Objects-F11-1.\n");
+        exit(ERROR);
     }
     
     ob->amount += inc;
@@ -193,25 +195,47 @@ Status use_object(Resources **r, Object *o){
     Resources **aux=NULL;
     
     if(r==NULL || o==NULL){
-        printf("Error. Objects-F11-1.\n");
-        return FAILED;
+        printf("Error. Objects-F12-1.\n");
+        exit(ERROR);
     }
     if((o->amount) < 1){
-        printf("Error. You have no objects of that type.\n");
-        return FAILED;
+        printf("Error. Objects-F12-2.\n");
+        exit(ERROR);
     }
     
     for(i=0, aux = r; *aux != NULL; aux++, i++){
         if(o->object_type == resources_getObjectType(r[i])){
             if(modify_resource(r[i], o->value) == ERROR){
-                printf("Error. Objects-F5-2.\n");
-                return FAILED;
+                printf("Error. Objects-F12-3.\n");
+                exit(ERROR);
             }
             object_changeAmount(o, -1);
             return OK;
         }
     }
     
-    printf("No comments Objects-F5.\n");
-    return FAILED;
+    printf("Error. Objects-F12-3.\n");
+    exit(ERROR);
+}
+
+
+Object* object_getObject(Object **o, int type){
+    Object **aux=NULL;
+    
+    if(o == NULL){
+        printf("Error. Objects-F13-1.\n");
+        exit(ERROR);
+    }
+    if(type != MEDICINE && type != AMMO && type != FOOD && type != DRINK){
+        printf("Error. Objects-F13-2.\n");
+        exit(ERROR);
+    }
+    
+    for(aux = o; (*aux)!=NULL; aux++){
+        if(object_getType(*aux) == type){
+            return (*aux);
+        }
+    }
+    printf("Error. Objects-F13-3.\n");
+    exit(ERROR);
 }

@@ -25,13 +25,14 @@ Weapon** load_weapons(char *filename){
     /* Checking*/
     if(filename == NULL){
         printf("Error. Weapons-F1-1.\n");
+        exit(ERROR);
     }
     /*--------------------------------------------*/
     
     in = (FILE *) fopen(filename, "r");
     if(in == NULL){
         printf("Error. Weapons-F1-2.\n");
-        return NULL;
+        exit(ERROR);
     }
     
     fgets(buff, BUFFER_SIZE, in);
@@ -42,7 +43,7 @@ Weapon** load_weapons(char *filename){
     if(w==NULL){
         printf("Error. Weapons-F1-3.\n");
         fclose(in);
-        return NULL;
+        exit(ERROR);
     }
     
     
@@ -58,7 +59,7 @@ Weapon** load_weapons(char *filename){
 		    }
 		    free(w);
 		    fclose(in);
-		    return NULL;
+		    exit(ERROR);
 		}
 	}
 	w[n_weapons] = NULL;
@@ -76,15 +77,15 @@ Weapon* create_weapon(char *name, int powder_waste, int speed, int damage, int o
     /*Checkings*/
     if(damage<0 || name==NULL || powder_waste<0 || speed<0 || row<0 || col<0){
         printf("Error. Weapons-F2-1.\n");
-        return NULL;
+        exit(ERROR);
     }
     if(owned != OWNED && owned != NOT_OWNED){
         printf("Error. Weapons-F2-2.\n");
-        return NULL;
+        exit(ERROR);
     }
     if(equipped != EQUIPPED && equipped != NOT_EQUIPPED){
         printf("Error. Weapons-F2-3.\n");
-        return NULL;
+        exit(ERROR);
     }
     /*-----------------------------------*/
     
@@ -92,7 +93,7 @@ Weapon* create_weapon(char *name, int powder_waste, int speed, int damage, int o
     weap = (Weapon *) malloc(sizeof(Weapon));
     if(weap==NULL){
         printf("Error. Weapons-F2-4.\n");
-        return NULL;
+        exit(ERROR);
     }
     
      
@@ -109,6 +110,7 @@ Weapon* create_weapon(char *name, int powder_waste, int speed, int damage, int o
 }
 
 
+
 void delete_weapon(Weapon *wp){
     if (wp==NULL) return;
     if (wp->name != NULL){
@@ -116,6 +118,8 @@ void delete_weapon(Weapon *wp){
     }
     free (wp);
 }
+
+
 
 void destroy_weapons(Weapon **wp){
     Weapon **aux=NULL;
@@ -128,12 +132,16 @@ void destroy_weapons(Weapon **wp){
     free(wp);
 }
 
+
+
 char *weapon_getName(Weapon* wp){
     if(wp==NULL){
         return NULL;
     }
     return wp->name;
 }
+
+
 
 int own_weapon(Weapon *wp){
     if (wp == NULL) return NOT_OWNED;
@@ -145,100 +153,103 @@ int own_weapon(Weapon *wp){
 
 int weapon_getPowderWaste(Weapon *wp){
     if(wp == NULL){
-        return ERROR;
+        printf("Error. Weapons-F7-1.\n");
+        exit(ERROR);
     }
     
     return wp->powder_waste;
 }
 
 
+
 int weapon_getSpeed(Weapon *wp){
     if(wp == NULL){
-        return ERROR;
+        printf("Error. Weapons-F8-1.\n");
+        exit(ERROR);
     }
     
     return wp->speed;
 }
 
 
+
 int weapon_getDamage(Weapon *wp){
     if(wp == NULL){
-        return ERROR;
+        printf("Error. Weapons-F9-1.\n");
+        exit(ERROR);
     }
     
     return wp->damage;
 }
 
+
+
 Status change_own(Weapon *wp){
     if(wp == NULL){
-        return FAILED;
+        printf("Error. Weapons-F10-1.\n");
+        exit(ERROR);
     }
+    
     wp->owned = OWNED;
     
     return OK;
 }
 
 
+
 Status shot_weapon(Weapon **wp, Resources **r){
-    Resources **auxr=NULL;
     Resources *r2=NULL;
-    Weapon **auxw=NULL;
     Weapon *w2=NULL;
     
     if(wp==NULL||r==NULL){
-        printf("Error. Weapons-F10-0.\n");
-        return FAILED;
+        printf("Error. Weapons-F11-1.\n");
+        exit(ERROR);
     } 
     
-    for(auxr = r; (*auxr) != NULL; auxr++){ /*Searching for the resource of ammo*/
-        if(resources_getObjectType(*auxr)==AMMO){
-            r2 = *auxr;
-        }
-    }
+    r2 = resources_getResource(r, AMMO); /*Getting the AMMO resource pointer*/
     if(r2==NULL){
-        printf("Error. Weapons-F10-1.\n");
-        return FAILED;
+        printf("Error. Weapons-F11-2.\n");
+        exit(ERROR);
     }
     
-    for(auxw = wp; (*auxw) != NULL; auxw++){
-        if((*auxw)->equipped == EQUIPPED){
-            w2 = *auxw;
-        }
-    }
+    w2 = weapon_getEquippedWeapon(wp); /*Getting the equipped weapon pointer*/
     if(w2==NULL){
-        printf("Error. Weapons-F10-2.\n");
-        return FAILED;
+        printf("Error. Weapons-F11-3.\n");
+        exit(ERROR);
     }
     
     if(w2->powder_waste > resources_getActualValue(r2)) return FAILED;
     
     if(modify_resource(r2, -(w2->powder_waste)) == ERROR){
-        printf("Ni puta idea de lo que ha pasado. Weapons-F10-3.\n");
-        return FAILED;
+        printf("Error. Weapons-F11-4.\n");
+        exit(ERROR);
     }
     
     return OK;
 }
 
 
+
 int weapon_getRow(Weapon *wp){
     if(wp == NULL){
-        printf("Error. Weapons-F11-1\n");
-        return ERROR;
+        printf("Error. Weapons-F12-1\n");
+        exit(ERROR);
     }
     
     return wp->row;
 }
 
 
+
 int weapon_getCol(Weapon *wp){
     if(wp == NULL){
-        printf("Error. Weapons-F12-1.\n");
-        return ERROR;
+        printf("Error. Weapons-F13-1.\n");
+        exit(ERROR);
     }
     
     return wp->col;
 }
+
 
 
 Status change_equipped(Weapon **wp, int dir){
@@ -246,17 +257,17 @@ Status change_equipped(Weapon **wp, int dir){
     
     /*Checkings*/
     if(wp == NULL){
-        printf("Error. Weapons-F13-1.\n");
-        return FAILED;
+        printf("Error. Weapons-F14-1.\n");
+        exit(ERROR);
     }
-    if(dir != UPW && dir != DOWNW){
-        printf("Error. Weapons-F13-2.\n");
-        return FAILED;
+    if(dir != UPW && dir != DOWNW){  /*dir indicates in what direction you want to swap the equipped weapon*/
+        printf("Error. Weapons-F14-2.\n");
+        exit(ERROR);
     }
     /*--------------------------------------*/
     
     
-    for(aux = wp; *aux != NULL; aux++){
+    for(aux = wp; (*aux) != NULL; aux++){
         if((*aux)->equipped == EQUIPPED){
             (*aux)->equipped = NOT_EQUIPPED;
             
@@ -289,14 +300,15 @@ Status change_equipped(Weapon **wp, int dir){
             }
         }
     }
-    return FAILED;
+    printf("Error. Weapons-F14-3.\n");
+    exit(ERROR);
 }
 
 
 int weapon_equipped(Weapon *wp){
     if(wp == NULL){
-        printf("Error. Weapons-F14-1.\n");
-        return ERROR;   
+        printf("Error. Weapons-F15-1.\n");
+        exit(ERROR);   
     }
     
     if(wp->equipped == EQUIPPED){
@@ -310,13 +322,13 @@ int weapon_equipped(Weapon *wp){
 
 
 
-Weapon* weapon_getWeaponEquipped(Weapon **wp){
+Weapon* weapon_getEquippedWeapon(Weapon **wp){
     Weapon *w2=NULL;
     Weapon **auxw=NULL;
     
     if(wp == NULL){
-        printf("Error. Weapons-F15-1.\n");
-        return NULL;   
+        printf("Error. Weapons-F16-1.\n");
+        exit(ERROR); 
     }
     
     for(auxw = wp; (*auxw) != NULL; auxw++){
@@ -325,8 +337,8 @@ Weapon* weapon_getWeaponEquipped(Weapon **wp){
         }
     }
     if(w2==NULL){
-        printf("Error. Weapons-F10-2.\n");
-        return NULL;
+        printf("Error. Weapons-F16-2.\n");
+        exit(ERROR);
     }
     
     return w2;

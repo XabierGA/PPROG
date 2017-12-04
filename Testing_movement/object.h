@@ -48,5 +48,8 @@ Status object_changeAmount(Object *ob, int inc);
 /*Function that uses an object*/
 Status use_object(Resources **r, Object *o);
 
+/* Function that returns the pointer to the object (which is inside the array of pointers) of the type passed by argument*/
+Object* object_getObject(Object **o, int type);
+
 
 #endif /* OBJECT_H */  

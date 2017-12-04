@@ -113,8 +113,8 @@ int main(){
         
         /*
         else if(c < 0){
-            move(intrf, 1, pl, -c);
-        }*/
+            move(intrf, 1, pl, -c);}
+        */
         
         
         else if(c < 0){
