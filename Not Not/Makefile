@@ -1,6 +1,6 @@
 CC = gcc -pedantic
 CFLAGS = -Wall -g
-EXE = test_movement
+EXE = Not_Not
 
 all : $(EXE)
 

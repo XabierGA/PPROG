@@ -2,6 +2,7 @@
 #include "maps.h"
 #include "rectangle.h"
 #include <limits.h>
+#include <unistd.h>
 #include <stdlib.h>
 
 #include <termios.h>
@@ -94,31 +95,47 @@ int main(){
     
   
     _term_init();
-    sleep (6);
+    sleep(2);
     while(1){
         
-        aleat = aleat_num(1, 2);
+        aleat = aleat_num(1, 4);
         printf("%d", aleat);
-        break;
+        /*break;*/
         print_map (intrf, aleat);
+        
         if (aleat == 1){
             c = read_key();
-            if (c==RIGHT){
+            if (c==-RIGHT){
                 puntos++;
             }else{
-                printf("pringao, tienes %d puntos.", puntos);
+                printf("Pringao, tienes %d puntos.", puntos);
                 break;
             } 
         }else if (aleat == 2){
             c = read_key();
-            if (c==LEFT){
+            if (c==-LEFT){
                 puntos++;
             }else{
-                printf("pringao, tienes %d puntos.", puntos);
+                printf("Pringao, tienes %d puntos.", puntos);
+                break;
+            } 
+        }else if (aleat == 3){
+            c = read_key();
+            if (c==-RIGHT||c==-UP||c==-DOWN){
+                puntos++;
+            }else{
+                printf("Pringao, tienes %d puntos.", puntos);
+                break;
+            } 
+        }else if (aleat == 4){
+            c = read_key();
+            if (c==-LEFT||c==-UP||c==-DOWN){
+                puntos++;
+            }else{
+                printf("Pringao, tienes %d puntos.", puntos);
                 break;
             } 
         }
-        
         
     }
     

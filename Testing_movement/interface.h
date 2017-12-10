@@ -16,12 +16,24 @@
 struct _interface{
     rectangle **rect_array;  /* Array of rectangle */
     int n_rectangles;       /* Total number of rectangle */
-    
     Maps **maps_array;  /* Array of maps */
     int n_maps;         /* Total number of maps */
 };
 
 typedef struct _interface Interface;
+
+
+
+
+typedef struct {
+    Interface *intrf;
+    Weapon **wp;
+    Player *pl;
+    Resources **r;
+    int map_id;
+    int dir;
+} shoot_stuff;
+
 
 Interface* create_intrf(char* rect_fname, char* maps_fname);
 
@@ -39,6 +51,6 @@ Status initialize_intrf(Interface *intrf, int initial_map, Resources **r, Weapon
 
 void move(Interface *intrf, int map_id, Player *pl, int dir);
 
-void shoot(Interface *intrf, Weapon **wp, Player *pl, Resources **r, int map_id, int dir);
+void shoot(shoot_stuff *stst);
 
 #endif /*INTERFACE_H*/

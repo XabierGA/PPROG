@@ -5,6 +5,7 @@
 #include "weapon.h"
 #include "maps.h"
 #include "rectangle.h"
+#include <pthread.h>
 
 #include <termios.h>
 
@@ -19,6 +20,8 @@ typedef struct {
   time_t initial; /* Initial time at which the function is first called */
   Interface  *intrf;    /* pointer to the interface where the clock is to be displayed */
 } clock_data;
+
+
 
 
 
@@ -74,7 +77,23 @@ int read_key(){
 }
 
 
+int dir_conv(int d) {
+    if (d == 'w')
+        return UP;
+    if (d == 'a')
+        return LEFT;
+    if (d == 's')
+        return DOWN;
+    if (d == 'd')
+        return RIGHT;
+    return HERE;
+}
+
+
+
 int main(){
+    shoot_stuff *stst;
+    pthread_t pth_shoot;
     Resources **r=NULL;
     Weapon **wp=NULL;
     Object **obj=NULL;
@@ -99,9 +118,9 @@ int main(){
     
     if(initialize_intrf(intrf, 1, r, wp, obj, pl) == FAILED) exit(12345);
     
-  
     _term_init();
     
+
     while(1){
         c = read_key();
         if(c == 'q'){
@@ -111,16 +130,21 @@ int main(){
             exit(0);
         }
         
-        /*
+        
         else if(c < 0){
             move(intrf, 1, pl, -c);}
-        */
         
-        
-        else if(c < 0){
-            shoot(intrf, wp, pl, r, 1, -c);
-        }
-        
+        else if (c == 'w' || c == 'a' || c == 's' || c == 'd') {
+            stst = (shoot_stuff *) malloc(sizeof(shoot_stuff));
+            stst->intrf = intrf;
+            stst->wp = wp;
+            stst->pl = pl;
+            stst->r = r;
+            stst->map_id = 1;
+            stst->dir = dir_conv(c);
+            pthread_create(&pth_shoot, NULL, shoot, (void *) stst);
+        }        
+
     }
     
     

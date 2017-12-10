@@ -1,6 +1,9 @@
 #include "interface.h"
 
 
+
+
+
 Interface* create_intrf(char* rect_fname, char* maps_fname){
     int n_rect, i, j, ini_row, ini_col, last_row, last_col, bg, fg, rect_type;
     FILE *in=NULL;
@@ -343,7 +346,7 @@ Status initialize_intrf(Interface *intrf, int initial_map, Resources **r, Weapon
 static int Dr[5] = {-1, 1, 0, 0, 0}; 
 static int Dc[5] = {0, 0, 1, -1, 0};
 void move(Interface *intrf, int map_id, Player *pl, int dir){
-    int fin_row, fin_col, j, act_row, act_col, go; 
+    int fin_row, fin_col, j, act_row, act_col, go;
     Maps *map=NULL;
     rectangle *aux=NULL;
     
@@ -399,7 +402,13 @@ void move(Interface *intrf, int map_id, Player *pl, int dir){
 }
 
 
-void shoot(Interface *intrf, Weapon **wp, Player *pl, Resources **r, int map_id, int dir){
+void shoot(shoot_stuff *stst){
+    Interface *intrf = stst->intrf;
+    Weapon **wp = stst->wp;
+    Player *pl = stst->pl;
+    Resources **r = stst->r;
+    int map_id = stst->map_id;
+    int dir = stst->dir;
     int row, col, go, next_row, next_col, r_aux, c_aux, j, flag=0;
     Weapon *w=NULL;
     Maps *map=NULL;
