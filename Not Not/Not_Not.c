@@ -2,10 +2,15 @@
 #include "maps.h"
 #include "rectangle.h"
 #include <limits.h>
+#include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
-
+#include <pthread.h>
+#include <time.h>
 #include <termios.h>
+#include <string.h>
+
+int puntos = 0;
 
 struct termios initial;
 
@@ -58,6 +63,16 @@ void _term_init() {
 						    before making this change*/
 }
 
+
+void _ck_count(void *q) {
+  Interface *iq = (Interface *) q;
+  
+
+  usleep(10000);
+  
+}
+
+
 int read_key(){
     char choice;
     choice = fgetc(stdin);
@@ -85,8 +100,9 @@ int read_key(){
 
 int main(){
     Interface *intrf=NULL;
-    int c, puntos = 0;
+    int c;
     int aleat = 0;
+    pthread_t pth;
     
     intrf = create_intrf("rectangles.txt", "map.txt");
     if(intrf == NULL) exit(12345);
@@ -96,6 +112,10 @@ int main(){
   
     _term_init();
     sleep(2);
+    
+    pthread_create(&pth, NULL, _ck_count, (void *) intrf);
+    _ck_count((void *) intrf);
+    
     while(1){
         
         aleat = aleat_num(1, 4);

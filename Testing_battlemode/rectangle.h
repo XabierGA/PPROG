@@ -78,8 +78,8 @@
   -------------------------------------------------------------------
 */
 
-#ifndef RECTANGLES_H
-#define RECTANGLES_H
+#ifndef RECTANGLE_H
+#define RECTANGLE_H
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -100,6 +100,8 @@
 typedef struct{
   int  ini_row;     /* row on the screen where the window begins */
   int  ini_col;     /* column on the screen where the window begins */
+  int last_row;     /* row on the screen where the window finishes */
+  int last_col;     /* column on the screen where the window finishes */
   int  n_rows;     /* number of rows in the window  */
   int  n_cols;     /* number of column in the window  */
   
@@ -127,7 +129,7 @@ typedef struct{
   will simply create the structure, initialize its fields, and return
   it.
  */
-rectangle* win_new(int ini_row, int ini_col, int n_rows, int n_cols, int bg, int fg, int type);
+rectangle* win_new(int ini_row, int ini_col, int last_row, int last_col, int bg, int fg, int type);
 
 
 /*
@@ -245,7 +247,32 @@ int win_write_line_at(rectangle *rec, int row, int col, char *str);
 Status win_write_char_at(rectangle *rec, int row, int col, char ch);
 
 
+int rectangle_getIniRow(rectangle *rec);
+
+
+int rectangle_getIniCol(rectangle *rec);
+
+
+int rectangle_getLastRow(rectangle *rec);
+
+
+int rectangle_getLastCol(rectangle *rec);
+
+
+
 /* Returns the type of the rectangle. It allows you to differenciate each rectangle*/
 int rectangle_getType(rectangle *rec);
 
-#endif /* RECTANGLES_H */
+
+int rectangle_getNRows(rectangle *rec);
+
+
+/* Returns the number of columns of a given rectangle */
+int rectangle_getNCols(rectangle *rec);
+
+
+/* Draws in the screen a given rectangle */
+Status rectangle_draw(rectangle *rec);
+
+
+#endif /* RECTANGLE_H */

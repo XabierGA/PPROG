@@ -1,6 +1,6 @@
 CC = gcc -pedantic
 CFLAGS = -Wall -g
-EXE = test_movement
+EXE = Increasing_Bar
 
 all : $(EXE)
 
@@ -13,7 +13,7 @@ $(EXE) : % : %.o resources.o object.o weapon.o player.o rectangle.o maps.o inter
 	@echo "# Generando $@ "
 	@echo "# Depende de $^"
 	@echo "# Ha cambiado $<"
-	$(CC) $(CFLAGS) -pthread -o $@ $@.o resources.o object.o weapon.o player.o rectangle.o maps.o interface.o
+	$(CC) $(CFLAGS) -o $@ $@.o resources.o object.o weapon.o player.o rectangle.o maps.o interface.o
 
 resources.o : resources.c resources.h defines.h
 	@echo "#---------------------------"

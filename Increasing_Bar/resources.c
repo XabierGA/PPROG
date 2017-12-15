@@ -131,6 +131,12 @@ int modify_resource(Resources *r, int value){
         printf("Error. Resources-F3-1.\n");
         return ERROR;
     }
+    
+    if(value < 0){
+        if(-(value) > r->actual){
+            return r->actual;
+        }
+    }
 
     r->actual += value;
     

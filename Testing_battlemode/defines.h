@@ -29,15 +29,21 @@
 #define ALIVE 1032
 #define DEAD 1033
 
-/*Weapon owned*/
+/*Weapon owned & equipped & dir_change*/
 #define OWNED 1040
 #define NOT_OWNED 1041
+#define EQUIPPED 1042
+#define NOT_EQUIPPED 1043
+#define UPW 1044
+#define DOWNW 1045
+
 
 /*Orientation of character*/
 #define UP 1050
 #define DOWN 1051
 #define RIGHT 1052
 #define LEFT 1053
+#define HERE 1054
 
 /*Colors*/
 #define BLACK 40
@@ -45,10 +51,11 @@
 
 /*Types of rectangles*/
 #define RECT_RES 1070
-#define RECT_OBJ 1071
+#define RECT_INVENT 1071
 #define RECT_WEAP 1072
-#define RECT_BATTLEFIELD 1073
-#define RECT_NOTIF 1074
+#define RECT_BATTLE 1073
+#define RECT_INFO 1074
+#define RECT_STORY 1075
 
 /*Things about the interface*/
 #define VISIBLE 1060

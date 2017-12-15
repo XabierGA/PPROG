@@ -11,7 +11,7 @@ Enemy** load_enemies(char *filename){
     FILE *in=NULL;
     char buff[BUFFER_SIZE], name[NAME_SIZE];
     char display;
-    int i, j, n_ene, type, HP, physical_status, speed, damage, r, c;
+    int i, j, n_ene, type, HP, physical_status, speed, damage;
     
     
     /*Checking*/
@@ -41,9 +41,9 @@ Enemy** load_enemies(char *filename){
     
     for(i=0; i<n_ene; i++){
         fgets(buff, BUFFER_SIZE, in);
-		sscanf(buff, "%s %c %d %d %d %d %d %d %d", name, &display, &type, &HP, &physical_status, &speed, &damage, &r, &c);
+		sscanf(buff, "%s %c %d %d %d %d %d %d %d", name, &display, &type, &HP, &physical_status, &speed, &damage);
 		
-		e[i] = create_enemy(name, display, type, HP, physical_status, speed, damage, r, c);
+		e[i] = create_enemy(name, display, type, HP, physical_status, speed, damage);
 		if(e[i]==NULL){
 		    printf("Error. Enemies-F1-4.\n");
 		    for(j=i-1; j>=0; j--){
@@ -64,10 +64,10 @@ Enemy** load_enemies(char *filename){
 
 
 /*Function that creates an enemy*/
-Enemy* create_enemy(char* name, char display, int type, int HP, int phy_stat, int speed, int damage, int row, int col){
+Enemy* create_enemy(char* name, char display, int type, int HP, int phy_stat, int speed, int damage){
     Enemy *ene;
      
-    if(damage<0||HP<0||speed<0||name==NULL||row<0||col<0){
+    if(damage<0||HP<0||speed<0||name==NULL){
         printf("Error. Enemies-F2-1.\n");
         return NULL;
     }
@@ -93,8 +93,6 @@ Enemy* create_enemy(char* name, char display, int type, int HP, int phy_stat, in
     ene->physical_status = phy_stat;
     ene->speed = speed;
     ene->damage = damage;
-    ene->row = row;
-    ene->col = col;
      
     return ene;
 }
@@ -166,11 +164,9 @@ Enemy* generate_enemy(Enemy **pe, char *name){
             e->display = (*i)->display;
             e->type = (*i)->type;
             e->HP = (*i)->HP;
-            e->physical_status = (*i)->physical_status;
+            e->physical_status = ALIVE;
             e->speed = (*i)->speed;
             e->damage = (*i)->damage;
-            e->row = (*i)->row;
-            e->col = (*i)->col;
             
             return e;
         }
@@ -178,6 +174,48 @@ Enemy* generate_enemy(Enemy **pe, char *name){
     }
     printf("Error. Enemies-F5-3.\n");
     return NULL;
+}
+
+
+
+Enemy** generate_arrayEnemies(Enemy **pe, int *n_ene, int size){
+    Enemy **e=NULL, **aux=NULL;
+    int i, j, k=0
+    int total=0;
+    
+    if(pe==NULL || n_ene==NULL){
+        printf("Error. Enemies-F111-1.\n");
+        exit(1);
+    }
+    
+    for(i=0; i<size; i++){
+        total += n_ene[i];
+    }
+    
+    e = (Enemy **) malloc(total * sizeof(Enemy*));
+    if(e==NULL){
+        printf("Error. Enemies-F111-2.\n");
+        exit(1);
+    }
+    for(i=0; i<size; i++){
+        e[i] = (Enemy *) malloc(sizeof(Enemy));
+        if(e[i]==NULL){
+            printf("Error. Enemies-F111-3.\n");
+            for(j=0; j<i; j++){
+                free(e[j]);
+            }
+            free(e);
+            exit(1);
+        }
+    }
+    
+    for(aux = pe, i=0; i<size; i++, aux++){
+        for(j=0; j<n_ene[i]; j++, k++){
+            e[k] = generate_enemy(pe, enemy_getName(*aux));
+        }
+    }
+    
+    return e;
 }
 
 
@@ -267,4 +305,13 @@ int enemy_getPhyStat(Enemy *ene){
     }
     
     return ene->physical_status;
+}
+
+void enemy_setLocation(Enemy *ene, int row, int col){
+    if (ene == NULL){
+        return;
+    }
+    ene->row = row;
+    ene->col = col;
+    return;
 }

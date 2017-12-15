@@ -402,7 +402,8 @@ void move(Interface *intrf, int map_id, Player *pl, int dir){
 }
 
 
-void shoot(shoot_stuff *stst){
+void *shoot(void *x){
+    shoot_stuff *stst = (shoot_stuff *) x;
     Interface *intrf = stst->intrf;
     Weapon **wp = stst->wp;
     Player *pl = stst->pl;
@@ -417,12 +418,12 @@ void shoot(shoot_stuff *stst){
     /* Checkings */
     if(intrf == NULL || wp == NULL || r == NULL || pl == NULL){
         printf("Error. Interface-F9-1.\n");
-        return;
+        exit(0);
     }
     /*----------------------------*/
     
     if(shot_weapon(wp, r) == FAILED){
-        return;
+        return NULL;
     }
     
     print_resources(intrf, r);
@@ -432,7 +433,7 @@ void shoot(shoot_stuff *stst){
     w = weapon_getEquippedWeapon(wp); /*We get the weapon equipped at this moment*/
     if(w == NULL){
         printf("Error. Interface-F9-2.\n");
-        return; 
+        exit(0); 
     }
     
     for(j=0; j<intrf->n_maps; j++){ /* Searching the map */
@@ -443,7 +444,7 @@ void shoot(shoot_stuff *stst){
     }
     if(map == NULL){
         printf("Error. Interface-F9-3.\n");
-        return;
+        exit(0);
     }
     
     for(j=0; j < intrf->n_rectangles; j++){ /*Searching the rectangle */
@@ -454,7 +455,7 @@ void shoot(shoot_stuff *stst){
     }
     if(aux==NULL){
         printf("Error. Interface-F9-4.\n");
-        return;
+        exit(0);
     }
     
     go = dir-UP;
@@ -470,23 +471,23 @@ void shoot(shoot_stuff *stst){
             r_aux = player_getRow(pl);
             c_aux = player_getCol(pl);
             if(r_aux == row && c_aux == col){
-                return;
+                return NULL;
             }
     
             win_write_char_at(aux, row, col, ' ');
-            return;
+            return NULL;
         } 
         
         if(map->field[next_row-2][next_col-2] != ' '){
             r_aux = player_getRow(pl);
             c_aux = player_getCol(pl);
             if(r_aux == row && c_aux == col){
-                return;
+                return NULL;
             }
             
             win_write_char_at(aux, row, col, ' ');
             
-            return;
+            return NULL;
         }
         
         if(flag != 0){

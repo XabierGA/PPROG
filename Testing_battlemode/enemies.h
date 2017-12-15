@@ -27,7 +27,7 @@ Enemy** load_enemies(char *filename);
 
 /*Function that creates an enemy*/
 /*THIS FUNCTION WORKS AS A HELP TO "load_enemies" FUNCTION*/
-Enemy* create_enemy(char *name, char display, int type, int HP, int phy_stat, int speed, int damage, int row, int col);
+Enemy* create_enemy(char *name, char display, int type, int HP, int phy_stat, int speed, int damage);
 
 
 /*Function that destroys an enemy, it receives an enemy and frees all the memory allocated for it*/
@@ -89,5 +89,10 @@ char* enemy_getName(Enemy *ene);
 /*Function that returns if one enemy is ALIVE or DEAD*/
 int enemy_getPhyStat(Enemy *ene);
 
+/*Function that generates an array of enemies of the given type*/
+Enemy** generate_arrayEnemies(Enemy **pe, int *n_ene, int size);
+
+/*Function that sets the row and the col of a given enemy*/
+void enemy_setLocation(Enemy* ene, int row, int col);
 
 #endif /* ENEMIES_H */
