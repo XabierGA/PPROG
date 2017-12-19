@@ -8,8 +8,8 @@ all : $(EXE)
 clean :
 	rm -f *.o core $(EXE)
 
-$(EXE) : % : %.o resources.o object.o weapon.o player.o rectangle.o maps.o interface.o enemies.o
-	$(CC) $(CFLAGS) -pthread -o $@ $@.o resources.o object.o weapon.o player.o rectangle.o maps.o interface.o enemies.o
+$(EXE) : % : %.o resources.o object.o weapon.o enemies.o player.o rectangle.o maps.o interface.o
+	$(CC) $(CFLAGS) -pthread -o $@ $@.o resources.o object.o weapon.o enemies.o player.o rectangle.o maps.o interface.o
 
 resources.o : resources.c resources.h defines.h
 	$(CC) $(CFLAGS) -c $<

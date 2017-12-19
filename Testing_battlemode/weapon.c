@@ -16,6 +16,7 @@ struct _weapon{
 };
 
 
+/*This function loads the weapons from a file, where all the specifications are*/
 Weapon** load_weapons(char *filename){
     Weapon **w=NULL;
     FILE *in=NULL;
@@ -70,7 +71,7 @@ Weapon** load_weapons(char *filename){
 }
 
 
-
+/*This function creates a weapon, reserves memory and fill it with the data specified*/
 Weapon* create_weapon(char *name, int powder_waste, int speed, int damage, int owned, int equipped, int row, int col){
     Weapon *weap;
     
@@ -110,17 +111,7 @@ Weapon* create_weapon(char *name, int powder_waste, int speed, int damage, int o
 }
 
 
-
-void delete_weapon(Weapon *wp){
-    if (wp==NULL) return;
-    if (wp->name != NULL){
-        free(wp->name);
-    }
-    free (wp);
-}
-
-
-
+/*This function receives the array created in load_weapons and it frees all its memory*/
 void destroy_weapons(Weapon **wp){
     Weapon **aux=NULL;
     
@@ -133,7 +124,17 @@ void destroy_weapons(Weapon **wp){
 }
 
 
+/*This function receives a weapon and it frees all the memory allocated for it*/
+void delete_weapon(Weapon *wp){
+    if (wp==NULL) return;
+    if (wp->name != NULL){
+        free(wp->name);
+    }
+    free (wp);
+}
 
+
+/*Function that returns the name of a certain weapon*/
 char *weapon_getName(Weapon* wp){
     if(wp==NULL){
         return NULL;
@@ -142,7 +143,7 @@ char *weapon_getName(Weapon* wp){
 }
 
 
-
+/*Function that says that if a weapon is owned or not*/
 int own_weapon(Weapon *wp){
     if (wp == NULL) return NOT_OWNED;
     if (wp->owned==OWNED)return OWNED;
@@ -150,7 +151,7 @@ int own_weapon(Weapon *wp){
 }
 
 
-
+/*Function that returns the powder waste of a certain weapon*/
 int weapon_getPowderWaste(Weapon *wp){
     if(wp == NULL){
         printf("Error. Weapons-F7-1.\n");
@@ -161,7 +162,7 @@ int weapon_getPowderWaste(Weapon *wp){
 }
 
 
-
+/*Function that returns the shooting speed of a weapon*/
 int weapon_getSpeed(Weapon *wp){
     if(wp == NULL){
         printf("Error. Weapons-F8-1.\n");
@@ -172,7 +173,7 @@ int weapon_getSpeed(Weapon *wp){
 }
 
 
-
+/*Function that returns the damage of a specific weapon*/
 int weapon_getDamage(Weapon *wp){
     if(wp == NULL){
         printf("Error. Weapons-F9-1.\n");
@@ -183,7 +184,7 @@ int weapon_getDamage(Weapon *wp){
 }
 
 
-
+/*It changes the status of a given weapon when it´s available*/
 Status change_own(Weapon *wp){
     if(wp == NULL){
         printf("Error. Weapons-F10-1.\n");
@@ -196,7 +197,8 @@ Status change_own(Weapon *wp){
 }
 
 
-
+/*This function uses a weapon, it wastes the amount of gunpowder needed to shoot and deals damage in the line it is shot, a Weapon
+only uses the resource gunpowder to shoot, the object ammo gives you gunpowder, but we supose we have infinite bullets*/
 Status shot_weapon(Weapon **wp, Resources **r){
     Resources *r2=NULL;
     Weapon *w2=NULL;
@@ -229,7 +231,7 @@ Status shot_weapon(Weapon **wp, Resources **r){
 }
 
 
-
+/*Returns the row where the weapon is going to be shown at the interface*/
 int weapon_getRow(Weapon *wp){
     if(wp == NULL){
         printf("Error. Weapons-F12-1\n");
@@ -240,7 +242,7 @@ int weapon_getRow(Weapon *wp){
 }
 
 
-
+/*Returns the column where the weapon is going to be shown at the interface*/
 int weapon_getCol(Weapon *wp){
     if(wp == NULL){
         printf("Error. Weapons-F13-1.\n");
@@ -251,7 +253,8 @@ int weapon_getCol(Weapon *wp){
 }
 
 
-
+/*Function that changes the state EQUIPPED to NOT_EQUIPPED or viceversa*/
+/*the int dir argument is to change the equipped weapon for the above weapon or the under one the actual*/
 Status change_equipped(Weapon **wp, int dir){
     Weapon **aux=NULL;
     
@@ -305,6 +308,7 @@ Status change_equipped(Weapon **wp, int dir){
 }
 
 
+/*Function that returns EQUIPPED if the weapon is equipped at the moment, or NOT_EQUIPPED in the another case*/
 int weapon_equipped(Weapon *wp){
     if(wp == NULL){
         printf("Error. Weapons-F15-1.\n");
@@ -321,7 +325,7 @@ int weapon_equipped(Weapon *wp){
 }
 
 
-
+/*Function that returns the pointer to the equipped weapon at the moment of the call*/
 Weapon* weapon_getEquippedWeapon(Weapon **wp){
     Weapon *w2=NULL;
     Weapon **auxw=NULL;

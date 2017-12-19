@@ -67,7 +67,7 @@ Object** load_objects(char *filename){
 
 
 
-/*Function that creates an object*/
+/*Function that receives the name, the serial number, the type and creates an object (used mainly in "load_objects" function)*/
 Object* create_object(char *name, int type, int value, int amount, int r, int c){
       Object *obj=NULL;
       
@@ -98,6 +98,7 @@ Object* create_object(char *name, int type, int value, int amount, int r, int c)
 }
 
 
+/*Function that deletes all the objects in a given array of objects*/
 void destroy_objects(Object **ob){
     Object **aux=NULL;
     
@@ -110,7 +111,7 @@ void destroy_objects(Object **ob){
 }
 
 
-/*Function of liberating memory*/
+/*Function that receives an object and destroys it*/
 void delete_object(Object* ob){
     if(ob == NULL) return;
         
@@ -122,7 +123,7 @@ void delete_object(Object* ob){
 }
 
 
-
+/*Function that receives an object and destroys it*/
 int object_getType(Object *ob){
     if(ob == NULL){
         printf("Error. Objects-F5-1.\n");
@@ -133,6 +134,7 @@ int object_getType(Object *ob){
 }
 
 
+/*Function that returns the amount of an object*/
 int object_getAmount(Object *ob){
     if(ob == NULL){
         printf("Error. Objects-F6-1.\n");
@@ -143,6 +145,7 @@ int object_getAmount(Object *ob){
 }
 
 
+/*Function that returns the value that one resource can be modified by this object*/
 int object_getValue(Object *ob){
     if(ob == NULL){
         printf("Error. Objects-F7-1.\n");
@@ -152,6 +155,8 @@ int object_getValue(Object *ob){
     return ob->value;
 }
 
+
+/*Function that returns the name of a given object*/
 char* object_getName(Object *ob){
     if(ob == NULL){
         printf("Error. Objects-F8-1.\n");
@@ -162,6 +167,7 @@ char* object_getName(Object *ob){
 }
 
 
+/*Function that returns the row of a given object*/
 int object_getRow(Object *ob){
     if(ob == NULL){
         printf("Error. Objects-F9-1.\n");
@@ -171,6 +177,8 @@ int object_getRow(Object *ob){
     return ob->row;
 }
 
+
+/*Function that returns the column of a given object*/
 int object_getColumn(Object *ob){
     if(ob == NULL){
         printf("Error. Objects-F10-1\n");
@@ -180,6 +188,8 @@ int object_getColumn(Object *ob){
     return ob->col;
 }
 
+
+/*Function that increases the amount of a given object*/
 Status object_changeAmount(Object *ob, int inc){
     if (ob == NULL){
         printf("Error. Objects-F11-1.\n");
@@ -190,6 +200,8 @@ Status object_changeAmount(Object *ob, int inc){
     return OK;
 }
 
+
+/*Function that uses an object*/
 Status use_object(Resources **r, Object *o){
     int i;
     Resources **aux=NULL;
@@ -219,6 +231,7 @@ Status use_object(Resources **r, Object *o){
 }
 
 
+/* Function that returns the pointer to the object (which is inside the array of pointers) of the type passed by argument*/
 Object* object_getObject(Object **o, int type){
     Object **aux=NULL;
     

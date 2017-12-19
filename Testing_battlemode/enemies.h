@@ -30,23 +30,21 @@ Enemy** load_enemies(char *filename);
 Enemy* create_enemy(char *name, char display, int type, int HP, int phy_stat, int speed, int damage);
 
 
+/*Function that destroys all the enemies of a given array*/
+void destroy_enemies(Enemy **e);
+
+
 /*Function that destroys an enemy, it receives an enemy and frees all the memory allocated for it*/
 /*It works mainly as a help to "destroy_enemies" function*/
 void delete_enemy(Enemy *e); 
-
-
-/*Function that destroys all the enemies of a given array*/
-void destroy_enemies(Enemy **e);
 
 
 /*Function that modifies an enemy's health once is hitten. It returns the final value of its HP or ERROR*/
 int modify_enemyhp(Enemy *e, int increase);
 
 
-/*Function that makes an enemy attack the player, we will need here to make the enemies go to the current
-location of the player, if the enemies are in a close range the player will automaticlly loose health, but this
-mechanic will be implemented in other TAD*/
-Enemy* attack_player(Enemy*e, Resources*r);
+/*Function that generates an array of enemies of the given type*/
+Enemy** generate_arrayEnemies(Enemy **pe, int *n_ene, int size);
 
 
 /*This function recieves the double pointer which has all the information of the enemies, and it generates
@@ -88,9 +86,6 @@ char* enemy_getName(Enemy *ene);
 
 /*Function that returns if one enemy is ALIVE or DEAD*/
 int enemy_getPhyStat(Enemy *ene);
-
-/*Function that generates an array of enemies of the given type*/
-Enemy** generate_arrayEnemies(Enemy **pe, int *n_ene, int size);
 
 /*Function that sets the row and the col of a given enemy*/
 void enemy_setLocation(Enemy* ene, int row, int col);

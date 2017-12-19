@@ -23,6 +23,10 @@ int main (){
         
     }
     
+    win_write_line_at(r[0], 3, 3, "HOLA");
+    
+    win_clear(r[0]);
+    
     for (i=0; i<n_rect; i++){
         win_delete(r[i]);
     }
