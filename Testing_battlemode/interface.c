@@ -387,15 +387,15 @@ void move(Interface *intrf, int map_id, Player *pl, int dir){
     if(fin_row<=1 || fin_col<=1 || fin_row >= aux->last_row || fin_col >= aux->last_col) return;
     
     
-    if(map->field[fin_row-2][fin_col-2] != ' ') return;
+    if(map->field[fin_row-2][fin_col-2] == ' '){
+        win_write_char_at(aux, act_row, act_col, ' ');
     
+        win_write_char_at(aux, fin_row, fin_col, player_getDisplay(pl));
     
-    win_write_char_at(aux, act_row, act_col, ' ');
-    
-    win_write_char_at(aux, fin_row, fin_col, player_getDisplay(pl));
-    
-    player_setLocation(pl, fin_row, fin_col);
-    
+        player_setLocation(pl, fin_row, fin_col);
+        
+        return;
+    }
     return;
 }
 
@@ -477,26 +477,27 @@ void *shoot(void *x){
             return NULL;
         } 
         
-        if(map->field[next_row-2][next_col-2] != ' '){
-            r_aux = player_getRow(pl);
-            c_aux = player_getCol(pl);
-            if(r_aux == row && c_aux == col){
-                return NULL;
-            }
-            
+        
+        if(map->field[next_row-2][next_col-2] == ' '){
+            if(flag != 0){
             win_write_char_at(aux, row, col, ' ');
-            
+            }
+        
+            flag = 1;
+            win_write_char_at(aux, next_row, next_col, 'o');
+        
+            row = next_row;
+            col = next_col;
+            continue;
+        }
+        r_aux = player_getRow(pl);
+        c_aux = player_getCol(pl);
+        if(r_aux == row && c_aux == col){
             return NULL;
         }
-        
-        if(flag != 0){
-            win_write_char_at(aux, row, col, ' ');
-        }
-        
-        flag = 1;
-        win_write_char_at(aux, next_row, next_col, 'o');
-        
-        row = next_row;
-        col = next_col;
+            
+        win_write_char_at(aux, row, col, ' ');
+            
+        return NULL;
     }
 }
