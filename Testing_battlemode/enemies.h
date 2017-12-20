@@ -87,7 +87,13 @@ char* enemy_getName(Enemy *ene);
 /*Function that returns if one enemy is ALIVE or DEAD*/
 int enemy_getPhyStat(Enemy *ene);
 
+
 /*Function that sets the row and the col of a given enemy*/
 void enemy_setLocation(Enemy* ene, int row, int col);
+
+
+/*Function that checks if all the enemies of a given array are dead*/
+/*If they are all DEAD it returns ALL_KILLED (1034), otherwise STH_ALIVE (1035)*/
+int enemy_checkPhyStat(Enemy **ene);
 
 #endif /* ENEMIES_H */

@@ -23,11 +23,14 @@
 #define DRINK 1022
 #define AMMO 1023
 
-/*Enemies types*/
+/*Enemies stuff*/
 #define ZOMBIE 1030
 #define WALL 1031
 #define ALIVE 1032
 #define DEAD 1033
+#define ALL_KILLED 1034
+#define STH_ALIVE 1035
+
 
 /*Weapon owned & equipped & dir_change*/
 #define OWNED 1040

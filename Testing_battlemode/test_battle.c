@@ -92,7 +92,7 @@ int dir_conv(int d) {
 
 
 int main(){
-    shoot_stuff *stst;
+    shoot_stuff *stst=NULL;
     pthread_t pth_shoot;
     Resources **r=NULL;
     Weapon **wp=NULL;
@@ -127,15 +127,16 @@ int main(){
             tcsetattr(fileno(stdin), TCSANOW, &initial);	/*We now restore the settings we back-up'd 
 							  so that the termial behaves normally when 
 							  the program ends */
-            exit(0);
+            break;
         }
         
         
         else if(c < 0){
-            move(intrf, 1, pl, -c);}
+            move(intrf, 1, pl, -c);
+        }
         
         else if (c == 'w' || c == 'a' || c == 's' || c == 'd') {
-            stst = (shoot_stuff *) malloc(sizeof(shoot_stuff));
+            stst = (shoot_stuff *) malloc(sizeof(shoot_stuff)); /* WHen are we freeing this ??? */
             stst->intrf = intrf;
             stst->wp = wp;
             stst->pl = pl;
@@ -143,10 +144,10 @@ int main(){
             stst->map_id = 1;
             stst->dir = dir_conv(c);
             pthread_create(&pth_shoot, NULL, shoot, (void *) stst);
-        }        
-
+        }
+        /*if(stst != NULL) free(stst);*/ /*Here we cant free it or it will explote */
     }
-    
+    /*if(stst != NULL) free(stst);*/ /*Here the memory problems aren't fixed */
     
     destroy_resources(r);
     

@@ -335,3 +335,22 @@ void enemy_setLocation(Enemy *ene, int row, int col){
     ene->col = col;
     return;
 }
+
+
+/*Function that checks if all the enemies of a given array are dead*/
+/*If they are all DEAD it returns ALL_KILLED (1034), otherwise STH_ALIVE (1035)*/
+int enemy_checkPhyStat(Enemy **ene){
+    Enemy **aux=NULL;
+    
+    if(ene==NULL){
+        printf("Error. Enemies-F18-1.\n");
+        exit(ERROR);
+    }
+    
+    for(aux = ene; (*aux)!= NULL; aux++){
+        if(enemy_getPhyStat(*aux) == ALIVE){
+            return STH_ALIVE;
+        }
+    }
+    return ALL_KILLED;
+}
