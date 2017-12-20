@@ -99,6 +99,7 @@ int main(){
     Object **obj=NULL;
     Player *pl=NULL;
     Interface *intrf=NULL;
+    Maps *copymap = NULL;
     int c;
     
     r = load_resources("resources.txt");
@@ -118,6 +119,9 @@ int main(){
     
     if(initialize_intrf(intrf, 1, r, wp, obj, pl) == FAILED) exit(12345);
     
+    copymap = map_getCopy(intrf->maps_array, 1); /*We get a copy of the map where we are gonna play*/
+    if(copymap == NULL) exit(12345);
+    
     _term_init();
     
 
@@ -132,7 +136,7 @@ int main(){
         
         
         else if(c < 0){
-            move(intrf, 1, pl, -c);
+            move(intrf, copymap, pl, -c);
         }
         
         else if (c == 'w' || c == 'a' || c == 's' || c == 'd') {
@@ -141,13 +145,15 @@ int main(){
             stst->wp = wp;
             stst->pl = pl;
             stst->r = r;
-            stst->map_id = 1;
+            stst->copymap = copymap;
             stst->dir = dir_conv(c);
             pthread_create(&pth_shoot, NULL, shoot, (void *) stst);
         }
         /*if(stst != NULL) free(stst);*/ /*Here we cant free it or it will explote */
     }
     /*if(stst != NULL) free(stst);*/ /*Here the memory problems aren't fixed */
+    
+    delete_map(copymap);
     
     destroy_resources(r);
     

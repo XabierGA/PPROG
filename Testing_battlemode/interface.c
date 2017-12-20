@@ -343,9 +343,8 @@ Status initialize_intrf(Interface *intrf, int initial_map, Resources **r, Weapon
 /*Function that allows the player to move*/
 static int Dr[5] = {-1, 1, 0, 0, 0}; 
 static int Dc[5] = {0, 0, 1, -1, 0};
-void move(Interface *intrf, int map_id, Player *pl, int dir){
+void move(Interface *intrf, Maps *copymap, Player *pl, int dir){
     int fin_row, fin_col, j, act_row, act_col, go;
-    Maps *map=NULL;
     rectangle *aux=NULL;
     
     if(dir != UP && dir != DOWN && dir != LEFT && dir != RIGHT && dir != HERE){
@@ -362,16 +361,6 @@ void move(Interface *intrf, int map_id, Player *pl, int dir){
     fin_row =  act_row + Dr[go]; 
     fin_col =  act_col + Dc[go];
     
-    for(j=0; j<intrf->n_maps; j++){ /* Searching the map */
-        if(map_getId(intrf->maps_array[j]) == map_id){
-            map = intrf->maps_array[j];
-            break;
-        }
-    }
-    if(map == NULL){
-        printf("Error. Interface-F8-3.\n");
-        return;
-    }
     
     for(j=0; j < intrf->n_rectangles; j++){ /*Searching the rectangle */
         if(rectangle_getType(intrf->rect_array[j]) == RECT_BATTLE){
@@ -387,7 +376,7 @@ void move(Interface *intrf, int map_id, Player *pl, int dir){
     if(fin_row<=1 || fin_col<=1 || fin_row >= aux->last_row || fin_col >= aux->last_col) return;
     
     
-    if(map->field[fin_row-2][fin_col-2] == ' '){
+    if(copymap->field[fin_row-2][fin_col-2] == ' '){
         win_write_char_at(aux, act_row, act_col, ' ');
     
         win_write_char_at(aux, fin_row, fin_col, player_getDisplay(pl));
@@ -407,11 +396,10 @@ void *shoot(void *x){
     Weapon **wp = stst->wp;
     Player *pl = stst->pl;
     Resources **r = stst->r;
-    int map_id = stst->map_id;
+    Maps *copymap = stst->copymap;
     int dir = stst->dir;
     int row, col, go, next_row, next_col, r_aux, c_aux, j, flag=0;
     Weapon *w=NULL;
-    Maps *map=NULL;
     rectangle *aux=NULL;
     
     /* Checkings */
@@ -433,17 +421,6 @@ void *shoot(void *x){
     if(w == NULL){
         printf("Error. Interface-F9-2.\n");
         exit(0); 
-    }
-    
-    for(j=0; j<intrf->n_maps; j++){ /* Searching the map */
-        if(map_getId(intrf->maps_array[j]) == map_id){
-            map = intrf->maps_array[j];
-            break;
-        }
-    }
-    if(map == NULL){
-        printf("Error. Interface-F9-3.\n");
-        exit(0);
     }
     
     for(j=0; j < intrf->n_rectangles; j++){ /*Searching the rectangle */
@@ -478,7 +455,7 @@ void *shoot(void *x){
         } 
         
         
-        if(map->field[next_row-2][next_col-2] == ' '){
+        if(copymap->field[next_row-2][next_col-2] == ' '){
             if(flag != 0){
             win_write_char_at(aux, row, col, ' ');
             }

@@ -94,6 +94,8 @@ Enemy* create_enemy(char* name, char display, int type, int HP, int phy_stat, in
     ene->physical_status = phy_stat;
     ene->speed = speed;
     ene->damage = damage;
+    ene->row = NOWHERE;
+    ene->col = NOWHERE;
      
     return ene;
 }
@@ -216,6 +218,8 @@ Enemy* generate_enemy(Enemy **pe, char *name){
             e->physical_status = ALIVE;
             e->speed = (*i)->speed;
             e->damage = (*i)->damage;
+            e->row = NOWHERE;
+            e->col = NOWHERE;
             
             return e;
         }

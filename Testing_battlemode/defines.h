@@ -30,6 +30,7 @@
 #define DEAD 1033
 #define ALL_KILLED 1034
 #define STH_ALIVE 1035
+#define NOWHERE -1030
 
 
 /*Weapon owned & equipped & dir_change*/

@@ -28,7 +28,7 @@ typedef struct{ /* Struct where all the parameters to shoot function are saved*/
     Weapon **wp;
     Player *pl;
     Resources **r;
-    int map_id;
+    Maps *copymap;
     int dir;
 } shoot_stuff;
 
@@ -62,7 +62,7 @@ Status initialize_intrf(Interface *intrf, int initial_map, Resources **r, Weapon
 
 
 /*Function that allows the player to move*/
-void move(Interface *intrf, int map_id, Player *pl, int dir);
+void move(Interface *intrf, Maps *copymap, Player *pl, int dir);
 
 
 /*Function that allows the player to shoot*/
