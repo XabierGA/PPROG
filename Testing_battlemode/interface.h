@@ -57,8 +57,11 @@ Status print_objects(Interface *intrf, Object **obj);
 Status print_map(Interface *intrf, int map_id);
 
 
+Status print_enemies(Interface *intrf, Enemy **ene);
+
+
 /*Prints the resources, weapons, objects, player and initial map at the beggining of the program*/
-Status initialize_intrf(Interface *intrf, int initial_map, Resources **r, Weapon **wp, Object **obj, Player *pl);
+Status initialize_intrf(Interface *intrf, int initial_map, Resources **r, Weapon **wp, Object **obj, Enemy **ene, Player *pl);
 
 
 /*Function that allows the player to move*/
@@ -67,5 +70,8 @@ void move(Interface *intrf, Maps *copymap, Player *pl, int dir);
 
 /*Function that allows the player to shoot*/
 void *shoot(void *);
+
+
+Status generate_EnePosRand(Enemy **ene, Maps *copymap);
 
 #endif /*INTERFACE_H*/

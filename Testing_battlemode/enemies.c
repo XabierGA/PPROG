@@ -163,21 +163,10 @@ Enemy** generate_arrayEnemies(Enemy **pe, int *n_ene, int size){
         total += n_ene[i];
     }
     
-    e = (Enemy **) malloc(total * sizeof(Enemy*));
+    e = (Enemy **) malloc((total+1) * sizeof(Enemy*));
     if(e==NULL){
         printf("Error. Enemies-F6-2.\n");
         exit(ERROR);
-    }
-    for(i=0; i<total; i++){
-        e[i] = (Enemy *) malloc(sizeof(Enemy));
-        if(e[i]==NULL){ /*Error*/
-            printf("Error. Enemies-F6-3.\n");
-            for(j=0; j<i; j++){
-                free(e[j]);
-            }
-            free(e);
-            exit(ERROR);
-        }
     }
     
     for(aux = pe, i=0; i<size; i++, aux++){
@@ -186,6 +175,7 @@ Enemy** generate_arrayEnemies(Enemy **pe, int *n_ene, int size){
             k++;
         }
     }
+    e[k] = NULL;
     
     return e;
 }

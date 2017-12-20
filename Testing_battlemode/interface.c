@@ -293,8 +293,39 @@ Status print_map(Interface *intrf, int map_id){
 }
 
 
+
+Status print_enemies(Interface *intrf, Enemy **ene){
+    int i;
+    rectangle *rect=NULL;
+    Enemy **aux=NULL;
+    
+    
+    if(intrf==NULL || ene==NULL){
+        printf("Error. Interface-F11-1.\n");
+        exit(ERROR);
+    }
+    
+    for(i=0; i<intrf->n_rectangles; i++){
+        if(rectangle_getType(intrf->rect_array[i]) == RECT_BATTLE){
+            rect = intrf->rect_array[i];
+            break;
+        }
+    }
+    if(rect==NULL){
+        printf("Error. Interface-F11-2.\n");
+        exit(ERROR);
+    }
+    
+    for(aux = ene; *(aux)!=NULL; aux++){
+        win_write_char_at(rect, enemy_getRow(*aux), enemy_getCol(*aux), enemy_getDisplay(*aux));
+    }
+    
+    return OK;
+}
+
+
 /*Prints the resources, weapons, objects, player and initial map at the beggining of the program*/
-Status initialize_intrf(Interface *intrf, int initial_map, Resources **r, Weapon **wp, Object **obj, Player *pl){
+Status initialize_intrf(Interface *intrf, int initial_map, Resources **r, Weapon **wp, Object **obj, Enemy **ene, Player *pl){
     int i, j;
     rectangle *aux=NULL;
     
@@ -320,6 +351,8 @@ Status initialize_intrf(Interface *intrf, int initial_map, Resources **r, Weapon
     
     /* Printing the initial map */
     print_map(intrf, initial_map);
+    
+    print_enemies(intrf, ene);
     
     /* Looking for the Battlefield rectangle in order to print the player sign there later */
     for(j=0; j < intrf->n_rectangles; j++){
@@ -378,9 +411,9 @@ void move(Interface *intrf, Maps *copymap, Player *pl, int dir){
     
     if(copymap->field[fin_row-2][fin_col-2] == ' '){
         win_write_char_at(aux, act_row, act_col, ' ');
-    
+        copymap->field[act_row-2][act_col-2] = ' ';
         win_write_char_at(aux, fin_row, fin_col, player_getDisplay(pl));
-    
+        copymap->field[fin_row-2][fin_col-2] = player_getDisplay(pl);
         player_setLocation(pl, fin_row, fin_col);
         
         return;
@@ -477,4 +510,32 @@ void *shoot(void *x){
             
         return NULL;
     }
+}
+
+
+Status generate_EnePosRand(Enemy **ene, Maps *copymap){
+    Enemy **aux=NULL;
+    int r, c, flag=0;
+    
+    
+    if(ene == NULL || copymap == NULL){
+        printf("Error. Interface-F10-1.\n");
+        exit(ERROR);
+    }
+    
+    for(aux = ene; *(aux)!=NULL; aux++){
+        do{
+            flag = 0;
+        
+            r = rand_num(0, map_getRows(copymap)-1);
+            c = rand_num(0, map_getCols(copymap)-1);
+        
+            if(copymap->field[r][c] == ' '){
+                copymap->field[r][c] = enemy_getDisplay(*aux);
+                enemy_setLocation(*aux, r+2, c+2);
+                flag=1;
+            }
+        }while(flag==0);
+    }
+    return OK;
 }

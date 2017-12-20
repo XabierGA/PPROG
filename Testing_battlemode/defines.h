@@ -4,6 +4,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <math.h>
+#include <limits.h>
 
 /*Game Mode*/
 #define EASY 1000
@@ -81,5 +83,8 @@ typedef enum{
 #define BUFFER_SIZE 128
 #define NAME_SIZE 20
 #define ERROR -11111
+
+
+int rand_num(int infs, int sup);
 
 #endif /* DEFINES_H */

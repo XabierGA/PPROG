@@ -101,6 +101,10 @@ int main(){
     Interface *intrf=NULL;
     Maps *copymap = NULL;
     int c;
+    int n[3] = {1,1,1};
+    Enemy **e, **ene;
+    
+    srand(time(NULL));
     
     r = load_resources("resources.txt");
     if(r == NULL) exit(12345);
@@ -117,10 +121,20 @@ int main(){
     intrf = create_intrf("rectangles.txt", "map.txt");
     if(intrf == NULL) exit(12345);
     
-    if(initialize_intrf(intrf, 1, r, wp, obj, pl) == FAILED) exit(12345);
+    e = load_enemies("enemies.txt");
+    if(e==NULL)exit(12345);
     
     copymap = map_getCopy(intrf->maps_array, 1); /*We get a copy of the map where we are gonna play*/
     if(copymap == NULL) exit(12345);
+    
+    ene = generate_arrayEnemies(e, n, 3);
+    if(ene==NULL)exit(12345);
+    
+    generate_EnePosRand(ene, copymap);
+    
+    if(initialize_intrf(intrf, 1, r, wp, obj, ene, pl) == FAILED) exit(12345);
+    
+    copymap->field[player_getRow(pl) - 2][player_getCol(pl) - 2] = player_getDisplay(pl); /* Inserting the player display into the map*/
     
     _term_init();
     
@@ -164,6 +178,11 @@ int main(){
     player_delete(pl);
     
     destroy_intrf(intrf);
+    
+    destroy_enemies(e);
+    
+    destroy_enemies(ene);
+    
     
     return 0;
 }
