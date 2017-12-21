@@ -5,10 +5,11 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
-#include <pthread.h>
 #include <time.h>
 #include <termios.h>
 #include <string.h>
+
+#define TENTOTHENINE 1000000000
 
 int puntos = 0;
 
@@ -64,14 +65,6 @@ void _term_init() {
 }
 
 
-void _ck_count(void *q) {
-  Interface *iq = (Interface *) q;
-  
-
-  usleep(10000);
-  
-}
-
 
 int read_key(){
     char choice;
@@ -100,27 +93,28 @@ int read_key(){
 
 int main(){
     Interface *intrf=NULL;
-    int c;
+    int c, i, score;
     int aleat = 0;
-    pthread_t pth;
+    struct timespec t_inicio, t_fin, aux;
+    double total;
     
     intrf = create_intrf("rectangles.txt", "map.txt");
     if(intrf == NULL) exit(12345);
     
-    print_map (intrf, 16);
+    print_map (intrf, 13);
+    sleep(2);
+    print_map(intrf, 14);
     
   
     _term_init();
     sleep(2);
+    clock_gettime(CLOCK_REALTIME, &t_inicio);
     
-    pthread_create(&pth, NULL, _ck_count, (void *) intrf);
-    _ck_count((void *) intrf);
-    
-    while(1){
+    for (i = 0; i<10 ;i++){
         
-        aleat = aleat_num(1, 4);
-        printf("%d", aleat);
-        /*break;*/
+        
+        aleat = aleat_num(1, 7);
+        
         print_map (intrf, aleat);
         
         if (aleat == 1){
@@ -128,7 +122,6 @@ int main(){
             if (c==-RIGHT){
                 puntos++;
             }else{
-                printf("Pringao, tienes %d puntos.", puntos);
                 break;
             } 
         }else if (aleat == 2){
@@ -136,7 +129,6 @@ int main(){
             if (c==-LEFT){
                 puntos++;
             }else{
-                printf("Pringao, tienes %d puntos.", puntos);
                 break;
             } 
         }else if (aleat == 3){
@@ -144,7 +136,6 @@ int main(){
             if (c==-RIGHT||c==-UP||c==-DOWN){
                 puntos++;
             }else{
-                printf("Pringao, tienes %d puntos.", puntos);
                 break;
             } 
         }else if (aleat == 4){
@@ -152,14 +143,37 @@ int main(){
             if (c==-LEFT||c==-UP||c==-DOWN){
                 puntos++;
             }else{
-                printf("Pringao, tienes %d puntos.", puntos);
                 break;
             } 
-        }
-        
+        }else if (aleat == 5){
+            c = read_key();
+            if (c==-RIGHT){
+                puntos ++;
+            }else{
+                break;
+            }
+        }else if (aleat == 6){
+            c = read_key();
+            if (c==-LEFT){
+                puntos ++;
+            }else{
+                break;
+            }
+        }else if (aleat == 7){
+           c = read_key();
+           if (c==-LEFT||c==-UP||c==-DOWN){
+                puntos ++;
+            }else{
+                break;
+            }
+        }    
     }
     
-    
+    clock_gettime(CLOCK_REALTIME, &t_fin);
+    aux.tv_sec = t_fin.tv_sec - t_inicio.tv_sec; 
+    total = aux.tv_sec;
+    score = (int)((puntos*10)/(int)total);
+    printf("\n\nPringao tienes %d aciertos en %d segundos luego tu score es %d.\n\n",(int)puntos, (int)total, score);
     destroy_intrf(intrf);
     
     return 0;

@@ -1,4 +1,9 @@
 #include "interface.h"
+#include <pthread.h>
+
+
+pthread_mutex_t mutex;
+
 
 /*Creates the interface struct reading all the rectangles information and all the maps from the files*/
 Interface* create_intrf(char* rect_fname, char* maps_fname){
@@ -124,13 +129,13 @@ Status print_resources(Interface *intrf, Resources **r){
                     printf("Error. Interface-F3-3.\n");
                     exit(ERROR);
                 }
-                
                 strcpy(buff, resources_getName(*aux));
                 sprintf(str, ": %05d / %d", resources_getActualValue(*aux), resources_getMax(*aux));
                 strcat(buff, str);
                 
+                pthread_mutex_lock(&mutex);
                 win_write_line_at(intrf->rect_array[i], resources_getRow(*aux), resources_getCol(*aux), buff);
-                
+                pthread_mutex_unlock(&mutex);
                 free(buff);
                 free(str);
             }
@@ -482,13 +487,15 @@ void *shoot(void *x){
             if(r_aux == row && c_aux == col){
                 return NULL;
             }
-    
+            pthread_mutex_lock(&mutex);    
             win_write_char_at(aux, row, col, ' ');
+            pthread_mutex_unlock(&mutex);
             return NULL;
         } 
         
         
         if(copymap->field[next_row-2][next_col-2] == ' '){
+            pthread_mutex_lock(&mutex);
             if(flag != 0){
             win_write_char_at(aux, row, col, ' ');
             }
@@ -498,6 +505,7 @@ void *shoot(void *x){
         
             row = next_row;
             col = next_col;
+            pthread_mutex_unlock(&mutex);
             continue;
         }
         r_aux = player_getRow(pl);
@@ -506,7 +514,9 @@ void *shoot(void *x){
             return NULL;
         }
             
+        pthread_mutex_lock(&mutex);
         win_write_char_at(aux, row, col, ' ');
+        pthread_mutex_unlock(&mutex);
             
         return NULL;
     }
@@ -573,22 +583,24 @@ void* move_enemies(void *y){
     }
     
     /* LABEL1? */
-    /* SOMETHING HERE ABOUT WHAT DIRECTION TO TAKE */
+    
     row = enemy_getRow(ene);
     col = enemy_getCol(ene);
     /*-----------------------------*/
     while(1){
         usleep(enemy_getSpeed(ene));
         
+        /* SOMETHING HERE ABOUT WHAT DIRECTION TO TAKE */
         go = rand_num(0, 3);
         next_row = row + Dr[go];
         next_col = col + Dc[go];
         
         if(next_row<=1 || next_col<=1 || next_row >= aux->last_row || next_col >= aux->last_col){
-            return NULL; /* OR GOTO TO LABEL1? */
+            return NULL; /* GOTO TO LABEL1? */
         }
         
         if(copymap->field[next_row-2][next_col-2] == ' '){
+            pthread_mutex_lock(&mutex);
             win_write_char_at(aux, row, col, ' ');
             copymap->field[row-2][col-2] = ' ';
             win_write_char_at(aux, next_row, next_col, enemy_getDisplay(ene));
@@ -596,6 +608,7 @@ void* move_enemies(void *y){
         
             row = next_row;
             col = next_col;
+            pthread_mutex_unlock (&mutex);
             continue;
         }
         
