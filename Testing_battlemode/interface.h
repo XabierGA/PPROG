@@ -33,6 +33,15 @@ typedef struct{ /* Struct where all the parameters to shoot function are saved*/
 } shoot_stuff;
 
 
+typedef struct{
+    Interface *intrf;
+    Maps *copymap;
+    Player *pl;
+    Resources **r;
+    Enemy *ene;
+} moveEne_stuff;
+
+
 /*Creates the interface struct reading all the rectangles information and all the maps from the files*/
 Interface* create_intrf(char* rect_fname, char* maps_fname);
 
@@ -73,5 +82,8 @@ void *shoot(void *);
 
 
 Status generate_EnePosRand(Enemy **ene, Maps *copymap);
+
+
+void* move_enemies(void *y);
 
 #endif /*INTERFACE_H*/

@@ -436,7 +436,7 @@ void *shoot(void *x){
     rectangle *aux=NULL;
     
     /* Checkings */
-    if(intrf == NULL || wp == NULL || r == NULL || pl == NULL){
+    if(intrf == NULL || wp == NULL || r == NULL || pl == NULL || copymap ==NULL){
         printf("Error. Interface-F9-1.\n");
         exit(0);
     }
@@ -538,4 +538,68 @@ Status generate_EnePosRand(Enemy **ene, Maps *copymap){
         }while(flag==0);
     }
     return OK;
+}
+
+
+
+void* move_enemies(void *y){
+    moveEne_stuff *mest = (moveEne_stuff *) y;
+    Interface *intrf = mest->intrf;
+    Player *pl = mest->pl;
+    Resources **r = mest->r;
+    Maps *copymap = mest->copymap;
+    Enemy *ene = mest->ene;
+    rectangle *aux=NULL;
+    int row, col, go, next_row, next_col, j;
+    
+    if(intrf == NULL || pl == NULL || r == NULL || copymap == NULL || ene == NULL){
+        printf("Error. Interface-F12-1.\n");
+        exit(ERROR);
+    }
+    
+    if(enemy_getPhyStat(ene) == DEAD){
+        return NULL;
+    }
+    
+    for(j=0; j < intrf->n_rectangles; j++){ /*Searching the rectangle */
+        if(rectangle_getType(intrf->rect_array[j]) == RECT_BATTLE){
+            aux = intrf->rect_array[j];
+            break;
+        }
+    }
+    if(aux==NULL){
+        printf("Error. Interface-F12-2.\n");
+        exit(ERROR);
+    }
+    
+    /* LABEL1? */
+    /* SOMETHING HERE ABOUT WHAT DIRECTION TO TAKE */
+    row = enemy_getRow(ene);
+    col = enemy_getCol(ene);
+    /*-----------------------------*/
+    while(1){
+        usleep(enemy_getSpeed(ene));
+        
+        go = rand_num(0, 3);
+        next_row = row + Dr[go];
+        next_col = col + Dc[go];
+        
+        if(next_row<=1 || next_col<=1 || next_row >= aux->last_row || next_col >= aux->last_col){
+            return NULL; /* OR GOTO TO LABEL1? */
+        }
+        
+        if(copymap->field[next_row-2][next_col-2] == ' '){
+            win_write_char_at(aux, row, col, ' ');
+            copymap->field[row-2][col-2] = ' ';
+            win_write_char_at(aux, next_row, next_col, enemy_getDisplay(ene));
+            copymap->field[next_row-2][next_col-2] = enemy_getDisplay(ene);
+        
+            row = next_row;
+            col = next_col;
+            continue;
+        }
+        
+        /* GO TO LABEL1? */
+    }
+    return NULL;
 }

@@ -93,7 +93,8 @@ int dir_conv(int d) {
 
 int main(){
     shoot_stuff *stst=NULL;
-    pthread_t pth_shoot;
+    moveEne_stuff *mest=NULL;
+    pthread_t pth_shoot, pth_moveEne;
     Resources **r=NULL;
     Weapon **wp=NULL;
     Object **obj=NULL;
@@ -102,7 +103,7 @@ int main(){
     Maps *copymap = NULL;
     int c;
     int n[3] = {1,1,1};
-    Enemy **e, **ene;
+    Enemy **e, **ene, **econt;
     
     srand(time(NULL));
     
@@ -138,6 +139,15 @@ int main(){
     
     _term_init();
     
+    for(econt = ene; *(econt)!=NULL; econt++){
+        mest = (moveEne_stuff *) malloc(sizeof(moveEne_stuff)); /* WHen are we freeing this ??? */
+        mest->intrf = intrf;
+        mest->pl = pl;
+        mest->r = r;
+        mest->copymap = copymap;
+        mest->ene = *(econt);
+        pthread_create(&pth_moveEne, NULL, move_enemies, (void *) mest);
+    }
 
     while(1){
         c = read_key();
@@ -182,7 +192,6 @@ int main(){
     destroy_enemies(e);
     
     destroy_enemies(ene);
-    
     
     return 0;
 }
