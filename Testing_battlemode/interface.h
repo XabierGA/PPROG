@@ -86,4 +86,6 @@ Status generate_EnePosRand(Enemy **ene, Maps *copymap);
 
 void* move_enemies(void *y);
 
+Boolean isOnSight(Maps *map, int rp, int cp, int re, int ce, int* flag);
+
 #endif /*INTERFACE_H*/

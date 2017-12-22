@@ -560,7 +560,7 @@ void* move_enemies(void *y){
     Maps *copymap = mest->copymap;
     Enemy *ene = mest->ene;
     rectangle *aux=NULL;
-    int row, col, go, next_row, next_col, j;
+    int row, col, go, next_row, next_col, j, flag;
     
     if(intrf == NULL || pl == NULL || r == NULL || copymap == NULL || ene == NULL){
         printf("Error. Interface-F12-1.\n");
@@ -582,22 +582,26 @@ void* move_enemies(void *y){
         exit(ERROR);
     }
     
-    /* LABEL1? */
-    
     row = enemy_getRow(ene);
     col = enemy_getCol(ene);
     /*-----------------------------*/
-    while(1){
+    while(enemy_getPhyStat(ene)==ALIVE){
         usleep(enemy_getSpeed(ene));
         
-        /* SOMETHING HERE ABOUT WHAT DIRECTION TO TAKE */
-        go = rand_num(0, 3);
+        if(isOnSight(copymap, player_getRow(pl), player_getCol(pl), row, col, &flag) == T){
+            next_row = row + Dr[flag];
+            next_col = col + Dc[flag];
+            goto LABEL2;
+        }
+        
+        LABEL1: go = rand_num(0, 3);
         next_row = row + Dr[go];
         next_col = col + Dc[go];
         
-        if(next_row<=1 || next_col<=1 || next_row >= aux->last_row || next_col >= aux->last_col){
-            return NULL; /* GOTO TO LABEL1? */
+        LABEL2: if(next_row<=1 || next_col<=1 || next_row >= aux->last_row || next_col >= aux->last_col){
+            goto LABEL1;
         }
+        
         
         if(copymap->field[next_row-2][next_col-2] == ' '){
             pthread_mutex_lock(&mutex);
@@ -611,8 +615,126 @@ void* move_enemies(void *y){
             pthread_mutex_unlock (&mutex);
             continue;
         }
-        
-        /* GO TO LABEL1? */
+        goto LABEL1;
     }
     return NULL;
+}
+
+
+Boolean isOnSight(Maps *map, int rp, int cp, int re, int ce, int* flag){
+    int x, y, i;
+    
+    if(map==NULL){
+        printf("Error. Interface-F13-1.\n");
+        exit(ERROR);
+    }
+    if(rp<1 || cp<1 || re<1 || ce<1){
+        printf("Error. Interface-F13-2.\n");
+        exit(ERROR);
+    }
+    
+    x = abs(cp - ce);
+    y = abs(rp - re);
+    
+    if(x > y){ /* Column distance greater than the row distance */
+        if(cp > ce && rp != re){ /* Player is more to the right than the enemy */
+        
+            for(i=ce+1; i<=cp; i++){
+                if(map->field[re-2][i-2] != ' ') return F;
+            }
+            *flag = 2;
+            
+            if(rp > re){ /* Enemy position is upper than the player one */
+                for(i=re+1; i<rp; i++){
+                    if(map->field[i-2][cp-2] != ' ') return F;
+                }
+            }
+            else if(rp < re){ /* Player position is upper than the enemy one */
+                for(i=re-1; i>rp; i--){
+                    if(map->field[i-2][cp-2] != ' ') return F;
+                }
+            }
+            
+        }
+        else if(cp < ce && rp != re){ /* Player is more to the left than the enemy */
+        
+            for(i=ce-1; i>=cp; i--){
+                if(map->field[re-2][i-2] != ' ') return F;
+            }
+            *flag = 3;
+            
+            if(rp > re){ /* Enemy position is upper than the player one */
+                for(i=re; i<rp; i++){
+                    if(map->field[i-2][cp-2] != ' ') return F;
+                }
+            }
+            else if(rp < re){ /* Player position is upper than the enemy one */
+                for(i=re; i>rp; i--){
+                    if(map->field[i-2][cp-2] != ' ') return F;
+                }
+            }
+        }
+        else if(cp > ce){ /*They are in the same row and player is more to the right than the enemy */
+            for(i=ce+1; i<cp; i++){
+                if(map->field[re-2][i-2] != ' ') return F;
+            }
+        }
+        else if(cp < ce){ /*They are in the same row and player is more to the left than te enemy */
+            for(i=ce-1; i>cp; i--){
+                if(map->field[re-2][i-2] != ' ') return F;
+            }
+        }
+        return T;
+    }
+    
+    else{ /* Row distance is greater(or equal) than the column distance*/
+        if(rp > re && cp != ce){ /* Enemy is upper than the player */
+        
+            for(i=re+1; i<=rp; i++){
+                if(map->field[i-2][ce-2] != ' ') return F;
+            }
+            *flag = 1;
+            
+            if(cp > ce){ /* Player position is more to the right than the enemy one */
+                for(i=ce; i<cp; i++){
+                    if(map->field[rp-2][i-2] != ' ') return F;
+                }
+            }
+            else if(cp < ce){ /* Enemy position is more to the right than the player one */
+                for(i=ce; i>cp; i--){
+                    if(map->field[rp-2][i-2] != ' ') return F;
+                }
+            }
+            
+        }
+        else if(rp < re && cp != ce){ /* Player is upper than the enemy */
+        
+            for(i=re-1; i>=rp; i--){
+                if(map->field[i-2][ce-2] != ' ') return F;
+            }
+            *flag = 0;
+            
+            if(cp > ce){ /* Player position more to the right than the enemy one */
+                for(i=ce; i<cp; i++){
+                    if(map->field[rp-2][i-2] != ' ') return F;
+                }
+            }
+            else if(cp < ce){ /* Enemy position is more to the right than the player one */
+                for(i=ce; i>cp; i--){
+                    if(map->field[rp-2][i-2] != ' ') return F;
+                }
+            }
+        }
+        else if(rp > re){ /*They are in the same column and the enemy is upper than the player */
+            for(i=re+1; i<rp; i++){
+                if(map->field[i-2][ce-2] != ' ') return F;
+            }
+        }
+        else if(rp < re){ /*They are in the same column and the player is upper than the enemy */
+            for(i=re-1; i>rp; i--){
+                if(map->field[i-2][ce-2] != ' ') return F;
+            }
+        }
+        return T;
+    }
 }
