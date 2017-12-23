@@ -151,7 +151,7 @@ int main(){
 
     while(1){
         c = read_key();
-        if(c == 'q'){
+        if(c == 'o'){
             tcsetattr(fileno(stdin), TCSANOW, &initial);	/*We now restore the settings we back-up'd 
 							  so that the termial behaves normally when 
 							  the program ends */
@@ -161,6 +161,15 @@ int main(){
         
         else if(c < 0){
             move(intrf, copymap, pl, -c);
+        }
+        
+        else if(c == 'q'){
+            change_equipped(wp, UPW);
+            print_weapons(intrf, wp);
+        }
+        else if(c == 'e'){
+            change_equipped(wp, DOWNW);
+            print_weapons(intrf, wp);
         }
         
         else if (c == 'w' || c == 'a' || c == 's' || c == 'd') {

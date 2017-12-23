@@ -185,9 +185,9 @@ Status print_weapons(Interface *intrf, Weapon **wp){
                     else if(weapon_equipped(*aux) == NOT_EQUIPPED){
                         strcat(buff, " N");
                     }
-                    
+                    pthread_mutex_lock(&mutex);
                     win_write_line_at(intrf->rect_array[i], weapon_getRow(*aux), weapon_getCol(*aux), buff);
-                
+                    pthread_mutex_unlock(&mutex);
                     free(buff);
                     free(str);
                 }
@@ -505,7 +505,7 @@ void *shoot(void *x){
             }
         
             flag = 1;
-            win_write_char_at(aux, next_row, next_col, 'o');
+            win_write_char_at(aux, next_row, next_col, weapon_getDisplay(w));
         
             row = next_row;
             col = next_col;

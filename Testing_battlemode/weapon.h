@@ -14,7 +14,7 @@ Weapon** load_weapons(char* filename);
 
 
 /*This function creates a weapon, reserves memory and fill it with the data specified*/
-Weapon* create_weapon(char *name, int powder_waste, int speed, int damage, int owned, int equipped, int row, int col);
+Weapon* create_weapon(char *name, char display, int powder_waste, int speed, int damage, int owned, int equipped, int row, int col);
 
 
 /*This function receives the array created in load_weapons and it frees all its memory*/
@@ -73,5 +73,7 @@ int weapon_equipped(Weapon *wp);
 
 /*Function that returns the pointer to the equipped weapon at the moment of the call*/
 Weapon* weapon_getEquippedWeapon(Weapon **wp);
+
+char weapon_getDisplay(Weapon *wp);
 
 #endif /* WEAPON_H */

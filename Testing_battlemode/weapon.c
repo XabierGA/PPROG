@@ -6,6 +6,7 @@
 
 struct _weapon{
     char *name;
+    char display;
     int powder_waste;
     int speed;
     int damage;
@@ -20,7 +21,7 @@ struct _weapon{
 Weapon** load_weapons(char *filename){
     Weapon **w=NULL;
     FILE *in=NULL;
-    char buff[BUFFER_SIZE], name[NAME_SIZE];
+    char buff[BUFFER_SIZE], name[NAME_SIZE], display;
     int i, j, n_weapons, powder_waste, speed, damage, owned, equipped, row, col;
     
     /* Checking*/
@@ -50,9 +51,9 @@ Weapon** load_weapons(char *filename){
     
     for(i=0; i<n_weapons; i++){
         fgets(buff, BUFFER_SIZE, in);
-		sscanf(buff, "%s %d %d %d %d %d %d %d", name, &powder_waste, &speed, &damage, &owned, &equipped, &row, &col);
+		sscanf(buff, "%s %c %d %d %d %d %d %d %d", name, &display, &powder_waste, &speed, &damage, &owned, &equipped, &row, &col);
 		
-		w[i] = create_weapon(name, powder_waste, speed, damage, owned, equipped, row, col);
+		w[i] = create_weapon(name, display, powder_waste, speed, damage, owned, equipped, row, col);
 		if(w[i]==NULL){
 		    printf("Error. Weapons-F1-4.\n");
 		    for(j=i-1; j>=0; j--){
@@ -72,7 +73,7 @@ Weapon** load_weapons(char *filename){
 
 
 /*This function creates a weapon, reserves memory and fill it with the data specified*/
-Weapon* create_weapon(char *name, int powder_waste, int speed, int damage, int owned, int equipped, int row, int col){
+Weapon* create_weapon(char *name, char display, int powder_waste, int speed, int damage, int owned, int equipped, int row, int col){
     Weapon *weap;
     
     /*Checkings*/
@@ -99,6 +100,7 @@ Weapon* create_weapon(char *name, int powder_waste, int speed, int damage, int o
     
      
     weap->name = strdup(name);
+    weap->display = display;
     weap->powder_waste = powder_waste;
     weap->speed = speed;
     weap->damage = damage;
@@ -346,4 +348,13 @@ Weapon* weapon_getEquippedWeapon(Weapon **wp){
     }
     
     return w2;
+}
+
+
+char weapon_getDisplay(Weapon *wp){
+    if(wp==NULL){
+        printf("Error. Weapons-F17-1.\n");
+        exit(ERROR);
+    }
+    return wp->display;
 }
