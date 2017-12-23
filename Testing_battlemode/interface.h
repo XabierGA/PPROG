@@ -89,4 +89,6 @@ void* move_enemies(void *y);
 
 Boolean isOnSight(Maps *map, int rp, int cp, int re, int ce, int* flag);
 
+Boolean isNextTo(Maps *map, int rp, int cp, int re, int ce, int *next_row, int *next_col);
+
 #endif /*INTERFACE_H*/

@@ -575,10 +575,17 @@ void* move_enemies(void *y){
     Maps *copymap = mest->copymap;
     Enemy *ene = mest->ene;
     rectangle *aux=NULL;
+    Resources *hp=NULL;
     int row, col, go, next_row, next_col, j, flag;
     
     if(intrf == NULL || pl == NULL || r == NULL || copymap == NULL || ene == NULL){
         printf("Error. Interface-F12-1.\n");
+        exit(ERROR);
+    }
+    
+    hp = resources_getResource(r, MEDICINE);
+    if(hp==NULL){
+        printf("Interface-F12-2.\n");
         exit(ERROR);
     }
     
@@ -593,7 +600,7 @@ void* move_enemies(void *y){
         }
     }
     if(aux==NULL){
-        printf("Error. Interface-F12-2.\n");
+        printf("Error. Interface-F12-3.\n");
         exit(ERROR);
     }
     
@@ -602,6 +609,10 @@ void* move_enemies(void *y){
     /*-----------------------------*/
     while(enemy_getPhyStat(ene)==ALIVE){
         usleep(enemy_getSpeed(ene));
+        
+        if(isNextTo(copymap, player_getRow(pl), player_getCol(pl), row, col, &next_row, &next_col) == T){
+            goto LABEL2;
+        }
         
         if(isOnSight(copymap, player_getRow(pl), player_getCol(pl), row, col, &flag) == T){
             next_row = row + Dr[flag];
@@ -628,8 +639,18 @@ void* move_enemies(void *y){
         
             row = next_row;
             col = next_col;
-            pthread_mutex_unlock (&mutex);
+            pthread_mutex_unlock(&mutex);
             continue;
+        }
+        
+        
+        if(copymap->field[next_row-2][next_col-2] == player_getDisplay(pl) && enemy_getPhyStat(ene)==ALIVE){
+            if(modify_resource(hp, -(enemy_getDamage(ene))) <= 0){
+                print_resources(intrf, r);
+                win_write_line_at(aux, copymap->n_rows / 2, copymap->n_cols / 2, "YOU ARE DEAD. END OF THE GAME");
+                exit(EXIT_SUCCESS);
+            }
+            print_resources(intrf, r);
         }
         goto LABEL1;
     }
@@ -753,4 +774,27 @@ Boolean isOnSight(Maps *map, int rp, int cp, int re, int ce, int* flag){
         }
         return T;
     }
+}
+
+
+Boolean isNextTo(Maps *map, int rp, int cp, int re, int ce, int *next_row, int *next_col){
+    if(rp==re){
+        if(cp==ce+1) goto ISTRUE;
+        if(cp==ce-1) goto ISTRUE;
+    }
+    if(rp==re-1){
+        if(cp==ce) goto ISTRUE;
+        if(cp==ce-1) goto ISTRUE;
+        if(cp==ce+1) goto ISTRUE;
+    }
+    if(rp==re+1){
+        if(cp==ce) goto ISTRUE;
+        if(cp==ce-1) goto ISTRUE;
+        if(cp==ce+1) goto ISTRUE;
+    }
+    return F;
+    
+    ISTRUE: *next_row = rp;
+    *next_col = cp;
+    return T;
 }

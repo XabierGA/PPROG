@@ -102,7 +102,7 @@ int main(){
     Interface *intrf=NULL;
     Maps *copymap = NULL;
     int c;
-    int n[3] = {1,2,1};
+    int n[3] = {1,1,1};
     Enemy **e, **ene, **econt;
     
     srand(time(NULL));

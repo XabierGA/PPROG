@@ -141,10 +141,20 @@ int modify_resource(Resources *r, int value){
         return ERROR;
     }
     
-    if(value < 0){
-        if(-(value) > r->actual){
-            return r->actual;
+    if(r->object_type!=MEDICINE){
+        if(value < 0){
+            if(-(value) > r->actual){
+                return r->actual;
+            }
         }
+    }
+    else if(r->object_type==MEDICINE){
+        if(value < 0){
+            if(-(value) > r->actual){
+                r->actual = 0;
+                return 0;
+            }
+        }    
     }
 
     r->actual += value;
