@@ -4,6 +4,8 @@
 
 #include "enemies.h"
 
+Enemy **enemies;
+
 /*This array of arrays of enemies is used to know all the enemies we are going to have in the game.
 This function reads all the enemies information that it´s placed in a file.*/
 Enemy** load_enemies(char *filename){
@@ -57,6 +59,8 @@ Enemy** load_enemies(char *filename){
 	e[n_ene] = NULL;
 	
 	fclose(in);
+	
+	enemies = e;
 	
 	return e;
 	
@@ -128,7 +132,7 @@ void delete_enemy(Enemy *e){
 
  
 /*Function that modifies an enemy's health once is hitten. It returns the final value of its HP or ERROR*/
-int modify_enemyhp(Enemy *e, int value){
+int modify_enemyHP(Enemy *e, int value){
     if (e == NULL){
         printf("Error. Enemies-F5-1.\n");
         exit(ERROR);
@@ -141,6 +145,7 @@ int modify_enemyhp(Enemy *e, int value){
     }
     
     if(e->HP <= 0){
+        e->HP = 0;
         e->physical_status = DEAD;
     }
     
@@ -347,4 +352,29 @@ int enemy_checkPhyStat(Enemy **ene){
         }
     }
     return ALL_KILLED;
+}
+
+
+Boolean isEnemyDisplay(char c){
+    Enemy **aux=NULL;
+    
+    for(aux = enemies; *(aux)!=NULL; aux++){
+        if(enemy_getDisplay(*aux) == c){
+            return T;
+        }
+    }
+    return F;
+}
+
+
+Enemy* getEnemyAt(Enemy **ene, int row, int col){
+    Enemy **aux=NULL;
+    
+    for(aux = ene; *(aux)!=NULL; aux++){
+        if(enemy_getRow(*aux)==row && enemy_getCol(*aux)==col){
+            return (*aux);
+        }
+    }
+    printf("Error. Enemies-F20-1.\n");
+    exit(ERROR);
 }

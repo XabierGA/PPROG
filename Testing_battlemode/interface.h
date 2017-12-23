@@ -30,6 +30,7 @@ typedef struct{ /* Struct where all the parameters to shoot function are saved*/
     Resources **r;
     Maps *copymap;
     int dir;
+    Enemy **ene;
 } shoot_stuff;
 
 

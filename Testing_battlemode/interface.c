@@ -415,11 +415,13 @@ void move(Interface *intrf, Maps *copymap, Player *pl, int dir){
     
     
     if(copymap->field[fin_row-2][fin_col-2] == ' '){
+        pthread_mutex_lock(&mutex);
         win_write_char_at(aux, act_row, act_col, ' ');
         copymap->field[act_row-2][act_col-2] = ' ';
         win_write_char_at(aux, fin_row, fin_col, player_getDisplay(pl));
         copymap->field[fin_row-2][fin_col-2] = player_getDisplay(pl);
         player_setLocation(pl, fin_row, fin_col);
+        pthread_mutex_unlock(&mutex);
         
         return;
     }
@@ -435,6 +437,8 @@ void *shoot(void *x){
     Player *pl = stst->pl;
     Resources **r = stst->r;
     Maps *copymap = stst->copymap;
+    Enemy **ene = stst->ene;
+    Enemy *e=NULL;
     int dir = stst->dir;
     int row, col, go, next_row, next_col, r_aux, c_aux, j, flag=0;
     Weapon *w=NULL;
@@ -508,6 +512,17 @@ void *shoot(void *x){
             pthread_mutex_unlock(&mutex);
             continue;
         }
+        
+        pthread_mutex_lock(&mutex);
+        if(isEnemyDisplay(copymap->field[next_row-2][next_col-2]) == T){
+            e = getEnemyAt(ene, next_row, next_col);
+            if(modify_enemyHP(e, -(weapon_getDamage(w))) <= 0){
+                win_write_char_at(aux, next_row, next_col, ' ');
+                copymap->field[next_row-2][next_col-2] = ' ';
+            }
+        }
+        pthread_mutex_unlock(&mutex);
+        
         r_aux = player_getRow(pl);
         c_aux = player_getCol(pl);
         if(r_aux == row && c_aux == col){
@@ -603,12 +618,13 @@ void* move_enemies(void *y){
         }
         
         
-        if(copymap->field[next_row-2][next_col-2] == ' '){
+        if(copymap->field[next_row-2][next_col-2] == ' ' && enemy_getPhyStat(ene)==ALIVE){
             pthread_mutex_lock(&mutex);
             win_write_char_at(aux, row, col, ' ');
             copymap->field[row-2][col-2] = ' ';
             win_write_char_at(aux, next_row, next_col, enemy_getDisplay(ene));
             copymap->field[next_row-2][next_col-2] = enemy_getDisplay(ene);
+            enemy_setLocation(ene, next_row, next_col);
         
             row = next_row;
             col = next_col;

@@ -74,4 +74,4 @@ int weapon_equipped(Weapon *wp);
 /*Function that returns the pointer to the equipped weapon at the moment of the call*/
 Weapon* weapon_getEquippedWeapon(Weapon **wp);
 
-#endif /* WEAPON_H */ 
+#endif /* WEAPON_H */

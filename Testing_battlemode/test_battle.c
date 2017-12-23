@@ -171,6 +171,7 @@ int main(){
             stst->r = r;
             stst->copymap = copymap;
             stst->dir = dir_conv(c);
+            stst->ene = ene;
             pthread_create(&pth_shoot, NULL, shoot, (void *) stst);
         }
         /*if(stst != NULL) free(stst);*/ /*Here we cant free it or it will explote */

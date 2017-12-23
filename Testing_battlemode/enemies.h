@@ -40,7 +40,7 @@ void delete_enemy(Enemy *e);
 
 
 /*Function that modifies an enemy's health once is hitten. It returns the final value of its HP or ERROR*/
-int modify_enemyhp(Enemy *e, int increase);
+int modify_enemyHP(Enemy *e, int increase);
 
 
 /*Function that generates an array of enemies of the given type*/
@@ -95,5 +95,9 @@ void enemy_setLocation(Enemy* ene, int row, int col);
 /*Function that checks if all the enemies of a given array are dead*/
 /*If they are all DEAD it returns ALL_KILLED (1034), otherwise STH_ALIVE (1035)*/
 int enemy_checkPhyStat(Enemy **ene);
+
+Boolean isEnemyDisplay(char c);
+
+Enemy* getEnemyAt(Enemy **ene, int row, int col);
 
 #endif /* ENEMIES_H */
