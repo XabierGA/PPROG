@@ -6,8 +6,6 @@
 #include <string.h>
 #include <math.h>
 #include <limits.h>
-#include <pthread.h>
-#include <termios.h>
 
 /*Game Mode*/
 #define EASY 1000
@@ -84,6 +82,7 @@ typedef enum{
 /*Others*/
 #define BUFFER_SIZE 128
 #define NAME_SIZE 20
+#define SENTENCE_SIZE 500
 #define ERROR -11111
 
 

@@ -4,10 +4,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <math.h>
-#include <limits.h>
-#include <pthread.h>
-#include <termios.h>
 
 /*Game Mode*/
 #define EASY 1000
@@ -27,15 +23,11 @@
 #define DRINK 1022
 #define AMMO 1023
 
-/*Enemies stuff*/
+/*Enemies types*/
 #define ZOMBIE 1030
 #define WALL 1031
 #define ALIVE 1032
 #define DEAD 1033
-#define ALL_KILLED 1034
-#define STH_ALIVE 1035
-#define NOWHERE -1030
-
 
 /*Weapon owned & equipped & dir_change*/
 #define OWNED 1040
@@ -85,8 +77,5 @@ typedef enum{
 #define BUFFER_SIZE 128
 #define NAME_SIZE 20
 #define ERROR -11111
-
-
-int rand_num(int infs, int sup);
 
 #endif /* DEFINES_H */

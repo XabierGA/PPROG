@@ -87,6 +87,6 @@ typedef enum{
 #define ERROR -11111
 
 
-int rand_num(int infs, int sup);
+int rand_num(int inf, int sup);
 
 #endif /* DEFINES_H */

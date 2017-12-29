@@ -144,7 +144,7 @@ int genera_iteracionTrivial_EPS(){
             /*Código que escaneee la letra a*/
             break;
         case 2:
-            printf("How many toilets are ther in the EPS)\na) 1\nb) 3\nc) Any\nd) None of the rest are correct\n");
+            printf("How many toilets are there in the EPS)\na) 1\nb) 3\nc) Any\nd) None of the rest are correct\n");
             /*Código que escanee la letra d*/
             break;
         case 3:

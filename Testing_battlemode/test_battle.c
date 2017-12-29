@@ -6,7 +6,6 @@
 #include "maps.h"
 #include "rectangle.h"
 #include <pthread.h>
-
 #include <termios.h>
 
 struct termios initial;
@@ -140,7 +139,7 @@ int main(){
     _term_init();
     
     for(econt = ene; *(econt)!=NULL; econt++){
-        mest = (moveEne_stuff *) malloc(sizeof(moveEne_stuff)); /* WHen are we freeing this ??? */
+        mest = (moveEne_stuff *) malloc(sizeof(moveEne_stuff)); /* When are we freeing this ??? */
         mest->intrf = intrf;
         mest->pl = pl;
         mest->r = r;

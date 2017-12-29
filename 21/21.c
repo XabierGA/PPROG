@@ -11,7 +11,7 @@
 
 #define TENTOTHENINE 1000000000
 
-int puntos = 0;
+
 
 struct termios initial;
 
@@ -93,87 +93,168 @@ int read_key(){
 
 int main(){
     Interface *intrf=NULL;
-    int c, i, score;
+    int c, score=0;
     int aleat = 0;
-    struct timespec t_inicio, t_fin, aux;
-    double total;
     
     intrf = create_intrf("rectangles.txt", "map.txt");
     if(intrf == NULL) exit(12345);
     
-    print_map (intrf, 13);
+    print_map (intrf, 23);
     sleep(2);
+    print_map(intrf, 22);
     
   
     _term_init();
     sleep(2);
-    clock_gettime(CLOCK_REALTIME, &t_inicio);
     
-    for (i = 0; i<10 ;i++){
+    while(1){
         
         
         aleat = aleat_num(1, 7);
         
-        print_map (intrf, aleat);
+        score += aleat;
         
-        if (aleat == 1){
+        if (score > 21){
+            break;
+        }
+        
+        print_map (intrf, score);
+        
+        if (score == 1){
             c = read_key();
-            if (c==-RIGHT){
-                puntos++;
-            }else{
+            if (c==-UP)
+                continue;
+            else
                 break;
-            } 
-        }else if (aleat == 2){
+        }else if (score == 2){
             c = read_key();
-            if (c==-LEFT){
-                puntos++;
-            }else{
+            if (c==-UP)
+                continue;
+            else
                 break;
-            } 
-        }else if (aleat == 3){
+        }else if (score == 3){
             c = read_key();
-            if (c==-RIGHT||c==-UP||c==-DOWN){
-                puntos++;
-            }else{
+            if (c==-UP)
+                continue;
+            else
                 break;
-            } 
-        }else if (aleat == 4){
+        }else if (score == 4){
             c = read_key();
-            if (c==-LEFT||c==-UP||c==-DOWN){
-                puntos++;
-            }else{
+            if (c==-UP)
+                continue;
+            else
                 break;
-            } 
-        }else if (aleat == 5){
+        }else if (score == 5){
             c = read_key();
-            if (c==-RIGHT){
-                puntos ++;
-            }else{
+            if (c==-UP)
+                continue;
+            else
                 break;
-            }
-        }else if (aleat == 6){
+        }else if (score == 6){
             c = read_key();
-            if (c==-LEFT){
-                puntos ++;
-            }else{
+            if (c==-UP)
+                continue;
+            else
                 break;
-            }
-        }else if (aleat == 7){
-           c = read_key();
-           if (c==-LEFT||c==-UP||c==-DOWN){
-                puntos ++;
-            }else{
+        }else if (score == 7){
+            c = read_key();
+            if (c==-UP)
+                continue;
+            else
                 break;
-            }
+        }else if (score == 8){
+            c = read_key();
+            if (c==-UP)
+                continue;
+            else
+                break;
+        }else if (score == 9){
+            c = read_key();
+            if (c==-UP)
+                continue;
+            else
+                break;
+        }else if (score == 10){
+            c = read_key();
+            if (c==-UP)
+                continue;
+            else
+                break;
+        }else if (score == 11){
+            c = read_key();
+            if (c==-UP)
+                continue;
+            else
+                break;
+        }else if (score == 12){
+            c = read_key();
+            if (c==-UP)
+                continue;
+            else
+                break;
+        }else if (score == 13){
+            c = read_key();
+            if (c==-UP)
+                continue;
+            else
+                break;
+        }else if (score == 14){
+            c = read_key();
+            if (c==-UP)
+                continue;
+            else
+                break;
+        }else if (score == 15){
+            c = read_key();
+            if (c==-UP)
+                continue;
+            else
+                break;
+        }else if (score == 16){
+            c = read_key();
+            if (c==-UP)
+                continue;
+            else
+                break;
+        }else if (score == 17){
+            c = read_key();
+            if (c==-UP)
+                continue;
+            else
+                break;
+        }else if (score == 18){
+            c = read_key();
+            if (c==-UP)
+                continue;
+            else
+                break;
+        }else if (score == 19){
+            c = read_key();
+            if (c==-UP)
+                continue;
+            else
+                break;
+        }else if (score == 20){
+            c = read_key();
+            if (c==-UP)
+                continue;
+            else
+                break;
+        }else if (score == 21){
+            c = read_key();
+            if (c==-UP)
+                continue;
+            else
+                break;
         }    
     }
+    if (score>21){
+        printf("\n\nYou get 0 points, so greedy!!!\n\n");
+    }else{
+        printf("\n\nYou get %d coins.\n\n", score); 
+    }
     
-    clock_gettime(CLOCK_REALTIME, &t_fin);
-    aux.tv_sec = t_fin.tv_sec - t_inicio.tv_sec; 
-    total = aux.tv_sec;
-    score = (int)((puntos*10)/(int)total);
-    printf("\n\nPringao tienes %d aciertos en %d segundos luego tu score es %d.\n\n",(int)puntos, (int)total, score);
-    destroy_intrf(intrf);
+   destroy_intrf(intrf);
     
     return 0;
 }
