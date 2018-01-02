@@ -274,11 +274,5 @@ int rectangle_getNCols(rectangle *rec);
 /* Draws in the screen a given rectangle */
 Status rectangle_draw(rectangle *rec);
 
-/* Writes a line in a certain possition slowly */
-int win_write_line_slow_at(rectangle *rec, int row, int col, char *str);
-
-/* Gets a rectangle given its id */
-rectangle* win_find_rectangle(int id, rectangle** r);
-
 
 #endif /* RECTANGLE_H */

@@ -330,7 +330,7 @@ Status print_enemies(Interface *intrf, Enemy **ene){
 
 
 /*Prints the resources, weapons, objects, player and initial map at the beggining of the program*/
-Status initialize_intrf(Interface *intrf, int initial_map, Resources **r, Weapon **wp, Object **obj, Enemy **ene, Player *pl){
+Status initialize_intrf(Interface *intrf, int initial_map, Resources **r, Weapon **wp, Object **obj, Player *pl){
     int i, j;
     rectangle *aux=NULL;
     
@@ -357,7 +357,7 @@ Status initialize_intrf(Interface *intrf, int initial_map, Resources **r, Weapon
     /* Printing the initial map */
     print_map(intrf, initial_map);
     
-    print_enemies(intrf, ene);
+    /*print_enemies(intrf, ene);*/
     
     /* Looking for the Battlefield rectangle in order to print the player sign there later */
     for(j=0; j < intrf->n_rectangles; j++){

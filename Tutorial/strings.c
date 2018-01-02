@@ -3,7 +3,7 @@
 Strings** load_strings(char* filename){
     FILE* fp;
     Strings** s;
-    char* buff[BUFFER_SIZE], sentence[SENTENCE_SIZE];
+    char* buff[BUFFER_SIZE], sentence[BUFFER_SIZE];
     int size, i, j;
     
     if(!filename){

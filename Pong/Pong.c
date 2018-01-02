@@ -10,7 +10,9 @@
 
 #define TENTOTHENINE 1000000000
 
-int percent=0, superflag=1; 
+int percent=0, superflag=1;
+int row_bar=14; /*Max:28 Initial: 14 Min: 6*/
+    
 
 struct termios initial;
 
@@ -60,6 +62,11 @@ typedef struct{
     Interface* intrf;
 }delete_stuff;
 
+typedef struct{
+    int row;
+    int col;
+}ball;
+
 
 int read_key(){
     char choice;
@@ -87,7 +94,6 @@ int read_key(){
 
 void print_bar(Interface *intrf){
     int i;
-    
     for(i=3; i<percent && i<91; i++){
         win_write_char_at(intrf->rect_array[0], 14, i, '#');
     }
@@ -100,32 +106,31 @@ void print_bar(Interface *intrf){
     
 }
 
+int generate_random_way(int inf, int sup){
+  int dif;
+  
+  if (inf > sup) return inf - 1;
+  
+  dif = sup - inf;
+  
+  return inf + (int)((dif + 1) * (rand() / (RAND_MAX + 1.0)));
+}
 
-void* delete_bar(void* stuff){
+
+void* move_bars(void* stuff){
     int i;
     delete_stuff *del;
     
     del = (delete_stuff*) stuff;
     
-    while(superflag == 1){
-        sleep(1);
-        
-        if(percent > 2){
-            percent = percent-3;
-        }
-        for(i=percent; i<91; i++){
-            if(i>2){
-                win_write_char_at(del->intrf->rect_array[0], 14, i, ' ');
-            }
-        }
-    } 
     return (void*) del;
 }
 
 
 int main(){
     Interface *intrf=NULL;
-    int flag=2, c;
+    int way, dir, cicle; 
+    ball *actual, *after;
     struct timespec time1, time2, time3;
     pthread_t db;
     delete_stuff *delst=NULL;
@@ -137,15 +142,18 @@ int main(){
     
     print_map(intrf, 1);
     
-    sleep(4);
-    print_map(intrf, 2);
+    actual->row = 14;
+    actual->col = 45;
+    win_write_char_at(intrf->rect_array[0],14,45,"&");
+    
     clock_gettime(CLOCK_REALTIME, &time1);
-    clock_gettime(CLOCK_REALTIME, &time3);
     
     
     delst = (delete_stuff *) malloc(sizeof(delete_stuff));
     delst->intrf = intrf;
     pthread_create(&db, NULL, delete_bar, (void*) delst);
+    
+    way = generate_random_way(1, 5);
     
     while(1){
         clock_gettime(CLOCK_REALTIME, &time2);
@@ -153,35 +161,21 @@ int main(){
             break;
         }
         
-        c=read_key();
-        
-        if(c == 'o'){
-            break;
+        if(actual->col == 2 || actual->col == 92){
+            if(actual->row <= row_bar && actual->row >= row_bar - 5){
+                way = generate_random_way(1, 5);
+            }
+            if(actual->col == 2){
+                dir = LEFT;
+            }
+            else{
+                dir = RIGHT;
+            }
+            cicle = 0;
         }
         
-        if(flag != 0 && c == -RIGHT){
-            flag = 0;
-            percent += 1;
-        }
-        if(flag != 1 && c == -LEFT){
-            flag = 1;
-            percent += 1;
-        }
-        
-        print_bar(intrf);
-        
-        if(percent>=91){
-            superflag=0;
-            break;
-        }
     }
     
-    if(percent<91){
-        win_write_line_at(intrf->rect_array[0], 14, 30, "YOU LOST");
-    }
-    else{
-        win_write_line_at(intrf->rect_array[0], 14, 30, "YOU WON");
-    }
     
     tcsetattr(fileno(stdin), TCSANOW, &initial);	/*We now restore the settings we back-up'd 
 							  so that the termial behaves normally when 

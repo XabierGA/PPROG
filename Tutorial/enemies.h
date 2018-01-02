@@ -22,7 +22,7 @@ typedef struct _enemies Enemy;
 
 /*This array of arrays of enemies is used to know all the enemies we are going to have in the game.
 This function reads all the enemies information that it´s placed in a file.*/
-Enemy** load_enemies(char *filename);
+Enemy** load_enemies(char *filename, int *n_enemies);
 
 
 /*Function that creates an enemy*/

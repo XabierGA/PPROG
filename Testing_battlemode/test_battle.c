@@ -10,11 +10,20 @@
 
 struct termios initial;
 
+Resources **r=NULL;
+Object **obj=NULL;
+Weapon **wp=NULL;
+Enemy **e=NULL;
+Interface *intrf=NULL;
+Player *pl=NULL;
+int n_ene=-1;
+
+
+
 /*
   Structure to send the clock parameters to the function that manages
   the closk1
 */
-
 typedef struct {
   time_t initial; /* Initial time at which the function is first called */
   Interface  *intrf;    /* pointer to the interface where the clock is to be displayed */
@@ -89,54 +98,37 @@ int dir_conv(int d) {
 }
 
 
-
-int main(){
+int battlemode(int *ene_array, int map_id){
     shoot_stuff *stst=NULL;
     moveEne_stuff *mest=NULL;
     pthread_t pth_shoot, pth_moveEne;
-    Resources **r=NULL;
-    Weapon **wp=NULL;
-    Object **obj=NULL;
-    Player *pl=NULL;
-    Interface *intrf=NULL;
-    Maps *copymap = NULL;
+    Enemy **ene=NULL, **econt;
+    Maps *copymap=NULL;
     int c;
-    int n[3] = {1,1,1};
-    Enemy **e, **ene, **econt;
     
-    srand(time(NULL));
+    if(ene_array == NULL){
+        printf("Error. Main-F1-1.\n");
+        exit(ERROR);
+    }
+    if(n_ene == -1){
+        printf("Error. Main-F1-2.\n");
+        exit(ERROR);  
+    }
     
-    r = load_resources("resources.txt");
-    if(r == NULL) exit(12345);
+    copymap = map_getCopy(intrf->maps_array, map_id); /*We get a copy of the map where we are gonna play*/
+    if(copymap == NULL){
+        printf("Error. Main-F1-3.\n");
+        exit(ERROR);
+    }    
     
-    wp = load_weapons("weapons.txt");
-    if(wp == NULL) exit(12345);
-    
-    obj = load_objects("objects.txt");
-    if(obj == NULL) exit(12345);
-    
-    pl = load_player("player.txt");
-    if(pl == NULL) exit(12345);
-    
-    intrf = create_intrf("rectangles.txt", "map.txt");
-    if(intrf == NULL) exit(12345);
-    
-    e = load_enemies("enemies.txt");
-    if(e==NULL)exit(12345);
-    
-    copymap = map_getCopy(intrf->maps_array, 1); /*We get a copy of the map where we are gonna play*/
-    if(copymap == NULL) exit(12345);
-    
-    ene = generate_arrayEnemies(e, n, 3);
-    if(ene==NULL)exit(12345);
+    ene = generate_arrayEnemies(e, ene_array, n_ene);
+    if(ene==NULL) exit(12345);
     
     generate_EnePosRand(ene, copymap);
     
-    if(initialize_intrf(intrf, 1, r, wp, obj, ene, pl) == FAILED) exit(12345);
+    print_enemies(intrf, ene);
     
     copymap->field[player_getRow(pl) - 2][player_getCol(pl) - 2] = player_getDisplay(pl); /* Inserting the player display into the map*/
-    
-    _term_init();
     
     for(econt = ene; *(econt)!=NULL; econt++){
         mest = (moveEne_stuff *) malloc(sizeof(moveEne_stuff)); /* When are we freeing this ??? */
@@ -187,6 +179,40 @@ int main(){
     /*if(stst != NULL) free(stst);*/ /*Here the memory problems aren't fixed */
     
     delete_map(copymap);
+    destroy_enemies(ene);
+    return 0;
+}
+
+
+
+int main(){
+    int n[3] = {1,1,1};
+    
+    srand(time(NULL));
+    
+    r = load_resources("resources.txt");
+    if(r == NULL) exit(12345);
+    
+    wp = load_weapons("weapons.txt");
+    if(wp == NULL) exit(12345);
+    
+    obj = load_objects("objects.txt");
+    if(obj == NULL) exit(12345);
+    
+    pl = load_player("player.txt");
+    if(pl == NULL) exit(12345);
+    
+    intrf = create_intrf("rectangles.txt", "map.txt");
+    if(intrf == NULL) exit(12345);
+    
+    e = load_enemies("enemies.txt", &n_ene);
+    if(e==NULL || n_ene==-1)exit(12345);
+    
+    _term_init();
+    
+    if(initialize_intrf(intrf, 1, r, wp, obj, pl) == FAILED) exit(12345);
+    
+    battlemode(n, 1);
     
     destroy_resources(r);
     
@@ -199,8 +225,6 @@ int main(){
     destroy_intrf(intrf);
     
     destroy_enemies(e);
-    
-    destroy_enemies(ene);
     
     return 0;
 }

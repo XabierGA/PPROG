@@ -8,7 +8,7 @@ Enemy **enemies;
 
 /*This array of arrays of enemies is used to know all the enemies we are going to have in the game.
 This function reads all the enemies information that it´s placed in a file.*/
-Enemy** load_enemies(char *filename){
+Enemy** load_enemies(char *filename, int *n_enemies){
     Enemy **e=NULL;
     FILE *in=NULL;
     char buff[BUFFER_SIZE], name[NAME_SIZE];
@@ -31,6 +31,7 @@ Enemy** load_enemies(char *filename){
     
     fgets(buff, BUFFER_SIZE, in);
     sscanf(buff, "%d", &n_ene);
+    *n_enemies = n_ene;
     
     
     e = (Enemy **) malloc((n_ene+1) * sizeof(Enemy*));
