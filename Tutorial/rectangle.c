@@ -434,6 +434,8 @@ Status rectangle_draw(rectangle *rec){
     exit(ERROR);
   }
   
+  prepare_font(rec);
+  
   /* Draw the top row */
   fprintf(stdout, "%c[%d;%dH", 27, rec->ini_row, rec->ini_col); /* Move to the top/left corner of the rectangle */
   fprintf(stdout, "+");
@@ -511,3 +513,14 @@ int win_write_line_slow_at(rectangle *rec, int row, int col, char *str){
     
     return ret;
 }
+
+rectangle* win_find_rectangle(int id, rectangle** r){
+  int i = 0;
+  if(!r) return NULL;
+  while(r[i]!=NULL){
+    if(r[i]->rect_type == id) return r[i];
+    i++;
+  }
+  return NULL;
+}
+

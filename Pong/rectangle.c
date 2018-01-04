@@ -337,6 +337,10 @@ Status win_write_char_at(rectangle *rec, int row, int col, char ch){
     move_to(rec, row, col);
     printf("%c", ch);
     fflush(stdout);
+    
+    move_to(rec, 1, 1);
+    fflush(stdout);
+    
     return OK;
 }
 

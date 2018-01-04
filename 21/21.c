@@ -96,16 +96,12 @@ int main(){
     int c, score=0;
     int aleat = 0;
     
+    _term_init();
+    
+    srand(time(NULL));
     intrf = create_intrf("rectangles.txt", "map.txt");
     if(intrf == NULL) exit(12345);
     
-    print_map (intrf, 23);
-    sleep(2);
-    print_map(intrf, 22);
-    
-  
-    _term_init();
-    sleep(2);
     
     while(1){
         
@@ -241,20 +237,19 @@ int main(){
             else
                 break;
         }else if (score == 21){
-            c = read_key();
-            if (c==-UP)
-                continue;
-            else
                 break;
         }    
     }
     if (score>21){
         printf("\n\nYou get 0 points, so greedy!!!\n\n");
+    }else if(score == 21){
+        printf("\n\nYOU GET 100 POINTS!!!!\n\n");    
     }else{
-        printf("\n\nYou get %d coins.\n\n", score); 
+        printf("\n\nYou get %d points.\n\n", score*3); 
     }
     
    destroy_intrf(intrf);
+   tcsetattr(fileno(stdin), TCSANOW, &initial);
     
     return 0;
 }

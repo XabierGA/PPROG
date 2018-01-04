@@ -71,7 +71,7 @@ Status print_enemies(Interface *intrf, Enemy **ene);
 
 
 /*Prints the resources, weapons, objects, player and initial map at the beggining of the program*/
-Status initialize_intrf(Interface *intrf, int initial_map, Resources **r, Weapon **wp, Object **obj, Enemy **ene, Player *pl);
+Status initialize_intrf(Interface *intrf, int initial_map, Resources **r, Weapon **wp, Object **obj, Player *pl);
 
 
 /*Function that allows the player to move*/
@@ -90,5 +90,10 @@ void* move_enemies(void *y);
 Boolean isOnSight(Maps *map, int rp, int cp, int re, int ce, int* flag);
 
 Boolean isNextTo(Maps *map, int rp, int cp, int re, int ce, int *next_row, int *next_col);
+
+void interface_lock();
+
+void interface_unlock();
+
 
 #endif /*INTERFACE_H*/

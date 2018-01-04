@@ -1,13 +1,25 @@
 12
-1 Welcome to our game! We're glad to show you how to play this game by the best way
-2 we can think of, just by telling you the basics and then let you by yourself in the game.
-3 First of all, there will be three different "modes" inside the game: battle mode,
-4 mission mode and town mode. Let's begin with battle mode.
-5 In battle mode, you will be fighting some zombies. You'll move with arrow keys,
-6 swap between weapons with QE and shooting with WASD. Now try it out for a little bit.
-7 If you forget this, don't worry, these instructions will appear in the
-8 rectangle at the right.
-9 There are many different missions, so for each one you will see the instructions
-10 on the rectangle on the right.
-11 Finally, in the town mode, you'll just wander around the town,
-12 so arrow keys just as in battle mode.
+1
+Welcome to our game! We're glad to show you how to play this game by the best way
+2
+we can think of, just by telling you the basics and then let you by yourself in the game.
+3
+First of all, there will be three different "modes" inside the game: battle mode,
+4
+mission mode and town mode. Let's begin with battle mode.
+5
+In battle mode, you will be fighting some zombies. You'll move with arrow keys,
+6
+swap between weapons with QE and shooting with WASD. Now try it out for a little bit.
+7
+If you forget this, don't worry, these instructions will appear in the
+8
+rectangle at the right.
+9
+There are many different missions, so for each one you will see the instructions
+10
+on the rectangle on the right.
+11
+Finally, in the town mode, you'll just wander around the town,
+12
+so arrow keys just as in battle mode.

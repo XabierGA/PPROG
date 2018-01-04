@@ -1,0 +1,13 @@
+6
+1
+--->Elige el modo de juego pulsando un número<---
+2
+1.FÁCIL
+3
+2.MEDIO
+4
+3.DIFÍCIL
+5
+4.LEGENDARIO
+6
+5.MODO DE BATALLA

@@ -10,8 +10,8 @@
 
 #define TENTOTHENINE 1000000000
 
-int percent=0, superflag=1;
-int row_bar=14; /*Max:28 Initial: 14 Min: 6*/
+int superflag = 0;
+int row_bar;/*Max:28 Initial: 14 Min: 6*/
     
 
 struct termios initial;
@@ -60,12 +60,12 @@ void _term_init() {
 
 typedef struct{
     Interface* intrf;
-}delete_stuff;
+}bar_stuff;
 
 typedef struct{
     int row;
     int col;
-}ball;
+}Ball;
 
 
 int read_key(){
@@ -92,90 +92,235 @@ int read_key(){
     return choice;
 }
 
-void print_bar(Interface *intrf){
-    int i;
-    for(i=3; i<percent && i<91; i++){
-        win_write_char_at(intrf->rect_array[0], 14, i, '#');
+void print_ball(Interface* intrf, Ball* ball, int dir){
+    if(dir == RIGHT){
+        ball->col ++;
     }
-    /*
-    while(i<91){
-        win_write_char_at(intrf->rect_array[0], 14, i, ' ');
-        i++;
+    else if(dir == LEFT){
+        ball->col --;
     }
-    */
+    else if(dir == UP){
+        ball->row --;
+    }
+    else if(dir == DOWN){
+        ball->row++;
+    }
     
+    
+    win_write_char_at(intrf->rect_array[0], ball->row, ball->col, '*');
 }
+
 
 int generate_random_way(int inf, int sup){
-  int dif;
+    int dif;
   
-  if (inf > sup) return inf - 1;
+    if (inf > sup) return inf - 1;
   
-  dif = sup - inf;
+    dif = sup - inf;
   
-  return inf + (int)((dif + 1) * (rand() / (RAND_MAX + 1.0)));
+    return inf + (int)((dif + 1) * (rand() / (RAND_MAX + 1.0)));
 }
 
+void move_ball(Interface* intrf, Ball* ball, int dir1, int dir2, int* cicle, int way){
+    win_write_char_at(intrf->rect_array[0], ball->row, ball->col, ' ');
+    if(way == 1){
+        print_ball(intrf, ball, dir1);
+        *cicle = 0;
+        return;
+    }
+    
+    if(way == 2){
+        if(*cicle == 0){
+            print_ball(intrf, ball, dir1);
+            *cicle = 1;
+            return;
+        }
+        if(*cicle == 1){
+            print_ball(intrf, ball, dir2);
+            *cicle = 0;
+            return;
+        }
+    }
+    
+    if(way == 3){
+        if(*cicle == 0){
+            print_ball(intrf, ball, dir1);
+            *cicle = 1;
+            return;
+        }
+        if(*cicle == 1){
+            print_ball(intrf, ball, dir1);
+            *cicle = 2;
+            return;
+        }
+        if(*cicle == 2){
+            print_ball(intrf, ball, dir2);
+            *cicle = 0;
+            return;
+        }
+    }
+    
+    if(way == 4){
+        if(*cicle == 0){
+            print_ball(intrf, ball, dir1);
+            *cicle = 1;
+            return;
+        }
+        if(*cicle == 1){
+            print_ball(intrf, ball, dir2);
+            *cicle = 2;
+            return;
+        }
+        if(*cicle == 2){
+            print_ball(intrf, ball, dir2);
+            *cicle = 0;
+            return;
+        }
+    }
+    
+}
+
+void print_bars(Interface* intrf, int c){
+    int i;
+    
+    if(row_bar <= 6 || row_bar + 3 >= 34){
+        return;
+    }
+    
+    if(c == -UP){
+        win_write_char_at(intrf->rect_array[0], row_bar + 5, 1,' ');
+        win_write_char_at(intrf->rect_array[0], row_bar + 5, 91,' ');
+    }
+    else if(c == -DOWN){
+        win_write_char_at(intrf->rect_array[0], row_bar - 1, 1,' ');
+        win_write_char_at(intrf->rect_array[0], row_bar - 1, 91,' ');
+    }
+    else{
+        return;
+    }
+    
+    for(i = row_bar; i< (row_bar+5); i++){
+        win_write_char_at(intrf->rect_array[0], i, 1,'|');
+        win_write_char_at(intrf->rect_array[0], i, 91,'|');
+    }
+}
 
 void* move_bars(void* stuff){
-    int i;
-    delete_stuff *del;
+    int c;
+    bar_stuff *bar;
     
-    del = (delete_stuff*) stuff;
+    bar = (bar_stuff*) stuff;
     
-    return (void*) del;
+    row_bar = 14;
+    print_bars(bar->intrf, -UP);
+    
+    while(superflag == 0){
+        c = read_key();
+        if((row_bar == 6 && c == -UP )|| (row_bar + 3 == 34 && c == -DOWN)){
+            continue;
+        }
+        
+        if(c == -DOWN){
+            row_bar ++;
+        }
+        else if(c == -UP){
+            row_bar --;
+        }
+        else{
+            continue;
+        }
+        
+        print_bars(bar->intrf, c);
+    }
+    
+    return (void*) bar;
+}
+
+int change_dir(int dir){
+    if (dir == UP){
+        return DOWN;
+    }
+    if (dir == DOWN){
+        return UP;
+    }
+    if (dir == LEFT){
+        return RIGHT;
+    }
+    if (dir == RIGHT){
+        return LEFT;
+    }
+    return 0;
 }
 
 
 int main(){
     Interface *intrf=NULL;
-    int way, dir, cicle; 
-    ball *actual, *after;
-    struct timespec time1, time2, time3;
+    int way, dir1, dir2, cicle=0; 
+    Ball *ball;
+    struct timespec time1, time2;
     pthread_t db;
-    delete_stuff *delst=NULL;
+    bar_stuff *stuff=NULL;
     
     _term_init();
+    
+    srand(time(NULL)); /* ----------> CABORNERO, YOU HAVE TO CHANGE THE SEED !!!! <------------------ */
     
     intrf = create_intrf("rectangles.txt", "map.txt");
     if(intrf == NULL) exit(1);
     
     print_map(intrf, 1);
     
-    actual->row = 14;
-    actual->col = 45;
-    win_write_char_at(intrf->rect_array[0],14,45,"&");
+    ball = (Ball *)malloc(sizeof(Ball));
+    
+    ball->row = 14;
+    ball->col = 45;
+    win_write_char_at(intrf->rect_array[0], ball->row, ball->col,'*');
     
     clock_gettime(CLOCK_REALTIME, &time1);
     
     
-    delst = (delete_stuff *) malloc(sizeof(delete_stuff));
-    delst->intrf = intrf;
-    pthread_create(&db, NULL, delete_bar, (void*) delst);
+    stuff = (bar_stuff *) malloc(sizeof(bar_stuff));
+    stuff->intrf = intrf;
+    pthread_create(&db, NULL, move_bars, (void*) stuff);
     
-    way = generate_random_way(1, 5);
+    way = generate_random_way(1, 4);
+    dir1 = LEFT;
+    dir2 = UP;
     
     while(1){
         clock_gettime(CLOCK_REALTIME, &time2);
-        if((time2.tv_sec-time1.tv_sec) > 30){
+        if((time2.tv_sec-time1.tv_sec) > 60){
+            superflag = 1;
             break;
         }
         
-        if(actual->col == 2 || actual->col == 92){
-            if(actual->row <= row_bar && actual->row >= row_bar - 5){
-                way = generate_random_way(1, 5);
-            }
-            if(actual->col == 2){
-                dir = LEFT;
+        if((ball->col == 2 && dir1 == LEFT )|| (ball->col == 90 && dir1 == RIGHT)){
+            if(ball->row >= row_bar && ball->row <= row_bar + 5){
+                way = generate_random_way(1, 4);
             }
             else{
-                dir = RIGHT;
+                superflag = 2;
+                break;
             }
             cicle = 0;
+            dir1 = change_dir(dir1);
         }
         
+        if((ball->row == 7 && dir2 == UP )|| (ball->row == 34 && dir2 == DOWN)){
+            dir2 = change_dir(dir2);
+        }
+        
+        move_ball(intrf, ball, dir1, dir2, &cicle, way);
+        usleep(60000);
     }
     
+    if(superflag == 1){
+        win_write_line_at(intrf->rect_array[0], 14, 30, "YOU WON!!!!");
+    }
+    if(superflag == 2){
+        win_write_line_at(intrf->rect_array[0], 14, 30, "YOU LOST...");
+    }
+    sleep(2);
     
     tcsetattr(fileno(stdin), TCSANOW, &initial);	/*We now restore the settings we back-up'd 
 							  so that the termial behaves normally when 

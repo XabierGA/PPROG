@@ -1,0 +1,13 @@
+6
+1
+--->Select the game mode by pressing a number<---
+2
+1.EASY
+3
+2.MEDIUM
+4
+3.HARD
+5
+4.LEGENDARY
+6
+5.BATTLEMODE

@@ -10,6 +10,7 @@
 #include <termios.h>
 
 Resources **r=NULL;
+Enemy **e=NULL;
 Weapon **wp=NULL;
 Object **obj=NULL;
 Player *pl=NULL;
@@ -19,11 +20,11 @@ int n_ene=-1;
 
 struct termios initial;
 
+
 /*
   Structure to send the clock parameters to the function that manages
   the closk1
 */
-
 typedef struct {
   time_t initial; /* Initial time at which the function is first called */
   Interface  *intrf;    /* pointer to the interface where the clock is to be displayed */
@@ -98,19 +99,35 @@ int dir_conv(int d) {
 }
 
 
-int battlemode(int *n_enemies, int map_id, int n_ene){
+int battlemode(int *ene_array, int map_id){
     shoot_stuff *stst=NULL;
     moveEne_stuff *mest=NULL;
+    pthread_t pth_shoot, pth_moveEne;
     Enemy **ene=NULL, **econt;
     Maps *copymap=NULL;
+    int c;
     
-    ene = generate_arrayEnemies(e, n_enemies, n_ene);
+    if(ene_array == NULL){
+        printf("Error. Main-F1-1.\n");
+        exit(ERROR);
+    }
+    if(n_ene == -1){
+        printf("Error. Main-F1-2.\n");
+        exit(ERROR);  
+    }
+    
+    copymap = map_getCopy(intrf->maps_array, map_id); /*We get a copy of the map where we are gonna play*/
+    if(copymap == NULL){
+        printf("Error. Main-F1-3.\n");
+        exit(ERROR);
+    }    
+    
+    ene = generate_arrayEnemies(e, ene_array, n_ene);
     if(ene==NULL) exit(12345);
     
     generate_EnePosRand(ene, copymap);
     
-    copymap = map_getCopy(intrf->maps_array, map_id); /*We get a copy of the map where we are gonna play*/
-    if(copymap == NULL) exit(12345);
+    print_enemies(intrf, ene);
     
     copymap->field[player_getRow(pl) - 2][player_getCol(pl) - 2] = player_getDisplay(pl); /* Inserting the player display into the map*/
     
@@ -164,9 +181,14 @@ int battlemode(int *n_enemies, int map_id, int n_ene){
     
     delete_map(copymap);
     destroy_enemies(ene);
+    return 0;
 }
 
 int main(){
+    rectangle* story = NULL;
+    char* sentence = NULL;
+    int enemies[3] = {1,1,1};
+    
     r = load_resources("resources.txt");
     if(r == NULL) exit(12345);
     
@@ -188,6 +210,14 @@ int main(){
     s = load_strings("strings.txt");
     if(s==NULL)exit(12345);
     
-    battlemode(int *n_enemies, int map_id, int n_ene);
+    _term_init();
     
+    initialize_intrf(intrf, 1, r, wp, obj, pl);
+    story = win_find_rectangle(RECT_STORY, intrf->rect_array);
+    sentence = strings_get_string_by_type(1, s);
+    win_write_line_slow_at(story, 3, 3, sentence);
+    sentence = strings_get_string_by_type(2, s);
+    win_write_line_slow_at(story, 4, 3, sentence);
+    win_clear(story);
+    battlemode(enemies, 1);
 }

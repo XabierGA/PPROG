@@ -95,7 +95,7 @@ int strings_get_type(Strings* str){
 }
 
 void strings_destroy(Strings** strs){
-    int i;
+    int i=0;
     if(!strs) return;
     while(strs[i] != NULL){
         delete_string(strs[i]);

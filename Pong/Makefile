@@ -1,6 +1,6 @@
 CC = gcc -pedantic
 CFLAGS = -Wall -g
-EXE = Increasing_Bar
+EXE = Pong
 
 all : $(EXE)
 

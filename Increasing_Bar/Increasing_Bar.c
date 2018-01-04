@@ -177,12 +177,12 @@ int main(){
     }
     
     if(percent<91){
-        win_write_line_at(intrf->rect_array[0], 14, 30, "YOU LOST");
+        win_write_line_at(intrf->rect_array[0], 14, 30, "YOU LOST...");
     }
     else{
-        win_write_line_at(intrf->rect_array[0], 14, 30, "YOU WON");
+        win_write_line_at(intrf->rect_array[0], 14, 30, "YOU WON!!!!");
     }
-    
+    sleep(2);
     tcsetattr(fileno(stdin), TCSANOW, &initial);	/*We now restore the settings we back-up'd 
 							  so that the termial behaves normally when 
 							  the program ends */

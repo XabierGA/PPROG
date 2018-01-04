@@ -1,18 +1,18 @@
 INTRODUCCIÓN A LA HISTORIA, ESTO VA AL PRINCIPIO Y MIENTRAS SE DISPLAYEA EL MAPA 01.
 
 Everything started a sunny and lovely day, in a very very far away land called "CIUDAD DEL VAL", this city was
-quiet and lovely until a great disaster came to the lives of all citycens. A misterious man came to the city, this
-man was called Moberto Ramabini. Moberto' s plan was to spread a disease around the city that was highly infectious
-and made all sick people act as zombies, the infected people repited the same phrase all the time in a loop:
+quiet and lovely until a great disaster came to the lives of all citizens. A mysterious man came to the city, this
+man was called Moberto Ramabini. Moberto's plan was to spread a disease around the city that was highly infectious
+and made all sick people act as zombies, the infected people repeated the same phrase all the time in a loop:
 SO FAR SO GOOD, SO FAR SO GOOD, SO FAR SOO GOOD, SO FAR SO GOOD if some of these "zombies" touch you, you can 
 get infected and they can kill you. 
-Afortunately in our history there is also a hero and that is you!! You are not affected by Ramabini's disease so 
-you are the chosen one to end up with this madness. Alvaro Del VMal (the mayor of the town) gave you some staff to 
+Fortunately in our story there is also a hero and that is you!! You are not affected by Ramabini's disease so 
+you are the chosen one to end up with this madness. Alvaro Del Mal (the mayor of the town) gave you some stuff to 
 start your mission, he is too busy investigating new ways to skip class without being fired. He is a teacher as well 
-but he needs to keep a secret identity as mayor of "CIUDAD DEL VAL", he is like super-man and clark kent, thats why
-he doesn't care about his job as teacher, it is only a fake identity, like superman being a journalist, but this
-is another history. Well, the fact is that you are alone here, kill all the "zombies" without mercy and complete
-all the missions (Not Not, Mazes, 21, etc...) to get cool staff to kick ramabini's ass!! Good Luck!!!
+but he needs to keep a secret identity as mayor of "CIUDAD DEL VAL", he is like Superman and Clark Kent, thats why
+he doesn't care about his job as a teacher, it is only a fake identity, like Superman being a journalist, but this
+is another story. Well, the fact is that you are alone here, kill all the "zombies" without mercy and complete
+all the missions (Not Not, Mazes, 21, etc...) to get cool stuff to kick Ramabini's ass!! Good Luck!!!
 
 ---PRIMERA BATALLA, SE DISPLAYEA EL MAPA 31
 
@@ -21,21 +21,21 @@ Well, here are your first rivals, try to kill them without being injured!
 ---CAMINO 1, SE DISPLAYEA EL MAPA 11
 
 You did it pretty well, now cotinue your adventure, do not forget to use MEDICINE, FOOD or DRINK if you need it!
-Now follow the path, there is a bonus level, follow all the instructions and get all the coins you can!!
+Now follow the path, there is a bonus level, follow all the instructions and do it the best you can!!
 
 ---JUEGO 1, SE DISPLAYEA NOT NOT
 
 WELCOME to NOT NOT, a game for fast and smart people, you have to pass 10 screens, if you fail one it stops and
-you get less points, the fastest you do it the more coins you get!!
+you get less points, the fastest you do it the more items you get!!
 
 ---VUELTA A LA CIUDAD, SE DISPLAYEA EL MAPA 01
 
-Now you can heal yourself for free in the hospital or get cool stuff in the sop with the coins you have. The town
-hall is closed because Del Mal Is teaching (this happen once every one or two years).
+Now you can heal yourself for free in the hospital. The town
+hall is closed because Del Mal is teaching (this happen once every one or two years).
 
 ---SEGUNDA BATALLA, SE DISPLAYEA EL MAPA 32
 
-Defeate them!!
+Defeat them!!
 
 ---LABERINTO 1, SE DISPLAYEA EL MAPA 21
 
@@ -43,13 +43,13 @@ Solve the Maze!! Quick because your stats are going down!
 
 ---VUELTA A LA CIUDAD, SE DISPLAYEA EL MAPA 01
 
-Go to the Town hall, you can visit the Hospital or the shop if you need it.
+Go to the Town hall, you can visit the Hospital if you need it.
 
 ---AYUNTAMIENTO, SE DISPLAYEA EL MAPA 04
 
 Hi there! I am Alvaro del Mal. It is great to meet you formally. You are our hero!! Ramabini is now weaker thanks to you!!
 You have cleaned the North zone, but it was the easiest one!! Now I will drive you to the East, here there are more mosters
-but i will give you a good amount of coins so you can get better weapons and more gunpowder!
+but I will give you cool stuff so you can get better weapons and more gunpowder!
 
 ---VUELTA A LA CIUDAD, SE DISPLAYEA EL MAPA 02
 
@@ -57,7 +57,7 @@ Go GO GO GO!!
 
 ---TERCERA BATALLA, SE DISPLAYEA EL MAPA 33
 
-Defeate Them!!
+Defeat Them!!
 
 ---JUEGO 2, SE DISPLAYEA 21
 
@@ -73,7 +73,7 @@ Solve the maze!
 
 ---CUARTA BATALLA, SE DISPLAYEA EL MAPA 34
 
-Defeate them, they are a bit stroger because ramabini is closest and closest every time!
+Defeat them, they are a bit stronger because Ramabini is closer and closer every time!
 
 ---LABERINTO 3, SE DISPLAYEA EL MAPA 23
 
@@ -81,7 +81,7 @@ Solve the maze!
 
 ---JUEGO 3, SE DISPLAYEA HANGMAN
 
-Follow the instructions and get a lot of coins!
+Follow the instructions and get a lot of items!
 
 ---VUELTA A LA CIUDAD, SE DISPLAYEA EL MAPA 02
 
@@ -89,4 +89,80 @@ Visit the Town Hall to see the mayor!!
 
 ---AYUNTAMIENTO, SE DISPLAYEA EL MAPA 04
 
-Hi there, my brave friend!! 
+Hi there, my brave friend!! You did it pretty well!! I have more adventures for you, you need to clean the last zone,
+this is the last time you will visit this wonderful town unless you defeat all the enemies! I have some presents for 
+you. Good luck and defeat Ramabini!
+
+---VUELTA A LA CIUUDAD, SE DISPLAYEA EL MAPA 03
+
+This is your last chance to visit the hospital, so good luck!
+
+---CAMINO 1, SE DISPLAYEA EL MAPA 01
+
+GO GO GO! I can feel Ramabini has been here...
+
+---QUINTA BATALLA, SE DISPLAYEA EL MAPA 05
+
+Defeat them!
+
+---JUEGO 4, SE DISPLAYEA INCREASING BAR (La recompensa debe ser munición)
+
+Smash it!
+
+---LABERINTO 4, SE DISPLAYEA EL MAPA 24
+
+Solve the maze!
+
+---SEXTA BATALLA, SE DISPLAYEA EL MAPA 36
+
+Defeat them!!
+
+---LABERINTO 5, SE DISPLAYEA El MAPA 25
+
+Solve the maze!!
+
+---JUEGO 5, SE DISPLAYEA PONG (Dar de alguna manera objetos como recompensa) 
+
+That classic game!! This is a bonus level, have fun!!
+
+---CAMINO 2, SE DISPLAYEA EL MAPA 12
+
+You are almost there!!
+
+---VUELTA A LA CIUDAD, ÚLTIMA BATALLA, SE DISPLAYEA EL MAPA 5
+
+The zombies have conquered the town! DEFEAT THEM! PROTECT YOUR HOME!!!
+
+---VUELTA AL AYUNTAMIENTO, SE DISPLAYEA EL MAPA 4
+
+HEY THERE!! I AM RAMABINI MUAHAHAHA, and yes, as you thougth I entered here with the primary key!
+You don´t have enough power to defeat me! (Suddenly there is a great sound coming from outside and
+appears a powerful man riding on a unicorn).
+
+RAYEES --HI, my name is Rayees I am from India! I came here to defeat Ramabini!
+
+RAMABINI --Oh, no! Too much power! (Dies)
+
+You --Hurray, who are you Rayees?
+
+RAYEES(SANTINI) --HEHE I am kidding, I am Santini, who else could defeat this monster?
+
+DEL MAL --Oh, I am late! (again) But at least RAMABINI is dead!
+
+SANTINI --Yes I did it!
+
+DEL MAL --Ok, now that you are here... Can you correct the 3º EDAT assignment? I was a bit busy...
+
+SANTINI --.....   ¬¬
+
+YOU --I SUPPOSE THIS IS THE END :)
+
+---CREDITOS, SE DISPLAYEA EL MAPA 99
+
+Game done by the WHILE 1 SQUAD:
+José Manuel Chacón (HISTORY AND GAME DESIGNER AND AUTHOR OF SOME MINIGAMES, ALSO DEBUGGER OF A MINOR PART OF THE CODE)
+David Cabornero (AUTHOR OF SOME MINIGAMES AND DESIGNER OF THE BATTLE MAPS, DEBUGGER OF A MINOR PART OF THE CODE)
+Sergio Galán (MAIN DEBBUGER AND IN CHARGE OF ALL THE DESING OF THE DATA STRUCTURES AND IMPLEMENTATION)
+ALEJANDRO SANTORUM VARELA (BOSS OF THE GROUP AND MAIN CODER)
+Special Thanks to:
+SIMONE SANTINI (Our teacher, he gave us great ideas of the implementation)

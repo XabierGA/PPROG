@@ -330,7 +330,7 @@ Status print_enemies(Interface *intrf, Enemy **ene){
 
 
 /*Prints the resources, weapons, objects, player and initial map at the beggining of the program*/
-Status initialize_intrf(Interface *intrf, int initial_map, Resources **r, Weapon **wp, Object **obj, Enemy **ene, Player *pl){
+Status initialize_intrf(Interface *intrf, int initial_map, Resources **r, Weapon **wp, Object **obj, Player *pl){
     int i, j;
     rectangle *aux=NULL;
     
@@ -343,6 +343,7 @@ Status initialize_intrf(Interface *intrf, int initial_map, Resources **r, Weapon
     /* Drawing all the rectangle of the interface */
     for(i=0; i < intrf->n_rectangles; i++){
         rectangle_draw(intrf->rect_array[i]);
+        win_clear(intrf->rect_array[i]);
     }
     
     /* Printing the resources */
@@ -356,8 +357,6 @@ Status initialize_intrf(Interface *intrf, int initial_map, Resources **r, Weapon
     
     /* Printing the initial map */
     print_map(intrf, initial_map);
-    
-    print_enemies(intrf, ene);
     
     /* Looking for the Battlefield rectangle in order to print the player sign there later */
     for(j=0; j < intrf->n_rectangles; j++){
@@ -797,4 +796,13 @@ Boolean isNextTo(Maps *map, int rp, int cp, int re, int ce, int *next_row, int *
     ISTRUE: *next_row = rp;
     *next_col = cp;
     return T;
+}
+
+
+void interface_lock(){
+    pthread_mutex_lock(&mutex);
+}
+
+void interface_unlock(){
+    pthread_mutex_unlock(&mutex);
 }

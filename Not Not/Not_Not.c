@@ -98,6 +98,8 @@ int main(){
     struct timespec t_inicio, t_fin, aux;
     double total;
     
+    srand(time(NULL));
+    
     intrf = create_intrf("rectangles.txt", "map.txt");
     if(intrf == NULL) exit(12345);
     
@@ -112,7 +114,7 @@ int main(){
     for (i = 0; i<10 ;i++){
         
         
-        aleat = aleat_num(1, 7);
+        aleat = aleat_num(1, 11);
         
         print_map (intrf, aleat);
         
@@ -160,7 +162,35 @@ int main(){
             }
         }else if (aleat == 7){
            c = read_key();
-           if (c==-LEFT||c==-UP||c==-DOWN){
+           if (c==-RIGHT||c==-UP){
+                puntos ++;
+            }else{
+                break;
+            }
+        }else if (aleat == 8){
+           c = read_key();
+           if (c==-UP){
+                puntos ++;
+            }else{
+                break;
+            }
+        }else if (aleat == 9){
+           c = read_key();
+           if (c==-DOWN){
+                puntos ++;
+            }else{
+                break;
+            }
+        }else if (aleat == 10){
+           c = read_key();
+           if (c==-RIGHT||c==-DOWN||c==-LEFT){
+                puntos ++;
+            }else{
+                break;
+            }
+        }else if (aleat == 11){
+           c = read_key();
+           if (c==-RIGHT||c==-UP||c==-LEFT){
                 puntos ++;
             }else{
                 break;
@@ -174,6 +204,7 @@ int main(){
     score = (int)((puntos*10)/(int)total);
     printf("\n\nPringao tienes %d aciertos en %d segundos luego tu score es %d.\n\n",(int)puntos, (int)total, score);
     destroy_intrf(intrf);
+    tcsetattr(fileno(stdin), TCSANOW, &initial);
     
     return 0;
 }
