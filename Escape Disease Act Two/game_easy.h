@@ -6,5 +6,6 @@
 #include "maps.h"
 #include "rectangle.h"
 #include "strings.h"
+#include "missions.h"
 
 void game_easy(int lang);

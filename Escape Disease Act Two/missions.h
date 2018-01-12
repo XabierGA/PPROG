@@ -7,5 +7,7 @@
 #include "rectangle.h"
 #include "strings.h"
 #include "missions.h"
+#include <pthread.h>
+#include <termios.h>
 
-void game_legendary(int lang);
+int hangman(Interface *intrf, Strings **s, int lang);

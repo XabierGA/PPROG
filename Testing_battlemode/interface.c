@@ -321,9 +321,13 @@ Status print_enemies(Interface *intrf, Enemy **ene){
         exit(ERROR);
     }
     
+    pthread_mutex_lock(&mutex);
     for(aux = ene; *(aux)!=NULL; aux++){
-        win_write_char_at(rect, enemy_getRow(*aux), enemy_getCol(*aux), enemy_getDisplay(*aux));
+        if(enemy_getPhyStat(*aux) == ALIVE){
+            win_write_char_at(rect, enemy_getRow(*aux), enemy_getCol(*aux), enemy_getDisplay(*aux));
+        }
     }
+    pthread_mutex_unlock(&mutex);
     
     return OK;
 }
@@ -382,17 +386,17 @@ Status initialize_intrf(Interface *intrf, int initial_map, Resources **r, Weapon
 /*Function that allows the player to move*/
 static int Dr[5] = {-1, 1, 0, 0, 0}; 
 static int Dc[5] = {0, 0, 1, -1, 0};
-void move(Interface *intrf, Maps *copymap, Player *pl, int dir){
+int move(Interface *intrf, Maps *copymap, Player *pl, int dir){
     int fin_row, fin_col, j, act_row, act_col, go;
     rectangle *aux=NULL;
     
     if(dir != UP && dir != DOWN && dir != LEFT && dir != RIGHT && dir != HERE){
         printf("Error. Interface-F8-1\n");
-        return;
+        exit(ERROR);
     }
     if(intrf==NULL ||pl==NULL){
         printf("Error. Interface-F8-2.\n");
-        return;
+        exit(ERROR);
     }
     act_row = player_getRow(pl);
     act_col = player_getCol(pl);
@@ -409,10 +413,10 @@ void move(Interface *intrf, Maps *copymap, Player *pl, int dir){
     }
     if(aux==NULL){
         printf("Error. Interface-F8-4.\n");
-        return;
+        exit(ERROR);
     }
     
-    if(fin_row<=1 || fin_col<=1 || fin_row >= aux->last_row || fin_col >= aux->last_col) return;
+    if(fin_row<=1 || fin_col<=1 || fin_row >= aux->last_row || fin_col >= aux->last_col) return 1;
     
     
     if(copymap->field[fin_row-2][fin_col-2] == ' '){
@@ -424,9 +428,13 @@ void move(Interface *intrf, Maps *copymap, Player *pl, int dir){
         player_setLocation(pl, fin_row, fin_col);
         pthread_mutex_unlock(&mutex);
         
-        return;
+        return 1;
     }
-    return;
+    
+    if(copymap->field[fin_row-2][fin_col-2] == 'G'){
+        return DOOR;
+    }
+    return 1;
 }
 
 
@@ -517,11 +525,13 @@ void *shoot(void *x){
         pthread_mutex_lock(&mutex);
         if(isEnemyDisplay(copymap->field[next_row-2][next_col-2]) == T){
             e = getEnemyAt(ene, next_row, next_col);
+            if(e==NULL)goto L1;
             if(modify_enemyHP(e, -(weapon_getDamage(w))) <= 0){
                 win_write_char_at(aux, next_row, next_col, ' ');
                 copymap->field[next_row-2][next_col-2] = ' ';
             }
         }
+        L1:
         pthread_mutex_unlock(&mutex);
         
         r_aux = player_getRow(pl);
@@ -549,7 +559,11 @@ Status generate_EnePosRand(Enemy **ene, Maps *copymap){
         exit(ERROR);
     }
     
+    pthread_mutex_lock(&mutex);
     for(aux = ene; *(aux)!=NULL; aux++){
+        if(enemy_getPhyStat(*aux) != ALIVE){
+            continue;
+        }
         do{
             flag = 0;
         
@@ -563,6 +577,10 @@ Status generate_EnePosRand(Enemy **ene, Maps *copymap){
             }
         }while(flag==0);
     }
+    pthread_mutex_unlock(&mutex);
+    
+    pthread_mutex_lock(&mutex);
+    pthread_mutex_unlock(&mutex);
     return OK;
 }
 
@@ -630,7 +648,8 @@ void* move_enemies(void *y){
         }
         
         
-        if(copymap->field[next_row-2][next_col-2] == ' ' && enemy_getPhyStat(ene)==ALIVE){
+        if(copymap->field[next_row-2][next_col-2] == ' '){
+            if(enemy_getPhyStat(ene)!=ALIVE) return NULL;
             pthread_mutex_lock(&mutex);
             win_write_char_at(aux, row, col, ' ');
             copymap->field[row-2][col-2] = ' ';

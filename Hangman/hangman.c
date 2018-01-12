@@ -1,4 +1,3 @@
-#define TAM 32
 #define MAX 100
 
 #include "interface.h"

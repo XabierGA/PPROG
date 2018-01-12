@@ -8,8 +8,8 @@ all : $(EXE)
 clean :
 	rm -f *.o core $(EXE)
 
-$(EXE) : % : %.o defines.o resources.o object.o weapon.o enemies.o player.o rectangle.o maps.o interface.o strings.o
-	$(CC) $(CFLAGS) -pthread -lm -o $@ $@.o defines.o resources.o object.o weapon.o enemies.o player.o rectangle.o maps.o interface.o strings.o
+$(EXE) : % : %.o defines.o resources.o object.o weapon.o enemies.o player.o rectangle.o maps.o interface.o strings.o game_easy.o game_medium.o game_hard.o game_legendary.o game_battlemode.o
+	$(CC) $(CFLAGS) -pthread -lm -o $@ $@.o defines.o resources.o object.o weapon.o enemies.o player.o rectangle.o maps.o interface.o strings.o game_easy.o game_medium.o game_hard.o game_legendary.o game_battlemode.o
 	
 defines.o : defines.c defines.h
 	$(CC) $(CFLAGS) -c $<
@@ -39,4 +39,19 @@ enemies.o : enemies.c enemies.h
 	$(CC) $(CFLAGS) -c $<
 	
 strings.o : strings.c strings.h
+	$(CC) $(CFLAGS) -c $<
+	
+game_easy.o : game_easy.c game_easy.h
+	$(CC) $(CFLAGS) -c $<
+	
+game_medium.o : game_medium.c game_medium.h
+	$(CC) $(CFLAGS) -c $<
+	
+game_hard.o : game_hard.c game_hard.h
+	$(CC) $(CFLAGS) -c $<
+	
+game_legendary.o : game_legendary.c game_legendary.h
+	$(CC) $(CFLAGS) -c $<
+	
+game_battlemode.o : game_battlemode.c game_battlemode.h
 	$(CC) $(CFLAGS) -c $<

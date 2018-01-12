@@ -376,6 +376,8 @@ Enemy* getEnemyAt(Enemy **ene, int row, int col){
             return (*aux);
         }
     }
+    return NULL;
+    /*
     printf("Error. Enemies-F20-1.\n");
-    exit(ERROR);
+    exit(ERROR);*/
 }

@@ -61,7 +61,8 @@ Defeat Them!!
 
 ---JUEGO 2, SE DISPLAYEA 21
 
-Follow the instructions and Good Luck!
+WELCOME TO 21, Press up to sum a random value between 1 and 7, press down to take the value you got. Try to get 21 to get
+the best stuff!! If you are very greedy and you get more than 21 you won't get anything.
 
 ---CAMINO 2, SE DISPLAYEA EL MAPA 12
 

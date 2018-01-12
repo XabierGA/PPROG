@@ -6,6 +6,7 @@
 #include "maps.h"
 #include "rectangle.h"
 #include "strings.h"
+#include "missions.h"
 #include <pthread.h>
 #include <termios.h>
 
@@ -180,7 +181,6 @@ int main(){
     destroy_intrf(itf);
     strings_destroy(s);
     
-    /*
     
     if(mode==EASY) game_easy(lang);
     else if(mode==MEDIUM) game_medium(lang);
@@ -191,6 +191,6 @@ int main(){
     	printf("Error. Game 5.\n");
     	exit(ERROR);
     }
-    */
+    
     return 0;
 }

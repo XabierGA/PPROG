@@ -75,7 +75,7 @@ Status initialize_intrf(Interface *intrf, int initial_map, Resources **r, Weapon
 
 
 /*Function that allows the player to move*/
-void move(Interface *intrf, Maps *copymap, Player *pl, int dir);
+int move(Interface *intrf, Maps *copymap, Player *pl, int dir);
 
 
 /*Function that allows the player to shoot*/
