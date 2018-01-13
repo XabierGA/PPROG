@@ -117,6 +117,13 @@ Status print_resources(Interface *intrf, Resources **r){
         if(rectangle_getType(intrf->rect_array[i]) == RECT_RES){ /*Found it*/
         
             num = rectangle_getNCols(intrf->rect_array[i]) - 1;
+            pthread_mutex_lock(&mutex);
+            win_clear(intrf->rect_array[i]);
+            pthread_mutex_unlock(&mutex);
+            
+            pthread_mutex_lock(&mutex);
+            win_write_line_at(intrf->rect_array[i], 2, 7, "R E S O U R C E S");
+            pthread_mutex_unlock(&mutex);
             
             for(aux = r; *aux != NULL; aux++){  /*Printing all the resources information*/
                 buff = (char *) malloc(num * sizeof(char));
@@ -162,7 +169,18 @@ Status print_weapons(Interface *intrf, Weapon **wp){
         if(rectangle_getType(intrf->rect_array[i]) == RECT_WEAP){ /*Found it*/
         
             num = rectangle_getNCols(intrf->rect_array[i]) - 1;
+            pthread_mutex_lock(&mutex);
             win_clear(intrf->rect_array[i]);
+            pthread_mutex_unlock(&mutex);
+            
+            pthread_mutex_lock(&mutex);
+            win_write_line_at(intrf->rect_array[i], 2, 9, "W E A P O N S");
+            pthread_mutex_unlock(&mutex);
+            pthread_mutex_lock(&mutex);
+            win_write_line_at(intrf->rect_array[i], 4, 6, "Name");
+            win_write_line_at(intrf->rect_array[i], 4, 19, "GPW  DMG");
+            pthread_mutex_unlock(&mutex);
+            
             
             for(aux = wp; *aux != NULL; aux++){
                 if(own_weapon(*aux) == OWNED){ 
@@ -179,12 +197,12 @@ Status print_weapons(Interface *intrf, Weapon **wp){
                 
                     strcpy(buff, weapon_getName(*aux));
                     if(weapon_equipped(*aux) == EQUIPPED){
-                        strcat(buff, "(Equipped)");
+                        strcat(buff, "(Equi)");
                     }
                     else if(weapon_equipped(*aux) == NOT_EQUIPPED){
                         strcat(buff, "(Not)");
                     }
-                    sprintf(str, ": %d %d", weapon_getPowderWaste(*aux), weapon_getDamage(*aux));
+                    sprintf(str, ": %d  %d", weapon_getPowderWaste(*aux), weapon_getDamage(*aux));
                     strcat(buff, str);
                     pthread_mutex_lock(&mutex);
                     win_write_line_at(intrf->rect_array[i], weapon_getRow(*aux), weapon_getCol(*aux), buff);
@@ -218,6 +236,17 @@ Status print_objects(Interface *intrf, Object **obj){
         if(rectangle_getType(intrf->rect_array[i]) == RECT_INVENT){ /*Found it*/
         
             num = rectangle_getNCols(intrf->rect_array[i]) - 1;
+            pthread_mutex_lock(&mutex);
+            win_clear(intrf->rect_array[i]);
+            pthread_mutex_unlock(&mutex);
+            
+            pthread_mutex_lock(&mutex);
+            win_write_line_at(intrf->rect_array[i], 2, 7, "I N V E N T O R Y");
+            pthread_mutex_unlock(&mutex);
+            pthread_mutex_lock(&mutex);
+            win_write_line_at(intrf->rect_array[i], 4, 6, "Name");
+            win_write_line_at(intrf->rect_array[i], 4, 15, "Amount  Incr");
+            pthread_mutex_unlock(&mutex);
             
             for(aux = obj; *aux != NULL; aux++){  /*Printing all the resources information*/
                 buff = (char *) malloc(num * sizeof(char));
@@ -232,7 +261,7 @@ Status print_objects(Interface *intrf, Object **obj){
                 }
                 
                 strcpy(buff, object_getName(*aux));
-                sprintf(str, ": %d  %d", object_getAmount(*aux), object_getValue(*aux));
+                sprintf(str, ":    %d     %d", object_getAmount(*aux), object_getValue(*aux));
                 strcat(buff, str);
                 
                 win_write_line_at(intrf->rect_array[i], object_getRow(*aux), object_getColumn(*aux), buff);
