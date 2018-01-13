@@ -1,5 +1,5 @@
 4
 Shitty_gun . 50 50000 50 1040 1042 3 3
-Light_machine_gun o 1 50000 20 1040 1043 4 3
+Machine_gun o 1 50000 20 1040 1043 4 3
 Revolver O 5 50000 70 1040 1043 5 3
 Bazooka 0 20 50000 200 1040 1043 6 3

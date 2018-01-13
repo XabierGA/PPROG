@@ -162,9 +162,10 @@ Status print_weapons(Interface *intrf, Weapon **wp){
         if(rectangle_getType(intrf->rect_array[i]) == RECT_WEAP){ /*Found it*/
         
             num = rectangle_getNCols(intrf->rect_array[i]) - 1;
+            win_clear(intrf->rect_array[i]);
             
-            for(aux = wp; *aux != NULL; aux++){  /*Printing all the weapons information*/
-                if(own_weapon(*aux) == OWNED){ /*BUT we only print those who are OWNED*/
+            for(aux = wp; *aux != NULL; aux++){
+                if(own_weapon(*aux) == OWNED){ 
                     buff = (char *) malloc(num * sizeof(char));
                     if(buff == NULL){
                         printf("Error. Interface-F4-2.\n");
@@ -177,14 +178,14 @@ Status print_weapons(Interface *intrf, Weapon **wp){
                     }
                 
                     strcpy(buff, weapon_getName(*aux));
-                    sprintf(str, ": %d", weapon_getPowderWaste(*aux));
-                    strcat(buff, str);
                     if(weapon_equipped(*aux) == EQUIPPED){
-                        strcat(buff, " E");
+                        strcat(buff, "(Equipped)");
                     }
                     else if(weapon_equipped(*aux) == NOT_EQUIPPED){
-                        strcat(buff, " N");
+                        strcat(buff, "(Not)");
                     }
+                    sprintf(str, ": %d %d", weapon_getPowderWaste(*aux), weapon_getDamage(*aux));
+                    strcat(buff, str);
                     pthread_mutex_lock(&mutex);
                     win_write_line_at(intrf->rect_array[i], weapon_getRow(*aux), weapon_getCol(*aux), buff);
                     pthread_mutex_unlock(&mutex);
@@ -192,6 +193,7 @@ Status print_weapons(Interface *intrf, Weapon **wp){
                     free(str);
                 }
             }
+            
             return OK;
         }
     }
