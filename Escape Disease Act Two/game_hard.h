@@ -7,5 +7,7 @@
 #include "rectangle.h"
 #include "strings.h"
 #include "missions.h"
+#include <pthread.h>
+#include <termios.h>
 
 void game_hard(int lang);

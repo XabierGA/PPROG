@@ -1,16 +1,4 @@
-#include "interface.h"
-#include "resources.h"
-#include "object.h"
-#include "player.h"
-#include "weapon.h"
-#include "maps.h"
-#include "rectangle.h"
-#include "strings.h"
-#include "missions.h"
-#include <pthread.h>
-#include <termios.h>
-
-struct termios initial;
+#include "game_easy.h"
 
 Resources **r=NULL;
 Object **obj=NULL;
@@ -22,21 +10,24 @@ Strings **s=NULL;
 int n_ene=-1;
 
 
+struct termios initial_easy;
+
+
 typedef struct {
-  time_t initial; /* Initial time at which the function is first called */
+  time_t initial_easy; /* Initial time at which the function is first called */
   Interface  *intrf;    /* pointer to the interface where the clock is to be displayed */
-} clock_data;
+} clock_data_easy;
 
 
-void _term_init() {
+void _term_init_easy() {
 	struct termios new;	          /*a termios structure contains a set of attributes about 
 					  how the terminal scans and outputs data*/
 		
-	tcgetattr(fileno(stdin), &initial);    /*first we get the current settings of out 
+	tcgetattr(fileno(stdin), &initial_easy);    /*first we get the current settings of out 
 						 terminal (fileno returns the file descriptor 
 						 of stdin) and save them in initial. We'd better 
 						 restore them later on*/
-	new = initial;	                      /*then we copy them into another one, as we aren't going 
+	new = initial_easy;	                      /*then we copy them into another one, as we aren't going 
 						to change ALL the values. We'll keep the rest the same */
 	new.c_lflag &= ~ICANON;	              /*here we are setting up new. This line tells to stop the 
 						canonical mode (which means waiting for the user to press 
@@ -55,8 +46,7 @@ void _term_init() {
 						    before making this change*/
 }
 
-
-int read_key(){
+int read_key_easy(){
     char choice;
     choice = fgetc(stdin);
     
@@ -81,7 +71,7 @@ int read_key(){
 }
 
 
-int dir_conv(int d) {
+int dir_conv_easy(int d) {
     if (d == 'w')
         return UP;
     if (d == 'a')
@@ -94,12 +84,11 @@ int dir_conv(int d) {
 }
 
 
-int battlemode(int *ene_array, int map_id){
+int battlemode_easy(int *ene_array, Maps *copymap){
     shoot_stuff *stst=NULL;
     moveEne_stuff *mest=NULL;
     pthread_t pth_shoot, pth_moveEne;
     Enemy **ene=NULL, **econt;
-    Maps *copymap=NULL;
     int c;
     
     if(ene_array == NULL){
@@ -110,12 +99,10 @@ int battlemode(int *ene_array, int map_id){
         printf("Error. Main-F1-2.\n");
         exit(ERROR);  
     }
-    
-    copymap = map_getCopy(intrf->maps_array, map_id); /*We get a copy of the map where we are gonna play*/
     if(copymap == NULL){
         printf("Error. Main-F1-3.\n");
         exit(ERROR);
-    }    
+    }
     
     ene = generate_arrayEnemies(e, ene_array, n_ene);
     if(ene==NULL) exit(12345);
@@ -126,6 +113,7 @@ int battlemode(int *ene_array, int map_id){
     
     copymap->field[player_getRow(pl) - 2][player_getCol(pl) - 2] = player_getDisplay(pl); /* Inserting the player display into the map*/
     
+
     for(econt = ene; *(econt)!=NULL; econt++){
         mest = (moveEne_stuff *) malloc(sizeof(moveEne_stuff)); /* When are we freeing this ??? */
         mest->intrf = intrf;
@@ -137,17 +125,17 @@ int battlemode(int *ene_array, int map_id){
     }
 
     while(1){
-        c = read_key();
+        c = read_key_easy();
         if(c == 'o'){
-            tcsetattr(fileno(stdin), TCSANOW, &initial);	/*We now restore the settings we back-up'd 
-							  so that the termial behaves normally when 
-							  the program ends */
             break;
         }
         
         
         else if(c < 0){
-            move(intrf, copymap, pl, -c);
+            if(move(intrf, copymap, pl, -c)==DOOR && enemy_checkPhyStat(ene)==ALL_KILLED){
+                destroy_enemies(ene);
+                return DOOR;
+            }
         }
         
         else if(c == 'q'){
@@ -166,17 +154,13 @@ int battlemode(int *ene_array, int map_id){
             stst->pl = pl;
             stst->r = r;
             stst->copymap = copymap;
-            stst->dir = dir_conv(c);
+            stst->dir = dir_conv_easy(c);
             stst->ene = ene;
             pthread_create(&pth_shoot, NULL, shoot, (void *) stst);
         }
-        /*if(stst != NULL) free(stst);*/ /*Here we cant free it or it will explote */
     }
-    /*if(stst != NULL) free(stst);*/ /*Here the memory problems aren't fixed */
-    
-    delete_map(copymap);
     destroy_enemies(ene);
-    return 0;
+    return DOOR;
 }
 
 
@@ -233,13 +217,64 @@ void game_easy(int lang){
     	exit(ERROR);
     }
     
-    _term_init();
+    _term_init_easy();
+    
+    rectangle* story = NULL;
+    rectangle* info = NULL;
+    rectangle* battle = NULL;
+    story = win_find_rectangle(RECT_STORY, intrf->rect_array);
+    info = win_find_rectangle(RECT_INFO, intrf->rect_array);
+    battle = win_find_rectangle(RECT_BATTLE, intrf->rect_array);
+    
+    
+    if(initialize_intrf(intrf, 120, r, wp, obj) == FAILED){
+        printf("Error. Easy 8.\n");
+        exit(ERROR);
+    }
+    win_write_line_at(battle, 27, 15, strings_get_string_by_type(7, s));
+    
+    
+    /* TUTORIAL */
+    char c = 0;
+    int enemies[3] = {1,1,1};
+    
+    story = win_find_rectangle(RECT_STORY, intrf->rect_array);
+    info = win_find_rectangle(RECT_INFO, intrf->rect_array);
+    win_write_line_slow_at(story, 2, 3, strings_get_string_by_type(11, s));
+    win_write_line_slow_at(story, 3, 3, strings_get_string_by_type(12, s));
+    sleep(3);
+    win_write_line_slow_at(story, 4, 3, strings_get_string_by_type(13, s));
+    win_write_line_slow_at(story, 5, 3, strings_get_string_by_type(14, s));
+    sleep(3);
+    win_write_line_slow_at(story, 6, 3, strings_get_string_by_type(15, s));
+    win_write_line_slow_at(story, 7, 3, strings_get_string_by_type(16, s));
+    sleep(3);
+    win_write_line_slow_at(story, 8, 3, strings_get_string_by_type(17, s));
+    win_write_line_slow_at(story, 9, 3, strings_get_string_by_type(18, s));
+    sleep(3);
+    win_write_line_slow_at(story, 10, 3, strings_get_string_by_type(19, s));
+    win_write_line_slow_at(info, 3, 3, strings_get_string_by_type(9991, s));
+    win_write_line_slow_at(info, 4, 3, strings_get_string_by_type(9992, s));
+    win_write_line_slow_at(info, 5, 3, strings_get_string_by_type(9993, s));
+    win_write_line_slow_at(info, 6, 3, strings_get_string_by_type(9994, s));
+    while(1){
+        c = read_key_easy();
+        if(c != ' '){
+            continue;
+        }
+        break;
+    }
+    print_map(intrf, 300);
+    print_player(intrf, pl);
+    
+    Maps *copymap=NULL;
+    copymap = map_getCopy(intrf->maps_array, 300);
+    battlemode_easy(enemies, copymap);
+    
+    win_clear(story);
+    win_clear(info);
     
     
     
-    
-    
-    
-    
-    
+    tcsetattr(fileno(stdin), TCSANOW, &initial_easy);
 }

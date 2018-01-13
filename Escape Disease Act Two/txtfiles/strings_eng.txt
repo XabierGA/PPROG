@@ -1,4 +1,4 @@
-6
+33
 1
 --->Select the game mode by pressing a number<---
 2
@@ -11,3 +11,57 @@
 4.LEGENDARY
 6
 5.BATTLEMODE
+7
+HAVE SELECTED EASY GAMEMODE
+11
+Welcome to our game! We're glad to show you how to play this game by the best way
+12
+we can think of, just by telling you the basics and then let you by yourself in the game.
+13
+First of all, there will be three different "modes" inside the game: battle mode,
+14
+mission mode and town mode. Let's begin with battle mode.
+15
+In battle mode, you will be fighting some zombies. You'll move with arrow keys,
+16
+swap between weapons with QE and shooting with WASD. Now try it out for a little bit.
+17
+If you forget this, don't worry, these instructions will appear in the
+18
+rectangle at the right.
+19
+When you are done with them, go to the G(Gate).
+20
+There are many different missions, so for each one you will see the instructions
+21
+on the rectangle on the right.
+22
+Finally, in the town mode, you'll just wander around the town,
+23
+so arrow keys just as in battle mode.
+30
+Push simultaneously -> and <- to win
+31
+YOU WON!!!
+32
+You lost...
+33
+Prepare to play Pong!!!
+34
+Time:
+40
+PRESS A KEY TO GUESS A LETTER (THE WORD IS CAPITALIZED)
+41
+NICEEE! THIS LETTER APPEARS!
+42
+YOU ARE DEAD, YOU LOST!
+43
+YOU WON, CONGRATULATIONS!
+9991
+Press Spacebar to continue.
+9992
+Move with arrow keys.
+9993
+Shoot with WASD.
+9994
+Swap with QE.

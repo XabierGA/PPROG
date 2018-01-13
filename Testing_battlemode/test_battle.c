@@ -118,9 +118,6 @@ int battlemode(int *ene_array, Maps *copymap){
         exit(ERROR);
     }
     
-    
-
-    
     ene = generate_arrayEnemies(e, ene_array, n_ene);
     if(ene==NULL) exit(12345);
     
@@ -179,7 +176,7 @@ int battlemode(int *ene_array, Maps *copymap){
     }
     /*if(stst != NULL) free(stst);*/ /*Here the memory problems aren't fixed */
     destroy_enemies(ene);
-    return DOOR;
+    return 0;
 }
 
 

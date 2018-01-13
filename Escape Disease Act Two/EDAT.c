@@ -7,6 +7,12 @@
 #include "rectangle.h"
 #include "strings.h"
 #include "missions.h"
+#include "game_easy.h"
+#include "game_medium.h"
+#include "game_hard.h"
+#include "game_legendary.h"
+#include "game_battlemode.h"
+
 #include <pthread.h>
 #include <termios.h>
 
@@ -18,6 +24,7 @@ typedef struct {
   time_t initial; /* Initial time at which the function is first called */
   Interface  *intrf;    /* pointer to the interface where the clock is to be displayed */
 } clock_data;
+
 
 void _term_init() {
 	struct termios new;	          /*a termios structure contains a set of attributes about 
@@ -45,7 +52,6 @@ void _term_init() {
 						    terminal. TCSANOW tells the program not to wait 
 						    before making this change*/
 }
-
 
 int read_key(){
     char choice;

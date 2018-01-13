@@ -141,9 +141,6 @@ int modify_enemyHP(Enemy *e, int value){
     if(e->physical_status == DEAD) return 0;
     
     e->HP = e->HP + value;
-    if (e->HP >= MAX_HEALTHRANGE){
-        e->HP = MAX_HEALTHRANGE;
-    }
     
     if(e->HP <= 0){
         e->HP = 0;

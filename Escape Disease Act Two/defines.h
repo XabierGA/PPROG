@@ -85,7 +85,7 @@ typedef enum{
 #define BUFFER_SIZE 128
 #define NAME_SIZE 20
 #define ERROR -11111
-
+#define DOOR 2000
 
 int rand_num(int infs, int sup);
 

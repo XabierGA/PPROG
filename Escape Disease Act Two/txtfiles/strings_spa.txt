@@ -11,3 +11,9 @@
 4.LEGENDARIO
 6
 5.MODO DE BATALLA
+7
+Pulsa simultáneamente -> y <- para ganar
+8
+¡¡HAS GANADO!!
+9
+Has perdido...

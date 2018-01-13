@@ -186,6 +186,8 @@ int battlemode(int *ene_array, int map_id){
 
 int main(){
     rectangle* story = NULL;
+    rectangle* info = NULL;
+    char c = 0;
     char* sentence = NULL;
     int enemies[3] = {1,1,1};
     
@@ -214,10 +216,41 @@ int main(){
     
     initialize_intrf(intrf, 1, r, wp, obj, pl);
     story = win_find_rectangle(RECT_STORY, intrf->rect_array);
+    info = win_find_rectangle(RECT_INFO, intrf->rect_array);
     sentence = strings_get_string_by_type(1, s);
-    win_write_line_slow_at(story, 3, 3, sentence);
+    win_write_line_slow_at(story, 2, 3, sentence);
     sentence = strings_get_string_by_type(2, s);
+    win_write_line_slow_at(story, 3, 3, sentence);
+    sentence = strings_get_string_by_type(3, s);
     win_write_line_slow_at(story, 4, 3, sentence);
-    win_clear(story);
+    sentence = strings_get_string_by_type(4, s);
+    win_write_line_slow_at(story, 5, 3, sentence);
+    sentence = strings_get_string_by_type(5, s);
+    win_write_line_slow_at(story, 6, 3, sentence);
+    sentence = strings_get_string_by_type(6, s);
+    win_write_line_slow_at(story, 7, 3, sentence);
+    sentence = strings_get_string_by_type(7, s);
+    win_write_line_slow_at(story, 8, 3, sentence);
+    sentence = strings_get_string_by_type(8, s);
+    win_write_line_slow_at(story, 9, 3, sentence);
+    sentence = strings_get_string_by_type(9, s);
+    win_write_line_slow_at(story, 10, 3, sentence);
+    sentence = strings_get_string_by_type(9991, s);
+    win_write_line_slow_at(info, 3, 3, sentence);
+    sentence = strings_get_string_by_type(9992, s);
+    win_write_line_slow_at(info, 4, 3, sentence);
+    sentence = strings_get_string_by_type(9993, s);
+    win_write_line_slow_at(info, 5, 3, sentence);
+    sentence = strings_get_string_by_type(9994, s);
+    win_write_line_slow_at(info, 6, 3, sentence);
+    while(1){
+        c = read_key();
+        if(c != ' '){
+            continue;
+        }
+        break;
+    }
     battlemode(enemies, 1);
+    win_clear(story);
+    win_clear(info);
 }

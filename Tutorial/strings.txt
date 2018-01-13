@@ -1,4 +1,4 @@
-12
+17
 1
 Welcome to our game! We're glad to show you how to play this game by the best way
 2
@@ -16,10 +16,20 @@ If you forget this, don't worry, these instructions will appear in the
 8
 rectangle at the right.
 9
-There are many different missions, so for each one you will see the instructions
+When you are done with them, go to the G(Gate).
 10
-on the rectangle on the right.
+There are many different missions, so for each one you will see the instructions
 11
-Finally, in the town mode, you'll just wander around the town,
+on the rectangle on the right.
 12
+Finally, in the town mode, you'll just wander around the town,
+13
 so arrow keys just as in battle mode.
+9991
+Press Spacebar to continue.
+9992
+Move with arrow keys.
+9993
+Shoot with WASD.
+9994
+Swap with QE.

@@ -1,4 +1,4 @@
-CC = gcc -pedantic
+CC = gcc
 CFLAGS = -Wall -g
 EXE = EDAT
 

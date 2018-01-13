@@ -41,7 +41,7 @@ Defeat them!!
 
 Solve the Maze!! Quick because your stats are going down!
 
----VUELTA A LA CIUDAD, SE DISPLAYEA EL MAPA 01
+---VUELTA A LA CIUDAD, SE DISPLAYEA EL MAPA 06
 
 Go to the Town hall, you can visit the Hospital if you need it.
 
@@ -84,7 +84,7 @@ Solve the maze!
 
 Follow the instructions and get a lot of items!
 
----VUELTA A LA CIUDAD, SE DISPLAYEA EL MAPA 02
+---VUELTA A LA CIUDAD, SE DISPLAYEA EL MAPA 06
 
 Visit the Town Hall to see the mayor!!
 
