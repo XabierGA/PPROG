@@ -1,4 +1,4 @@
-107
+108
 1
 --->Select the game mode by pressing a number<---
 2
@@ -12,7 +12,7 @@
 6
 5.BATTLEMODE
 7
-HAVE SELECTED EASY GAMEMODE
+EASY GAMEMODE HAS BEEN SELECTED
 11
 Welcome to our game! We're glad to show you how to play this game by the best way
 12
@@ -38,7 +38,9 @@ on the rectangle on the right.
 22
 Finally, in the town mode, you'll just wander around the town,
 23
-so arrow keys just as in battle mode.
+so arrow keys just as in battle mode. Also, you can use your objects to keep
+24
+your HUNGER, HYDRATION, HEALTH and GUNPOWDER up.
 30
 Push simultaneously -> and <- to win
 31
@@ -80,7 +82,7 @@ Shoot with WASD.
 9994
 Change weapon with QE.
 9995
-Use objects with 1, 2, ... 8.
+Use objects with 1...8.
 999
 Now that you know how to play, let's get started with the main game.
 1000
@@ -90,9 +92,9 @@ This city was quiet and lovely until a great disaster came to the lives of all c
 1002
 A mysterious man came to the city, this man was called Moberto Ramabini. Moberto's plan
 1003
-was to spread a disease around the city that was highly infectious and made all sick people
+was to spread a disease around the city that was highly infectious and made all sick
 1004
-act as zombies, the infected people repeated the same phrase all the time in a loop:
+people act as zombies, the infected people repeated the same phrase all the time in a loop:
 1005
 SO FAR SO GOOD, SO FAR SO GOOD. If some of these "zombies" touch you, you may get infected
 1006
