@@ -4,6 +4,8 @@
 
 pthread_mutex_t mutex;
 
+Strings **strings=NULL;
+
 
 /*Creates the interface struct reading all the rectangles information and all the maps from the files*/
 Interface* create_intrf(char* rect_fname, char* maps_fname){
@@ -117,7 +119,13 @@ Status print_resources(Interface *intrf, Resources **r){
         if(rectangle_getType(intrf->rect_array[i]) == RECT_RES){ /*Found it*/
         
             num = rectangle_getNCols(intrf->rect_array[i]) - 1;
+            pthread_mutex_lock(&mutex);
             win_clear(intrf->rect_array[i]);
+            pthread_mutex_unlock(&mutex);
+            
+            pthread_mutex_lock(&mutex);
+            win_write_line_at(intrf->rect_array[i], 2, 7, strings_get_string_by_type(100, strings));
+            pthread_mutex_unlock(&mutex);
             
             for(aux = r; *aux != NULL; aux++){  /*Printing all the resources information*/
                 buff = (char *) malloc(num * sizeof(char));
@@ -163,7 +171,18 @@ Status print_weapons(Interface *intrf, Weapon **wp){
         if(rectangle_getType(intrf->rect_array[i]) == RECT_WEAP){ /*Found it*/
         
             num = rectangle_getNCols(intrf->rect_array[i]) - 1;
+            pthread_mutex_lock(&mutex);
             win_clear(intrf->rect_array[i]);
+            pthread_mutex_unlock(&mutex);
+            
+            pthread_mutex_lock(&mutex);
+            win_write_line_at(intrf->rect_array[i], 2, 9, strings_get_string_by_type(101, strings));
+            pthread_mutex_unlock(&mutex);
+            pthread_mutex_lock(&mutex);
+            win_write_line_at(intrf->rect_array[i], 4, 6, strings_get_string_by_type(102, strings));
+            win_write_line_at(intrf->rect_array[i], 4, 19, strings_get_string_by_type(103, strings));
+            pthread_mutex_unlock(&mutex);
+            
             
             for(aux = wp; *aux != NULL; aux++){
                 if(own_weapon(*aux) == OWNED){ 
@@ -180,12 +199,12 @@ Status print_weapons(Interface *intrf, Weapon **wp){
                 
                     strcpy(buff, weapon_getName(*aux));
                     if(weapon_equipped(*aux) == EQUIPPED){
-                        strcat(buff, "(Equipped)");
+                        strcat(buff, "(Equi)");
                     }
                     else if(weapon_equipped(*aux) == NOT_EQUIPPED){
                         strcat(buff, "(Not)");
                     }
-                    sprintf(str, ": %d %d", weapon_getPowderWaste(*aux), weapon_getDamage(*aux));
+                    sprintf(str, ": %d  %d", weapon_getPowderWaste(*aux), weapon_getDamage(*aux));
                     strcat(buff, str);
                     pthread_mutex_lock(&mutex);
                     win_write_line_at(intrf->rect_array[i], weapon_getRow(*aux), weapon_getCol(*aux), buff);
@@ -208,7 +227,7 @@ Status print_weapons(Interface *intrf, Weapon **wp){
 Status print_objects(Interface *intrf, Object **obj){
     int i, num;
     Object **aux=NULL;
-    char *buff, *str;
+    char *buff, *sentence;
     
     if(intrf == NULL || obj == NULL){
         printf("Error. Interface-F5-1.\n");
@@ -219,7 +238,17 @@ Status print_objects(Interface *intrf, Object **obj){
         if(rectangle_getType(intrf->rect_array[i]) == RECT_INVENT){ /*Found it*/
         
             num = rectangle_getNCols(intrf->rect_array[i]) - 1;
+            pthread_mutex_lock(&mutex);
             win_clear(intrf->rect_array[i]);
+            pthread_mutex_unlock(&mutex);
+            
+            pthread_mutex_lock(&mutex);
+            win_write_line_at(intrf->rect_array[i], 2, 7, strings_get_string_by_type(104, strings));
+            pthread_mutex_unlock(&mutex);
+            pthread_mutex_lock(&mutex);
+            win_write_line_at(intrf->rect_array[i], 4, 6, strings_get_string_by_type(102, strings));
+            win_write_line_at(intrf->rect_array[i], 4, 15, strings_get_string_by_type(105, strings));
+            pthread_mutex_unlock(&mutex);
             
             for(aux = obj; *aux != NULL; aux++){  /*Printing all the resources information*/
                 buff = (char *) malloc(num * sizeof(char));
@@ -227,20 +256,20 @@ Status print_objects(Interface *intrf, Object **obj){
                     printf("Error. Interface-F5-2.\n");
                     exit(ERROR);
                 }
-                str = (char *) malloc(num * sizeof(char));
-                if(buff == NULL){
+                sentence = (char *) malloc(num * sizeof(char));
+                if(sentence == NULL){
                     printf("Error. Interface-F5-2.\n");
                     exit(ERROR);
                 }
                 
                 strcpy(buff, object_getName(*aux));
-                sprintf(str, ": %d  %d", object_getAmount(*aux), object_getValue(*aux));
-                strcat(buff, str);
+                sprintf(sentence, ":    %d     %d", object_getAmount(*aux), object_getValue(*aux));
+                strcat(buff, sentence);
                 
                 win_write_line_at(intrf->rect_array[i], object_getRow(*aux), object_getColumn(*aux), buff);
                 
                 free(buff);
-                free(str);
+                free(sentence);
             }
             return OK;
         }
@@ -360,11 +389,11 @@ Status print_player(Interface *intrf, Player *pl){
 
 
 /*Prints the resources, weapons, objects, player and initial map at the beggining of the program*/
-Status initialize_intrf(Interface *intrf, int initial_map, Resources **r, Weapon **wp, Object **obj){
-    int i, j;
+Status initialize_intrf(Interface *intrf, int initial_map, Resources **r, Weapon **wp, Object **obj, Strings **sss){
+    int i;
     
     /* Error checking */
-    if(intrf == NULL || initial_map < 0){
+    if(intrf == NULL || initial_map < 0 || r == NULL || wp == NULL || obj == NULL || sss == NULL){
         printf("Error. Interface-F7-1.\n");
         exit(ERROR);
     }
@@ -374,6 +403,9 @@ Status initialize_intrf(Interface *intrf, int initial_map, Resources **r, Weapon
         rectangle_draw(intrf->rect_array[i]);
         win_clear(intrf->rect_array[i]);
     }
+    
+    /* Saving the strings to print in different languages */
+    strings = sss;
     
     /* Printing the resources */
     print_resources(intrf, r);
@@ -675,7 +707,8 @@ void* move_enemies(void *y){
         if(copymap->field[next_row-2][next_col-2] == player_getDisplay(pl) && enemy_getPhyStat(ene)==ALIVE){
             if(modify_resource(hp, -(enemy_getDamage(ene))) <= 0){
                 print_resources(intrf, r);
-                win_write_line_at(aux, copymap->n_rows / 2, copymap->n_cols / 2, "YOU ARE DEAD. END OF THE GAME");
+                win_clear(aux);
+                win_write_line_at(aux, copymap->n_rows / 2, copymap->n_cols / 2, strings_get_string_by_type(700, strings));
                 exit(EXIT_SUCCESS);
             }
             print_resources(intrf, r);

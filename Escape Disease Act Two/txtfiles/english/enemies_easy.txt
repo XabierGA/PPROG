@@ -1,0 +1,4 @@
+3
+Sacacorchos # 1030 400 1032 150000 2
+Rapidzombie & 1030 50 1032 70000 1
+Lanzasemen $ 1030 100 1032 300000 5

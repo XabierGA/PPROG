@@ -20,13 +20,13 @@
 
 struct termios initial;
 
-typedef struct {
+typedef struct{
   time_t initial; /* Initial time at which the function is first called */
   Interface  *intrf;    /* pointer to the interface where the clock is to be displayed */
 } clock_data;
 
 
-void _term_init() {
+void _term_init(){
 	struct termios new;	          /*a termios structure contains a set of attributes about 
 					  how the terminal scans and outputs data*/
 		
@@ -134,13 +134,13 @@ int main(){
     win_clear(itf->rect_array[0]);
     
     if(lang==ENGLISH){
-    	s = load_strings("txtfiles/strings_eng.txt");
+    	s = load_strings("txtfiles/english/strings_eng.txt");
     }
     else if(lang==SPANISH){
-    	s = load_strings("txtfiles/strings_spa.txt");
+    	s = load_strings("txtfiles/spanish/strings_spa.txt");
     }
     else if(lang==GALICIAN){
-    	s = load_strings("txtfiles/strings_gal.txt");
+    	s = load_strings("txtfiles/galician/strings_gal.txt");
     }
     else{
     	printf("Error. Game 3.\n");

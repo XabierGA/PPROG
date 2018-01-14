@@ -1,0 +1,219 @@
+107
+1
+--->Select the game mode by pressing a number<---
+2
+1.EASY
+3
+2.MEDIUM
+4
+3.HARD
+5
+4.LEGENDARY
+6
+5.BATTLEMODE
+7
+HAVE SELECTED EASY GAMEMODE
+11
+Welcome to our game! We're glad to show you how to play this game by the best way
+12
+we can think of, just by telling you the basics and then let you by yourself in the game.
+13
+First of all, there will be three different "modes" inside the game: battle mode,
+14
+mission mode and town mode. Let's begin with battle mode.
+15
+In battle mode, you will be fighting some zombies. You'll move with arrow keys,
+16
+swap between weapons with QE and shooting with WASD. Now try it out for a little bit.
+17
+If you forget this, don't worry, these instructions will appear in the
+18
+rectangle at the right.
+19
+When you are done with them, go to the G(Gate).
+20
+There are many different missions, so for each one you will see the instructions
+21
+on the rectangle on the right.
+22
+Finally, in the town mode, you'll just wander around the town,
+23
+so arrow keys just as in battle mode.
+30
+Push simultaneously -> and <- to win
+31
+YOU WON!!!
+32
+You lost...
+33
+Prepare to play Pong!!!
+34
+Time:
+40
+PRESS A KEY TO GUESS A LETTER (THE WORD IS CAPITALIZED)
+41
+NICEEE! THIS LETTER APPEARS!
+42
+YOU ARE DEAD, YOU LOST!
+43
+YOU WON, CONGRATULATIONS!
+100
+R E S O U R C E S
+101
+W E A P O N S
+102
+Name
+103
+GPW  DMG
+104
+I N V E N T O R Y
+105
+Amount  Incr
+700
+YOU ARE DEAD. END OF THE GAME.
+9991
+Press SPACEBAR to continue.
+9992
+Move with arrow keys.
+9993
+Shoot with WASD.
+9994
+Change weapon with QE.
+9995
+Use objects with 1, 2, ... 8.
+999
+Now that you know how to play, let's get started with the main game.
+1000
+Everything started a sunny and lovely day, in a far away land called "CIUDAD DEL VAL".
+1001
+This city was quiet and lovely until a great disaster came to the lives of all citizens.
+1002
+A mysterious man came to the city, this man was called Moberto Ramabini. Moberto's plan
+1003
+was to spread a disease around the city that was highly infectious and made all sick people
+1004
+act as zombies, the infected people repeated the same phrase all the time in a loop:
+1005
+SO FAR SO GOOD, SO FAR SO GOOD. If some of these "zombies" touch you, you may get infected
+1006
+and die.
+1007
+Fortunately, in our story there is also a hero, and that is you!! You are not affected
+1008
+by Ramabini's disease, so you are the chosen one to end up with this madness. Alvaro del
+1009
+Mal (the mayor of the town) gave you some stuff to start your mission, he is too busy
+1010
+investigating new ways to skip class without being fired. He is a teacher but he needs
+1011
+to keep a secret identity as mayor of "CIUDAD DEL VAL", he is like Superman and Clark
+1012
+Kent, that's why he doesn't care about his job as a teacher, it is only a fake identity,
+1013
+like Superman being a journalist, but this is another story. Well, the fact is that
+1014
+you are not alone here, kill all the zombies without mercy and complete all the
+1015
+missions to get cool stuff to kick Ramabini's ass!! Good luck!!
+1016
+Well, here are your first rivals, try to kill them without being injured!
+1017
+You did it pretty well, now continue your adventure, do not forget to use MEDICINES,
+1018
+FOOD or DRINKS if you need them!
+1019
+Now follow the path, there is a bonus level, follow the instructions and do your best!
+1020
+WELCOME to NOT NOT, a game for fast and smart people. You have to pass 10 screens. If
+1021
+you fail one you'll lose and you'll get less points, the fastest you do it the more
+1022
+items you get!
+1023
+Time to rest, just make sure your HUNGER, HEALTH and HYDRATION are good. The town hall
+1024
+is closed because Del Mal is teaching (this happen once every one or two years).
+1025
+Go to G when you are ready to continue.
+1026
+Defeat them!!
+1027
+Solve the Maze!!
+1028
+Go to the Town Hall. You can eat, drink or heal yourself if you need.
+1029
+DEL MAL-Hi there! I'm Alvaro del Mal. It is great to meet you formally. You are our hero!!
+1030
+Ramabini is now weaker thanks to you!! You have cleaned the North zone, but it was
+1031
+the easiest one!! Now I will drive you to the East, there wil be more monsters but
+1032
+I will give you cool stuff.
+1033
+GO GO GO GO!!
+1034
+Welcome to 21, press UP to get a number between 1 and 7, press DOWN if you want to
+1035
+quit with the amount you have got. Try to get 21 to get the best stuff!! If you are
+1036
+very greedy and you get more than 21 you won't get anything.
+1037
+Heal yourself and prepare for what is about to come!
+1038
+Defeat them, they are a bit stronger because Ramabini is getting closer!
+1039
+Follow the instructions and get a lot of items!
+1040
+Visit the Town Hall to see the mayor!!
+1041
+DEL MAL-Hi there, my friend!! You did it pretty well!! I have more adventures for you.
+1042
+You need to clean the last zone, this is the last time you will visit this wonderful
+1043
+town if you don't kill those last zombies! I have some presents for you. Good luck
+1044
+and defeat Ramabini!
+1045
+GO GO GO! I can feel Ramabini is somewhere near!
+1046
+Smash it!
+1047
+That classic game. This is a bonus level, have fun!
+1048
+You are almost there!
+1049
+The zombies have conquered the town! DEFEAT THEM! PROTECT THE CITY!
+1050
+RAMABINI-HEY THERE!! I AM RAMABINI MUAHAHAHA, and yes, as you thought I entered CIUDAD DEL
+1051
+VAL with the Primary Key! You don't have enough power to defeat me!
+1052
+(Ramabini dies in agony).
+1053
+???-Here I am to help! Oh wow, did you actually already killed him? Seem that I'm a bit
+1054
+late. I was looking for Del Mal but since I couldn't find him anywhere I came here without
+1055
+him. Nice to meet you, I'm Santini.
+1056
+DEL MAL-Oh, sorry for being late, I was, umm, thinking about a strategy to defeat Ramabini
+1057
+in the pub, but seems you didn't need a strategy. Well done. By the way, Santini, could
+1058
+you correct the 2nd assignment for me? Being a mayor is such a time consuming task.
+1059
+SANTINI-........... ¬¬
+1060
+Game created by WHILE 1 SQUAD:
+1061
+José Manuel Chacón (HISTORY AND GAME DESIGNER, AUTHOR OF SOME MINIGAMES , DEBUGGER)
+1062
+David Cabornero (AUTHOR OF SOME MINIGAMES, DESIGNER OF MAPS, DEBUGGER)
+1063
+Sergio Galán (MAIN DEBUGGER, DESIGNER OF DATA STRUCTURES AND IMPLEMENTATION)
+1064
+Alejandro Santorum (BOSS OF THE GROUP AND MAIN CODER)
+1065
+Special thanks to:
+1066
+Simone Santini (TEACHER, GREAT ADVISOR, BETTER PERSON)

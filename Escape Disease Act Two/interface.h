@@ -7,6 +7,7 @@
 #include "rectangle.h"
 #include "maps.h"
 #include "player.h"
+#include "strings.h"
 
 #include <stdio.h>
 #include <string.h>
@@ -74,7 +75,7 @@ Status print_player(Interface *intrf, Player *pl);
 
 
 /*Prints the resources, weapons, objects, player and initial map at the beggining of the program*/
-Status initialize_intrf(Interface *intrf, int initial_map, Resources **r, Weapon **wp, Object **obj);
+Status initialize_intrf(Interface *intrf, int initial_map, Resources **r, Weapon **wp, Object **obj, Strings **str);
 
 
 /*Function that allows the player to move*/

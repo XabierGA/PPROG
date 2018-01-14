@@ -211,8 +211,7 @@ Status use_object(Resources **r, Object *o){
         exit(ERROR);
     }
     if((o->amount) < 1){
-        printf("Error. Objects-F12-2.\n");
-        exit(ERROR);
+        return OK;
     }
     
     for(i=0, aux = r; *aux != NULL; aux++, i++){
@@ -226,7 +225,7 @@ Status use_object(Resources **r, Object *o){
         }
     }
     
-    printf("Error. Objects-F12-3.\n");
+    printf("Error. Objects-F12-2.\n");
     exit(ERROR);
 }
 
