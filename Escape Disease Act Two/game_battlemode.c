@@ -106,12 +106,12 @@ void game_init_battle(int lang){
     	s_battle = load_strings("txtfiles/galician/strings_gal.txt");
     }
     else{
-    	printf("Error. Easy 7.\n");
+    	printf("Error. Battle 7.\n");
     	exit(ERROR);
     }
     
     if(intrf_battle==NULL || r_battle==NULL || wp_battle==NULL || obj_battle==NULL || pl_battle==NULL || e_battle==NULL || s_battle==NULL ||n_ene_battle==-1){
-        printf("Error. Easy 8.\n");
+        printf("Error. Battle 8.\n");
         exit(ERROR);
     }
     
@@ -142,13 +142,14 @@ void read_space_battle(){
 }
 
 
-int battlemode_battle(int *ene_array, Maps *copymap){
+int battlemode_battle(int *ene_array, int map_id){
     shoot_stuff *stst=NULL;
     moveEne_stuff *mest=NULL;
     pthread_t pth_shoot, pth_moveEne;
     Enemy **ene=NULL, **econt;
     int c;
     rectangle *battle=NULL;
+    Maps *copymap=NULL;
     
     
     if(ene_array == NULL){
@@ -159,14 +160,17 @@ int battlemode_battle(int *ene_array, Maps *copymap){
         printf("Error. Main-F1-2.\n");
         exit(ERROR);  
     }
-    if(copymap == NULL){
-        printf("Error. Main-F1-3.\n");
+    
+    copymap = map_getCopy(intrf_battle->maps_array, map_id);
+    if(copymap==NULL){
+        printf("Error. Main-F1-4.\n");
         exit(ERROR);
     }
     
     battle = win_find_rectangle(RECT_BATTLE, intrf_battle->rect_array);
     if(battle==NULL){
         printf("Error. Main-F1-5.\n");
+        exit(ERROR);
     }
     
     ene = generate_arrayEnemies(e_battle, ene_array, n_ene_battle);
@@ -276,13 +280,75 @@ void game_battlemode(int lang){
     battle = win_find_rectangle(RECT_BATTLE, intrf_battle->rect_array);
     
     if(initialize_intrf(intrf_battle, 120, r_battle, wp_battle, obj_battle, s_battle) == FAILED){
-        printf("Error. Easy 8.\n");
+        printf("Error. Battle 1.\n");
         exit(ERROR);
     }
     win_write_line_at(battle, 18, get_mid_col_battle(battle, strlen(strings_get_string_by_type(8, s_battle))), strings_get_string_by_type(8, s_battle));
+    sleep(1);
     
     char* cont = NULL;
     cont = strings_get_string_by_type(9991, s_battle);
+    
+    /* PRINTEAR EL MAPA CON TODAS LAS ESTADÍSTIVCAS DE LOS BICHOS MIENTRAS SE CUENTA LA MIERDA EN EL OTRO RECTANGULO */
+    
+    win_write_line_at(story, 2, get_mid_col_battle(story, strlen(strings_get_string_by_type(500, s_battle))), strings_get_string_by_type(500, s_battle));
+    win_write_line_at(story, 3, 3, strings_get_string_by_type(501, s_battle));
+    win_write_line_at(story, 4, 3, strings_get_string_by_type(502, s_battle));
+    win_write_line_at(story, 5, 3, strings_get_string_by_type(503, s_battle));
+    win_write_line_at(story, 6, 3, strings_get_string_by_type(504, s_battle));
+    win_write_line_at(story, 7, 3, strings_get_string_by_type(505, s_battle));
+    win_write_line_slow_at(info, 2, 3, strings_get_string_by_type(9992, s_battle));
+    win_write_line_slow_at(info, 3, 3, strings_get_string_by_type(9993, s_battle));
+    win_write_line_slow_at(info, 4, 3, strings_get_string_by_type(9994, s_battle));
+    win_write_line_slow_at(info, 5, 3, strings_get_string_by_type(9996, s_battle));
+    win_write_line_at(story, 8, 3, strings_get_string_by_type(506, s_battle));
+    win_write_line_slow_at(story, 11, get_mid_col_battle(story, strlen(cont)), cont);
+    read_space_battle();
+    
+    win_clear(battle);
+    win_clear(story);
+    
+    Resources *hp=NULL;
+    char *sentence=NULL;
+    int *enemies=NULL;
+    enemies = (int *) malloc(n_ene_battle * sizeof(int));
+    if(enemies==NULL){
+        printf("Error. Battle 2.\n");
+        exit(ERROR);
+    }
+    
+    hp = resources_getResource(r_battle, MEDICINE);
+    
+    sentence = strings_get_string_by_type(507, s_battle);
+    int k;
+    for(k=1; 1==1; k++){
+        enemies[0] = k;
+        enemies[1] = floor(k/2);
+        enemies[2] = floor(k/3);
+        
+        char *n_round = (char *) malloc(sizeof(int));
+        char *auxiliar = (char *)malloc(strlen(sentence) * sizeof(char));
+        strcpy(auxiliar, sentence);
+        sprintf(n_round, " %d", k);
+        strcat(auxiliar, n_round);
+        win_write_line_at(story, get_mid_row_battle(story), get_mid_col_battle(story, strlen(auxiliar)), auxiliar);
+        
+        print_map(intrf_battle, 300);
+        player_setLocation(pl_battle, 35, 92);
+        print_player(intrf_battle, pl_battle);
+        if(battlemode_battle(enemies, 300) != DOOR){
+            free(n_round);
+            free(auxiliar);
+            break;
+        }
+        modify_resource(hp, 100000);
+        print_resources(intrf_battle, r_battle);
+        win_clear(story);
+        free(auxiliar);
+        free(n_round);
+    }
+    
+    free(enemies);
     
     tcsetattr(fileno(stdin), TCSANOW, &initial_battle);
     return;

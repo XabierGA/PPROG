@@ -1,4 +1,4 @@
-111
+120
 1
 --->Select the game mode by pressing a number<---
 2
@@ -73,6 +73,22 @@ GPW  DMG
 I N V E N T O R Y
 105
 Amount  Incr
+500
+Welcome to the battle gamemode!
+501
+Here your only goal is to survive as much as possible.
+502
+You've got infinite gunpowder and your hydration/hunger doesn't decrease.
+503
+The number of enemies to fight will be increased each round.
+504
+At the end of each round your HP will be restored.
+505
+The controls are the same as in the story mode, but you can check them there -->
+506
+And last but not least, good luck and have fun!
+507
+ROUND:
 700
 YOU ARE DEAD. END OF THE GAME.
 9991
@@ -84,7 +100,9 @@ Shoot with WASD.
 9994
 Change weapon with QE.
 9995
-Use objects with 1...8.
+Use objects with 1,...,8
+9996
+Use objects with 1,...,6
 999
 Now that you know how to play, let's get started with the main game.
 1000
