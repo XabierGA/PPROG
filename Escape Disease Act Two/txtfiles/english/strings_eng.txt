@@ -1,4 +1,4 @@
-108
+111
 1
 --->Select the game mode by pressing a number<---
 2
@@ -13,6 +13,8 @@
 5.BATTLEMODE
 7
 EASY GAMEMODE HAS BEEN SELECTED
+8
+BATTLE GAMEMODE HAS BEEN SELECTED
 11
 Welcome to our game! We're glad to show you how to play this game by the best way
 12

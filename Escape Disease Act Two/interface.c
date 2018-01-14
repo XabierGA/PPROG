@@ -266,7 +266,9 @@ Status print_objects(Interface *intrf, Object **obj){
                 sprintf(sentence, ":    %d     %d", object_getAmount(*aux), object_getValue(*aux));
                 strcat(buff, sentence);
                 
+                pthread_mutex_lock(&mutex);
                 win_write_line_at(intrf->rect_array[i], object_getRow(*aux), object_getColumn(*aux), buff);
+                pthread_mutex_unlock(&mutex);
                 
                 free(buff);
                 free(sentence);

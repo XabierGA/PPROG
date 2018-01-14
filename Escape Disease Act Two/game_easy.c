@@ -73,15 +73,15 @@ int read_key_easy(){
     return choice;
 }
 
-int get_mid_col(rectangle* r, int len){
+int get_mid_col_easy(rectangle* r, int len){
     return ((r->last_col-r->ini_col)/2)-(len/2);
 }
 
-int get_mid_row(rectangle* r){
+int get_mid_row_easy(rectangle* r){
     return ((r->last_row-r->ini_row)/2);
 }
 
-void game_init(int lang){
+void game_init_easy(int lang){
     
     intrf = create_intrf("txtfiles/rectangles.txt", "txtfiles/maps.txt");
     
@@ -134,7 +134,7 @@ int dir_conv_easy(int d) {
     return HERE;
 }
 
-void read_space(){
+void read_space_easy(){
     char c = 0;
     while(1){
         c = read_key_easy();
@@ -333,7 +333,7 @@ int battlemode_easy(int *ene_array, Maps *copymap){
 void game_easy(int lang){
     srand(time(NULL));
     
-    game_init(lang);
+    game_init_easy(lang);
     
     _term_init_easy();
     
@@ -349,7 +349,7 @@ void game_easy(int lang){
         printf("Error. Easy 8.\n");
         exit(ERROR);
     }
-    win_write_line_at(battle, 18, 26, strings_get_string_by_type(7, s));
+    win_write_line_at(battle, 18, get_mid_col_easy(battle, strlen(strings_get_string_by_type(7, s))), strings_get_string_by_type(7, s));
     
     
     /* TUTORIAL */
@@ -368,12 +368,12 @@ void game_easy(int lang){
     win_write_line_slow_at(story, 9, 3, strings_get_string_by_type(18, s));
     win_write_line_slow_at(story, 10, 3, strings_get_string_by_type(19, s));
     cont = strings_get_string_by_type(9991, s);
-    win_write_line_slow_at(story, 11, get_mid_col(story, strlen(cont)), cont);
+    win_write_line_slow_at(story, 11, get_mid_col_easy(story, strlen(cont)), cont);
     win_write_line_slow_at(info, 2, 3, strings_get_string_by_type(9992, s));
     win_write_line_slow_at(info, 3, 3, strings_get_string_by_type(9993, s));
     win_write_line_slow_at(info, 4, 3, strings_get_string_by_type(9994, s));
     win_write_line_slow_at(info, 5, 3, strings_get_string_by_type(9995, s));
-    read_space();
+    read_space_easy();
     print_map(intrf, 300);
     print_player(intrf, pl);
     
@@ -389,22 +389,22 @@ void game_easy(int lang){
     win_clear(info);
     win_write_line_slow_at(story, 2, 3, strings_get_string_by_type(20, s));
     win_write_line_slow_at(story, 3, 3, strings_get_string_by_type(21, s));
-    win_write_line_slow_at(story, 4, get_mid_col(story, strlen(cont)), cont);
-    read_space();
+    win_write_line_slow_at(story, 4, get_mid_col_easy(story, strlen(cont)), cont);
+    read_space_easy();
     win_clear(story);
     win_clear(info);
     win_write_line_slow_at(story, 2, 3, strings_get_string_by_type(22, s));
     win_write_line_slow_at(story, 3, 3, strings_get_string_by_type(23, s));
     win_write_line_slow_at(story, 4, 3, strings_get_string_by_type(24, s));
-    win_write_line_slow_at(story, 5, get_mid_col(story, strlen(cont)), cont);
+    win_write_line_slow_at(story, 5, get_mid_col_easy(story, strlen(cont)), cont);
     win_write_line_slow_at(info, 2, 3, strings_get_string_by_type(9992, s));
     win_write_line_slow_at(info, 3, 3, strings_get_string_by_type(9995, s));
-    read_space();
+    read_space_easy();
     win_clear(story);
     win_clear(info);
     win_write_line_slow_at(story, 2, 3, strings_get_string_by_type(999, s));
-    win_write_line_slow_at(story, 3, get_mid_col(story, strlen(cont)), cont);
-    read_space();
+    win_write_line_slow_at(story, 3, get_mid_col_easy(story, strlen(cont)), cont);
+    read_space_easy();
     win_clear(story);
     win_clear(info);
     /* STORY STARTS */
@@ -415,8 +415,8 @@ void game_easy(int lang){
     win_write_line_slow_at(story, 6, 3, strings_get_string_by_type(1004, s));
     win_write_line_slow_at(story, 7, 3, strings_get_string_by_type(1005, s));
     win_write_line_slow_at(story, 8, 3, strings_get_string_by_type(1006, s));
-    win_write_line_slow_at(story, 9, get_mid_col(story, strlen(cont)), cont);
-    read_space();
+    win_write_line_slow_at(story, 9, get_mid_col_easy(story, strlen(cont)), cont);
+    read_space_easy();
     win_clear(story);
     win_write_line_slow_at(story, 2, 3, strings_get_string_by_type(1007, s));
     win_write_line_slow_at(story, 3, 3, strings_get_string_by_type(1008, s));
@@ -427,8 +427,8 @@ void game_easy(int lang){
     win_write_line_slow_at(story, 8, 3, strings_get_string_by_type(1013, s));
     win_write_line_slow_at(story, 9, 3, strings_get_string_by_type(1014, s));
     win_write_line_slow_at(story, 10, 3, strings_get_string_by_type(1015, s));
-    win_write_line_slow_at(story, 11, get_mid_col(story, strlen(cont)), cont);
-    read_space();
+    win_write_line_slow_at(story, 11, get_mid_col_easy(story, strlen(cont)), cont);
+    read_space_easy();
     
     tcsetattr(fileno(stdin), TCSANOW, &initial_easy);
     return;
