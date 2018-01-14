@@ -144,7 +144,7 @@ int hangman(Interface *intrf, Strings **s, int lang){
     
     /*---------------Once we´ve got the word, the game STARTS ------------------*/
     
-    win_write_line_at(rectStory, 5, 5, strings_get_string_by_type(40, strs)); /* <------ IT HAS TO BE CHANGED */
+    win_write_line_at(rectStory, 5, 5, strings_get_string_by_type(40, strs)); /* Press a key to try to guess */
     
     
     while(1){
@@ -158,7 +158,7 @@ int hangman(Interface *intrf, Strings **s, int lang){
                 col = conv(i);
                 win_write_char_at(rectBattle, 17, col, word[i]);
                 found[i] = word[i];
-                win_write_line_at(rectStory, 6, 5, strings_get_string_by_type(41, strs)); /* <-------- IT HAS TO BE CHANGED */
+                win_write_line_at(rectStory, 6, 5, strings_get_string_by_type(41, strs)); /* Nice! This letter appears! */
             }
         }
         
@@ -167,13 +167,13 @@ int hangman(Interface *intrf, Strings **s, int lang){
             change_map(found, deaths, intrf, rectBattle);
             if(deaths==7){
                 win_clear(rectStory);
-                win_write_line_at(rectStory, 5, 5, strings_get_string_by_type(42, strs)); /* <-------- IT HAS TO BE CHANGED */
+                win_write_line_at(rectStory, 5, 5, strings_get_string_by_type(42, strs)); /* You have consumed all your lives*/
                 break;
             }
         }
         else if(correct==8){
             win_clear(rectStory);
-            win_write_line_at(rectStory, 5, 5, strings_get_string_by_type(43, strs)); /* <-------- IT HAS TO BE CHANGED */
+            win_write_line_at(rectStory, 5, 5, strings_get_string_by_type(43, strs)); /* You won! Congratulations*/
             break;
         }
     }
@@ -777,7 +777,7 @@ int main(Interface *intrf, Strings **strs, int lang){
     
     _term_init();
     
-    srand(time(NULL)); /* ----------> CABORNERO, YOU HAVE TO CHANGE THE SEED !!!! <------------------ */
+    srand(time(NULL));
     
     if(intrf == NULL){
         printf("Increasing_Bar Error 1\n");

@@ -1,9 +1,9 @@
 8
-Bandages 1020 30 5 6 5
-Fruit 1021 20 5 7 5
-Water 1022 20 5 8 5
-Bullets 1023 30 5 9 5
-Medical_kit 1020 60 2 10 5
-Caviar 1021 50 2 11 5
-Alcohol 1022 50 2 12 5
-Misil 1023 100 2 13 5
+1.Bandages 1020 30 5 6 5
+2.Fruit 1021 20 5 7 5
+3.Water 1022 20 5 8 5
+4.Bullets 1023 30 5 9 5
+5.Med_kit 1020 60 2 10 5
+6.Caviar 1021 50 2 11 5
+7.Alcohol 1022 50 2 12 5
+8.Misil 1023 100 2 13 5

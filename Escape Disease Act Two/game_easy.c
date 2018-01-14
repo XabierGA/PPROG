@@ -121,6 +121,27 @@ void game_init_easy(int lang){
     
 }
 
+int walking_simulator_easy(int map_id){
+    int c = 0;
+    Maps *copymap=NULL;
+    
+    copymap = map_getCopy(intrf->maps_array, map_id);
+    if(copymap==NULL){
+        printf("Error. Walking_simulator_easy 1.\n");
+        exit(ERROR);
+    }
+    
+    while(1){
+        c = read_key_easy();
+        
+        if(c < 0){
+            if(move(intrf, copymap, pl, -c) == DOOR){
+                return DOOR;
+            }
+        }
+        else if(c == 'o') return 0;
+    }
+}
 
 int dir_conv_easy(int d) {
     if (d == 'w')
@@ -143,6 +164,19 @@ void read_space_easy(){
         }
         return;
     }
+}
+
+void battle_info_easy(rectangle *info){
+    win_write_line_slow_at(info, 2, 3, strings_get_string_by_type(9992, s));
+    win_write_line_slow_at(info, 3, 3, strings_get_string_by_type(9993, s));
+    win_write_line_slow_at(info, 4, 3, strings_get_string_by_type(9994, s));
+    win_write_line_slow_at(info, 5, 3, strings_get_string_by_type(9995, s));
+    return;
+}
+
+void town_info_easy(rectangle *info){
+    win_write_line_slow_at(info, 2, 3, strings_get_string_by_type(9992, s));
+    win_write_line_slow_at(info, 3, 3, strings_get_string_by_type(9995, s));
 }
 
 int battlemode_easy(int *ene_array, Maps *copymap){
@@ -353,7 +387,7 @@ void game_easy(int lang){
     
     
     /* TUTORIAL */
-    int enemies[3] = {1,1,1};
+    int enemies[7] = {1,1,1,1,0,0,0};
     char* cont = NULL;
     
     story = win_find_rectangle(RECT_STORY, intrf->rect_array);
@@ -369,10 +403,7 @@ void game_easy(int lang){
     win_write_line_slow_at(story, 10, 3, strings_get_string_by_type(19, s));
     cont = strings_get_string_by_type(9991, s);
     win_write_line_slow_at(story, 11, get_mid_col_easy(story, strlen(cont)), cont);
-    win_write_line_slow_at(info, 2, 3, strings_get_string_by_type(9992, s));
-    win_write_line_slow_at(info, 3, 3, strings_get_string_by_type(9993, s));
-    win_write_line_slow_at(info, 4, 3, strings_get_string_by_type(9994, s));
-    win_write_line_slow_at(info, 5, 3, strings_get_string_by_type(9995, s));
+    battle_info_easy(info);
     read_space_easy();
     print_map(intrf, 300);
     print_player(intrf, pl);
@@ -397,8 +428,7 @@ void game_easy(int lang){
     win_write_line_slow_at(story, 3, 3, strings_get_string_by_type(23, s));
     win_write_line_slow_at(story, 4, 3, strings_get_string_by_type(24, s));
     win_write_line_slow_at(story, 5, get_mid_col_easy(story, strlen(cont)), cont);
-    win_write_line_slow_at(info, 2, 3, strings_get_string_by_type(9992, s));
-    win_write_line_slow_at(info, 3, 3, strings_get_string_by_type(9995, s));
+    town_info_easy(info);
     read_space_easy();
     win_clear(story);
     win_clear(info);
@@ -429,6 +459,41 @@ void game_easy(int lang){
     win_write_line_slow_at(story, 10, 3, strings_get_string_by_type(1015, s));
     win_write_line_slow_at(story, 11, get_mid_col_easy(story, strlen(cont)), cont);
     read_space_easy();
+    win_clear(battle);
+    win_clear(story);
+    /* FIRST BATTLE */
+    win_write_line_slow_at(story, 2, 3, strings_get_string_by_type(1016, s));
+    battle_info_easy(info);
+    
+    print_map(intrf, 31);
+    
+    Maps *copymap2=NULL;
+    int enemies2[7] = {3,1,1,1,0,0,0};
+    copymap2 = map_getCopy(intrf->maps_array, 31);
+    if(battlemode_easy(enemies2, copymap2) == 0){
+        tcsetattr(fileno(stdin), TCSANOW, &initial_easy);
+        return;
+    }
+    
+    
+    win_clear(battle);
+    win_clear(story);
+    win_clear(info);
+    
+    win_write_line_slow_at(story, 2, 3, strings_get_string_by_type(1017, s));
+    win_write_line_slow_at(story, 3, 3, strings_get_string_by_type(1018, s));
+    win_write_line_slow_at(story, 4, 3, strings_get_string_by_type(1019, s));
+    win_write_line_slow_at(story, 11, get_mid_col_easy(story, strlen(cont)), cont);
+    town_info_easy(info);
+    read_space_easy();
+    print_map(intrf, 11);
+    player_setLocation(pl, 31, 2);
+    print_player(intrf, pl);
+    if(walking_simulator_easy(11) == 0){
+        tcsetattr(fileno(stdin), TCSANOW, &initial_easy);
+        return;
+    }
+    
     
     tcsetattr(fileno(stdin), TCSANOW, &initial_easy);
     return;

@@ -321,10 +321,14 @@ void game_battlemode(int lang){
     
     sentence = strings_get_string_by_type(507, s_battle);
     int k;
-    for(k=1; 1==1; k++){
+    for(k=1; 1; k++){
         enemies[0] = k;
-        enemies[1] = floor(k/2);
-        enemies[2] = floor(k/3);
+        enemies[1] = ceil(k/3);
+        enemies[2] = ceil(k/3);
+        enemies[3] = ceil(k/4);
+        enemies[4] = floor(k/5);
+        enemies[5] = floor(k/6);
+        enemies[6] = floor(k/8);
         
         char *n_round = (char *) malloc(sizeof(int));
         char *auxiliar = (char *)malloc(strlen(sentence) * sizeof(char));
