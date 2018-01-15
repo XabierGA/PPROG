@@ -13,3 +13,5 @@
 #include <termios.h>
 
 int hangman(Interface *intrf, Strings **s, int lang);
+
+int Not_Not(Interface *intrf);

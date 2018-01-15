@@ -239,6 +239,11 @@ int battlemode_easy(int *ene_array, Maps *copymap){
             tcsetattr(fileno(stdin), TCSANOW, &initial_easy);
             break;
         }
+        if(c == 'p'){
+            kill_all_enemies(ene);
+            destroy_enemies(ene);
+            return DOOR;
+        }
         
         
         else if(c < 0){ /* MOVING */
@@ -465,7 +470,9 @@ void game_easy(int lang){
     win_write_line_slow_at(story, 2, 3, strings_get_string_by_type(1016, s));
     battle_info_easy(info);
     
+    player_setLocation(pl, 31, 2);
     print_map(intrf, 31);
+    print_player(intrf, pl);
     
     Maps *copymap2=NULL;
     int enemies2[7] = {3,1,1,1,0,0,0};
@@ -480,6 +487,9 @@ void game_easy(int lang){
     win_clear(story);
     win_clear(info);
     
+    change_own(wp[1]); /* Shitty_gun AVAILABLE */
+    print_weapons(intrf, wp);
+    
     win_write_line_slow_at(story, 2, 3, strings_get_string_by_type(1017, s));
     win_write_line_slow_at(story, 3, 3, strings_get_string_by_type(1018, s));
     win_write_line_slow_at(story, 4, 3, strings_get_string_by_type(1019, s));
@@ -493,6 +503,62 @@ void game_easy(int lang){
         tcsetattr(fileno(stdin), TCSANOW, &initial_easy);
         return;
     }
+    
+    win_clear(battle);
+    win_clear(story);
+    win_clear(info);
+    win_write_line_slow_at(story, 2, 3, strings_get_string_by_type(1020, s));
+    win_write_line_slow_at(story, 3, 3, strings_get_string_by_type(1021, s));
+    win_write_line_slow_at(story, 4, 3, strings_get_string_by_type(1022, s));
+    win_write_line_slow_at(info, 2, 3, strings_get_string_by_type(9992, s));
+    
+    int score;
+    
+    score = Not_Not(intrf);
+    if(score < 1){
+        object_changeAmount(obj[0], 1); /* +One bandage */
+        object_changeAmount(obj[1], 2); /* +Two fruits */
+        object_changeAmount(obj[2], 3); /* +Three water */
+        object_changeAmount(obj[3], 2); /* +Two bullets */
+    }else if(score <3){
+        object_changeAmount(obj[0], 2); /* +Two bandages */
+        object_changeAmount(obj[1], 3); /* +Three fruits */
+        object_changeAmount(obj[2], 4); /* +Four water */
+        object_changeAmount(obj[3], 4); /* +Four bullets */
+    }else if (score < 5){
+        object_changeAmount(obj[0], 4); /* +Four bandages */
+        object_changeAmount(obj[1], 3); /* +Three fruits */
+        object_changeAmount(obj[3], 6); /* +Six bullets */
+        object_changeAmount(obj[2], 6); /* +Six water */ 
+        object_changeAmount(obj[6], 6); /* +Six alcohol */
+    }else if (score < 8){
+        object_changeAmount(obj[0], 1); /* +One bandage */
+        object_changeAmount(obj[1], 2); /* +Two fruits */
+        object_changeAmount(obj[4], 4); /* +Four medical kits */
+        object_changeAmount(obj[3], 8); /* +Eight bullets */
+        object_changeAmount(obj[2], 8); /* +Eight water */
+        object_changeAmount(obj[6], 8); /* +Eight alcohol */
+    }else if(score < 10){
+        object_changeAmount(obj[0], 2); /* +Two bandages */
+        object_changeAmount(obj[1], 3); /* +Three fruits */
+        object_changeAmount(obj[4], 4); /* +Four medical kits */
+        object_changeAmount(obj[3], 8); /* +Eight bullets */
+        object_changeAmount(obj[2], 8); /* +Eight water */
+        object_changeAmount(obj[6], 8); /* +Eight alcohol */
+        object_changeAmount(obj[5], 3); /* +Three caviar */
+        object_changeAmount(obj[7], 5); /* +Five missiles */
+        
+    }else if (score >= 10){
+        object_changeAmount(obj[0], 2); /* +Two bandages */
+        object_changeAmount(obj[1], 3); /* +Three fruits */
+        object_changeAmount(obj[4], 4); /* +Four medical kits */
+        object_changeAmount(obj[3], 8); /* +Eight bullets */
+        object_changeAmount(obj[2], 8); /* +Eight water */
+        object_changeAmount(obj[6], 8); /* +Eight alcohol */
+        object_changeAmount(obj[5], 8); /* +Eight caviar */
+        object_changeAmount(obj[7], 8); /* +Eight missiles */
+    }
+    print_objects(intrf, obj);
     
     
     tcsetattr(fileno(stdin), TCSANOW, &initial_easy);

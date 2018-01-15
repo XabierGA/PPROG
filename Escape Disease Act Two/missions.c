@@ -116,14 +116,14 @@ int hangman(Interface *intrf, Strings **s, int lang){
     /*--------------------------------------------------------------*/
     
     /* Getting the number of words in the file */
-    fgets(buff, HM_MAX, f);
+    fgets(buff, HM_TAM, f);
     sscanf(buff, "%d", &num_words);
     
     random_n = rand_num(1, num_words);
     
     /*We got the random number that will choose the random word, and we search for it*/
     for(i=1; i<random_n; i++){
-        fgets(buff, HM_TAM, f_in);
+        fgets(buff, HM_TAM, f);
         sscanf(buff, "%s", word);
     }
     fgets(buff, HM_TAM, f);
@@ -144,7 +144,7 @@ int hangman(Interface *intrf, Strings **s, int lang){
     
     /*---------------Once we´ve got the word, the game STARTS ------------------*/
     
-    win_write_line_at(rectStory, 5, 5, strings_get_string_by_type(40, strs)); /* Press a key to try to guess */
+    win_write_line_at(rectStory, 5, 5, strings_get_string_by_type(40, s)); /* Press a key to try to guess */
     
     
     while(1){
@@ -158,7 +158,7 @@ int hangman(Interface *intrf, Strings **s, int lang){
                 col = conv(i);
                 win_write_char_at(rectBattle, 17, col, word[i]);
                 found[i] = word[i];
-                win_write_line_at(rectStory, 6, 5, strings_get_string_by_type(41, strs)); /* Nice! This letter appears! */
+                win_write_line_at(rectStory, 6, 5, strings_get_string_by_type(41, s)); /* Nice! This letter appears! */
             }
         }
         
@@ -167,13 +167,13 @@ int hangman(Interface *intrf, Strings **s, int lang){
             change_map(found, deaths, intrf, rectBattle);
             if(deaths==7){
                 win_clear(rectStory);
-                win_write_line_at(rectStory, 5, 5, strings_get_string_by_type(42, strs)); /* You have consumed all your lives*/
+                win_write_line_at(rectStory, 5, 5, strings_get_string_by_type(42, s)); /* You have consumed all your lives*/
                 break;
             }
         }
         else if(correct==8){
             win_clear(rectStory);
-            win_write_line_at(rectStory, 5, 5, strings_get_string_by_type(43, strs)); /* You won! Congratulations*/
+            win_write_line_at(rectStory, 5, 5, strings_get_string_by_type(43, s)); /* You won! Congratulations*/
             break;
         }
     }
@@ -209,9 +209,12 @@ int Not_Not(Interface *intrf){
     
     srand(time(NULL));
 
-    if(intrf == NULL) exit(12345);
+    if(intrf == NULL){
+        printf("Error. NotNot-1.\n");
+        exit(ERROR);
+    }
     
-    print_map (intrf, 13);
+    print_map (intrf, 113);
     sleep(2);
     
     
@@ -319,6 +322,10 @@ int g_21(Interface *intrf){
     int c, score=0;
     int aleat = 0;
     
+    if(intrf == NULL){
+        printf("Error. 21-1\n");
+        exit(ERROR);
+    }
     
     srand(time(NULL));
     if(intrf == NULL) exit(12345);
@@ -516,8 +523,6 @@ int Increasing_Bar(Interface *intrf, Strings **strs, int lang){
     pthread_t db;
     delete_stuff *delst=NULL;
     
-    _term_init();
-    
     if(intrf == NULL){
         printf("Increasing_Bar Error 1\n");
         return -1;
@@ -573,15 +578,12 @@ int Increasing_Bar(Interface *intrf, Strings **strs, int lang){
     }
     
     if(percent_ib<91){
-        win_write_line_at(intrf->rect_array[0], 14, 30, strings_get_string_by_type(31, strs););
+        win_write_line_at(intrf->rect_array[0], 14, 30, strings_get_string_by_type(31, strs));
     }
     else{
-        win_write_line_at(intrf->rect_array[0], 14, 30, strings_get_string_by_type(32, strs););
+        win_write_line_at(intrf->rect_array[0], 14, 30, strings_get_string_by_type(32, strs));
     }
     sleep(2);
-    tcsetattr(fileno(stdin), TCSANOW, &initial);	/*We now restore the settings we back-up'd 
-							  so that the termial behaves normally when 
-							  the program ends */
 							  
     destroy_intrf(intrf);
     
@@ -729,7 +731,7 @@ void* move_bars(void* stuff){
     print_bars(bar->intrf, -UP);
     
     while(superflag == 0){
-        c = read_key();
+        c = read_key_mission();
         if((row_bar == 6 && c == -UP )|| (row_bar + 3 == 34 && c == -DOWN)){
             continue;
         }
@@ -767,7 +769,7 @@ int change_dir(int dir){
 }
 
 
-int main(Interface *intrf, Strings **strs, int lang){
+int pong(Interface *intrf, Strings **strs, int lang){
     int way, dir1, dir2, cicle=0; 
     Ball *ball;
     struct timespec time1, time2;
@@ -775,7 +777,6 @@ int main(Interface *intrf, Strings **strs, int lang){
     bar_stuff *stuff=NULL;
     char *buffer;
     
-    _term_init();
     
     srand(time(NULL));
     
@@ -813,6 +814,7 @@ int main(Interface *intrf, Strings **strs, int lang){
     dir1 = LEFT;
     dir2 = UP;
     
+    int time_n;
     while(1){
         clock_gettime(CLOCK_REALTIME, &time2);
         if((time2.tv_sec-time1.tv_sec) > 60){
@@ -820,7 +822,8 @@ int main(Interface *intrf, Strings **strs, int lang){
             break;
         }
         
-        itoa(time2.tv_sec-time1.tv_sec,buffer,10);
+        time_n = time2.tv_sec-time1.tv_sec;
+        sprintf(buffer, "%d", time_n);
         win_write_line_at(intrf->rect_array[0], 5, 30, strings_get_string_by_type(34, strs));
         win_write_line_at(intrf->rect_array[0], 5, 40, buffer);
         
@@ -852,10 +855,6 @@ int main(Interface *intrf, Strings **strs, int lang){
         win_write_line_at(intrf->rect_array[0], 14, 30, strings_get_string_by_type(32, strs));
     }
     sleep(2);
-    
-    tcsetattr(fileno(stdin), TCSANOW, &initial);	/*We now restore the settings we back-up'd 
-							  so that the termial behaves normally when 
-							  the program ends */
 							  
     destroy_intrf(intrf);
     

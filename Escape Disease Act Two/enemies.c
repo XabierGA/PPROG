@@ -376,3 +376,19 @@ Enemy* getEnemyAt(Enemy **ene, int row, int col){
     printf("Error. Enemies-F20-1.\n");
     exit(ERROR);
 }
+
+
+int kill_all_enemies(Enemy **ene){
+    Enemy **cont=NULL;
+    
+    if(ene==NULL){
+        printf("Error. Enemies-F21-1.\n");
+        exit(ERROR);
+    }
+    
+    for(cont = ene; (*cont)!=NULL; cont++){
+        (*cont)->physical_status = DEAD;
+    }
+    
+    return 0;
+}

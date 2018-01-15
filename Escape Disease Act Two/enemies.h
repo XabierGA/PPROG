@@ -100,4 +100,6 @@ Boolean isEnemyDisplay(char c);
 
 Enemy* getEnemyAt(Enemy **ene, int row, int col);
 
+int kill_all_enemies(Enemy **ene);
+
 #endif /* ENEMIES_H */
