@@ -514,7 +514,7 @@ void game_easy(int lang){
     
     int score;
     
-    score = Not_Not(intrf);
+    score = Not_Not(intrf, s, lang);
     if(score < 1){
         object_changeAmount(obj[0], 1); /* +One bandage */
         object_changeAmount(obj[1], 2); /* +Two fruits */

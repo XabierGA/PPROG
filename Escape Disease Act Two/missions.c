@@ -5,6 +5,13 @@
 #define HM_TAM 100
 #define TENTOTHENINE 1000000000
 
+int get_mid_col_missions(rectangle* r, int len){
+    return ((r->last_col-r->ini_col)/2)-(len/2);
+}
+
+int get_mid_row_missions(rectangle* r){
+    return ((r->last_row-r->ini_row)/2);
+}
 
 int read_key_mission(){
     char choice;
@@ -201,11 +208,12 @@ int aleat_num(int inf, int sup) {
 
 }
 
-int Not_Not(Interface *intrf){
+int Not_Not(Interface *intrf, Strings **s, int lang){
     int c, i, score;
     int aleat = 0;
     struct timespec t_inicio, t_fin, aux;
     double total;
+    rectangle *battle=NULL;
     
     srand(time(NULL));
 
@@ -214,96 +222,113 @@ int Not_Not(Interface *intrf){
         exit(ERROR);
     }
     
-    print_map (intrf, 113);
+    battle = win_find_rectangle(RECT_BATTLE, intrf->rect_array);
+    if(battle==NULL){
+        printf("Error. NotNot-2.\n");
+    }
+    
+    win_clear(battle);
+    
+    if(lang==ENGLISH){
+        print_map (intrf, 113);
+    }
+    else if(lang==SPANISH || lang==GALICIAN){
+        win_write_line_slow_at(battle, get_mid_row_missions(battle), get_mid_col_missions(battle, strlen(strings_get_string_by_type(2012, s))), strings_get_string_by_type(2012, s));
+        win_write_line_slow_at(battle, get_mid_row_missions(battle)+2, get_mid_col_missions(battle, strlen(strings_get_string_by_type(2013, s))), strings_get_string_by_type(2013, s));
+    }
     sleep(2);
     
     
-    sleep(2);
     clock_gettime(CLOCK_REALTIME, &t_inicio);
     
     for (i = 0; i<10 ;i++){
-        
+        win_clear(battle);
         
         aleat = aleat_num(1, 11);
         
-        print_map(intrf, aleat+100);
+        if(lang==ENGLISH){
+            print_map(intrf, aleat+100);
+        }
+        else if(lang==SPANISH||lang==GALICIAN){
+            win_write_line_slow_at(battle, get_mid_row_missions(battle), get_mid_col_missions(battle, strlen(strings_get_string_by_type(2000+aleat, s))), strings_get_string_by_type(2000+aleat, s));
+        }
         
         if (aleat == 1){
             c = read_key_mission();
             if (c==-RIGHT){
                 puntos_NotNot++;
             }else{
-                break;
+                continue;
             } 
         }else if (aleat == 2){
             c = read_key_mission();
             if (c==-LEFT){
                 puntos_NotNot++;
             }else{
-                break;
+                continue;
             } 
         }else if (aleat == 3){
             c = read_key_mission();
             if (c==-RIGHT||c==-UP||c==-DOWN){
                 puntos_NotNot++;
             }else{
-                break;
+                continue;
             } 
         }else if (aleat == 4){
             c = read_key_mission();
             if (c==-LEFT||c==-UP||c==-DOWN){
                 puntos_NotNot++;
             }else{
-                break;
+                continue;
             } 
         }else if (aleat == 5){
             c = read_key_mission();
             if (c==-RIGHT){
                 puntos_NotNot ++;
             }else{
-                break;
+                continue;
             }
         }else if (aleat == 6){
             c = read_key_mission();
             if (c==-LEFT){
                 puntos_NotNot ++;
             }else{
-                break;
+                continue;
             }
         }else if (aleat == 7){
            c = read_key_mission();
            if (c==-RIGHT||c==-UP){
                 puntos_NotNot ++;
             }else{
-                break;
+                continue;
             }
         }else if (aleat == 8){
            c = read_key_mission();
            if (c==-UP){
                 puntos_NotNot ++;
             }else{
-                break;
+                continue;
             }
         }else if (aleat == 9){
            c = read_key_mission();
            if (c==-DOWN){
                 puntos_NotNot ++;
             }else{
-                break;
+                continue;
             }
         }else if (aleat == 10){
            c = read_key_mission();
            if (c==-RIGHT||c==-DOWN||c==-LEFT){
                 puntos_NotNot ++;
             }else{
-                break;
+                continue;
             }
         }else if (aleat == 11){
            c = read_key_mission();
            if (c==-RIGHT||c==-UP||c==-LEFT){
                 puntos_NotNot ++;
             }else{
-                break;
+                continue;
             }
         }    
     }
