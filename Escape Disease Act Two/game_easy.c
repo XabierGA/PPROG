@@ -124,6 +124,8 @@ void game_init_easy(int lang){
 int walking_simulator_easy(int map_id){
     int c = 0;
     Maps *copymap=NULL;
+    Resources *hung=NULL, *hydra=NULL;
+    rectangle *battle=NULL;
     
     copymap = map_getCopy(intrf->maps_array, map_id);
     if(copymap==NULL){
@@ -131,15 +133,91 @@ int walking_simulator_easy(int map_id){
         exit(ERROR);
     }
     
+    hung = resources_getResource(r, FOOD);
+    hydra = resources_getResource(r, DRINK);
+    if(hung==NULL || hydra==NULL){
+        printf("Error. Main-F1-4.\n");
+        exit(ERROR);
+    }
+    battle = win_find_rectangle(RECT_BATTLE, intrf->rect_array);
+    if(battle==NULL){
+        printf("Error. Main-F1-5.\n");
+    }
+    
     while(1){
         c = read_key_easy();
         
-        if(c < 0){
+        if(c==-UP || c==-DOWN || c==-RIGHT || c==-LEFT){
+            hydration++;
+            hunger++;
+            if(hydration == 20){
+                hydration = 0;
+                if(modify_resource(hydra, -1)<=0){
+                    print_resources(intrf, r);
+                    win_clear(battle);
+                    win_write_line_at(battle, copymap->n_rows / 2, copymap->n_cols / 2, strings_get_string_by_type(700, s)); /* You are dead becuase of no hydration */
+                    tcsetattr(fileno(stdin), TCSANOW, &initial_easy);
+                    exit(EXIT_SUCCESS);
+                }
+                print_resources(intrf, r);
+            }
+            if(hunger == 40){
+                hunger = 0;
+                if(modify_resource(hung, -1)<=0){
+                    print_resources(intrf, r);
+                    win_clear(battle);
+                    win_write_line_at(battle, copymap->n_rows / 2, copymap->n_cols / 2, strings_get_string_by_type(700, s)); /* You are dead becuase of hunger */
+                    tcsetattr(fileno(stdin), TCSANOW, &initial_easy);
+                    exit(EXIT_SUCCESS);
+                }
+                print_resources(intrf, r);
+            }
             if(move(intrf, copymap, pl, -c) == DOOR){
                 return DOOR;
             }
         }
         else if(c == 'o') return 0;
+        else if(c == 'p') return DOOR;
+        else if(c == '1'){
+            use_object(r, obj[0]);
+            print_objects(intrf, obj);
+            print_resources(intrf, r);
+        }
+        else if(c == '2'){
+            use_object(r, obj[1]);
+            print_objects(intrf, obj);
+            print_resources(intrf, r);
+        }
+        else if(c == '3'){
+            use_object(r, obj[2]);
+            print_objects(intrf, obj);
+            print_resources(intrf, r);
+        }
+        else if(c == '4'){
+            use_object(r, obj[3]);
+            print_objects(intrf, obj);
+            print_resources(intrf, r);
+        }
+        else if(c == '5'){
+            use_object(r, obj[4]);
+            print_objects(intrf, obj);
+            print_resources(intrf, r);
+        }
+        else if(c == '6'){
+            use_object(r, obj[5]);
+            print_objects(intrf, obj);
+            print_resources(intrf, r);
+        }
+        else if(c == '7'){
+            use_object(r, obj[6]);
+            print_objects(intrf, obj);
+            print_resources(intrf, r);
+        }
+        else if(c == '8'){
+            use_object(r, obj[7]);
+            print_objects(intrf, obj);
+            print_resources(intrf, r);
+        }
     }
 }
 
@@ -468,8 +546,8 @@ void game_easy(int lang){
     win_clear(story);
     /* FIRST BATTLE */
     win_write_line_slow_at(story, 2, 3, strings_get_string_by_type(1016, s));
-    battle_info_easy(info);
     
+    battle_info_easy(info);
     player_setLocation(pl, 31, 2);
     print_map(intrf, 31);
     print_player(intrf, pl);
@@ -515,29 +593,35 @@ void game_easy(int lang){
     int score;
     
     score = Not_Not(intrf, s, lang);
+    win_clear(story);
+    win_write_line_slow_at(story, 2, get_mid_col_easy(story, strlen(strings_get_string_by_type(2999, s))), strings_get_string_by_type(2999, s));
     if(score < 1){
         object_changeAmount(obj[0], 1); /* +One bandage */
         object_changeAmount(obj[1], 2); /* +Two fruits */
         object_changeAmount(obj[2], 3); /* +Three water */
         object_changeAmount(obj[3], 2); /* +Two bullets */
+        win_write_line_slow_at(story, 3, get_mid_col_easy(story, strlen(strings_get_string_by_type(3000, s))), strings_get_string_by_type(3000, s));
     }else if(score <3){
         object_changeAmount(obj[0], 2); /* +Two bandages */
         object_changeAmount(obj[1], 3); /* +Three fruits */
         object_changeAmount(obj[2], 4); /* +Four water */
         object_changeAmount(obj[3], 4); /* +Four bullets */
+        win_write_line_slow_at(story, 3, get_mid_col_easy(story, strlen(strings_get_string_by_type(3001, s))), strings_get_string_by_type(3001, s));
     }else if (score < 5){
         object_changeAmount(obj[0], 4); /* +Four bandages */
         object_changeAmount(obj[1], 3); /* +Three fruits */
         object_changeAmount(obj[3], 6); /* +Six bullets */
         object_changeAmount(obj[2], 6); /* +Six water */ 
         object_changeAmount(obj[6], 6); /* +Six alcohol */
+        win_write_line_slow_at(story, 3, get_mid_col_easy(story, strlen(strings_get_string_by_type(3002, s))), strings_get_string_by_type(3002, s));
     }else if (score < 8){
         object_changeAmount(obj[0], 1); /* +One bandage */
         object_changeAmount(obj[1], 2); /* +Two fruits */
         object_changeAmount(obj[4], 4); /* +Four medical kits */
         object_changeAmount(obj[3], 8); /* +Eight bullets */
         object_changeAmount(obj[2], 8); /* +Eight water */
-        object_changeAmount(obj[6], 8); /* +Eight alcohol */
+        object_changeAmount(obj[6], 5); /* +Five alcohol */
+        win_write_line_slow_at(story, 3, get_mid_col_easy(story, strlen(strings_get_string_by_type(3003, s))), strings_get_string_by_type(3003, s));
     }else if(score < 10){
         object_changeAmount(obj[0], 2); /* +Two bandages */
         object_changeAmount(obj[1], 3); /* +Three fruits */
@@ -547,7 +631,7 @@ void game_easy(int lang){
         object_changeAmount(obj[6], 8); /* +Eight alcohol */
         object_changeAmount(obj[5], 3); /* +Three caviar */
         object_changeAmount(obj[7], 5); /* +Five missiles */
-        
+        win_write_line_slow_at(story, 3, get_mid_col_easy(story, strlen(strings_get_string_by_type(3004, s))), strings_get_string_by_type(3004, s));
     }else if (score >= 10){
         object_changeAmount(obj[0], 2); /* +Two bandages */
         object_changeAmount(obj[1], 3); /* +Three fruits */
@@ -556,9 +640,173 @@ void game_easy(int lang){
         object_changeAmount(obj[2], 8); /* +Eight water */
         object_changeAmount(obj[6], 8); /* +Eight alcohol */
         object_changeAmount(obj[5], 8); /* +Eight caviar */
-        object_changeAmount(obj[7], 8); /* +Eight missiles */
+        object_changeAmount(obj[7], 6); /* +Six missiles */
+        win_write_line_slow_at(story, 3, get_mid_col_easy(story, strlen(strings_get_string_by_type(3005, s))), strings_get_string_by_type(3005, s));
     }
+    win_write_line_slow_at(story, 4, get_mid_col_easy(story, strlen(cont)), cont);
+    read_space_easy();
+    win_clear(story);
     print_objects(intrf, obj);
+    
+    win_write_line_slow_at(story, 2, 3, strings_get_string_by_type(1023, s));
+    win_write_line_slow_at(story, 3, 3, strings_get_string_by_type(1024, s));
+    win_write_line_slow_at(story, 4, 3, strings_get_string_by_type(1025, s));
+    
+    win_clear(battle);
+    
+    town_info_easy(info);
+    print_map(intrf, 1);
+    player_setLocation(pl, 20, 2);
+    print_player(intrf, pl);
+    if(walking_simulator_easy(1) == 0){
+        tcsetattr(fileno(stdin), TCSANOW, &initial_easy);
+        return;
+    }
+    
+    
+    win_clear(battle);
+    win_clear(story);
+    win_clear(info);
+    
+    battle_info_easy(info);
+    win_write_line_slow_at(story, get_mid_row_easy(story), get_mid_col_easy(story, strlen(strings_get_string_by_type(1026, s))), strings_get_string_by_type(1026, s));
+    player_setLocation(pl, 35, 44);
+    print_map(intrf, 32);
+    print_player(intrf, pl);
+    
+    Maps *copymap3=NULL;
+    int enemies3[7] = {3,2,2,2,0,0,0};
+    copymap3 = map_getCopy(intrf->maps_array, 32);
+    if(battlemode_easy(enemies3, copymap3) == 0){
+        tcsetattr(fileno(stdin), TCSANOW, &initial_easy);
+        return;
+    }
+    
+    
+    win_clear(battle);
+    win_clear(story);
+    win_clear(info);
+    
+    win_write_line_slow_at(story, get_mid_row_easy(story), get_mid_col_easy(story, strlen(strings_get_string_by_type(1027, s))), strings_get_string_by_type(1027, s));
+    
+    print_map(intrf, 21);
+    town_info_easy(info);
+    player_setLocation(pl, 3, 2);
+    print_player(intrf, pl);
+    if(walking_simulator_easy(21) == 0){
+        tcsetattr(fileno(stdin), TCSANOW, &initial_easy);
+        return;
+    }
+    
+    win_clear(battle);
+    win_clear(story);
+    
+    win_write_line_slow_at(story, get_mid_row_easy(story), get_mid_col_easy(story, strlen(strings_get_string_by_type(1028, s))), strings_get_string_by_type(1028, s));
+    
+    print_map(intrf, 6);
+    player_setLocation(pl, 3, 37);
+    print_player(intrf, pl);
+    if(walking_simulator_easy(6) == 0){
+        tcsetattr(fileno(stdin), TCSANOW, &initial_easy);
+        return;
+    }
+    
+    win_clear(battle);
+    win_clear(story);
+    
+    win_write_line_slow_at(story, get_mid_row_easy(story)-2, get_mid_col_easy(story, strlen(strings_get_string_by_type(1029, s)))+2, strings_get_string_by_type(1029, s));
+    win_write_line_slow_at(story, get_mid_row_easy(story)-1, get_mid_col_easy(story, strlen(strings_get_string_by_type(1030, s))), strings_get_string_by_type(1030, s));
+    win_write_line_slow_at(story, get_mid_row_easy(story), get_mid_col_easy(story, strlen(strings_get_string_by_type(1031, s))), strings_get_string_by_type(1031, s));
+    win_write_line_slow_at(story, get_mid_row_easy(story)+1, get_mid_col_easy(story, strlen(strings_get_string_by_type(1032, s))), strings_get_string_by_type(1032, s));
+    
+    print_map(intrf, 4);
+    player_setLocation(pl, 16, 43);
+    print_player(intrf, pl);
+    if(walking_simulator_easy(4) == 0){
+        tcsetattr(fileno(stdin), TCSANOW, &initial_easy);
+        return;
+    }
+    
+    win_clear(battle);
+    win_clear(story);
+    
+    win_write_line_slow_at(story, get_mid_row_easy(story), get_mid_col_easy(story, strlen(strings_get_string_by_type(1033, s))), strings_get_string_by_type(1033, s));
+    
+    print_map(intrf, 2);
+    player_setLocation(pl, 31, 39);
+    print_player(intrf, pl);
+    if(walking_simulator_easy(2) == 0){
+        tcsetattr(fileno(stdin), TCSANOW, &initial_easy);
+        return;
+    }
+    
+    win_clear(battle);
+    win_clear(story);
+    win_clear(info);
+    
+    win_write_line_slow_at(story, get_mid_row_easy(story), get_mid_col_easy(story, strlen(strings_get_string_by_type(1047, s))), strings_get_string_by_type(1047, s));
+    win_write_line_slow_at(info, 2, 3, strings_get_string_by_type(9992, s));
+    
+    score = pong(intrf, s, lang);
+    win_clear(story);
+    win_clear(info);
+    
+    win_write_line_slow_at(story, 2, get_mid_col_easy(story, strlen(strings_get_string_by_type(2999, s))), strings_get_string_by_type(2999, s));
+    if(score < 5){
+        object_changeAmount(obj[0], 1); /* +One bandage */
+        object_changeAmount(obj[1], 2); /* +Two fruits */
+        object_changeAmount(obj[2], 3); /* +Three water */
+        object_changeAmount(obj[3], 2); /* +Two bullets */
+        win_write_line_slow_at(story, 3, get_mid_col_easy(story, strlen(strings_get_string_by_type(3000, s))), strings_get_string_by_type(3000, s));
+    }else if(score < 15){
+        object_changeAmount(obj[0], 2); /* +Two bandages */
+        object_changeAmount(obj[1], 3); /* +Three fruits */
+        object_changeAmount(obj[2], 4); /* +Four water */
+        object_changeAmount(obj[3], 4); /* +Four bullets */
+        win_write_line_slow_at(story, 3, get_mid_col_easy(story, strlen(strings_get_string_by_type(3001, s))), strings_get_string_by_type(3001, s));
+    }else if (score < 25){
+        object_changeAmount(obj[0], 4); /* +Four bandages */
+        object_changeAmount(obj[1], 3); /* +Three fruits */
+        object_changeAmount(obj[3], 6); /* +Six bullets */
+        object_changeAmount(obj[2], 6); /* +Six water */ 
+        object_changeAmount(obj[6], 6); /* +Six alcohol */
+        win_write_line_slow_at(story, 3, get_mid_col_easy(story, strlen(strings_get_string_by_type(3002, s))), strings_get_string_by_type(3002, s));
+    }else if (score < 35){
+        object_changeAmount(obj[0], 1); /* +One bandage */
+        object_changeAmount(obj[1], 2); /* +Two fruits */
+        object_changeAmount(obj[4], 4); /* +Four medical kits */
+        object_changeAmount(obj[3], 8); /* +Eight bullets */
+        object_changeAmount(obj[2], 8); /* +Eight water */
+        object_changeAmount(obj[6], 5); /* +Five alcohol */
+        win_write_line_slow_at(story, 3, get_mid_col_easy(story, strlen(strings_get_string_by_type(3003, s))), strings_get_string_by_type(3003, s));
+    }else if(score < 45){
+        object_changeAmount(obj[0], 2); /* +Two bandages */
+        object_changeAmount(obj[1], 3); /* +Three fruits */
+        object_changeAmount(obj[4], 4); /* +Four medical kits */
+        object_changeAmount(obj[3], 8); /* +Eight bullets */
+        object_changeAmount(obj[2], 8); /* +Eight water */
+        object_changeAmount(obj[6], 8); /* +Eight alcohol */
+        object_changeAmount(obj[5], 3); /* +Three caviar */
+        object_changeAmount(obj[7], 5); /* +Five missiles */
+        win_write_line_slow_at(story, 3, get_mid_col_easy(story, strlen(strings_get_string_by_type(3004, s))), strings_get_string_by_type(3004, s));
+    }else if (score >= 55){
+        object_changeAmount(obj[0], 2); /* +Two bandages */
+        object_changeAmount(obj[1], 3); /* +Three fruits */
+        object_changeAmount(obj[4], 4); /* +Four medical kits */
+        object_changeAmount(obj[3], 8); /* +Eight bullets */
+        object_changeAmount(obj[2], 8); /* +Eight water */
+        object_changeAmount(obj[6], 8); /* +Eight alcohol */
+        object_changeAmount(obj[5], 8); /* +Eight caviar */
+        object_changeAmount(obj[7], 6); /* +Six missiles */
+        win_write_line_slow_at(story, 3, get_mid_col_easy(story, strlen(strings_get_string_by_type(3005, s))), strings_get_string_by_type(3005, s));
+    }
+    win_write_line_slow_at(story, 4, get_mid_col_easy(story, strlen(cont)), cont);
+    sleep(1);
+    win_clear(battle);
+    read_space_easy();
+    win_clear(story);
+    print_objects(intrf, obj);
+    
     
     
     tcsetattr(fileno(stdin), TCSANOW, &initial_easy);

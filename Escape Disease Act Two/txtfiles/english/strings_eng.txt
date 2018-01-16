@@ -1,4 +1,4 @@
-120
+140
 1
 --->Select the game mode by pressing a number<---
 2
@@ -160,7 +160,7 @@ Go to G when you are ready to continue.
 1026
 Defeat them!!
 1027
-Solve the Maze!!
+Solve the Maze!! Be careful with your resources!
 1028
 Go to the Town Hall. You can eat, drink or heal yourself if you need.
 1029
@@ -168,7 +168,7 @@ DEL MAL-Hi there! I'm Alvaro del Mal. It is great to meet you formally. You are 
 1030
 Ramabini is now weaker thanks to you!! You have cleaned the North zone, but it was
 1031
-the easiest one!! Now I will drive you to the East, there wil be more monsters but
+the easiest one!! Now I will drive you to the East, there will be more monsters but
 1032
 I will give you cool stuff.
 1033
@@ -265,3 +265,17 @@ NOT DOWN
 WELCOME TO NOT NOT!
 2013
 BE AS FAST AS POSSIBLE TO GET MORE ITEMS
+2999
+According to your score, you got:
+3000
+1 Bandage, 2 Fruits, 3 Water and 2 Bullets.
+3001
+2 Bandages, 3 Fruits, 4 Water and 4 Bullets. 
+3002
+4 Bandages, 3 Fruits, 6 Water, 6 Bullets and 6 Alcohol.
+3003
+1 Bandage, 2 Fruits, 4 Medkits, 8 Bullets, 8 Water and 5 Alcohol.
+3004
+2 Bandages, 3 Fruits, 4 Medkits, 8 Bullets, 8 Water, 8 Alcohol, 3 Caviar and 5 Missiles.
+3005
+2 Bandages, 3 Fruits, 4 Medkits, 8 Bullets, 8 Water, 8 Alcohol, 8 Caviar and 6 Missiles.

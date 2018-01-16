@@ -197,22 +197,29 @@ int hangman(Interface *intrf, Strings **s, int lang){
 int puntos_NotNot =0 ;
 
 int aleat_num(int inf, int sup) {
-  
-  int dif;
-  
-  if (inf > sup) return inf - 1;
-  
-  dif = sup - inf;
-  
-  return inf + (int)((dif + 1) * (rand() / (RAND_MAX + 1.0)));
-
+  int result = 0;
+    
+    if(inf == sup){
+        return sup;
+    }
+    
+    else if (inf > sup){
+        printf("ERROR: Límite inferior mayor que el límite superior.\n");
+        exit(-1);
+    }
+    
+    do{
+        result = (inf + ((int) ((((double)(sup-inf+1)) * rand())/(RAND_MAX + 1.0))));
+    }while(result>11 || 1>result);
+    
+    return result;
 }
 
 int Not_Not(Interface *intrf, Strings **s, int lang){
     int c, i, score;
     int aleat = 0;
     struct timespec t_inicio, t_fin, aux;
-    double total;
+    double total=0;
     rectangle *battle=NULL;
     
     srand(time(NULL));
@@ -257,86 +264,132 @@ int Not_Not(Interface *intrf, Strings **s, int lang){
             c = read_key_mission();
             if (c==-RIGHT){
                 puntos_NotNot++;
+                print_map(intrf, 350);
+                usleep(700000);
             }else{
+                print_map(intrf, 351);
+                usleep(700000);
                 continue;
             } 
         }else if (aleat == 2){
             c = read_key_mission();
             if (c==-LEFT){
                 puntos_NotNot++;
+                print_map(intrf, 350);
+                usleep(700000);
             }else{
+                print_map(intrf, 351);
+                usleep(700000);
                 continue;
             } 
         }else if (aleat == 3){
             c = read_key_mission();
             if (c==-RIGHT||c==-UP||c==-DOWN){
+                print_map(intrf, 350);
+                usleep(700000);
                 puntos_NotNot++;
             }else{
+                print_map(intrf, 351);
+                usleep(700000);
                 continue;
             } 
         }else if (aleat == 4){
             c = read_key_mission();
             if (c==-LEFT||c==-UP||c==-DOWN){
+                print_map(intrf, 350);
+                usleep(700000);
                 puntos_NotNot++;
             }else{
+                print_map(intrf, 351);
+                usleep(700000);
                 continue;
             } 
         }else if (aleat == 5){
             c = read_key_mission();
             if (c==-RIGHT){
+                print_map(intrf, 350);
+                usleep(700000);
                 puntos_NotNot ++;
             }else{
+                print_map(intrf, 351);
+                usleep(700000);
                 continue;
             }
         }else if (aleat == 6){
             c = read_key_mission();
             if (c==-LEFT){
+                print_map(intrf, 350);
+                usleep(700000);
                 puntos_NotNot ++;
             }else{
+                print_map(intrf, 351);
+                usleep(700000);
                 continue;
             }
         }else if (aleat == 7){
            c = read_key_mission();
            if (c==-RIGHT||c==-UP){
+               print_map(intrf, 350);
+                usleep(700000);
                 puntos_NotNot ++;
             }else{
+                print_map(intrf, 351);
+                usleep(700000);
                 continue;
             }
         }else if (aleat == 8){
            c = read_key_mission();
            if (c==-UP){
+                print_map(intrf, 350);
+                usleep(700000);
                 puntos_NotNot ++;
             }else{
+                print_map(intrf, 351);
+                usleep(700000);
                 continue;
             }
         }else if (aleat == 9){
            c = read_key_mission();
            if (c==-DOWN){
+                print_map(intrf, 350);
+                usleep(700000);
                 puntos_NotNot ++;
             }else{
+                print_map(intrf, 351);
+                usleep(700000);
                 continue;
             }
         }else if (aleat == 10){
            c = read_key_mission();
            if (c==-RIGHT||c==-DOWN||c==-LEFT){
+                print_map(intrf, 350);
+                usleep(700000);
                 puntos_NotNot ++;
             }else{
+                print_map(intrf, 351);
+                usleep(700000);
                 continue;
             }
         }else if (aleat == 11){
            c = read_key_mission();
            if (c==-RIGHT||c==-UP||c==-LEFT){
+                print_map(intrf, 350);
+                usleep(700000);
                 puntos_NotNot ++;
             }else{
+                print_map(intrf, 351);
+                usleep(700000);
                 continue;
             }
         }    
     }
     
     clock_gettime(CLOCK_REALTIME, &t_fin);
-    aux.tv_sec = t_fin.tv_sec - t_inicio.tv_sec; 
-    total = aux.tv_sec;
-    score = (int)((puntos_NotNot*100)/(int)total);
+    aux.tv_sec = t_fin.tv_sec - t_inicio.tv_sec;
+    aux.tv_nsec = t_fin.tv_nsec - t_inicio.tv_nsec;
+    total = total + aux.tv_sec*TENTOTHENINE + aux.tv_nsec;
+    total = total/TENTOTHENINE;
+    score = (int)((puntos_NotNot*20)/(int)total+1);
     
     return score;
 }
@@ -729,20 +782,24 @@ void print_bars(Interface* intrf, int c){
     }
     
     if(c == -UP){
-        win_write_char_at(intrf->rect_array[0], row_bar + 5, 1,' ');
-        win_write_char_at(intrf->rect_array[0], row_bar + 5, 91,' ');
+        win_write_char_at(intrf->rect_array[0], row_bar + 5, 2,' ');
+        if(row_bar + 3 == 33){
+            win_write_char_at(intrf->rect_array[0], row_bar + 5, 92,' ');   /*Este if puede estar mal*/
+        }
     }
     else if(c == -DOWN){
-        win_write_char_at(intrf->rect_array[0], row_bar - 1, 1,' ');
-        win_write_char_at(intrf->rect_array[0], row_bar - 1, 91,' ');
+        win_write_char_at(intrf->rect_array[0], row_bar - 1, 2,' ');
+        if(row_bar == 7){
+            win_write_char_at(intrf->rect_array[0], row_bar - 1, 92,' '); /*Este if puede estar mal*/
+        }
     }
     else{
         return;
     }
     
     for(i = row_bar; i< (row_bar+5); i++){
-        win_write_char_at(intrf->rect_array[0], i, 1,'|');
-        win_write_char_at(intrf->rect_array[0], i, 91,'|');
+        win_write_char_at(intrf->rect_array[0], i, 2,'H');
+        win_write_char_at(intrf->rect_array[0], i, 92,'H');
     }
 }
 
@@ -852,7 +909,7 @@ int pong(Interface *intrf, Strings **strs, int lang){
         win_write_line_at(intrf->rect_array[0], 5, 30, strings_get_string_by_type(34, strs));
         win_write_line_at(intrf->rect_array[0], 5, 40, buffer);
         
-        if((ball->col == 2 && dir1 == LEFT )|| (ball->col == 90 && dir1 == RIGHT)){
+        if((ball->col == 3 && dir1 == LEFT )|| (ball->col == 91 && dir1 == RIGHT)){
             if(ball->row >= row_bar && ball->row <= row_bar + 5){
                 way = generate_random_way(1, 4);
             }
@@ -875,9 +932,11 @@ int pong(Interface *intrf, Strings **strs, int lang){
     print_map(intrf, 120);
     if(superflag == 1){
         win_write_line_at(intrf->rect_array[0], 14, 30, strings_get_string_by_type(31, strs));
+        return 60;
     }
     if(superflag == 2){
         win_write_line_at(intrf->rect_array[0], 14, 30, strings_get_string_by_type(32, strs));
+        return (time2.tv_sec-time1.tv_sec);
     }
     sleep(2);
 							  

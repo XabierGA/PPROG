@@ -59,7 +59,7 @@ Go GO GO GO!!
 
 Defeat Them!!
 
----JUEGO 2, SE DISPLAYEA 21
+---JUEGO 2, SE DISPLAYEA PONG
 
 WELCOME TO 21, Press up to sum a random value between 1 and 7, press down to take the value you got. Try to get 21 to get
 the best stuff!! If you are very greedy and you get more than 21 you won't get anything.
@@ -122,7 +122,7 @@ Defeat them!!
 
 Solve the maze!!
 
----JUEGO 5, SE DISPLAYEA PONG (Dar de alguna manera objetos como recompensa) 
+---JUEGO 5, SE DISPLAYEA 21 (Dar de alguna manera objetos como recompensa) 
 
 That classic game!! This is a bonus level, have fun!!
 
