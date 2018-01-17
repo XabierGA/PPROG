@@ -1,4 +1,4 @@
-140
+144
 1
 --->Select the game mode by pressing a number<---
 2
@@ -61,6 +61,8 @@ NICE! THIS LETTER APPEARS!
 YOU HAVE CONSUMED ALL YOUR LIVES!
 43
 YOU WON, CONGRATULATIONS!
+44
+SORRY, YOU'VE FAILED
 100
 R E S O U R C E S
 101
@@ -180,7 +182,7 @@ quit with the amount you have got. Try to get 21 to get the best stuff!! If you 
 1036
 very greedy and you get more than 21 you won't get anything.
 1037
-Heal yourself and prepare for what is about to come!
+Heal yourself and prepare for what is about to come! Also, you've just found a revolver.
 1038
 Defeat them, they are a bit stronger because Ramabini is getting closer!
 1039
@@ -195,6 +197,8 @@ You need to clean the last zone, this is the last time you will visit this wonde
 town if you don't kill those last zombies! I have some presents for you. Good luck
 1044
 and defeat Ramabini!
+10445
+Now head to the South!
 1045
 GO GO GO! I can feel Ramabini is somewhere near!
 1046
@@ -265,6 +269,8 @@ NOT DOWN
 WELCOME TO NOT NOT!
 2013
 BE AS FAST AS POSSIBLE TO GET MORE ITEMS
+2020
+CAPS ONLY
 2999
 According to your score, you got:
 3000
@@ -279,3 +285,5 @@ According to your score, you got:
 2 Bandages, 3 Fruits, 4 Medkits, 8 Bullets, 8 Water, 8 Alcohol, 3 Caviar and 5 Missiles.
 3005
 2 Bandages, 3 Fruits, 4 Medkits, 8 Bullets, 8 Water, 8 Alcohol, 8 Caviar and 6 Missiles.
+3006
+Your score is:

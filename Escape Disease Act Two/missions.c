@@ -68,7 +68,8 @@ void change_map(char *found, int deaths, Interface *intrf, rectangle *rec){
     int i;
     int col;
     
-    print_map(intrf, deaths);
+    print_map(intrf, 400+deaths);
+    
     
     for(i=0; i<8; i++){
         if(found[i] != '0'){
@@ -85,7 +86,7 @@ int hangman(Interface *intrf, Strings **s, int lang){
     rectangle *rectStory=NULL, *rectBattle=NULL;
     char buff[HM_TAM], word[HM_TAM];
     char letter;
-    int i, num_words, random_n, flag, correct, deaths, col; /* <--- DEATHS HAS TO BE INITIALIZED */
+    int i, num_words, random_n, flag, correct=0, deaths=0, col; /* <--- DEATHS HAS TO BE INITIALIZED */
     char found[8] = "00000000";
     
     /* Error Checking */
@@ -121,6 +122,7 @@ int hangman(Interface *intrf, Strings **s, int lang){
         exit(ERROR);
     }
     /*--------------------------------------------------------------*/
+    print_map(intrf, 400);
     
     /* Getting the number of words in the file */
     fgets(buff, HM_TAM, f);
@@ -160,6 +162,7 @@ int hangman(Interface *intrf, Strings **s, int lang){
         
         for(i=0; i<strlen(word); i++){
             if(letter == word[i]){
+                win_clear(rectStory);
                 flag=1;
                 correct++;
                 col = conv(i);
@@ -170,6 +173,8 @@ int hangman(Interface *intrf, Strings **s, int lang){
         }
         
         if(flag==0){
+            win_clear(rectStory);
+            win_write_line_at(rectStory, 6, 5, strings_get_string_by_type(44, s)); /* Sorry! You have failed */
             deaths++;
             change_map(found, deaths, intrf, rectBattle);
             if(deaths==7){
@@ -186,7 +191,7 @@ int hangman(Interface *intrf, Strings **s, int lang){
     }
     
     fclose(f);
-    return deaths;
+    return (2*correct - deaths);
 }
 /* --------------------------------------------------------------------------------------------------------------------------- */
 
@@ -782,15 +787,19 @@ void print_bars(Interface* intrf, int c){
     }
     
     if(c == -UP){
-        win_write_char_at(intrf->rect_array[0], row_bar + 5, 2,' ');
-        if(row_bar + 3 == 33){
-            win_write_char_at(intrf->rect_array[0], row_bar + 5, 92,' ');   /*Este if puede estar mal*/
+        if(row_bar + 3 != 33){
+            interface_lock();
+            win_write_char_at(intrf->rect_array[0], row_bar + 5, 2,' ');
+            win_write_char_at(intrf->rect_array[0], row_bar + 5, 92,' '); 
+            interface_unlock();
         }
     }
     else if(c == -DOWN){
-        win_write_char_at(intrf->rect_array[0], row_bar - 1, 2,' ');
-        if(row_bar == 7){
-            win_write_char_at(intrf->rect_array[0], row_bar - 1, 92,' '); /*Este if puede estar mal*/
+        if(row_bar != 7){
+            interface_lock();
+            win_write_char_at(intrf->rect_array[0], row_bar - 1, 2,' ');
+            win_write_char_at(intrf->rect_array[0], row_bar - 1, 92,' ');
+            interface_unlock();
         }
     }
     else{
@@ -798,8 +807,10 @@ void print_bars(Interface* intrf, int c){
     }
     
     for(i = row_bar; i< (row_bar+5); i++){
+        interface_lock();
         win_write_char_at(intrf->rect_array[0], i, 2,'H');
         win_write_char_at(intrf->rect_array[0], i, 92,'H');
+        interface_unlock();
     }
 }
 
@@ -876,7 +887,7 @@ int pong(Interface *intrf, Strings **strs, int lang){
     
     win_write_line_at(intrf->rect_array[0], 14, 30, strings_get_string_by_type(33, strs));
     
-    sleep(4);
+    sleep(2);
     
     print_map(intrf, 122);
     ball = (Ball *)malloc(sizeof(Ball));
@@ -931,16 +942,11 @@ int pong(Interface *intrf, Strings **strs, int lang){
     
     print_map(intrf, 120);
     if(superflag == 1){
-        win_write_line_at(intrf->rect_array[0], 14, 30, strings_get_string_by_type(31, strs));
         return 60;
     }
     if(superflag == 2){
-        win_write_line_at(intrf->rect_array[0], 14, 30, strings_get_string_by_type(32, strs));
         return (time2.tv_sec-time1.tv_sec);
     }
-    sleep(2);
-							  
-    destroy_intrf(intrf);
     
     return 0;
 }

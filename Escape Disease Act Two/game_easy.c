@@ -689,7 +689,7 @@ void game_easy(int lang){
     
     win_write_line_slow_at(story, get_mid_row_easy(story), get_mid_col_easy(story, strlen(strings_get_string_by_type(1027, s))), strings_get_string_by_type(1027, s));
     
-    print_map(intrf, 21);
+    print_map(intrf, 21); /* MAZE 1 */
     town_info_easy(info);
     player_setLocation(pl, 3, 2);
     print_player(intrf, pl);
@@ -751,6 +751,23 @@ void game_easy(int lang){
     win_clear(story);
     win_clear(info);
     
+    char *aux=NULL;
+    char *aux2=NULL;
+    
+    aux = (char *) malloc(sizeof(int)+2);
+    if(aux==NULL){
+        printf("Error. Easy 9.\n");
+        exit(ERROR);
+    }
+    sprintf(aux, " %d", score);
+    aux2 = (char *) malloc(strlen(aux)+strlen(strings_get_string_by_type(3006, s)+2));
+    if(aux2==NULL){
+        printf("Error. Easy 10.\n");
+        exit(ERROR);
+    }
+    strcpy(aux2, strings_get_string_by_type(3006, s));
+    strcat(aux2, aux);
+    
     win_write_line_slow_at(story, 2, get_mid_col_easy(story, strlen(strings_get_string_by_type(2999, s))), strings_get_string_by_type(2999, s));
     if(score < 5){
         object_changeAmount(obj[0], 1); /* +One bandage */
@@ -801,12 +818,215 @@ void game_easy(int lang){
         win_write_line_slow_at(story, 3, get_mid_col_easy(story, strlen(strings_get_string_by_type(3005, s))), strings_get_string_by_type(3005, s));
     }
     win_write_line_slow_at(story, 4, get_mid_col_easy(story, strlen(cont)), cont);
+    print_objects(intrf, obj);
     sleep(1);
     win_clear(battle);
-    read_space_easy();
-    win_clear(story);
-    print_objects(intrf, obj);
     
+    win_write_line_slow_at(battle, get_mid_row_easy(battle), get_mid_col_easy(battle, strlen(aux2)), aux2);
+    free(aux);
+    free(aux2);
+    
+    read_space_easy();
+    win_clear(battle);
+    win_clear(story);
+    
+    change_own(wp[2]);
+    win_write_line_slow_at(story, get_mid_row_easy(story), get_mid_col_easy(story, strlen(strings_get_string_by_type(1037, s))), strings_get_string_by_type(1037, s));
+    print_weapons(intrf, wp);
+    town_info_easy(info);
+    
+    print_map(intrf, 12);
+    player_setLocation(pl, 18, 2);
+    print_player(intrf, pl);
+    if(walking_simulator_easy(12) == 0){
+        tcsetattr(fileno(stdin), TCSANOW, &initial_easy);
+        return;
+    }
+    
+    win_clear(story);
+    win_clear(battle);
+    
+    win_write_line_slow_at(story, get_mid_row_easy(story), get_mid_col_easy(story, strlen(strings_get_string_by_type(1027, s))), strings_get_string_by_type(1027, s));
+    
+    print_map(intrf, 22); /* MAZE 2 */
+    player_setLocation(pl, 3, 2);
+    print_player(intrf, pl);
+    if(walking_simulator_easy(22) == 0){
+        tcsetattr(fileno(stdin), TCSANOW, &initial_easy);
+        return;
+    }
+    
+    win_clear(story);
+    win_clear(battle);
+    win_clear(info);
+    
+    battle_info_easy(info);
+    win_write_line_slow_at(story, get_mid_row_easy(story), get_mid_col_easy(story, strlen(strings_get_string_by_type(1038, s))), strings_get_string_by_type(1038, s));
+    player_setLocation(pl, 18, 40);
+    print_map(intrf, 34);
+    print_player(intrf, pl);
+    
+    Maps *copymap4=NULL;
+    int enemies4[7] = {2,2,2,2,2,0,0};
+    copymap4 = map_getCopy(intrf->maps_array, 34);
+    if(battlemode_easy(enemies4, copymap4) == 0){
+        tcsetattr(fileno(stdin), TCSANOW, &initial_easy);
+        return;
+    }
+    
+    win_clear(story);
+    win_clear(battle);
+    win_clear(info);
+    
+    win_write_line_slow_at(story, get_mid_row_easy(story), get_mid_col_easy(story, strlen(strings_get_string_by_type(1027, s))), strings_get_string_by_type(1027, s));
+    town_info_easy(info);
+    
+    print_map(intrf, 23); /* MAZE 3 */
+    player_setLocation(pl, 3, 2);
+    print_player(intrf, pl);
+    if(walking_simulator_easy(23) == 0){
+        tcsetattr(fileno(stdin), TCSANOW, &initial_easy);
+        return;
+    }
+    
+    win_clear(story);
+    win_clear(battle);
+    win_clear(info);
+    
+    win_write_line_slow_at(info, get_mid_row_easy(info), get_mid_col_easy(info, strlen(strings_get_string_by_type(2020, s))), strings_get_string_by_type(2020, s));
+    
+    score = hangman(intrf, s, lang);
+    win_clear(story);
+    win_write_line_slow_at(story, 2, get_mid_col_easy(story, strlen(strings_get_string_by_type(2999, s))), strings_get_string_by_type(2999, s));
+    if(score <= -2){
+        object_changeAmount(obj[0], 1); /* +One bandage */
+        object_changeAmount(obj[1], 2); /* +Two fruits */
+        object_changeAmount(obj[2], 3); /* +Three water */
+        object_changeAmount(obj[3], 2); /* +Two bullets */
+        win_write_line_slow_at(story, 3, get_mid_col_easy(story, strlen(strings_get_string_by_type(3000, s))), strings_get_string_by_type(3000, s));
+    }else if(score <= 0){
+        object_changeAmount(obj[0], 2); /* +Two bandages */
+        object_changeAmount(obj[1], 3); /* +Three fruits */
+        object_changeAmount(obj[2], 4); /* +Four water */
+        object_changeAmount(obj[3], 4); /* +Four bullets */
+        win_write_line_slow_at(story, 3, get_mid_col_easy(story, strlen(strings_get_string_by_type(3001, s))), strings_get_string_by_type(3001, s));
+    }else if (score <= 2){
+        object_changeAmount(obj[0], 4); /* +Four bandages */
+        object_changeAmount(obj[1], 3); /* +Three fruits */
+        object_changeAmount(obj[3], 6); /* +Six bullets */
+        object_changeAmount(obj[2], 6); /* +Six water */ 
+        object_changeAmount(obj[6], 6); /* +Six alcohol */
+        win_write_line_slow_at(story, 3, get_mid_col_easy(story, strlen(strings_get_string_by_type(3002, s))), strings_get_string_by_type(3002, s));
+    }else if (score <= 6){
+        object_changeAmount(obj[0], 1); /* +One bandage */
+        object_changeAmount(obj[1], 2); /* +Two fruits */
+        object_changeAmount(obj[4], 4); /* +Four medical kits */
+        object_changeAmount(obj[3], 8); /* +Eight bullets */
+        object_changeAmount(obj[2], 8); /* +Eight water */
+        object_changeAmount(obj[6], 5); /* +Five alcohol */
+        win_write_line_slow_at(story, 3, get_mid_col_easy(story, strlen(strings_get_string_by_type(3003, s))), strings_get_string_by_type(3003, s));
+    }else if(score <12){
+        object_changeAmount(obj[0], 2); /* +Two bandages */
+        object_changeAmount(obj[1], 3); /* +Three fruits */
+        object_changeAmount(obj[4], 4); /* +Four medical kits */
+        object_changeAmount(obj[3], 8); /* +Eight bullets */
+        object_changeAmount(obj[2], 8); /* +Eight water */
+        object_changeAmount(obj[6], 8); /* +Eight alcohol */
+        object_changeAmount(obj[5], 3); /* +Three caviar */
+        object_changeAmount(obj[7], 5); /* +Five missiles */
+        win_write_line_slow_at(story, 3, get_mid_col_easy(story, strlen(strings_get_string_by_type(3004, s))), strings_get_string_by_type(3004, s));
+    }else if (score >= 12){
+        object_changeAmount(obj[0], 2); /* +Two bandages */
+        object_changeAmount(obj[1], 3); /* +Three fruits */
+        object_changeAmount(obj[4], 4); /* +Four medical kits */
+        object_changeAmount(obj[3], 8); /* +Eight bullets */
+        object_changeAmount(obj[2], 8); /* +Eight water */
+        object_changeAmount(obj[6], 8); /* +Eight alcohol */
+        object_changeAmount(obj[5], 8); /* +Eight caviar */
+        object_changeAmount(obj[7], 6); /* +Six missiles */
+        win_write_line_slow_at(story, 3, get_mid_col_easy(story, strlen(strings_get_string_by_type(3005, s))), strings_get_string_by_type(3005, s));
+    }
+    win_write_line_slow_at(story, 4, get_mid_col_easy(story, strlen(cont)), cont);
+    print_objects(intrf, obj);
+    read_space_easy();
+    win_clear(battle);
+    win_clear(story);
+    win_clear(info);
+    
+    
+    win_write_line_slow_at(story, get_mid_row_easy(story), get_mid_col_easy(story, strlen(strings_get_string_by_type(1040, s))), strings_get_string_by_type(1040, s));
+    town_info_easy(info);
+    
+    print_map(intrf, 6);
+    player_setLocation(pl, 3, 37);
+    print_player(intrf, pl);
+    if(walking_simulator_easy(6) == 0){
+        tcsetattr(fileno(stdin), TCSANOW, &initial_easy);
+        return;
+    }
+    
+    
+    win_clear(battle);
+    win_clear(story);
+    
+    win_write_line_slow_at(story, get_mid_row_easy(story)-2, get_mid_col_easy(story, strlen(strings_get_string_by_type(1041, s)))+2, strings_get_string_by_type(1041, s));
+    win_write_line_slow_at(story, get_mid_row_easy(story)-1, get_mid_col_easy(story, strlen(strings_get_string_by_type(1042, s))), strings_get_string_by_type(1042, s));
+    win_write_line_slow_at(story, get_mid_row_easy(story), get_mid_col_easy(story, strlen(strings_get_string_by_type(1043, s))), strings_get_string_by_type(1043, s));
+    win_write_line_slow_at(story, get_mid_row_easy(story)+1, get_mid_col_easy(story, strlen(strings_get_string_by_type(1044, s))), strings_get_string_by_type(1044, s));
+    change_own(wp[3]);
+    print_weapons(intrf, wp);
+    
+    print_map(intrf, 4);
+    player_setLocation(pl, 16, 43);
+    print_player(intrf, pl);
+    if(walking_simulator_easy(4) == 0){
+        tcsetattr(fileno(stdin), TCSANOW, &initial_easy);
+        return;
+    }
+    
+    win_clear(battle);
+    win_clear(story);
+    
+    win_write_line_slow_at(story, get_mid_row_easy(story), get_mid_col_easy(story, strlen(strings_get_string_by_type(10445, s))), strings_get_string_by_type(10445, s));
+    
+    print_map(intrf, 3);
+    player_setLocation(pl, 31, 38);
+    print_player(intrf, pl);
+    if(walking_simulator_easy(3) == 0){
+        tcsetattr(fileno(stdin), TCSANOW, &initial_easy);
+        return;
+    }
+    
+    win_clear(battle);
+    win_clear(story);
+    
+    win_write_line_slow_at(story, get_mid_row_easy(story), get_mid_col_easy(story, strlen(strings_get_string_by_type(1045, s))), strings_get_string_by_type(1045, s));
+    
+    print_map(intrf, 11);
+    player_setLocation(pl, 31, 2);
+    print_player(intrf, pl);
+    if(walking_simulator_easy(11) == 0){
+        tcsetattr(fileno(stdin), TCSANOW, &initial_easy);
+        return;
+    }
+    
+    win_clear(battle);
+    win_clear(story);
+    win_clear(info);
+    
+    battle_info_easy(info);
+    win_write_line_slow_at(story, get_mid_row_easy(story), get_mid_col_easy(story, strlen(strings_get_string_by_type(1026, s))), strings_get_string_by_type(1026, s));
+    player_setLocation(pl, 4, 4);
+    print_map(intrf, 35);
+    print_player(intrf, pl);
+    
+    Maps *copymap5=NULL;
+    int enemies5[7] = {3,2,2,2,2,0,0};
+    copymap5 = map_getCopy(intrf->maps_array, 35);
+    if(battlemode_easy(enemies5, copymap5) == 0){
+        tcsetattr(fileno(stdin), TCSANOW, &initial_easy);
+        return;
+    }
     
     
     tcsetattr(fileno(stdin), TCSANOW, &initial_easy);

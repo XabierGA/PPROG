@@ -316,12 +316,12 @@ Status print_map(Interface *intrf, int map_id){
     }
     
     if(r != n_rows-2){
-        printf("Error. Interface-F6-2.\n");
+        printf("Error. Interface-F6-3.\n");
         exit(ERROR);
     }
     
     if(aux == NULL){
-        printf("Error. Interface-F6-3.\n");
+        printf("Error. Interface-F6-4.\n");
         exit(ERROR);
     }
     

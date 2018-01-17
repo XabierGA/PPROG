@@ -98,11 +98,11 @@ you. Good luck and defeat Ramabini!
 
 This is your last chance to visit the hospital, so good luck!
 
----CAMINO 1, SE DISPLAYEA EL MAPA 01
+---CAMINO 1, SE DISPLAYEA EL MAPA 11
 
 GO GO GO! I can feel Ramabini has been here...
 
----QUINTA BATALLA, SE DISPLAYEA EL MAPA 05
+---QUINTA BATALLA, SE DISPLAYEA EL MAPA 35
 
 Defeat them!
 
