@@ -1,13 +1,301 @@
-6
+150
 1
---->Selecciona o modo de xogo presionando un número<---
+--->Selecciona o modo de xogo presionando un numero<---
 2
-1.FÁCIL
+1.FACIL
 3
 2.MEDIO
 4
-3.DIFÍCIL
+3.DIFICIL
 5
 4.LEXENDARIO
 6
 5.MODO DE BATALLA
+7
+O MODO FACIL FOI SELECCIONADO
+8
+O MODO DE BATALLA FOI SELECCIONADO
+11
+Benvido ao noso xogo! Estamos aqui para ensinarte a xogar a este xogo da mellor
+12
+forma posible; contaremoste o basico e ti melloraras a medida que xogas.
+13
+Primeiro, dentro do xogo hai tres modos posibles: modo batalla,
+14
+misións mode e exploracion. Empecemos co modo de batalla.
+15
+No modo batalla, teras que enfrentarte a alguns inimigos. Moveste coas frechas,
+16
+cambias de arma con QE, e disparas con WASD. Agora probao cunha batalla.
+17
+Non preocuparse por olvidalas, as instruccions apareceran no
+18
+rectangulo da dereita.
+19
+Cando acabes, dirixete a Porta(G).
+20
+Hai diferentes misions, enton para cada unha teras as intruccions
+21
+no rectangulo da dereita.
+22
+Finalmente, no modo exploracion, so teras que andas polas distintas cidades
+23
+usando as frechas como no modo de batalla. Tamen debes empregar os obxectos
+24
+para manter a tua FAME, HIDRATACION, VIDA e MUNICION en bo estado.
+30
+Pulsa simultaneamente -> e <- para gañar.
+31
+GANACHES!!
+32
+Perdiches...
+33
+Preparate para xogar ao "Pong"
+34
+Tempo:
+40
+PRESIONA UNHA TECLA PARA ADIVIÑAR (A LETRA TEN QUE SER EN MAIUSCULA)
+41
+BOA ESA! A PARALABRA CONTEN ESA LETRA
+42
+CONSUMICHES TODAS AS TUAS VIDAS!
+43
+GAÑACHES! FELICIDADES!
+44
+SINTOO, FALLACHES
+100
+R E C U R S O S
+101
+A R M A R I O
+102
+Nome
+103
+GDM  DAÑ
+104
+O B X E C T O S
+105
+Cant  Incr
+500
+Benvido ao modo de batalla!
+501
+Aqui o teu unico obxectivo e sobrevivir o maximo posible
+502
+Tes case infinita municion e a tua fame a hidratacion non baixaran.
+503
+O numero de inimigos aumentara cada ronda.
+504
+Ao final de cada ronda a tua vida restaurarase ao maximo.
+505
+Os controles son os mesmos que no modo historia, pero poder comprobalos aqui -->
+506
+E ultimo pero non menos importante, boa sorte a pasao ben!
+507
+RODA:
+700
+MORRICHES, FIN DO XOGO.
+9991
+preme a BARRA ESPACIADORA para continuar.
+9992
+Moverse coas frechas
+9993
+Disparar con WASD.
+9994
+Cambiar arma con QE.
+9995
+Usar obxecto with 1,..,8
+9996
+Usar obxecto with 1,..,6
+999
+Agora que xa sabes como xogar, comecemos co xogo de verdade.
+1000
+Todo comezou un dia soleado, nunca terra lexana chamada "CIDADE DEL VAL".
+1001
+Esta cidade era tranquila e preciosa ata que un gran desastre aconteceu.
+1002
+Un misterioso home veu a cidade, era chamado Moberto Ramabini. O pla de Moberto
+1003
+era esparcir unha enfermidade letal pola cidade e contaxiar a todolo mundo,
+1004
+provocando que a xente se transformase en zombies e repetindo a mesma frase:
+1005
+ATA AGORA BE, ATA AGORA BEN... Se che tocan algun destes "zombies", podrás ser infectado
+1006
+e morrer.
+1007
+Fortunadamente, na nosa historia hai un superheroe, e ese eres ti! Non estas infectado
+1008
+pola enfermidade de Ramabini, enton eres o elixido para acabar con todo isto. Alvaro del
+1009
+Mal (o alcalde da cidade) facilitoute algunhas cousas para comenzar, el esta moi ocupado
+1010
+investigando novas formas de faltar a clase sin ser despedido. E profesor pero necesita
+1011
+manter unha identidade secreta como alcalde da "CIDADE DEL VAL", e como Superman e Clark
+1012
+Kent, por iso non se preocupa polo seu traballo como profesor, e unha identidade falsa
+1013
+como Superman e un xornalista, pero isto e outra historia. Agora ti non 
+1014
+estas solo aqui, mata todolos inimgos sen piedade e completa todalas
+1015
+misions para conseguir novos utensilios para destrozar a Ramabini! Boa sorte!
+1016
+Aqui enfrentaraste aos teus primeiros rivais, intenta matalos sen morrer!
+1017
+Fixechelo bastante ben, continua agora, non te olvides de usar MEDICINAS,
+1018
+COMIDAS e BEBIDAS se as necesitas. Por certo, encontraches un arma, usaa corectamente.
+1019
+Ahora segue o camiño hacia a tua primeira mision e fixate nas intruccions.
+1020
+BENVIDO ao NON NON, un xogo para xente rapida e lista. Tes que superar 10 pantallas. Se
+1021
+fallas, obtendras menos puntos, canto mais rapido sexas, mais obxectos
+1022
+obtenrás como recompensa.
+1023
+Tempo para descansar, comproba a tua FAME, SAUDA e HIDRATACION. O axuntamento
+1024
+esta cerrado porque Del Mal esta ensinando (isto ocorre duas veces ao ano).
+1025
+Vai a porta(G) cando estes listo.
+1026
+Derrotaos a todos!
+1027
+Resolve o laberinto! Non perdas tempo que os teus recursos baixan!
+1028
+Vai ao axuntamente. Podes comer, beber e curarte se o necesitas.
+1029
+DEL MAL: Ola! Son Alvaro Del Mal. Encantado de coñecerte. Eres un heroe!
+1030
+Ramabini e mais debil gracias a ti, acabas de limpar a zona norte, pero era
+1031
+a mais facil, agora tes que ir polo este, habra mais inimigos pero
+1032
+dareiche algunhas axudas.
+1033
+VAMOS NENO VAMOS!
+1034
+Benvido ao 21, preme ARRIBA para pedir unha carta entre 1 e 7 e ABAIXO para plantarte.
+1035
+Intenta obter 21 puntos para conseguir a mellor recompensa. Se eres moi
+1036
+codicioso e acabas conseguindo mais que 21 puntos non conseguiras nada.
+1037
+Curate e preparate para a seguinte! Tamen decirche que has encontrado un revolver.
+1038
+Derrotaos! Agora son mais fortes, Ramabini esta mais cerca.
+1039
+Segue as intruccions e consegue boas recompensas.
+1040
+Visita o axuntamento para ver ao alcalde!
+1041
+DEL MAL-Ola meu amigo! Fixechelo moi ben! Teño mais retos para ti!
+1042
+Necesitas limpar a ultima zona, esta e a ultima vez que visitaras esta preciosa
+1043
+cidade se non matas esos zombies. Teño algo para ti, boa sorte.
+1044
+E derrota a Ramabini!
+10445
+Now vete ao Sur!
+1045
+Vamos NENO Vamos! Podo sentir a Ramabini cerca!
+1046
+Destrozao!
+1047
+Esto e un xogo clasico! Faino o mellor que poidas.
+1048
+Estas casi ahi!
+1049
+Los zombies conquistaron o pobo. DERROTAOS E PROTEXE A CIDADE!
+1050
+RAMABINI-HEY SALUDOS! SOY RAMABINI MUAHAHAHA, e si, como pensabas, entrei
+1051
+na CIDADE DEL VAL coa Clave Primaria! Non tes o suficiente poder para derrotarme!
+1052
+(Ramabini morre agonizando).
+1053
+???-Aqui estoy para axudarte! Oh wow, xa o mataches? Parece que cheguei tarde.
+1054
+Estaba buscando a Del Mal pero como non o encontrei viñen so.
+1055
+Encantado de coñecerte, Son Santini.
+1056
+DEL MAL-Oh, perdoade o retraso, estaba pensando como vencer a Ramabini
+1057
+no Pub, pero parece que non me necesitaches. Ben feito! Por certo Santini, poderiasme
+1058
+correxir a segunda practica de EDAT no meu lugar? Ser alcalde non me deixa tempo.
+1059
+SANTINI-........... -.-
+1060
+Xogo creado por WHILE 1 SQUAD:
+1061
+Jose Manuel Chacon (Historia e diseño do xogo, autor dalgunhas misions, debugger).
+1062
+David Cabornero (Autor de misions, diseño de mapas, debugger).
+1063
+Sergio Galan (Debugger principal, diseñador de estructuras de datos e implementacion).
+1064
+Alejandro Santorum (Xefe do grupo e programador principal).
+1065
+Agradecimientos especiales a:
+1066
+Simone Santini (Profesor, bo conselleiro, mellor persoa).
+1067
+???-Hey, Vin que mataches moitos zombies. Deberias ir a cidade.
+1068
+Parece que algunas inimigos invadiron a cidade. Toma isto, pode que che axude.
+1069
+("O home do unicornio lanzache un lanzamisiles").
+2001
+NON NON DEREITA
+2002
+NON NON ESQUERDA
+2003
+NON ESQUERDA
+2004
+NON DEREITA
+2005
+DEREITA
+2006
+ESQUERDA
+2007
+DEREITA OU ARRIBA
+2008
+ARRIBA
+2009
+ABAIXO
+2010
+NON ARRIBA
+2011
+NON ABAIXO
+2012
+BENVIDO AO NON NON!
+2013
+SE O MAIS RAPIDO POSIBLE PARA OBTER MELLORES OBXECTOS
+2020
+SOLO CAPS
+2021
+ARRIBA para carta.
+2022
+ABAIXO para plantarte.
+2999
+Vendo a tua nota, obtes:
+3000
+1 Vendas, 2 Froitas, 3 Auga e 2 Balas.
+3001
+2 Vendas, 3 Froitas, 4 Auga e 4 Balas. 
+3002
+4 Vendas, 3 Froitas, 6 Auga, 6 Balas e 6 Alcohol.
+3003
+1 Vendas, 2 Froitas, 4 Botiquines, 8 Balas, 8 Auga e 5 Alcohol.
+3004
+2 Vendas, 3 Froitas, 4 Botiquines, 8 Balas, 8 Auga, 8 Alcohol, 3 Caviar e 5 Misiles.
+3005
+2 Vendas, 3 Froitas, 4 Botiquines, 8 Balas, 8 Auga, 8 Alcohol, 8 Caviar e 6 Misiles.
+3006
+A tua puntuacion e:
+3007
+Recibes unha ametralladora tamen.

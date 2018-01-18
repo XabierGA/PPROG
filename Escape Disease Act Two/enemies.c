@@ -352,7 +352,7 @@ int enemy_checkPhyStat(Enemy **ene){
     return ALL_KILLED;
 }
 
-
+/*Function that shows the enemie's character*/
 Boolean isEnemyDisplay(char c){
     Enemy **aux=NULL;
     

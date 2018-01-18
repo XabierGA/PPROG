@@ -402,8 +402,12 @@ int Not_Not(Interface *intrf, Strings **s, int lang){
 
 /* ----------------------------------------- 2 1 -------------------------------------------- */
 int g_21(Interface *intrf){
-    int c, score=0;
+    int c, score=0, i = 0, j;
     int aleat = 0;
+    int num[21] = {-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1};
+    int row[3] = {4, 14, 26};
+    int col[7] = {8, 20, 32, 44, 56, 68, 80}; 
+    char *buf=NULL;
     
     if(intrf == NULL){
         printf("Error. 21-1\n");
@@ -418,6 +422,7 @@ int g_21(Interface *intrf){
         
         
         aleat = aleat_num(1, 7);
+        num[i] = aleat;
         
         score += aleat;
         
@@ -425,132 +430,24 @@ int g_21(Interface *intrf){
             break;
         }
         
-        print_map (intrf, score+200);
+        print_map (intrf, 221-i);
+        for(j=0; num[j]!=-1; j++){
+            buf = (char *) malloc(sizeof(int)+1);
+            sprintf(buf, "%d", num[j]);
+            win_write_line_at(intrf->rect_array[0], row[j/8], col[j%8], buf);
+            free(buf);
+        }
         
-        if (score == 1){
-            c = read_key_mission();
-            if (c==-UP)
-                continue;
-            else
-                break;
-        }else if (score == 2){
-            c = read_key_mission();
-            if (c==-UP)
-                continue;
-            else
-                break;
-        }else if (score == 3){
-            c = read_key_mission();
-            if (c==-UP)
-                continue;
-            else
-                break;
-        }else if (score == 4){
-            c = read_key_mission();
-            if (c==-UP)
-                continue;
-            else
-                break;
-        }else if (score == 5){
-            c = read_key_mission();
-            if (c==-UP)
-                continue;
-            else
-                break;
-        }else if (score == 6){
-            c = read_key_mission();
-            if (c==-UP)
-                continue;
-            else
-                break;
-        }else if (score == 7){
-            c = read_key_mission();
-            if (c==-UP)
-                continue;
-            else
-                break;
-        }else if (score == 8){
-            c = read_key_mission();
-            if (c==-UP)
-                continue;
-            else
-                break;
-        }else if (score == 9){
-            c = read_key_mission();
-            if (c==-UP)
-                continue;
-            else
-                break;
-        }else if (score == 10){
-            c = read_key_mission();
-            if (c==-UP)
-                continue;
-            else
-                break;
-        }else if (score == 11){
-            c = read_key_mission();
-            if (c==-UP)
-                continue;
-            else
-                break;
-        }else if (score == 12){
-            c = read_key_mission();
-            if (c==-UP)
-                continue;
-            else
-                break;
-        }else if (score == 13){
-            c = read_key_mission();
-            if (c==-UP)
-                continue;
-            else
-                break;
-        }else if (score == 14){
-            c = read_key_mission();
-            if (c==-UP)
-                continue;
-            else
-                break;
-        }else if (score == 15){
-            c = read_key_mission();
-            if (c==-UP)
-                continue;
-            else
-                break;
-        }else if (score == 16){
-            c = read_key_mission();
-            if (c==-UP)
-                continue;
-            else
-                break;
-        }else if (score == 17){
-            c = read_key_mission();
-            if (c==-UP)
-                continue;
-            else
-                break;
-        }else if (score == 18){
-            c = read_key_mission();
-            if (c==-UP)
-                continue;
-            else
-                break;
-        }else if (score == 19){
-            c = read_key_mission();
-            if (c==-UP)
-                continue;
-            else
-                break;
-        }else if (score == 20){
-            c = read_key_mission();
-            if (c==-UP)
-                continue;
-            else
-                break;
-        }else if (score == 21){
-                break;
-        }    
-    }
+        
+        i++;
+        c = read_key_mission();
+        if (c==-UP){
+            continue;
+        }else{
+            break;
+        }
+    }  
+    
     if (score>21){
         score = 0;
     }else if(score == 21){
@@ -574,8 +471,10 @@ typedef struct{
 void print_bar(Interface *intrf){
     int i;
     
-    for(i=3; i<percent_ib && i<91; i++){
+    for(i=3; i<percent_ib && i<92; i++){
+        interface_lock();
         win_write_char_at(intrf->rect_array[0], 14, i, '#');
+        interface_unlock();
     }
 }
 
@@ -591,9 +490,11 @@ void* delete_bar(void* stuff){
         if(percent_ib > 2){
             percent_ib = percent_ib-3;
         }
-        for(i=percent_ib; i<91; i++){
+        for(i=percent_ib; i<92; i++){
             if(i>2){
+                interface_lock();
                 win_write_char_at(del->intrf->rect_array[0], 14, i, ' ');
+                interface_unlock();
             }
         }
     } 
@@ -601,10 +502,11 @@ void* delete_bar(void* stuff){
 }
 
 int Increasing_Bar(Interface *intrf, Strings **strs, int lang){
-    int flag=2, c;
+    int flag=2, c, progress=0, times=0;
     struct timespec time1, time2, time3;
     pthread_t db;
     delete_stuff *delst=NULL;
+    char *buffer, *buffer2;
     
     if(intrf == NULL){
         printf("Increasing_Bar Error 1\n");
@@ -614,6 +516,9 @@ int Increasing_Bar(Interface *intrf, Strings **strs, int lang){
         printf("Increasing_Bar Error 2\n");
         return -1;
     }
+    
+    buffer = (char *)malloc(5*sizeof(char));
+    buffer2 = (char *)malloc(5*sizeof(char));
     
     print_map(intrf, 120);
     
@@ -643,6 +548,17 @@ int Increasing_Bar(Interface *intrf, Strings **strs, int lang){
             break;
         }
         
+        times = 30 - (time2.tv_sec-time1.tv_sec);
+        progress = (percent_ib*100)/92;
+        sprintf(buffer, "%d", times);
+        sprintf(buffer2, "%d", progress);
+        interface_lock();
+        win_write_line_at(intrf->rect_array[0], 12, 40, strings_get_string_by_type(34, strs));
+        win_write_line_at(intrf->rect_array[0], 12, 50, buffer);
+        win_write_line_at(intrf->rect_array[0], 16, 45, buffer2);
+        win_write_line_at(intrf->rect_array[0], 16, 47, "%");
+        interface_unlock();
+        
         if(flag != 0 && c == -RIGHT){
             flag = 0;
             percent_ib += 1;
@@ -654,21 +570,18 @@ int Increasing_Bar(Interface *intrf, Strings **strs, int lang){
         
         print_bar(intrf);
         
-        if(percent_ib>=91){
+        if(percent_ib>=92){
             superflag_ib=0;
             break;
         }
     }
     
-    if(percent_ib<91){
-        win_write_line_at(intrf->rect_array[0], 14, 30, strings_get_string_by_type(31, strs));
+    if(superflag_ib==0){
+        return 92;
     }
     else{
-        win_write_line_at(intrf->rect_array[0], 14, 30, strings_get_string_by_type(32, strs));
+        return percent_ib;
     }
-    sleep(2);
-							  
-    destroy_intrf(intrf);
     
     return 0;
 }
@@ -881,7 +794,7 @@ int pong(Interface *intrf, Strings **strs, int lang){
         printf("Increasing_Bar Error 2\n");
         return -1;
     }
-    
+        
     buffer = (char *)malloc(5*sizeof(char));
     print_map(intrf, 120);
     
@@ -914,11 +827,13 @@ int pong(Interface *intrf, Strings **strs, int lang){
             superflag = 1;
             break;
         }
-        
+    
         time_n = time2.tv_sec-time1.tv_sec;
         sprintf(buffer, "%d", time_n);
+        interface_lock();
         win_write_line_at(intrf->rect_array[0], 5, 30, strings_get_string_by_type(34, strs));
         win_write_line_at(intrf->rect_array[0], 5, 40, buffer);
+        interface_unlock();
         
         if((ball->col == 3 && dir1 == LEFT )|| (ball->col == 91 && dir1 == RIGHT)){
             if(ball->row >= row_bar && ball->row <= row_bar + 5){

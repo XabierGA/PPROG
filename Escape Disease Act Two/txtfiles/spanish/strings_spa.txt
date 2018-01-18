@@ -1,4 +1,4 @@
-141
+150
 1
 --->Selecciona el modo de juego presionando su numero<---
 2
@@ -10,276 +10,292 @@
 5
 4.LEGENDARIO
 6
-5.MODO BATALLA
+5.MODO DE BATALLA
 7
-HAS SELECCIONADO EL MODO FÁCIL
+HAS SELECCIONADO EL MODO FACIL
 8
-BATTLE GAMEMODE HAS BEEN SELECTED
+HAS SELECCIONADO EL MODO DE BATALLA
 11
-Welcome to our game! We're glad to show you how to play this game by the best way
+Bienvenido a nuestro juego!! Nos encantaria mostrarte como juegar lo mejor posible
 12
-we can think of, just by telling you the basics and then let you by yourself in the game.
+a este juego, contandote las nociones basicas para que puedas progresar.
 13
-First of all, there will be three different "modes" inside the game: battle mode,
+Primero, habra tres diferentes modos dentro del juego: modo batalla,
 14
-mission mode and town mode. Let's begin with battle mode.
+modo mision y modo ciudad. Comencemos con modo batalla.
 15
-In battle mode, you will be fighting some zombies. You'll move with arrow keys,
+En modo batalla, lucharas contra zombies. Te mueves con las flechas,
 16
-swap between weapons with QE and shooting with WASD. Now try it out for a little bit.
+cambias de arma con QE y disparas con WASD. Ahora pruebalo con estos zombies.
 17
-If you forget this, don't worry, these instructions will appear in the
+Si te olvidas, no te preocupes, las intrucciones aparecen en todo momento
 18
-rectangle at the right.
+en el rectangulo de la derecha.
 19
-When you are done with them, go to the G(Gate).
+Cuando te hayas familiarizado, vete a G (Gate).
 20
-There are many different missions, so for each one you will see the instructions
+Hay distintas misiones, asi que para una veras las instrucciones
 21
-on the rectangle on the right.
+en el rectangulo de la derecha.
 22
-Finally, in the town mode, you'll just wander around the town,
+Por ultimo, puedes simplemente deambular por la ciudad, para ello
 23
-so arrow keys just as in battle mode. Also, you can use your objects to keep
+pulsa las flechas como en modo batalla. Tambien puedes usar objetos para
 24
-your HUNGER, HYDRATION, HEALTH and GUNPOWDER up.
+mantener tu HAMBRE, HIDRATACION, VIDA y MUNICION en buenos niveles.
 30
-Push simultaneously -> and <- to win
+Pulsa simultaneamente -> y <- para ganar
 31
-YOU WON!!!
+HAS GANADO!!
 32
-You lost...
+Has perdido...
 33
-Prepare to play Pong!!!
+Preparate para jugar al PONG!!
 34
-Time:
+Tiempo:
 40
-PRESS A KEY TO GUESS A LETTER (THE WORD IS CAPITALIZED)
+PULSA LA LETRA CORRECTA PARA ACERTAR (LA PALABRA ESTÁ EN MAYUSCULAS)
 41
-NICE! THIS LETTER APPEARS!
+BIEN! HAS ACERTADO LA LETRA!
 42
-YOU HAVE CONSUMED ALL YOUR LIVES!
+HAS ACABADO CON TODAS TUS VIDAS!
 43
-YOU WON, CONGRATULATIONS!
+FELICIDADES, HAS GANADO!
+44
+LO SIENTO, HAS FALLADO...
 100
-R E S O U R C E S
+R E C U R S O S
 101
-W E A P O N S
+A R M A R I O
 102
-Name
+Nombre
 103
-GPW  DMG
+GMC  DAÑ
 104
-I N V E N T O R Y
+O B J E T O S
 105
-Amount  Incr
+Cant  Incr
 500
-Welcome to the battle gamemode!
+Bienvenido al modo de batalla!
 501
-Here your only goal is to survive as much as possible.
+Aqui tu unica meta es sobrevivir lo maximo posible.
 502
-You've got infinite gunpowder and your hydration/hunger doesn't decrease.
+Tienes municion infinita y tu hidratacion/hambre no decrece.
 503
-The number of enemies to fight will be increased each round.
+El numero de enemigos a combatir aumentara cada ronda.
 504
-At the end of each round your HP will be restored.
+Al final de cada ronda tu salud sera reestablecida.
 505
-The controls are the same as in the story mode, but you can check them there -->
+Los controles son los mismos que en la historia, pero puedes mirarlos aqui -->
 506
-And last but not least, good luck and have fun!
+Y por ultimo pero no menos importante, buena suerte y diviertete
 507
-ROUND:
+RONDA:
 700
-YOU ARE DEAD. END OF THE GAME.
+HAS MUERTO. FIN DEL JUEGO.
 9991
-Press SPACEBAR to continue.
+Presiona BARRA ESPACIADORA para continuar.
 9992
-Move with arrow keys.
+Muevete con las flechas.
 9993
-Shoot with WASD.
+Dispara con WASD.
 9994
-Change weapon with QE.
+Cambia de arma con QE.
 9995
-Use objects with 1,...,8
+Usa los objetos con 1,...,8
 9996
-Use objects with 1,...,6
+Usa los objetos con 1,...,6
 999
-Now that you know how to play, let's get started with the main game.
+Ahora que sabes como jugar, empecemos con el juego.
 1000
-Everything started a sunny and lovely day, in a far away land called "CIUDAD DEL VAL".
+Todo empezo en un placido verano, en una lejana tierra llamada "CIUDAD DEL VAL".
 1001
-This city was quiet and lovely until a great disaster came to the lives of all citizens.
+La ciudad era bella y tranquila, hasta que un desastre cambio las vidas de los habitantes.
 1002
-A mysterious man came to the city, this man was called Moberto Ramabini. Moberto's plan
+Un hombre misterioso llego a la ciudad, se llamaba Moberto Ramabini. Su plan era
 1003
-was to spread a disease around the city that was highly infectious and made all sick
+expandir una epidemia sobre la ciudad que fuera muy infecciosa y hacia que los enfermos 
 1004
-people act as zombies, the infected people repeated the same phrase all the time in a loop:
+actuaran como zombies, repitiendo la misma frase en bucle:
 1005
-SO FAR SO GOOD, SO FAR SO GOOD. If some of these "zombies" touch you, you may get infected
+SO FAR SO GOOD, SO FAR SO GOOD. Si alguno de estos zombies te toca, podrias infectarte
 1006
-and die.
+y morir.
 1007
-Fortunately, in our story there is also a hero, and that is you!! You are not affected
+Afortunadamente, en nuestra historia hay un heroe, eres tu!! No estas infectado por la
 1008
-by Ramabini's disease, so you are the chosen one to end up with this madness. Alvaro del
+enfermedad de Ramabini, asi que eres el elegido para acabar con esta locura. Alvaro del
 1009
-Mal (the mayor of the town) gave you some stuff to start your mission, he is too busy
+Mal (alcalde de la ciudad) te ha dado algunas cosas para empezar, pero el esta muy ocupado
 1010
-investigating new ways to skip class without being fired. He is a teacher but he needs
+investigando formas de saltarse clases sin que le pillen. Es profesor, pero necesita
 1011
-to keep a secret identity as mayor of "CIUDAD DEL VAL", he is like Superman and Clark
+mantener una identidad secreta como alcalde de "CIUDAD DEL VAL", es como Superman y Clark
 1012
-Kent, that's why he doesn't care about his job as a teacher, it is only a fake identity,
+Kent, por ello a nadie le importa su trabajo de profesor, es una falsa identidad,
 1013
-like Superman being a journalist, but this is another story. Well, the fact is that
+como Superman siendo periodista, pero eso es otra historia. Bien, centremonos en que
 1014
-you are not alone here, kill all the zombies without mercy and complete all the
+no estas solo. Mata a todos los zombies sin piedad y completa todas las misiones
 1015
-missions to get cool stuff to kick Ramabini's ass!! Good luck!!
+para conseguir mejores armas para partir el culo a Ramabini!! Buena suerte!!
 1016
-Well, here are your first rivals, try to kill them without being injured!
+Bien, aqui estan tus primeros rivales, intenta matarlos sin ser dañado!
 1017
-You did it pretty well, now continue your adventure, do not forget to use MEDICINES,
+Lo hiciste bien, continua tu aventura y no olvides usar MEDICINAS,
 1018
-FOOD or DRINKS if you need them! And you have found a gun, you should use it.
+COMIDA o BEBIDA si la necesitas! Y encontraste una pistola, deberias usarla.
 1019
-Now follow the path, there is a bonus level, follow the instructions and do your best!
+Ahora sigue el camino, hay un nivel bonus, sigue las instrucciones y buena suerte!
 1020
-WELCOME to NOT NOT, a game for fast and smart people. You have to pass 10 screens. If
+BIENVENIDO al NOT NOT, el juego para gente rapida y lista. Tienes 10 pantallas. Si
 1021
-you fail one you'll lose and you'll get less points, the fastest you do it the more
+si fallas una perderas puntos, se recompensa tu velocidad y cuanta mas puntuacion
 1022
-items you get!
+tengas mas objetos conseguiras!
 1023
-Time to rest, just make sure your HUNGER, HEALTH and HYDRATION are good. The town hall
+Descansa, asegurate de que tu HAMBRE, SALUD y HIDRATACION estan bien. El ayuntamiento
 1024
-is closed because Del Mal is teaching (this happen once every one or two years).
+esta cerrado porque Del Mal esta explicando (ocurre una vez cada dos años).
 1025
-Go to G when you are ready to continue.
+Vete a G cuando estes listo.
 1026
-Defeat them!!
+Derrotalos!!
 1027
-Solve the Maze!! Be careful with your resources!
+Resuelve el laberinto!! Cuidado con tus recursos!
 1028
-Go to the Town Hall. You can eat, drink or heal yourself if you need.
+Ve al ayuntamiento. Puedes comer, beber y curarte si lo necesitas.
 1029
-DEL MAL-Hi there! I'm Alvaro del Mal. It is great to meet you formally. You are our hero!!
+DEL MAL-Hola! Soy Alvaro del Mal. Encantado de conocerte por fin. Eres un heroe!!
 1030
-Ramabini is now weaker thanks to you!! You have cleaned the North zone, but it was
+Ramabini es mas debil gracias a ti!! Has limpiado la Zona Norte, pero esa era la mas
 1031
-the easiest one!! Now I will drive you to the East, there will be more monsters but
+facil!! Ahora te llevare hasta el Este, habra mas monstruos, pero tranquilo,
 1032
-I will give you cool stuff.
+para ello te dare buen material.
 1033
-GO GO GO GO!!
+VAMOS VAMOS VAMOS VAMOS!!
 1034
-Welcome to 21, press UP to get a number between 1 and 7, press DOWN if you want to
+Bienvenido a 21, presiona ARRIBA para obtener un numero del 1 al 7, ABAJO si quieres
 1035
-quit with the amount you have got. Try to get 21 to get the best stuff!! If you are
+plantarte. Intenta conseguir 21 para conseguir mas recursos!! Si por codicioso
 1036
-very greedy and you get more than 21 you won't get anything.
+te pasas de 21, no obtendras ningun recurso. 
 1037
-Heal yourself and prepare for what is about to come! Also, you've just found a revolver.
+Curate y preparate para lo que te espera! Por cierto, has encontrado un revolver!.
 1038
-Defeat them, they are a bit stronger because Ramabini is getting closer!
+Derrotalos, son un poco mas fuertes porque Ramabini esta cerca!
 1039
-Follow the instructions and get a lot of items!
+Sigue las instrucciones para conseguir muchos recursos!
 1040
-Visit the Town Hall to see the mayor!!
+Visita el ayuntamiento para ver al alcalde!!
 1041
-DEL MAL-Hi there, my friend!! You did it pretty well!! I have more adventures for you.
+DEL MAL-Hola, amigo mio! Lo hiciste genial!! Tengo mas aventuras para ti.
 1042
-You need to clean the last zone, this is the last time you will visit this wonderful
+Necesitas limpiar la ultima zona, y sera la ultima vez que veas esta preciosa ciudad
 1043
-town if you don't kill those last zombies! I have some presents for you. Good luck
+si no matas a los ultimos zombies Tengo algunos regalitos para ti. Buena suerte
 1044
-and defeat Ramabini!
+y derrota a Ramabini!
+10445
+Ahora vayamos al Sur!
 1045
-GO GO GO! I can feel Ramabini is somewhere near!
+VAMOS VAMOS! Puedo sentir a Ramabini cerca!
 1046
-Smash it!
+Revientalos!
 1047
-That classic game. This is a bonus level, have fun!
+Todo un clasico. Es un nivel bonus, diviertete!
 1048
-You are almost there!
+Ya casi has llegado!
 1049
-The zombies have conquered the town! DEFEAT THEM! PROTECT THE CITY!
+Los zombies conquistaron la ciudad DERROTALOS! PROTEGE LA CIUDAD!
 1050
-RAMABINI-HEY THERE!! I AM RAMABINI MUAHAHAHA, and yes, as you thought I entered CIUDAD DEL
+RAMABINI-HEY GUYS!! SOY RAMABINI MUAHAHAHA, y si, como pensasteis he llegado a CIUDAD DEL
 1051
-VAL with the Primary Key! You don't have enough power to defeat me!
+MAL con la Primary Key! No tienes sufiente poder para derrotarme!
 1052
-(Ramabini dies in agony).
+(Ramabini muere en agonia).
 1053
-???-Here I am to help! Oh wow, did you actually already killed him? Seem that I'm a bit
+???-He venido a ayudar! Wow, ya lo has matado? Parece que he llegado un poco
 1054
-late. I was looking for Del Mal but since I couldn't find him anywhere I came here without
+tarde. Estuve buscando a Del Mal pero no puede encontrarle, asi que vine sin el.
 1055
-him. Nice to meet you, I'm Santini.
+Encantado, soy Santini.
 1056
-DEL MAL-Oh, sorry for being late, I was, umm, thinking about a strategy to defeat Ramabini
+DEL MAL-Oh,perdon por tardar,estaba,umm,pensando una estrategia para derrotar a Ramabini
 1057
-in the pub, but seems you didn't need a strategy. Well done. By the way, Santini, could
+en el bar, pero parece que no la necesitais. Bien hecho. Por cierto, Santini, puedes
 1058
-you correct the 2nd assignment for me? Being a mayor is such a time consuming task.
+la segunda practica de EDAT por mi? Ser alcalde me come todo el tiempo.
 1059
-SANTINI-........... ¬¬
+SANTINI-........... -.-
 1060
-Game created by WHILE 1 SQUAD:
+Juego creado por WHILE 1 SQUAD:
 1061
-José Manuel Chacón (HISTORY AND GAME DESIGNER, AUTHOR OF SOME MINIGAMES , DEBUGGER)
+Jose Manuel Chacon (DISEÑADOR DE HISTORIA Y JUEGO, AUTOR DE MINIJUEGOS, DEBUGGER)
 1062
-David Cabornero (AUTHOR OF SOME MINIGAMES, DESIGNER OF MAPS, DEBUGGER)
+David Cabornero (AUTOR DE MINIJUEGOS, DISEÑADOR DE MAPAS, DEBUGGER)
 1063
-Sergio Galán (MAIN DEBUGGER, DESIGNER OF DATA STRUCTURES AND IMPLEMENTATION)
+Sergio Galan (PRINCIPAL DEBUGGER, DISEÑADOR E IMPLEMENTADOR DE ESTRUCTURAS DE DATOS)
 1064
-Alejandro Santorum (BOSS OF THE GROUP AND MAIN CODER)
+Alejandro Santorum (JEFE DEL GRUPO Y PROGRAMADOR PRINCIPAL)
 1065
-Special thanks to:
+Agradecimientos a:
 1066
-Simone Santini (TEACHER, GREAT ADVISOR, BETTER PERSON)
+Simone Santini (PROFESOR, GRAN CONSEJERO, MEJOR PERSONA)
+1067
+???-Hey, parece que has matado muchos zombies. Deberias dirigirte a la ciudad.
+1068
+Parece que algunos zombies han invadido Ciudad del Val. Toma esto, te ayudara.
+1069
+("El hombre del unicornio te lanza un bazoka").
 2001
-NOT NOT RIGHT
+NO NO DERECHA
 2002
-NOT NOT LEFT
+NO NO IZQUIERDA
 2003
-NOT LEFT
+NO IZQUIERDA
 2004
-NOT RIGHT
+NO DERECHA
 2005
-RIGHT
+DERECHA
 2006
-LEFT
+IZQUIERDA
 2007
-RIGHT OR UP
+DERECHA O ARRIBA
 2008
-UP
+ARRIBA
 2009
-DOWN
+ABAJO
 2010
-NOT UP
+NO ARRIBA
 2011
-NOT DOWN
+NO ABAJO
 2012
-WELCOME TO NOT NOT!
+BIENVENIDO AL NOT NOT!
 2013
-BE AS FAST AS POSSIBLE TO GET MORE ITEMS
+SE LO MAS RAPIDO POSIBLE PARA GANAR MAS RECURSOS
 2020
-
+SOLO MAYUSCULAS
+2021
+ARRIBA nueva carta.
+2022
+ABAJO para plantarte.
 2999
-According to your score, you got:
+De acuerdo a tu puntuacion, tienes:
 3000
-1 Bandage, 2 Fruits, 3 Water and 2 Bullets.
+1 Vendas, 2 Frutas, 3 Aguas y 2 Balas.
 3001
-2 Bandages, 3 Fruits, 4 Water and 4 Bullets. 
+2 Vendas, 3 Frutas, 4 Aguas y 4 Balas. 
 3002
-4 Bandages, 3 Fruits, 6 Water, 6 Bullets and 6 Alcohol.
+4 Vendas, 3 Frutas, 6 Aguas, 6 Balas y 6 Alcohol.
 3003
-1 Bandage, 2 Fruits, 4 Medkits, 8 Bullets, 8 Water and 5 Alcohol.
+1 Vendas, 2 Frutas, 4 Botiquines, 8 Balas, 8 Aguas y 5 Alcohol.
 3004
-2 Bandages, 3 Fruits, 4 Medkits, 8 Bullets, 8 Water, 8 Alcohol, 3 Caviar and 5 Missiles.
+2 Vendas, 3 Frutas, 4 Botiquines, 8 Balas, 8 Aguas, 8 Alcohol, 3 Caviar y 5 Misiles.
 3005
-2 Bandages, 3 Fruits, 4 Medkits, 8 Bullets, 8 Water, 8 Alcohol, 8 Caviar and 6 Missiles.
+2 Vendas, 3 Frutas, 4 Botiquines, 8 Balas, 8 Aguas, 8 Alcohol, 8 Caviar y 6 Misiles.
 3006
-Your score is:
+Tu puntuacion es:
+3007
+Tambien, has recibido una ametralladora.

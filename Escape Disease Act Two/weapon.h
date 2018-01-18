@@ -74,6 +74,7 @@ int weapon_equipped(Weapon *wp);
 /*Function that returns the pointer to the equipped weapon at the moment of the call*/
 Weapon* weapon_getEquippedWeapon(Weapon **wp);
 
+/*Function that gets the display character of the bullets of a given weapon*/
 char weapon_getDisplay(Weapon *wp);
 
 #endif /* WEAPON_H */

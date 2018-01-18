@@ -20,7 +20,7 @@ struct _enemies{
 typedef struct _enemies Enemy;
 
 
-/*This array of arrays of enemies is used to know all the enemies we are going to have in the game.
+/*This array of enemies is used to know all the enemies we are going to have in the game.
 This function reads all the enemies information that it´s placed in a file.*/
 Enemy** load_enemies(char *filename, int *n_enemies);
 
@@ -39,11 +39,11 @@ void destroy_enemies(Enemy **e);
 void delete_enemy(Enemy *e); 
 
 
-/*Function that modifies an enemy's health once is hitten. It returns the final value of its HP or ERROR*/
+/*Function that modifies an enemy's health once is hit. It returns the final value of its HP or ERROR*/
 int modify_enemyHP(Enemy *e, int increase);
 
 
-/*Function that generates an array of enemies of the given type*/
+/*Function that generates an array of enemies of the given types*/
 Enemy** generate_arrayEnemies(Enemy **pe, int *n_ene, int size);
 
 
@@ -96,10 +96,13 @@ void enemy_setLocation(Enemy* ene, int row, int col);
 /*If they are all DEAD it returns ALL_KILLED (1034), otherwise STH_ALIVE (1035)*/
 int enemy_checkPhyStat(Enemy **ene);
 
+/**/
 Boolean isEnemyDisplay(char c);
 
+/**/
 Enemy* getEnemyAt(Enemy **ene, int row, int col);
 
+/*Function that kills all the enemies of a given array*/
 int kill_all_enemies(Enemy **ene);
 
 #endif /* ENEMIES_H */

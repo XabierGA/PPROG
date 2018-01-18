@@ -246,16 +246,16 @@ int win_write_line_at(rectangle *rec, int row, int col, char *str);
 */
 Status win_write_char_at(rectangle *rec, int row, int col, char ch);
 
-
+/*Gets the initial row of a given rectangle*/
 int rectangle_getIniRow(rectangle *rec);
 
-
+/*Gets the initial column of a given rectangle*/
 int rectangle_getIniCol(rectangle *rec);
 
-
+/*Gets the last row of a given rectangle*/
 int rectangle_getLastRow(rectangle *rec);
 
-
+/*Gets the last column of a given rectangle*/
 int rectangle_getLastCol(rectangle *rec);
 
 
@@ -263,7 +263,7 @@ int rectangle_getLastCol(rectangle *rec);
 /* Returns the type of the rectangle. It allows you to differenciate each rectangle*/
 int rectangle_getType(rectangle *rec);
 
-
+/* Returns the number of rows of a given rectangle*/
 int rectangle_getNRows(rectangle *rec);
 
 

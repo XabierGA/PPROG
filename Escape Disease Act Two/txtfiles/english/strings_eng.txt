@@ -1,4 +1,4 @@
-144
+150
 1
 --->Select the game mode by pressing a number<---
 2
@@ -212,7 +212,7 @@ The zombies have conquered the town! DEFEAT THEM! PROTECT THE CITY!
 1050
 RAMABINI-HEY THERE!! I AM RAMABINI MUAHAHAHA, and yes, as you thought I entered CIUDAD DEL
 1051
-VAL with the Primary Key! You don't have enough power to defeat me!
+MAL with the Primary Key! You don't have enough power to defeat me!
 1052
 (Ramabini dies in agony).
 1053
@@ -226,23 +226,29 @@ DEL MAL-Oh, sorry for being late, I was, umm, thinking about a strategy to defea
 1057
 in the pub, but seems you didn't need a strategy. Well done. By the way, Santini, could
 1058
-you correct the 2nd assignment for me? Being a mayor is such a time consuming task.
+you correct the 2nd EDAT assignment for me? Being a mayor is such a time consuming task.
 1059
-SANTINI-........... ¬¬
+SANTINI-........... -.-
 1060
 Game created by WHILE 1 SQUAD:
 1061
-José Manuel Chacón (HISTORY AND GAME DESIGNER, AUTHOR OF SOME MINIGAMES , DEBUGGER)
+Jose Manuel Chacon (HISTORY AND GAME DESIGNER, AUTHOR OF SOME MINIGAMES , DEBUGGER)
 1062
 David Cabornero (AUTHOR OF SOME MINIGAMES, DESIGNER OF MAPS, DEBUGGER)
 1063
-Sergio Galán (MAIN DEBUGGER, DESIGNER OF DATA STRUCTURES AND IMPLEMENTATION)
+Sergio Galan (MAIN DEBUGGER, DESIGNER OF DATA STRUCTURES AND IMPLEMENTATION)
 1064
 Alejandro Santorum (BOSS OF THE GROUP AND MAIN CODER)
 1065
 Special thanks to:
 1066
 Simone Santini (TEACHER, GREAT ADVISOR, BETTER PERSON)
+1067
+???-Hey, I see you have killed a lot of zombies. You should head to the city.
+1068
+It seems that some zombies have invaded Ciudad del Val. Take this, it may help you.
+1069
+("The man on the unicorn throws a bazooka at you").
 2001
 NOT NOT RIGHT
 2002
@@ -271,6 +277,10 @@ WELCOME TO NOT NOT!
 BE AS FAST AS POSSIBLE TO GET MORE ITEMS
 2020
 CAPS ONLY
+2021
+UP for getting a new card.
+2022
+DONW to fold.
 2999
 According to your score, you got:
 3000
@@ -287,3 +297,5 @@ According to your score, you got:
 2 Bandages, 3 Fruits, 4 Medkits, 8 Bullets, 8 Water, 8 Alcohol, 8 Caviar and 6 Missiles.
 3006
 Your score is:
+3007
+Also, you received a Machine gun.

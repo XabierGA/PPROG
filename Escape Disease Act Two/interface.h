@@ -85,18 +85,22 @@ int move(Interface *intrf, Maps *copymap, Player *pl, int dir);
 /*Function that allows the player to shoot*/
 void *shoot(void *);
 
-
+/*Function that places the enemies of a given array in a random possition of a given map*/
 Status generate_EnePosRand(Enemy **ene, Maps *copymap);
 
-
+/*Function that allows enemies to move. Intended to be used in a thread*/
 void* move_enemies(void *y);
 
+/*Funcion that tells if a enemy has the player on its sights. Gets thre row and col of both of them*/
 Boolean isOnSight(Maps *map, int rp, int cp, int re, int ce, int* flag);
 
+/*Function that tells if the enemy is in one tile distance from the player, including diagonally*/
 Boolean isNextTo(Maps *map, int rp, int cp, int re, int ce, int *next_row, int *next_col);
 
+/*Function that allows us to block all the threads*/
 void interface_lock();
 
+/*Function that allows us to unlock all the threads*/
 void interface_unlock();
 
 #endif /*INTERFACE_H*/
