@@ -191,7 +191,7 @@ int main(){
     if(mode==EASY) game_easy(lang);
     else if(mode==MEDIUM) game_medium(lang);
     else if(mode==HARD) game_hard(lang);
-    else if(mode==LEGENDARY) game_hard(lang);
+    else if(mode==LEGENDARY) game_legendary(lang);
     else if(mode==BATTLE_MODE) game_battlemode(lang);
     else{
     	printf("Error. Game 5.\n");

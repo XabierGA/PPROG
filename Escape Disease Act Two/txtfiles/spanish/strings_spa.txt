@@ -1,4 +1,4 @@
-150
+153
 1
 --->Selecciona el modo de juego presionando su numero<---
 2
@@ -15,6 +15,12 @@
 HAS SELECCIONADO EL MODO FACIL
 8
 HAS SELECCIONADO EL MODO DE BATALLA
+9
+HAS SELECCIONADO EL MODO MEDIO
+10
+HAS SELECCIONADO EL MODO DIFICIL
+110
+HAS SELECCIONADO EL MODO LEGENDARIO
 11
 Bienvenido a nuestro juego!! Nos encantaria mostrarte como juegar lo mejor posible
 12

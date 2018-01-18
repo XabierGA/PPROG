@@ -1,4 +1,4 @@
-150
+153
 1
 --->Selecciona o modo de xogo presionando un numero<---
 2
@@ -15,6 +15,12 @@
 O MODO FACIL FOI SELECCIONADO
 8
 O MODO DE BATALLA FOI SELECCIONADO
+9
+O MODO MEDIO FOI SELECCIONADO
+10
+O MODO DIFICIL FOI SELECCIONADO
+110
+O MODO LEXENDARIO FOI SELECCIONADO
 11
 Benvido ao noso xogo! Estamos aqui para ensinarte a xogar a este xogo da mellor
 12
@@ -152,7 +158,7 @@ BENVIDO ao NON NON, un xogo para xente rapida e lista. Tes que superar 10 pantal
 1021
 fallas, obtendras menos puntos, canto mais rapido sexas, mais obxectos
 1022
-obtenrás como recompensa.
+obtenras como recompensa.
 1023
 Tempo para descansar, comproba a tua FAME, SAUDA e HIDRATACION. O axuntamento
 1024

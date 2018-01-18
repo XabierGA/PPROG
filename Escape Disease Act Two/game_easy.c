@@ -470,7 +470,7 @@ void game_easy(int lang){
     
     
     /* TUTORIAL */
-    int enemies[7] = {1,1,1,1,0,0,0};
+    int enemies[7] = {2,0,0,0,0,0,0};
     char* cont = NULL;
     
     story = win_find_rectangle(RECT_STORY, intrf->rect_array);
@@ -553,7 +553,7 @@ void game_easy(int lang){
     print_player(intrf, pl);
     
     Maps *copymap2=NULL;
-    int enemies2[7] = {3,1,1,1,0,0,0};
+    int enemies2[7] = {1,1,1,1,0,0,0};
     copymap2 = map_getCopy(intrf->maps_array, 31);
     if(battlemode_easy(enemies2, copymap2) == 0){
         tcsetattr(fileno(stdin), TCSANOW, &initial_easy);
@@ -675,7 +675,7 @@ void game_easy(int lang){
     print_player(intrf, pl);
     
     Maps *copymap3=NULL;
-    int enemies3[7] = {3,2,2,2,0,0,0};
+    int enemies3[7] = {2,1,1,1,0,0,0};
     copymap3 = map_getCopy(intrf->maps_array, 32);
     if(battlemode_easy(enemies3, copymap3) == 0){
         tcsetattr(fileno(stdin), TCSANOW, &initial_easy);
@@ -867,7 +867,7 @@ void game_easy(int lang){
     print_player(intrf, pl);
     
     Maps *copymap4=NULL;
-    int enemies4[7] = {2,2,2,2,2,0,0};
+    int enemies4[7] = {2,1,1,1,1,0,0};
     copymap4 = map_getCopy(intrf->maps_array, 34);
     if(battlemode_easy(enemies4, copymap4) == 0){
         tcsetattr(fileno(stdin), TCSANOW, &initial_easy);
@@ -1021,7 +1021,7 @@ void game_easy(int lang){
     print_player(intrf, pl);
     
     Maps *copymap5=NULL;
-    int enemies5[7] = {3,2,2,2,2,0,0};
+    int enemies5[7] = {2,1,1,1,2,0,0};
     copymap5 = map_getCopy(intrf->maps_array, 35);
     if(battlemode_easy(enemies5, copymap5) == 0){
         tcsetattr(fileno(stdin), TCSANOW, &initial_easy);
@@ -1121,7 +1121,7 @@ void game_easy(int lang){
     print_player(intrf, pl);
     
     Maps *copymap6=NULL;
-    int enemies6[7] = {2,2,2,2,2,1,0};
+    int enemies6[7] = {2,1,1,1,2,1,0};
     copymap6 = map_getCopy(intrf->maps_array, 36);
     if(battlemode_easy(enemies6, copymap6) == 0){
         tcsetattr(fileno(stdin), TCSANOW, &initial_easy);
@@ -1240,7 +1240,7 @@ void game_easy(int lang){
     print_player(intrf, pl);
     
     Maps *copymap7=NULL;
-    int enemies7[7] = {2,2,2,2,2,2,1};
+    int enemies7[7] = {2,2,2,2,2,1,1};
     copymap7 = map_getCopy(intrf->maps_array, 501);
     if(battlemode_easy(enemies7, copymap7) == 0){
         tcsetattr(fileno(stdin), TCSANOW, &initial_easy);

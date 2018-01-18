@@ -466,7 +466,7 @@ void game_medium(int lang){
         printf("Error. Medium 8.\n");
         exit(ERROR);
     }
-    win_write_line_at(battle, 18, get_mid_col_medium(battle, strlen(strings_get_string_by_type(7, s_m))), strings_get_string_by_type(7, s_m));
+    win_write_line_at(battle, 18, get_mid_col_medium(battle, strlen(strings_get_string_by_type(9, s_m))), strings_get_string_by_type(9, s_m));
     
     
     /* TUTORIAL */
