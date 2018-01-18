@@ -72,7 +72,7 @@ LO SIENTO, HAS FALLADO...
 100
 R E C U R S O S
 101
-A R M A R I O
+A R M E R I A
 102
 Nombre
 103
@@ -146,7 +146,7 @@ no estas solo. Mata a todos los zombies sin piedad y completa todas las misiones
 1015
 para conseguir mejores armas para partir el culo a Ramabini!! Buena suerte!!
 1016
-Bien, aqui estan tus primeros rivales, intenta matarlos sin ser dañado!
+Bien, aqui estan tus primeros rivales, intenta matarlos sin que te toquen!
 1017
 Lo hiciste bien, continua tu aventura y no olvides usar MEDICINAS,
 1018
@@ -162,7 +162,7 @@ tengas mas objetos conseguiras!
 1023
 Descansa, asegurate de que tu HAMBRE, SALUD y HIDRATACION estan bien. El ayuntamiento
 1024
-esta cerrado porque Del Mal esta explicando (ocurre una vez cada dos años).
+esta cerrado porque Del Mal esta explicando (ocurre una vez cada dos anios).
 1025
 Vete a G cuando estes listo.
 1026
@@ -216,9 +216,9 @@ Ya casi has llegado!
 1049
 Los zombies conquistaron la ciudad DERROTALOS! PROTEGE LA CIUDAD!
 1050
-RAMABINI-HEY GUYS!! SOY RAMABINI MUAHAHAHA, y si, como pensasteis he llegado a CIUDAD DEL
+RAMABINI-HEY CHAVALES!! SOY RAMABINI MUAHAHAHA, y si, como pensasteis he llegado a CIUDAD DEL
 1051
-MAL con la Primary Key! No tienes sufiente poder para derrotarme!
+MAL con la Clave Primaria! No tienes sufiente poder para derrotarme!
 1052
 (Ramabini muere en agonia).
 1053
@@ -228,11 +228,11 @@ tarde. Estuve buscando a Del Mal pero no puede encontrarle, asi que vine sin el.
 1055
 Encantado, soy Santini.
 1056
-DEL MAL-Oh,perdon por tardar,estaba,umm,pensando una estrategia para derrotar a Ramabini
+DEL MAL-Oh, perdon por tardar, estaba, umm, pensando una estrategia para derrotar a
 1057
-en el bar, pero parece que no la necesitais. Bien hecho. Por cierto, Santini, puedes
+Ramabini en el bar, pero parece que no la necesitais. Bien hecho. Por cierto, Santini,
 1058
-la segunda practica de EDAT por mi? Ser alcalde me come todo el tiempo.
+puedes la segunda practica de EDAT por mi? Ser alcalde me come todo el tiempo.
 1059
 SANTINI-........... -.-
 1060
@@ -240,9 +240,9 @@ Juego creado por WHILE 1 SQUAD:
 1061
 Jose Manuel Chacon (DISEÑADOR DE HISTORIA Y JUEGO, AUTOR DE MINIJUEGOS, DEBUGGER)
 1062
-David Cabornero (AUTOR DE MINIJUEGOS, DISEÑADOR DE MAPAS, DEBUGGER)
+David Cabornero (AUTOR DE MINIJUEGOS, DISENIADOR DE MAPAS, DEBUGGER)
 1063
-Sergio Galan (PRINCIPAL DEBUGGER, DISEÑADOR E IMPLEMENTADOR DE ESTRUCTURAS DE DATOS)
+Sergio Galan (PRINCIPAL DEBUGGER, DISENIADOR E IMPLEMENTADOR DE ESTRUCTURAS DE DATOS)
 1064
 Alejandro Santorum (JEFE DEL GRUPO Y PROGRAMADOR PRINCIPAL)
 1065

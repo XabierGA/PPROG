@@ -475,15 +475,15 @@ void game_hard(int lang){
     
     story = win_find_rectangle(RECT_STORY, intrf_h->rect_array);
     info = win_find_rectangle(RECT_INFO, intrf_h->rect_array);
-    win_write_line_slow_at(story, 2, 3, strings_get_string_by_type(11, s_h));
-    win_write_line_slow_at(story, 3, 3, strings_get_string_by_type(12, s_h));
-    win_write_line_slow_at(story, 4, 3, strings_get_string_by_type(13, s_h));
-    win_write_line_slow_at(story, 5, 3, strings_get_string_by_type(14, s_h));
-    win_write_line_slow_at(story, 6, 3, strings_get_string_by_type(15, s_h));
-    win_write_line_slow_at(story, 7, 3, strings_get_string_by_type(16, s_h));
-    win_write_line_slow_at(story, 8, 3, strings_get_string_by_type(17, s_h));
-    win_write_line_slow_at(story, 9, 3, strings_get_string_by_type(18, s_h));
-    win_write_line_slow_at(story, 10, 3, strings_get_string_by_type(19, s_h));
+    win_write_line_slow_at(story, 2, get_mid_col_hard(story, strlen(strings_get_string_by_type(11, s_h))), strings_get_string_by_type(11, s_h));
+    win_write_line_slow_at(story, 3, get_mid_col_hard(story, strlen(strings_get_string_by_type(12, s_h))), strings_get_string_by_type(12, s_h));
+    win_write_line_slow_at(story, 4, get_mid_col_hard(story, strlen(strings_get_string_by_type(13, s_h))), strings_get_string_by_type(13, s_h));
+    win_write_line_slow_at(story, 5, get_mid_col_hard(story, strlen(strings_get_string_by_type(14, s_h))), strings_get_string_by_type(14, s_h));
+    win_write_line_slow_at(story, 6, get_mid_col_hard(story, strlen(strings_get_string_by_type(15, s_h))), strings_get_string_by_type(15, s_h));
+    win_write_line_slow_at(story, 7, get_mid_col_hard(story, strlen(strings_get_string_by_type(16, s_h))), strings_get_string_by_type(16, s_h));
+    win_write_line_slow_at(story, 8, get_mid_col_hard(story, strlen(strings_get_string_by_type(17, s_h))), strings_get_string_by_type(17, s_h));
+    win_write_line_slow_at(story, 9, get_mid_col_hard(story, strlen(strings_get_string_by_type(18, s_h))), strings_get_string_by_type(18, s_h));
+    win_write_line_slow_at(story, 10, get_mid_col_hard(story, strlen(strings_get_string_by_type(19, s_h))), strings_get_string_by_type(19, s_h));
     cont = strings_get_string_by_type(9991, s_h);
     win_write_line_slow_at(story, 11, get_mid_col_hard(story, strlen(cont)), cont);
     battle_info_hard(info);
@@ -501,51 +501,52 @@ void game_hard(int lang){
     
     win_clear(story);
     win_clear(info);
-    win_write_line_slow_at(story, 2, 3, strings_get_string_by_type(20, s_h));
-    win_write_line_slow_at(story, 3, 3, strings_get_string_by_type(21, s_h));
-    win_write_line_slow_at(story, 4, get_mid_col_hard(story, strlen(cont)), cont);
+    win_write_line_slow_at(story, get_mid_row_hard(story)-1, get_mid_col_hard(story, strlen(strings_get_string_by_type(20, s_h))), strings_get_string_by_type(20, s_h));
+    win_write_line_slow_at(story, get_mid_row_hard(story), get_mid_col_hard(story, strlen(strings_get_string_by_type(21, s_h))), strings_get_string_by_type(21, s_h));
+    win_write_line_slow_at(story, 6, get_mid_col_hard(story, strlen(cont)), cont);
     read_space_hard();
     win_clear(story);
     win_clear(info);
-    win_write_line_slow_at(story, 2, 3, strings_get_string_by_type(22, s_h));
-    win_write_line_slow_at(story, 3, 3, strings_get_string_by_type(23, s_h));
-    win_write_line_slow_at(story, 4, 3, strings_get_string_by_type(24, s_h));
-    win_write_line_slow_at(story, 5, get_mid_col_hard(story, strlen(cont)), cont);
+    win_write_line_slow_at(story, get_mid_row_hard(story)-1, get_mid_col_hard(story, strlen(strings_get_string_by_type(22, s_h))), strings_get_string_by_type(22, s_h));
+    win_write_line_slow_at(story, get_mid_row_hard(story), get_mid_col_hard(story, strlen(strings_get_string_by_type(23, s_h))), strings_get_string_by_type(23, s_h));
+    win_write_line_slow_at(story, get_mid_row_hard(story)+1, get_mid_col_hard(story, strlen(strings_get_string_by_type(24, s_h))), strings_get_string_by_type(24, s_h));
+    win_write_line_slow_at(story, 7, get_mid_col_hard(story, strlen(cont)), cont);
     town_info_hard(info);
     read_space_hard();
     win_clear(story);
     win_clear(info);
-    win_write_line_slow_at(story, 2, 3, strings_get_string_by_type(999, s_h));
-    win_write_line_slow_at(story, 3, get_mid_col_hard(story, strlen(cont)), cont);
+    win_write_line_slow_at(story, get_mid_row_hard(story), get_mid_col_hard(story, strlen(strings_get_string_by_type(999, s_h))), strings_get_string_by_type(999, s_h));
+    win_write_line_slow_at(story, 6, get_mid_col_hard(story, strlen(cont)), cont);
     read_space_hard();
     win_clear(story);
     win_clear(info);
     /* STORY STARTS */
-    win_write_line_slow_at(story, 2, 3, strings_get_string_by_type(1000, s_h));
-    win_write_line_slow_at(story, 3, 3, strings_get_string_by_type(1001, s_h));
-    win_write_line_slow_at(story, 4, 3, strings_get_string_by_type(1002, s_h));
-    win_write_line_slow_at(story, 5, 3, strings_get_string_by_type(1003, s_h));
-    win_write_line_slow_at(story, 6, 3, strings_get_string_by_type(1004, s_h));
-    win_write_line_slow_at(story, 7, 3, strings_get_string_by_type(1005, s_h));
-    win_write_line_slow_at(story, 8, 3, strings_get_string_by_type(1006, s_h));
-    win_write_line_slow_at(story, 9, get_mid_col_hard(story, strlen(cont)), cont);
+    win_write_line_slow_at(story, 3, get_mid_col_hard(story, strlen(strings_get_string_by_type(1000, s_h))), strings_get_string_by_type(1000, s_h));
+    win_write_line_slow_at(story, 4, get_mid_col_hard(story, strlen(strings_get_string_by_type(1001, s_h))), strings_get_string_by_type(1001, s_h));
+    win_write_line_slow_at(story, 5, get_mid_col_hard(story, strlen(strings_get_string_by_type(1002, s_h))), strings_get_string_by_type(1002, s_h));
+    win_write_line_slow_at(story, 6, get_mid_col_hard(story, strlen(strings_get_string_by_type(1003, s_h))), strings_get_string_by_type(1003, s_h));
+    win_write_line_slow_at(story, 7, get_mid_col_hard(story, strlen(strings_get_string_by_type(1004, s_h))), strings_get_string_by_type(1004, s_h));
+    win_write_line_slow_at(story, 8, get_mid_col_hard(story, strlen(strings_get_string_by_type(1005, s_h))), strings_get_string_by_type(1005, s_h));
+    win_write_line_slow_at(story, 9, get_mid_col_hard(story, strlen(strings_get_string_by_type(1006, s_h))), strings_get_string_by_type(1006, s_h));
+    win_write_line_slow_at(story, 10, get_mid_col_hard(story, strlen(cont)), cont);
     read_space_hard();
     win_clear(story);
-    win_write_line_slow_at(story, 2, 3, strings_get_string_by_type(1007, s_h));
-    win_write_line_slow_at(story, 3, 3, strings_get_string_by_type(1008, s_h));
-    win_write_line_slow_at(story, 4, 3, strings_get_string_by_type(1009, s_h));
-    win_write_line_slow_at(story, 5, 3, strings_get_string_by_type(1010, s_h));
-    win_write_line_slow_at(story, 6, 3, strings_get_string_by_type(1011, s_h));
-    win_write_line_slow_at(story, 7, 3, strings_get_string_by_type(1012, s_h));
-    win_write_line_slow_at(story, 8, 3, strings_get_string_by_type(1013, s_h));
-    win_write_line_slow_at(story, 9, 3, strings_get_string_by_type(1014, s_h));
-    win_write_line_slow_at(story, 10, 3, strings_get_string_by_type(1015, s_h));
+    win_write_line_slow_at(story, 2, get_mid_col_hard(story, strlen(strings_get_string_by_type(1007, s_h))), strings_get_string_by_type(1007, s_h));
+    win_write_line_slow_at(story, 3, get_mid_col_hard(story, strlen(strings_get_string_by_type(1008, s_h))), strings_get_string_by_type(1008, s_h));
+    win_write_line_slow_at(story, 4, get_mid_col_hard(story, strlen(strings_get_string_by_type(1009, s_h))), strings_get_string_by_type(1009, s_h));
+    win_write_line_slow_at(story, 5, get_mid_col_hard(story, strlen(strings_get_string_by_type(1010, s_h))), strings_get_string_by_type(1010, s_h));
+    win_write_line_slow_at(story, 6, get_mid_col_hard(story, strlen(strings_get_string_by_type(1011, s_h))), strings_get_string_by_type(1011, s_h));
+    win_write_line_slow_at(story, 7, get_mid_col_hard(story, strlen(strings_get_string_by_type(1012, s_h))), strings_get_string_by_type(1012, s_h));
+    win_write_line_slow_at(story, 8, get_mid_col_hard(story, strlen(strings_get_string_by_type(1013, s_h))), strings_get_string_by_type(1013, s_h));
+    win_write_line_slow_at(story, 9, get_mid_col_hard(story, strlen(strings_get_string_by_type(1014, s_h))), strings_get_string_by_type(1014, s_h));
+    win_write_line_slow_at(story, 10, get_mid_col_hard(story, strlen(strings_get_string_by_type(1015, s_h))), strings_get_string_by_type(1015, s_h));
     win_write_line_slow_at(story, 11, get_mid_col_hard(story, strlen(cont)), cont);
+    read_space_hard();
     read_space_hard();
     win_clear(battle);
     win_clear(story);
     /* FIRST BATTLE */
-    win_write_line_slow_at(story, 2, 3, strings_get_string_by_type(1016, s_h));
+    win_write_line_slow_at(story, 2, get_mid_col_hard(story, strlen(strings_get_string_by_type(1016, s_h))), strings_get_string_by_type(1016, s_h));
     
     battle_info_hard(info);
     player_setLocation(pl_h, 31, 2);
@@ -568,10 +569,10 @@ void game_hard(int lang){
     change_own(wp_h[1]); /* Shitty_gun AVAILABLE */
     print_weapons(intrf_h, wp_h);
     
-    win_write_line_slow_at(story, 2, 3, strings_get_string_by_type(1017, s_h));
-    win_write_line_slow_at(story, 3, 3, strings_get_string_by_type(1018, s_h));
-    win_write_line_slow_at(story, 4, 3, strings_get_string_by_type(1019, s_h));
-    win_write_line_slow_at(story, 5, get_mid_col_hard(story, strlen(cont)), cont);
+    win_write_line_slow_at(story, get_mid_row_hard(story)-1, get_mid_col_hard(story, strlen(strings_get_string_by_type(1017, s_h))), strings_get_string_by_type(1017, s_h));
+    win_write_line_slow_at(story, get_mid_row_hard(story), get_mid_col_hard(story, strlen(strings_get_string_by_type(1018, s_h))), strings_get_string_by_type(1018, s_h));
+    win_write_line_slow_at(story, get_mid_row_hard(story)+1, get_mid_col_hard(story, strlen(strings_get_string_by_type(1019, s_h))), strings_get_string_by_type(1019, s_h));
+    win_write_line_slow_at(story, 7, get_mid_col_hard(story, strlen(cont)), cont);
     town_info_hard(info);
     read_space_hard();
     print_map(intrf_h, 11);
@@ -585,9 +586,9 @@ void game_hard(int lang){
     win_clear(battle);
     win_clear(story);
     win_clear(info);
-    win_write_line_slow_at(story, 2, 3, strings_get_string_by_type(1020, s_h));
-    win_write_line_slow_at(story, 3, 3, strings_get_string_by_type(1021, s_h));
-    win_write_line_slow_at(story, 4, 3, strings_get_string_by_type(1022, s_h));
+    win_write_line_slow_at(story, get_mid_row_hard(story)-1, get_mid_col_hard(story, strlen(strings_get_string_by_type(1020, s_h))), strings_get_string_by_type(1020, s_h));
+    win_write_line_slow_at(story, get_mid_row_hard(story), get_mid_col_hard(story, strlen(strings_get_string_by_type(1021, s_h))), strings_get_string_by_type(1021, s_h));
+    win_write_line_slow_at(story, get_mid_row_hard(story)+1, get_mid_col_hard(story, strlen(strings_get_string_by_type(1022, s_h))), strings_get_string_by_type(1022, s_h));
     win_write_line_slow_at(info, 2, 3, strings_get_string_by_type(9992, s_h));
     
     int score;
@@ -648,9 +649,9 @@ void game_hard(int lang){
     win_clear(story);
     print_objects(intrf_h, obj_h);
     
-    win_write_line_slow_at(story, 2, 3, strings_get_string_by_type(1023, s_h));
-    win_write_line_slow_at(story, 3, 3, strings_get_string_by_type(1024, s_h));
-    win_write_line_slow_at(story, 4, 3, strings_get_string_by_type(1025, s_h));
+    win_write_line_slow_at(story, get_mid_row_hard(story)-1, get_mid_col_hard(story, strlen(strings_get_string_by_type(1023, s_h))), strings_get_string_by_type(1023, s_h));
+    win_write_line_slow_at(story, get_mid_row_hard(story), get_mid_col_hard(story, strlen(strings_get_string_by_type(1024, s_h))), strings_get_string_by_type(1024, s_h));
+    win_write_line_slow_at(story, get_mid_row_hard(story)+1, get_mid_col_hard(story, strlen(strings_get_string_by_type(1025, s_h))), strings_get_string_by_type(1025, s_h));
     
     win_clear(battle);
     

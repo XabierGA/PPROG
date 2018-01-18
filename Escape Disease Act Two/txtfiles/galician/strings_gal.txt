@@ -50,7 +50,7 @@ usando as frechas como no modo de batalla. Tamen debes empregar os obxectos
 24
 para manter a tua FAME, HIDRATACION, VIDA e MUNICION en bo estado.
 30
-Pulsa simultaneamente -> e <- para gañar.
+Pulsa simultaneamente -> e <- para ganiar.
 31
 GANACHES!!
 32
@@ -60,23 +60,23 @@ Preparate para xogar ao "Pong"
 34
 Tempo:
 40
-PRESIONA UNHA TECLA PARA ADIVIÑAR (A LETRA TEN QUE SER EN MAIUSCULA)
+PRESIONA UNHA TECLA PARA ADIVIniAR (A LETRA TEN QUE SER EN MAIUSCULA)
 41
 BOA ESA! A PARALABRA CONTEN ESA LETRA
 42
 CONSUMICHES TODAS AS TUAS VIDAS!
 43
-GAÑACHES! FELICIDADES!
+GAniACHES! FELICIDADES!
 44
 SINTOO, FALLACHES
 100
 R E C U R S O S
 101
-A R M A R I O
+A R M E R I A
 102
 Nome
 103
-GDM  DAÑ
+GDM  DAni
 104
 O B X E C T O S
 105
@@ -100,7 +100,7 @@ RODA:
 700
 MORRICHES, FIN DO XOGO.
 9991
-preme a BARRA ESPACIADORA para continuar.
+Preme a BARRA ESPACIADORA para continuar.
 9992
 Moverse coas frechas
 9993
@@ -152,7 +152,7 @@ Fixechelo bastante ben, continua agora, non te olvides de usar MEDICINAS,
 1018
 COMIDAS e BEBIDAS se as necesitas. Por certo, encontraches un arma, usaa corectamente.
 1019
-Ahora segue o camiño hacia a tua primeira mision e fixate nas intruccions.
+Ahora segue o caminio hacia a tua primeira mision e fixate nas intruccions.
 1020
 BENVIDO ao NON NON, un xogo para xente rapida e lista. Tes que superar 10 pantallas. Se
 1021
@@ -172,7 +172,7 @@ Resolve o laberinto! Non perdas tempo que os teus recursos baixan!
 1028
 Vai ao axuntamente. Podes comer, beber e curarte se o necesitas.
 1029
-DEL MAL: Ola! Son Alvaro Del Mal. Encantado de coñecerte. Eres un heroe!
+DEL MAL: Ola! Son Alvaro Del Mal. Encantado de coniecerte. Eres un heroe!
 1030
 Ramabini e mais debil gracias a ti, acabas de limpar a zona norte, pero era
 1031
@@ -196,11 +196,11 @@ Segue as intruccions e consegue boas recompensas.
 1040
 Visita o axuntamento para ver ao alcalde!
 1041
-DEL MAL-Ola meu amigo! Fixechelo moi ben! Teño mais retos para ti!
+DEL MAL-Ola meu amigo! Fixechelo moi ben! Tenio mais retos para ti!
 1042
 Necesitas limpar a ultima zona, esta e a ultima vez que visitaras esta preciosa
 1043
-cidade se non matas esos zombies. Teño algo para ti, boa sorte.
+cidade se non matas esos zombies. Tenio algo para ti, boa sorte.
 1044
 E derrota a Ramabini!
 10445
@@ -224,9 +224,9 @@ na CIDADE DEL VAL coa Clave Primaria! Non tes o suficiente poder para derrotarme
 1053
 ???-Aqui estoy para axudarte! Oh wow, xa o mataches? Parece que cheguei tarde.
 1054
-Estaba buscando a Del Mal pero como non o encontrei viñen so.
+Estaba buscando a Del Mal pero como non o encontrei vinien so.
 1055
-Encantado de coñecerte, Son Santini.
+Encantado de coniecerte, Son Santini.
 1056
 DEL MAL-Oh, perdoade o retraso, estaba pensando como vencer a Ramabini
 1057
@@ -238,11 +238,11 @@ SANTINI-........... -.-
 1060
 Xogo creado por WHILE 1 SQUAD:
 1061
-Jose Manuel Chacon (Historia e diseño do xogo, autor dalgunhas misions, debugger).
+Jose Manuel Chacon (Historia e disenio do xogo, autor dalgunhas misions, debugger).
 1062
-David Cabornero (Autor de misions, diseño de mapas, debugger).
+David Cabornero (Autor de misions, disenio de mapas, debugger).
 1063
-Sergio Galan (Debugger principal, diseñador de estructuras de datos e implementacion).
+Sergio Galan (Debugger principal, diseniador de estructuras de datos e implementacion).
 1064
 Alejandro Santorum (Xefe do grupo e programador principal).
 1065
